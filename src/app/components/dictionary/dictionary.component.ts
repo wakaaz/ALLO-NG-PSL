@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Dictionary } from 'src/app/_models/dictionary';
 import { GenericService } from 'src/app/_services/generic-service';
 
@@ -7,7 +7,8 @@ import { GenericService } from 'src/app/_services/generic-service';
   templateUrl: './dictionary.component.html',
   styleUrls: [
     './dictionary.component.css'
-  ]
+  ],
+  encapsulation: ViewEncapsulation.None
 })
 export class DictionaryComponent implements OnInit {
   dictionaries: Dictionary[];
