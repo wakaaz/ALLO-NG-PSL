@@ -1,0 +1,85 @@
+<div class="container">
+    <div class="row content-title">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <h2>PSL <span>Dictionary</span></h2>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 d-none d-md-block">
+            <ol class="breadcrumb">
+                <li><a href="#"><span>PSL Dictionary </span></a></li>
+                <li><span>List</span></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2 col-md-2 alphabets-list">
+
+            <div class="select-dictionary d-block d-md-none">
+                <select class="custom-select" id="inputGroupSelect02">
+                    <option selected>Select Alphabets</option>
+                    <option>A</option>
+                    <option>B</option>
+                    <option>C</option>
+                    <option>D</option>
+                    <option>E</option>
+                    <option>F</option>
+                    <option>G</option>
+                </select>
+            </div>
+
+            <div class="leftside-list d-none d-md-block">
+                <h3><span>Alphabets</span></h3>
+                <div class="leftside-overflow">
+                    <ul>
+                        <li><a href="#">A <span>125</span></a></li>
+                        <li><a href="#">B <span>125</span></a></li>
+                        <li><a class="active" href="#">C <span>125</span></a></li>
+                        <li><a href="#">D <span>125</span></a></li>
+                        <li><a href="#">E <span>125</span></a></li>
+                        <li><a href="#">F <span>125</span></a></li>
+                        <li><a href="#">G <span>125</span></a></li>
+                        <li><a href="#">H <span>125</span></a></li>
+                        <li><a href="#">I <span>125</span></a></li>
+                        <li><a href="#">J <span>125</span></a></li>
+                        <li><a href="#">K <span>125</span></a></li>
+                        <li><a href="#">L <span>125</span></a></li>
+                        <li><a href="#">M <span>125</span></a></li>
+                        <li><a href="#">N <span>125</span></a></li>
+                        <li><a href="#">O <span>125</span></a></li>
+                        <li><a href="#">P <span>125</span></a></li>
+                        <li><a href="#">Q <span>125</span></a></li>
+                        <li><a href="#">R <span>125</span></a></li>
+                        <li><a href="#">S <span>125</span></a></li>
+                        <li><a href="#">T <span>125</span></a></li>
+                        <li><a href="#">U <span>125</span></a></li>
+                        <li><a href="#">V <span>125</span></a></li>
+                        <li><a href="#">W <span>125</span></a></li>
+                        <li><a href="#">X <span>125</span></a></li>
+                        <li><a href="#">Y <span>125</span></a></li>
+                        <li><a href="#">Z <span>125</span></a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="col-lg-10 col-md-10 sign-list">
+
+            <div class="row" *ngIf="dictionaries && dictionaries.length">
+
+                <div class="col-3" *ngFor="let dictionary of dictionaries">
+                    <a href="#" class="sign-card">
+                        <span>{{dictionary.videos}}</span>
+                        <img [src]="decodeURIComponent(dictionary.image)" alt="">
+                        <h4>{{dictionary.title}}</h4>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

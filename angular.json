@@ -24,9 +24,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/styles/js/jquery-3.5.1.slim.min.js",
+              "src/styles/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -88,9 +91,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/styles/js/jquery-3.5.1.slim.min.js",
+              "src/styles/js/bootstrap.min.js"
+            ]
           }
         },
         "lint": {
@@ -119,6 +125,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "NG-PSL"
 }

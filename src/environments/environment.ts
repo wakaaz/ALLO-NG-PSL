@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  ENV: 'development',
+  // API_URL: 'http://192.168.1.115/vape/public',
+  API_URL: 'http://psl.am7.studio',
+  APP_NAME: 'PSL | '
 };
 
 /*

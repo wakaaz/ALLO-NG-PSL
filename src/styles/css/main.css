@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700;800&family=Roboto:wght@300;400;500;700;900&display=swap');
+body {
+	overflow-x: hidden;
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	letter-spacing: .5px; background-color: #F6F6F6; color: #282828;
+}
+.no-scroll {
+	overflow: hidden
+}
+.btn, .btn-primary {
+	outline: 0!important; font-family: 'Poppins', sans-serif;
+}
+h1, h2, h3, h4, h5, h6, h7, h8 {
+	font-family: 'Poppins', sans-serif;
+	letter-spacing: 1px;
+	font-weight: 700
+}
+
+.btn, input, textarea {
+	outline: 0!important;
+	box-shadow: none!important
+}
+.content-wrapper {
+	position: relative;
+	padding-bottom: 40px;
+}
+.content-wrapper .content-title{padding-top: 40px; padding-bottom: 15px;}
+.content-wrapper .content-title h2 {font-size: 24px; color: #282828}
+.content-wrapper .content-title h2 span {color: #009e4f}
+.breadcrumb {
+	background-color: transparent;
+	float: right;
+	margin-bottom: 0;
+	padding: 0;
+	font-size: 14px;
+}
+.breadcrumb a, .breadcrumb span {
+	color: #212121;
+}
+.breadcrumb a {
+	opacity: .5;
+	transition: .3s ease;
+}
+.breadcrumb a:HOVER {
+	opacity: 1;
+	transition: .3s ease;
+}
+.breadcrumb>li+li::before {
+	color: #009e4f;
+	padding: 0 9px;
+	font-weight: 600;
+	content: '\f105';
+	font-family: 'Font Awesome 5 Free';
+}
+.custom-select{font-size: 14px;}
+.btn {
+    font-size: 14px; letter-spacing: 1px;
+    line-height: 1.5;
+}
+
+
+
+@media (max-width:1024px) {
+	.content-wrapper .content-title h2{font-size: 22px}
+}
