@@ -1,10 +1,7 @@
 .nextvds{display: none}
-.btn-language {text-align: right}
-.btn-language .btn-outline-primary{font-size: 14px; padding: 4px 12px;}
-.btn-language .active{background-color: #009e4f!important; color: #fff!important}
-.text-link{color: #282828; font-family: 'Poppins', sans-serif; opacity: 0.6}
+.text-link{color: #7a7a7a; font-family: 'Poppins', sans-serif;}
 .text-link i{color: #009e4f; margin-right:10px;}
-.text-link:hover{color: #009e4f; opacity: 1;}
+.text-link:hover{color: #009e4f;}
 .video-page{padding-top: 40px;}
 .video-page .content-title{font-size:22px; padding-top: 15px!important;}
 .v-title-action{padding-top: 15px;}
@@ -72,13 +69,12 @@
  
 @media (max-width:1024px) {
 .r-video-list{height: 560px}
-.text-link, .btn-language .btn-outline-primary{font-size: 13px}
+.text-link{font-size: 13px}
 .custom-switch span{font-size: 13px; line-height: 1.7;} 
 .video-page h4{font-size: 16px}
 	.v-title-action .content-title h2{font-size: 18px!important;}
 .video-page .content-title{font-size:20px!important;}
 .v-title{font-size: 20px!important;}
-.btn-language{margin-top: -4px}
 }
 
 @media (max-width:812px) {
@@ -92,7 +88,6 @@
 
 @media (max-width:767px) {
 .nextvds{display: block; margin-bottom: 10px; font-size: 16px;}
-.btn-language .btn-outline-primary {font-size: 12.5px;padding: 3px 8px;}
 .text-link{letter-spacing: normal}
 .v-title, .v-title-action .content-title h2{letter-spacing: 0.5px; font-size: 16px!important;}
 .v-title{margin-bottom: 5px;}
