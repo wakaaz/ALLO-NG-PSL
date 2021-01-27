@@ -21,6 +21,9 @@ h1, h2, h3, h4, h5, h6, h7, h8 {
 	outline: 0!important;
 	box-shadow: none!important
 }
+.btn-language {text-align: right}
+.btn-language .btn-outline-primary{font-size: 14px; padding: 4px 12px;}
+.btn-language .active{background-color: #009e4f!important; color: #fff!important}
 .content-wrapper {
 	position: relative;
 	padding-bottom: 40px;
@@ -53,14 +56,37 @@ h1, h2, h3, h4, h5, h6, h7, h8 {
 	content: '\f105';
 	font-family: 'Font Awesome 5 Free';
 }
-.custom-select{font-size: 14px;}
+.custom-select{font-size: 14px; border: solid 1px #dee2e6}
 .btn {
     font-size: 14px; letter-spacing: 1px;
     line-height: 1.5;
 }
-
-
+.form-control:focus, .custom-select:focus {
+  border-color: #009e4f; box-shadow: none;
+}
+#test:focus, 
+#test:active,
+input:focus,
+input:active, .custom-control-input:focus ~ .custom-control-label::before, button{
+	outline: none !important; box-shadow:  none!important;
+}
+.modal-title{font-size: 18px}
+.modal-footer .btn{padding-left: 20px; padding-right: 20px; font-size: 16px;}
+.top-border{border-top: solid 2px #009e4f}
+.modal-title i{color:#009e4f}
 
 @media (max-width:1024px) {
-	.content-wrapper .content-title h2{font-size: 22px}
+.content-wrapper .content-title h2{font-size: 22px}
+.btn-language{margin-top: -4px}
+.btn-language .btn-outline-primary{font-size: 13px}
 }
+
+@media (max-width:767px) {
+.btn-language .btn-outline-primary {font-size: 12.5px;padding: 3px 8px;}
+.modal-footer .btn{font-size: 14px;}
+.modal-title{font-size: 16px; letter-spacing: normal}
+}
+
+
+
+ 

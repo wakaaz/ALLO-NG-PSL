@@ -65,6 +65,23 @@
         </div>
 
         <div class="col-lg-10 col-md-10 sign-list">
+            <div class="row filter-sort">
+	
+                <div class="col-md-6 col pr-0">
+                    <div class="search-filter">
+                    <i class="fa fa-search"></i>
+                    <input type="text" placeholder="Search" class="form-control">
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-auto">	
+                <select class="custom-select">
+                    <option selected>Sort By:</option>
+                    <option selected>Sort By:</option>
+                </select>
+                </div>
+                
+            </div>
             <div class="row">
                 <div class="col-3" *ngFor="let dictionary of genericService.dictionaryCategories$ | async">
                     <a [routerLink]="['/dictionary/', dictionary.title, dictionary.id]" class="sign-card">
