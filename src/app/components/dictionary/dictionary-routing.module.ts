@@ -10,10 +10,10 @@ const routes: Routes = [
     path: '', component: DictionaryComponent,
   },
   {
-    path: ':id', component: SidebarListComponent,
+    path: 'category', component: SidebarListComponent,
     children: [
       {
-        path: ':newId', component: ListComponent
+        path: ':id', component: ListComponent
       },
     ]
   }

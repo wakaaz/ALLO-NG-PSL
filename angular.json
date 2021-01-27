@@ -24,11 +24,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles/styles.css"
+              "src/styles/styles.css",
+              "node_modules/plyr/dist/plyr.css"
             ],
             "scripts": [
               "src/styles/js/jquery-3.5.1.slim.min.js",
-              "src/styles/js/bootstrap.min.js"
+              "src/styles/js/bootstrap.min.js",
+              "node_modules/plyr/dist/plyr.js"
             ]
           },
           "configurations": {

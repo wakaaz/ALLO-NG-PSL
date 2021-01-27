@@ -11,7 +11,7 @@ import { SidebarListComponent } from './sidebar-list/sidebar-list.component';
   declarations: [
     DictionaryComponent,
     ListComponent,
-    SidebarListComponent
+    SidebarListComponent,
   ],
   imports: [
     CommonModule,

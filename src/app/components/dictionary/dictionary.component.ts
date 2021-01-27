@@ -8,7 +8,7 @@ import { GenericService } from 'src/app/_services/generic-service';
   styleUrls: [
     './dictionary.component.css'
   ],
-  encapsulation: ViewEncapsulation.None
+  // encapsulation: ViewEncapsulation.None
 })
 export class DictionaryComponent implements OnInit {
   // dictionaries: Dictionary[];

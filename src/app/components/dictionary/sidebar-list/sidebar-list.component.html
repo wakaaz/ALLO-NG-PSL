@@ -31,21 +31,10 @@
                 <h3>Dictionary <span>List</span></h3>
                 <div class="leftside-overflow">
                     <ul>
-                        <li><a href="#">Adjectives</a></li>
-                        <li><a href="#">Adverbs</a></li>
-                        <li><a href="#">Airport</a></li>
-                        <li><a href="#">Alphabet</a></li>
-                        <li><a href="#">Beauty</a></li>
-                        <li><a href="#">Bedroom</a></li>
-                        <li><a href="#">Adjectives</a></li>
-                        <li><a href="#">Adverbs</a></li>
-                        <li><a href="#">Airport</a></li>
-                        <li><a href="#">Alphabet</a></li>
-                        <li><a href="#">Beauty</a></li>
-                        <li><a href="#">Birds</a></li>
-                        <li><a href="#">Adjectives</a></li>
-                        <li><a href="#">Adverbs</a></li>
-                        <li><a href="#">Airport</a></li>
+                        <li *ngFor="let dictionary of genericService.dictionaryCategories$ | async">
+                            <a [routerLink]="['/dictionary/category', dictionary.id]"
+                                routerLinkActive="active">{{dictionary.title}}</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -53,8 +42,8 @@
         </div>
 
         <div class="col-lg-9 col-md-8">
-            
-                <router-outlet></router-outlet>
+
+            <router-outlet></router-outlet>
             <!-- </div> -->
 
         </div>

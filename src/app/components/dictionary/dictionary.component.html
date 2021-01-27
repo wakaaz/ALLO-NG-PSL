@@ -66,25 +66,25 @@
 
         <div class="col-lg-10 col-md-10 sign-list">
             <div class="row filter-sort">
-	
+
                 <div class="col-md-6 col pr-0">
                     <div class="search-filter">
-                    <i class="fa fa-search"></i>
-                    <input type="text" placeholder="Search" class="form-control">
+                        <i class="fa fa-search"></i>
+                        <input type="text" placeholder="Search" class="form-control">
                     </div>
                 </div>
-                
-                <div class="col-md-6 col-auto">	
-                <select class="custom-select">
-                    <option selected>Sort By:</option>
-                    <option selected>Sort By:</option>
-                </select>
+
+                <div class="col-md-6 col-auto">
+                    <select class="custom-select">
+                        <option selected>Sort By:</option>
+                        <option selected>Sort By:</option>
+                    </select>
                 </div>
-                
+
             </div>
             <div class="row">
                 <div class="col-3" *ngFor="let dictionary of genericService.dictionaryCategories$ | async">
-                    <a [routerLink]="['/dictionary/', dictionary.title, dictionary.id]" class="sign-card">
+                    <a [routerLink]="['/dictionary/category', dictionary.id]" class="sign-card">
                         <span>{{dictionary.videos}}</span>
                         <img [src]="decodeURIComponent(dictionary.image)" alt="">
                         <h4>{{dictionary.title}}</h4>
