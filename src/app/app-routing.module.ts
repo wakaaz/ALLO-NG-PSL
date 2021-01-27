@@ -3,7 +3,7 @@ import { Routes, RouterModule, PreloadAllModules, PreloadingStrategy } from '@an
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'dictionary',
     loadChildren: () => import('./components/dictionary/dictionary.module').then(m => m.DictionaryModule)
   }
 ];

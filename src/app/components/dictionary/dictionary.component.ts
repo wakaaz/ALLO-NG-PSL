@@ -11,16 +11,15 @@ import { GenericService } from 'src/app/_services/generic-service';
   encapsulation: ViewEncapsulation.None
 })
 export class DictionaryComponent implements OnInit {
-  dictionaries: Dictionary[];
+  // dictionaries: Dictionary[];
   constructor(
-    private genericService: GenericService
+    public genericService: GenericService
   ) { }
 
   ngOnInit(): void {
-    this.genericService.getDictionaryCategories().subscribe((x: Dictionary[]) => {
-      console.log(x);
-      this.dictionaries = x;
-    });
+    this.genericService.getDictionaryCategories();
   }
-
+  decodeURIComponent(url: string): string {
+    return decodeURIComponent(url);
+  }
 }

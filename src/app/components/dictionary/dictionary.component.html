@@ -65,21 +65,15 @@
         </div>
 
         <div class="col-lg-10 col-md-10 sign-list">
-
-            <div class="row" *ngIf="dictionaries && dictionaries.length">
-
-                <div class="col-3" *ngFor="let dictionary of dictionaries">
-                    <a href="#" class="sign-card">
+            <div class="row">
+                <div class="col-3" *ngFor="let dictionary of genericService.dictionaryCategories$ | async">
+                    <a [routerLink]="['/dictionary/', dictionary.title, dictionary.id]" class="sign-card">
                         <span>{{dictionary.videos}}</span>
                         <img [src]="decodeURIComponent(dictionary.image)" alt="">
                         <h4>{{dictionary.title}}</h4>
                     </a>
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 </div>
