@@ -11,6 +11,7 @@ import { GenericService } from 'src/app/_services/generic-service';
 })
 export class PlayerComponent implements OnInit {
   id: number;
+  categoryName = '';
   categoryId: number;
   currentlyPlayed: any = {
   };
@@ -45,6 +46,13 @@ export class PlayerComponent implements OnInit {
       this.genericService.getDictionaries(this.categoryId);
     }
 
+    const url = this.router.url;
+
+    if (url.split('/')[1] === 'play') {
+      if (url.split('/')[2] === 'dictionary') {
+        this.categoryName = 'PSL Dictionary';
+      }
+    }
     // this.allVedios = this.genericService.dictionaries$.tak.value();
     // this.setCurrentlyPlayedVedio(this.id);
     // this.setPlayer();

@@ -7,9 +7,15 @@ const routes: Routes = [
     loadChildren: () => import('./components/dictionary/dictionary.module').then(m => m.DictionaryModule)
   },
   {
+    path: 'teacherTutorials',
+    loadChildren: () => import('./components/teachers-tutorial/teachers-tutorial.module').then(m => m.TeachersTutorialModule)
+  },
+
+  {
     path: 'play',
     loadChildren: () => import('./components/player/player.module').then(m => m.PlayerModule)
   },
+  { path: 'components/story', loadChildren: () => import('./components/story/story.module').then(m => m.StoryModule) },
 ];
 
 @NgModule({

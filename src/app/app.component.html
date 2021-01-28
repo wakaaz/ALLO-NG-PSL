@@ -11,9 +11,9 @@
         <nav class="navbar navbar-expand-md">
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
-              <li class="nav-item"><a class="nav-link active" href="index.html">Dictionary <span
+              <li class="nav-item"><a class="nav-link active" [routerLink]="['/dictionary']">Dictionary <span
                     class="sr-only">(current)</span></a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Teacher Tutorials</a></li>
+              <li class="nav-item"><a class="nav-link" [routerLink]="['/teacherTutorials']">Teacher Tutorials</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Stories</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Learning Tutorials</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Iqra Program</a></li>
@@ -66,9 +66,9 @@
         <div class="widget">
           <h3>Quick Links</h3>
           <ul class="widget-list">
-            <li><a href="#">Dictionary</a></li>
+            <li><a [routerLink]="['/dictionary']">Dictionary</a></li>
             <li><a href="#">Learning Tutorials</a></li>
-            <li><a href="#">Teacher Tutorials</a></li>
+            <li><a [routerLink]="['/teacherTutorials']">Teacher Tutorials</a></li>
             <li><a href="#">PSL Stories</a></li>
             <li><a href="#">Iqra Program</a></li>
             <li><a href="#">Resources</a></li>
