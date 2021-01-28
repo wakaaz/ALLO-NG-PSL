@@ -10,12 +10,14 @@ const routes: Routes = [
     path: 'teacherTutorials',
     loadChildren: () => import('./components/teachers-tutorial/teachers-tutorial.module').then(m => m.TeachersTutorialModule)
   },
-
+  {
+    path: 'stories',
+    loadChildren: () => import('./components/story/story.module').then(m => m.StoryModule)
+  },
   {
     path: 'play',
     loadChildren: () => import('./components/player/player.module').then(m => m.PlayerModule)
   },
-  { path: 'components/story', loadChildren: () => import('./components/story/story.module').then(m => m.StoryModule) },
 ];
 
 @NgModule({

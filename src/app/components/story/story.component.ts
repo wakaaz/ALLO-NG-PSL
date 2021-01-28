@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GenericService } from 'src/app/_services/generic-service';
 
 @Component({
   selector: 'app-story',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StoryComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public genericService: GenericService
+  ) { }
 
   ngOnInit(): void {
+    let length = 0;
+    this.genericService.storyTypes$.subscribe(x => {
+      length = x.length;
+    });
+    if (length === 0) {
+      this.genericService.getPreferences();
+    }
   }
 
 }

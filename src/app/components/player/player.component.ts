@@ -4,6 +4,8 @@ import * as Plyr from 'plyr';
 import { Location } from '@angular/common';
 import { GenericService } from 'src/app/_services/generic-service';
 
+// import { PlyrDriver, PlyrDriverCreateParams, PlyrDriverUpdateSourceParams, PlyrDriverDestroyParams } from './plyr-driver';
+
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
@@ -13,6 +15,7 @@ export class PlayerComponent implements OnInit {
   id: number;
   categoryName = '';
   categoryId: number;
+  routerURL: string;
   currentlyPlayed: any = {
   };
   allVedios: any[] = [];
@@ -27,39 +30,77 @@ export class PlayerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    const url = this.router.url;
     this.route.params.subscribe(params => {
       // this.genericService.getDictionaries(params.vedioId);
       // this.initialiseState(); // reset and set based on new parameter this time
       this.id = params.vedioId;
       this.categoryId = params.id;
+      this.init(url);
     });
-    this.setPlayer();
-    this.genericService.dictionaries$
-      .subscribe(d => {
-        this.allVedios = d;
-        if (this.allVedios.length > 0) {
-          this.setCurrentlyPlayedVedio(this.id);
-          this.setPlayer();
-        }
-      });
-    if (this.allVedios.length === 0) {
-      this.genericService.getDictionaries(this.categoryId);
-    }
 
-    const url = this.router.url;
-
-    if (url.split('/')[1] === 'play') {
-      if (url.split('/')[2] === 'dictionary') {
-        this.categoryName = 'PSL Dictionary';
-      }
-    }
     // this.allVedios = this.genericService.dictionaries$.tak.value();
     // this.setCurrentlyPlayedVedio(this.id);
     // this.setPlayer();
   }
+  init(url: string): void {
+    this.setPlayer();
 
+    if (this.allVedios.length === 0) {
+      if (url.split('/')[2] === 'dictionary') {
+        this.genericService.getDictionaries(this.categoryId);
+      } else if (url.split('/')[2] === 'story') {
+        this.genericService.getStoriesVedios(this.categoryId);
+      }
+    }
+
+
+    if (url.split('/')[1] === 'play') {
+      if (url.split('/')[2] === 'dictionary') {
+        this.dictionariesSubscription();
+        this.setObject(this.allVedios);
+        this.routerURL =
+          this.categoryName = 'PSL Dictionary';
+      } else {
+        if (url.split('/')[2] === 'story') {
+          this.storiesSubscription();
+          this.categoryName = 'Story';
+          this.setObject(this.allVedios);
+        }
+      }
+    }
+  }
+  updateUrl(id: string): string {
+    const url = this.router.url;
+    const urlArray = url.split('/');
+    // urlArray[urlArray.length - 1] = id;
+    // this.routerURL = urlArray.join('/');
+    urlArray.pop();
+    return urlArray.join('/');
+  }
+  storiesSubscription(): void {
+    this.genericService.stories$
+      .subscribe(data => {
+        this.setObject(data);
+      });
+  }
+
+  dictionariesSubscription(): void {
+    this.genericService.dictionaries$
+      .subscribe(data => {
+        this.setObject(data);
+      });
+  }
   decodeURIComponent(url: string): string {
     return decodeURIComponent(url);
+  }
+
+  setObject(data: any): void {
+    this.allVedios = data;
+    if (this.allVedios.length > 0) {
+      this.setCurrentlyPlayedVedio(this.id);
+      this.setPlayer();
+    }
   }
 
   setPlayer(): void {
@@ -67,38 +108,43 @@ export class PlayerComponent implements OnInit {
   }
 
   setPlayerCurrentSource(): void {
-    this.player.source = {
+    this.player.source =
+    // [
+    {
       type: 'video',
       title: this.currentlyPlayed.english_word,
-      sources: [
-        {
-          src: this.decodeURIComponent(this.currentlyPlayed['1080p'].url),
-          type: 'video/mp4',
-          size: 1080,
-        },
-        {
-          src: this.decodeURIComponent(this.currentlyPlayed['720p'].url),
-          type: 'video/mp4',
-          size: 720,
-        },
-        {
-          src: this.decodeURIComponent(this.currentlyPlayed['480p'].url),
-          type: 'video/mp4',
-          size: 480,
-        },
-        {
-          src: this.decodeURIComponent(this.currentlyPlayed['360p'].url),
-          type: 'video/mp4',
-          size: 360,
-        },
-        {
-          src: this.decodeURIComponent(this.currentlyPlayed['240p'].url),
-          type: 'video/mp4',
-          size: 240,
-        }
-      ],
+      sources:
+        [
+          {
+            src: this.decodeURIComponent(this.currentlyPlayed['1080p'].url),
+            type: 'video/mp4',
+            size: 1080,
+          },
+          {
+            src: this.decodeURIComponent(this.currentlyPlayed['720p'].url),
+            type: 'video/mp4',
+            size: 720,
+          },
+          {
+            src: this.decodeURIComponent(this.currentlyPlayed['480p'].url),
+            type: 'video/mp4',
+            size: 480,
+          },
+          {
+            src: this.decodeURIComponent(this.currentlyPlayed['360p'].url),
+            type: 'video/mp4',
+            size: 360,
+          },
+          {
+            src: this.decodeURIComponent(this.currentlyPlayed['240p'].url),
+            type: 'video/mp4',
+            size: 240,
+          }
+        ],
       poster: this.decodeURIComponent(this.currentlyPlayed.poster)
     };
+    //  ];
+    this.player.play();
   }
 
   setCurrentlyPlayedVedio(id: number): void {
