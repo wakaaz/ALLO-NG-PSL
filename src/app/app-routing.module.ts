@@ -15,6 +15,10 @@ const routes: Routes = [
     loadChildren: () => import('./components/story/story.module').then(m => m.StoryModule)
   },
   {
+    path: 'learningTutorials',
+    loadChildren: () => import('./components/learning-tutorial/learning-tutorial.module').then(m => m.LearningTutorialModule)
+  },
+  {
     path: 'play',
     loadChildren: () => import('./components/player/player.module').then(m => m.PlayerModule)
   },

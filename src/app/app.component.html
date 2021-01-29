@@ -15,7 +15,8 @@
                     class="sr-only">(current)</span></a></li>
               <li class="nav-item"><a class="nav-link" [routerLink]="['/teacherTutorials']">Teacher Tutorials</a></li>
               <li class="nav-item"><a class="nav-link" [routerLink]="['/stories', 1]">Stories</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Learning Tutorials</a></li>
+              <li class="nav-item"><a class="nav-link" [routerLink]="['/learningTutorials', 1]">Learning Tutorials</a>
+              </li>
               <li class="nav-item"><a class="nav-link" href="#">Iqra Program</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Resources</a></li>
 
@@ -67,7 +68,7 @@
           <h3>Quick Links</h3>
           <ul class="widget-list">
             <li><a [routerLink]="['/dictionary']">Dictionary</a></li>
-            <li><a href="#">Learning Tutorials</a></li>
+            <li><a [routerLink]="['/learningTutorials', 1]">Learning Tutorials</a></li>
             <li><a [routerLink]="['/teacherTutorials']">Teacher Tutorials</a></li>
             <li><a [routerLink]="['/stories', 1]">PSL Stories</a></li>
             <li><a href="#">Iqra Program</a></li>
