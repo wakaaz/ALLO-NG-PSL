@@ -104,7 +104,7 @@ export class PlayerComponent implements OnInit {
   }
 
   setPlayer(): void {
-    this.player = new Plyr('#plyrID', { captions: { active: true } });
+    this.player = new Plyr('#plyrID', { captions: { active: true }, autoplay: true });
   }
 
   setPlayerCurrentSource(): void {
@@ -144,7 +144,7 @@ export class PlayerComponent implements OnInit {
       poster: this.decodeURIComponent(this.currentlyPlayed.poster)
     };
     //  ];
-    this.player.play();
+    // this.player.play();
   }
 
   setCurrentlyPlayedVedio(id: number): void {
