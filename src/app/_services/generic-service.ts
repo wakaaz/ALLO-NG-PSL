@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Dictionary } from '../_models/dictionary';
+import { LearningTutorial } from '../_models/learning-tutorial';
+import { Skill } from '../_models/skill';
 import { Story } from '../_models/story';
 import { TeacherTutorial } from '../_models/teacher-tutorial';
 import { LocalStorageSerivce } from './local-storage-serivce';
@@ -15,7 +17,10 @@ export class GenericService {
   private _teacherTutorial$ = new BehaviorSubject<TeacherTutorial[]>([]);
   private _storyTypes$ = new BehaviorSubject<Story[]>([]);
   private _stories$ = new BehaviorSubject<Story[]>([]);
+  private _learnginSkill$ = new BehaviorSubject<Skill[]>([]);
+  private _learningTutorial$ = new BehaviorSubject<LearningTutorial[]>([]);
   private _dictionaries$ = new BehaviorSubject<Dictionary[]>([]);
+
   constructor(
     private restService: RestSerivce,
     private localStorageSerivce: LocalStorageSerivce
@@ -43,6 +48,15 @@ export class GenericService {
   get stories$(): Observable<Story[]> {
     return this._stories$.asObservable();
   }
+
+  // get Learnign Skills
+  get learnginSkill$(): Observable<Story[]> {
+    return this._learnginSkill$.asObservable();
+  }
+  // get Learnign Skills
+  get learningTutorial$(): Observable<LearningTutorial[]> {
+    return this._learningTutorial$.asObservable();
+  }
   // Emtpty dictionary
   setEmptyDictionaries(): void {
     this._dictionaries$.next([]);
@@ -60,6 +74,8 @@ export class GenericService {
       this._dictionaryCategories$.next(x.dictionary_categories);
       this._teacherTutorial$.next(x.tut_grades);
       this._storyTypes$.next(x.story_types);
+      this._learnginSkill$.next(x.life_skills);
+      this._learningTutorial$.next(x.learning_tut_grades);
     });
   }
 
