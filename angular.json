@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "NG-PSL"
+  "defaultProject": "NG-PSL",
+  "cli": {
+    "analytics": false
+  }
 }

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Dictionary } from '../_models/dictionary';
-import { LearningTutorial } from '../_models/learning-tutorial';
+import { LearningTutorial, Subject as LearningSubjects } from '../_models/learning-tutorial';
 import { Skill } from '../_models/skill';
 import { Story } from '../_models/story';
 import { TeacherTutorial } from '../_models/teacher-tutorial';
@@ -19,6 +19,7 @@ export class GenericService {
   private _stories$ = new BehaviorSubject<Story[]>([]);
   private _learnginSkill$ = new BehaviorSubject<Skill[]>([]);
   private _learningTutorial$ = new BehaviorSubject<LearningTutorial[]>([]);
+  // private _learningTutorialSubjects$ = new BehaviorSubject<LearningSubjects[]>([]);
   private _dictionaries$ = new BehaviorSubject<Dictionary[]>([]);
 
   constructor(
@@ -57,6 +58,9 @@ export class GenericService {
   get learningTutorial$(): Observable<LearningTutorial[]> {
     return this._learningTutorial$.asObservable();
   }
+  // get learningTutorialSubjects$(id: number): Observable<LearningSubjects[]> {
+    // return this._learningTutorialSubjects$.pipe(map(x = x.id == this.paramId)?.subjects)).asObservable();
+  // }
   // Emtpty dictionary
   setEmptyDictionaries(): void {
     this._dictionaries$.next([]);
@@ -84,8 +88,14 @@ export class GenericService {
       this._dictionaries$.next(x);
     });
   }
+  // getLearningTutorials(id: number): void {
+  //   this.restService.postRequest('/LearningTutorials', { grade_id: id }).pipe(map(x => x.data)).subscribe(x => {
+  //     this._dictionaries$.next(x);
+  //   });
+  // }
   // getStoriesVedios
   getStoriesVedios(id: number): void {
+    debugger;
     this.restService.postRequest('/Stories', { type_id: id }).pipe(map(x => x.data)).subscribe(x => {
       this._stories$.next(x);
     });
