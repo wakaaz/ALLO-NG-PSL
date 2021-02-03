@@ -1,16 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-import { DictionaryComponent } from './dictionary.component';
 import { ListComponent } from './list/list.component';
-import { SidebarListComponent } from './sidebar-list/sidebar-list.component';
+
+import { StoryComponent } from './story.component';
 
 const routes: Routes = [
   {
-    path: '', component: DictionaryComponent,
-  },
-  {
-    path: 'category', component: SidebarListComponent,
+    path: '', component: StoryComponent,
     children: [
       {
         path: ':id', component: ListComponent
@@ -23,4 +19,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DictionaryRoutingModule { }
+export class StoryRoutingModule { }
