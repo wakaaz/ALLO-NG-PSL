@@ -31,6 +31,7 @@ export class ListComponent implements OnInit {
   }
   learingTutorialSubject() {
     this.subjects = this.data.find(x => x.id == this.paramId)?.subjects;
+    console.log('', this.subjects);
   }
   decodeURIComponent(url: string): string {
     return decodeURIComponent(url);

@@ -20,7 +20,6 @@ export class PlayerComponent implements OnInit {
   };
   allVedios: any[] = [];
   remeaningVedios = [];
-
   public player: any;
   constructor(
     private route: ActivatedRoute,
@@ -51,6 +50,8 @@ export class PlayerComponent implements OnInit {
         this.genericService.getDictionaries(this.categoryId);
       } else if (url.split('/')[2] === 'story') {
         this.genericService.getStoriesVedios(this.categoryId);
+      } else if (url.split('/')[2] === 'learningTutorials') {
+        // this.genericService.getLearningTutorials(this.id);
       }
     }
 
@@ -66,8 +67,11 @@ export class PlayerComponent implements OnInit {
           this.storiesSubscription();
           this.categoryName = 'Story';
           this.setObject(this.allVedios);
+        } else if (url.split('/')[2] === 'learningTutorials') {
+          this.learningVideoSubscription();
         }
       }
+  
     }
   }
   updateUrl(id: string): string {
@@ -81,6 +85,12 @@ export class PlayerComponent implements OnInit {
   storiesSubscription(): void {
     this.genericService.stories$
       .subscribe(data => {
+        this.setObject(data);
+      });
+  }
+  learningVideoSubscription(): void {
+    this.genericService.learningTutorialVideos$
+      .subscribe((data: any) => {
         this.setObject(data);
       });
   }

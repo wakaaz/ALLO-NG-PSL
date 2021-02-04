@@ -5,7 +5,8 @@ import { PlayerComponent } from './player.component';
 
 const routes: Routes = [
   { path: 'dictionary/category/:id/:vedioId', component: PlayerComponent },
-  { path: 'story/:id/:vedioId', component: PlayerComponent }
+  { path: 'story/:id/:vedioId', component: PlayerComponent },
+  { path: 'learningTutorials/:gradeId/:id/:vedioId', component: PlayerComponent },
 ];
 
 @NgModule({

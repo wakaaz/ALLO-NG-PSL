@@ -7,7 +7,9 @@ import { Skill } from '../_models/skill';
 import { Story } from '../_models/story';
 import { TeacherTutorial } from '../_models/teacher-tutorial';
 import { LocalStorageSerivce } from './local-storage-serivce';
+import { VideoList } from '../_models/learning-tutorial'
 import { RestSerivce } from './rest-serivce';
+import { VideosListComponent } from '../components/learning-tutorial/videos-list/videos-list.component';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +21,11 @@ export class GenericService {
   private _stories$ = new BehaviorSubject<Story[]>([]);
   private _learnginSkill$ = new BehaviorSubject<Skill[]>([]);
   private _learningTutorial$ = new BehaviorSubject<LearningTutorial[]>([]);
+  private _learningTutorialVideos$ = new BehaviorSubject<VideoList[]>([]);
+
   // private _learningTutorialSubjects$ = new BehaviorSubject<LearningSubjects[]>([]);
   private _dictionaries$ = new BehaviorSubject<Dictionary[]>([]);
+  private _learningVideo$ = new BehaviorSubject<VideoList[]>([]);
 
   constructor(
     private restService: RestSerivce,
@@ -58,6 +63,12 @@ export class GenericService {
   get learningTutorial$(): Observable<LearningTutorial[]> {
     return this._learningTutorial$.asObservable();
   }
+  get learningTutorialVideos$(): Observable<VideoList[]> {
+    return this._learningTutorialVideos$.asObservable();
+  }
+  get learningVideo$(): Observable<VideoList[]> {
+    return this._learningVideo$.asObservable();
+  }
   // get learningTutorialSubjects$(id: number): Observable<LearningSubjects[]> {
     // return this._learningTutorialSubjects$.pipe(map(x = x.id == this.paramId)?.subjects)).asObservable();
   // }
@@ -88,14 +99,21 @@ export class GenericService {
       this._dictionaries$.next(x);
     });
   }
-  // getLearningTutorials(id: number): void {
-  //   this.restService.postRequest('/LearningTutorials', { grade_id: id }).pipe(map(x => x.data)).subscribe(x => {
-  //     this._dictionaries$.next(x);
-  //   });
-  // }
+  getLearningTutorialVideoList(gradeIds: number, subjectId: number): void {
+    this.restService.postRequest('/LearningTutorials', { grade_id: gradeIds, subject_id: subjectId}).pipe(map(x => x.data)).subscribe(x => {
+      console.log('getLearningTutorialVideoList', x)
+      this._learningTutorialVideos$.next(x);
+    });
+  }
+  getLearningTutorials(id: number): void {
+    this._learningTutorialVideos$.subscribe((videos: VideoList[])=> {
+      let video = videos.filter((x => x.id == id))
+      this._learningVideo$.next(videos);
+      // console.log('videos', video);
+    })
+  }
   // getStoriesVedios
   getStoriesVedios(id: number): void {
-    debugger;
     this.restService.postRequest('/Stories', { type_id: id }).pipe(map(x => x.data)).subscribe(x => {
       this._stories$.next(x);
     });
