@@ -12,3 +12,12 @@ export interface Subject {
     grade_id: string;
     videos: number;
 }
+
+export interface VideoList {
+    id: number;
+    grade_id: number;
+    duration: string;
+    title: string;
+    youtube_link: string;
+    vimeo_link: string;
+}
