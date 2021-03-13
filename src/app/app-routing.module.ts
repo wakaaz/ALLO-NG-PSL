@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'resources',
     loadChildren: () => import('./components/resouces/resouces.module').then(m => m.ResoucesModule)
   },
+  {
+    path: 'about-psl',
+    loadChildren: () => import('./components/about/about.module').then(m => m.AboutModule)
+  },
 ];
 
 @NgModule({
