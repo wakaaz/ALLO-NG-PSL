@@ -43,6 +43,10 @@ const routes: Routes = [
     path: 'deaf-reach-program',
     loadChildren: () => import('./components/deaf-reach-program/deaf-reach-program.module').then(m => m.DeafReachProgramModule)
   },
+  {
+    path: 'testimonial',
+    loadChildren: () => import('./components/testimonial/testimonial.module').then(m => m.TestimonialModule)
+  },
 ];
 
 @NgModule({
