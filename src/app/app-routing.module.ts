@@ -39,6 +39,10 @@ const routes: Routes = [
     path: 'about-fesf',
     loadChildren: () => import('./components/fesf/fesf.module').then(m => m.FesfModule)
   },
+  {
+    path: 'deaf-reach-program',
+    loadChildren: () => import('./components/deaf-reach-program/deaf-reach-program.module').then(m => m.DeafReachProgramModule)
+  },
 ];
 
 @NgModule({
