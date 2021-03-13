@@ -35,6 +35,10 @@ const routes: Routes = [
     path: 'about-psl',
     loadChildren: () => import('./components/about/about.module').then(m => m.AboutModule)
   },
+  {
+    path: 'about-fesf',
+    loadChildren: () => import('./components/fesf/fesf.module').then(m => m.FesfModule)
+  },
 ];
 
 @NgModule({
