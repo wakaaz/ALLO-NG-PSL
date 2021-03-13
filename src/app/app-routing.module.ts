@@ -47,6 +47,10 @@ const routes: Routes = [
     path: 'testimonial',
     loadChildren: () => import('./components/testimonial/testimonial.module').then(m => m.TestimonialModule)
   },
+  {
+    path: 'partners',
+    loadChildren: () => import('./components/partners/partners.module').then(m => m.PartnersModule)
+  },
 ];
 
 @NgModule({
