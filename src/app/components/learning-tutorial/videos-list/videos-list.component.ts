@@ -9,9 +9,9 @@ import { GenericService } from 'src/app/_services/generic-service';
 })
 export class VideosListComponent implements OnInit {
 
-  videoList: any= []
+  videoList: any = [];
   subjectId = 0;
-  gradeId= 0;
+  gradeId = 0;
   constructor(
     private route: ActivatedRoute,
     public genericService: GenericService
@@ -22,10 +22,10 @@ export class VideosListComponent implements OnInit {
       this.genericService.getLearningTutorialVideoList(this.gradeId, this.subjectId);
       // this.initialiseState(); // reset and set based on new parameter this time
     });
-   }
+  }
 
   ngOnInit(): void {
-   
+
   }
   decodeURIComponent(url: string): string {
     return decodeURIComponent(url);

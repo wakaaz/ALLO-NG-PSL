@@ -27,7 +27,7 @@ export class ListComponent implements OnInit {
     this.genericService.learningTutorial$.subscribe((x: LearningTutorial[]) => {
       this.data = x;
       this.learingTutorialSubject();
-    })
+    });
   }
   learingTutorialSubject() {
     this.subjects = this.data.find(x => x.id == this.paramId)?.subjects;

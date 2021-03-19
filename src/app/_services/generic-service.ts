@@ -70,7 +70,7 @@ export class GenericService {
     return this._learningVideo$.asObservable();
   }
   // get learningTutorialSubjects$(id: number): Observable<LearningSubjects[]> {
-    // return this._learningTutorialSubjects$.pipe(map(x = x.id == this.paramId)?.subjects)).asObservable();
+  // return this._learningTutorialSubjects$.pipe(map(x = x.id == this.paramId)?.subjects)).asObservable();
   // }
   // Emtpty dictionary
   setEmptyDictionaries(): void {
@@ -88,6 +88,7 @@ export class GenericService {
     this.restService.getRequest<any>('/Preferences').pipe(map(x => x.object)).subscribe(x => {
       this._dictionaryCategories$.next(x.dictionary_categories);
       this._teacherTutorial$.next(x.tut_grades);
+      this._teacherTutorial$.next(x.tut_grades);
       this._storyTypes$.next(x.story_types);
       this._learnginSkill$.next(x.life_skills);
       this._learningTutorial$.next(x.learning_tut_grades);
@@ -100,21 +101,27 @@ export class GenericService {
     });
   }
   getLearningTutorialVideoList(gradeIds: number, subjectId: number): void {
-    this.restService.postRequest('/LearningTutorials', { grade_id: gradeIds, subject_id: subjectId}).pipe(map(x => x.data)).subscribe(x => {
+    this.restService.postRequest('/LearningTutorials', { grade_id: gradeIds, subject_id: subjectId }).pipe(map(x => x.data)).subscribe(x => {
       console.log('getLearningTutorialVideoList', x)
       this._learningTutorialVideos$.next(x);
     });
   }
   getLearningTutorials(id: number): void {
-    this._learningTutorialVideos$.subscribe((videos: VideoList[])=> {
-      let video = videos.filter((x => x.id == id))
+    this._learningTutorialVideos$.subscribe((videos: VideoList[]) => {
+      const video = videos.filter((x => x.id === id));
       this._learningVideo$.next(videos);
       // console.log('videos', video);
-    })
+    });
   }
   // getStoriesVedios
   getStoriesVedios(id: number): void {
     this.restService.postRequest('/Stories', { type_id: id }).pipe(map(x => x.data)).subscribe(x => {
+      this._stories$.next(x);
+    });
+  }
+  // getTeacherTetorials
+  getTeacherTetorials(gradeId: number, subjectId: number): void {
+    this.restService.postRequest('/Tutorials', { grade_id: gradeId, subject_id: subjectId }).pipe(map(x => x.data)).subscribe(x => {
       this._stories$.next(x);
     });
   }
