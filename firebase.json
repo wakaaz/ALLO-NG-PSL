@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/NG-PSL",
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
