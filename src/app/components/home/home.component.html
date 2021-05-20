@@ -1,4 +1,4 @@
-<div class="main-slider">
+<!-- <div class="main-slider">
     <div class="main-slider-bg">
         <div class="container">
             <h1>RESOURCES</h1>
@@ -6,7 +6,22 @@
                 teachers of the Deaf.</h5>
         </div>
     </div>
+</div> -->
+<div class="main-slider">
+    <ngb-carousel *ngIf="sliderData.length">
+        <ng-template ngbSlide *ngFor="let slide of sliderData; let i=index">
+            <div class="picsum-img-wrapper slider-img">
+                <img [src]="slide.image" alt="Random first slide">
+            </div>
+            <div class="carousel-caption">
+                <h3 class="main-slider-bg slider-title">{{slide.title}}</h3>
+                <p class="main-slider-bg slider-description">{{slide.description}}</p>
+                <button class="main-slider-bg slider-navigate" routerLink="{{slide.link}}">Learn More</button>
+            </div>
+        </ng-template>
+    </ngb-carousel>
 </div>
+
 
 <div class="card-act-vds">
     <div class="container">
