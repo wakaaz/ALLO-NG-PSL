@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GenericService } from './_services/generic-service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'PSL';
+  constructor(private genericService: GenericService) {
+    this.genericService.getToken();
+  }
 }

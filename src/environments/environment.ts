@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   ENV: 'development',
   // API_URL: 'http://192.168.1.115/vape/public',
-  API_URL: 'https://psl.am7.studio',
+  API_URL: 'http://psl.am7.studio',
   APP_NAME: 'PSL | '
 };
 

@@ -129,4 +129,10 @@ export class GenericService {
   getPreferences(): void {
     this.getDictionaryCategories();
   }
+  getToken(): void {
+    this.restService.postAuth('/GuestLogin')
+        .subscribe(x => {
+          this.localStorageSerivce.setItem('api_token', x);
+        });
+  }
 }
