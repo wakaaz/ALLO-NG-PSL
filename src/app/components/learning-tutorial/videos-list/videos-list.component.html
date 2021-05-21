@@ -8,16 +8,17 @@
     </div>
 
     <div class="col-md-6 col-auto">
-        <select class="custom-select">
-            <option selected>Sort By:</option>
-            <option selected>Sort By:</option>
+        <select class="custom-select" (change)="changeSort($event.target.value)">
+            <option hidden selected>Sort By</option>
+            <option value="A">A to Z</option>
+            <option value="Z">Z to A</option>
         </select>
     </div>
 
 </div>
 
 <div class="row" >
-    <div class="col-lg-4 col-md-6 col-12" *ngFor="let videos of genericService.learningTutorialVideos$ | async">
+    <div class="col-lg-4 col-md-6 col-12" *ngFor="let videos of tutorialVideos">
         <a [routerLink]="['/play/learningTutorials/', videos.grade_id , videos.subject_id, videos.id]" class="video-thumb">
             <div class="v-thumb-img">
                 <div class='playBut'>

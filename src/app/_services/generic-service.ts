@@ -135,4 +135,15 @@ export class GenericService {
           this.localStorageSerivce.setItem('api_token', x);
         });
   }
+
+  sortArray(actualArray: Array<Dictionary | LearningSubjects | Story | VideoList >, sortBy: string): Array<any> {
+    const sortedArray = actualArray.sort((a: any, b: any) => {
+      if (sortBy === 'A') {
+        return a.title.charCodeAt(0) - b.title.charCodeAt(0);
+      } else {
+        return b.title.charCodeAt(0) - a.title.charCodeAt(0);
+      }
+    });
+    return sortedArray;
+  }
 }

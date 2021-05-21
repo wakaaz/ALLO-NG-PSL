@@ -12,7 +12,7 @@ import { GenericService } from 'src/app/_services/generic-service';
   // encapsulation: ViewEncapsulation.None
 })
 export class DictionaryComponent implements OnInit {
-  // dictionaries: Dictionary[];
+  dictionaries: Dictionary[];
   categoryName = '';
   constructor(
     public genericService: GenericService,
@@ -21,6 +21,10 @@ export class DictionaryComponent implements OnInit {
 
   ngOnInit(): void {
     this.genericService.getDictionaryCategories();
+    this.genericService.dictionaryCategories$.subscribe((dictionriesData: Array<Dictionary>) => {
+      this.dictionaries = dictionriesData;
+      this.changeSort('A');
+    });
     const url = this.router.url;
     // if (url.split('/')[1] === 'play') {
     if (url.split('/')[1] === 'dictionary') {
@@ -33,4 +37,9 @@ export class DictionaryComponent implements OnInit {
   decodeURIComponent(url: string): string {
     return decodeURIComponent(url);
   }
+
+  changeSort(sort: string) {
+    this.dictionaries = this.genericService.sortArray(this.dictionaries, sort);
+  }
+
 }
