@@ -4,6 +4,25 @@
     display: table;
     position: relative;
 }
+.carousel-control-prev-icon {
+    border: solid #008e47;
+    border-width: 0 5px 5px 0;
+    display: inline-block;
+    padding: 3px;
+    background-image: none !important;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+.carousel-control-next-icon {
+    border: solid #008e47;
+    border-width: 0 5px 5px 0;
+    display: inline-block;
+    padding: 3px;
+    background-image: none !important;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
 .main-slider-bg {
     position: relative;
     text-align: left;
