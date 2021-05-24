@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent,
+    pathMatch: 'full'
+  },
   {
     path: 'dictionary',
     loadChildren: () => import('./components/dictionary/dictionary.module').then(m => m.DictionaryModule)
@@ -21,6 +27,34 @@ const routes: Routes = [
   {
     path: 'play',
     loadChildren: () => import('./components/player/player.module').then(m => m.PlayerModule)
+  },
+  {
+    path: 'resources',
+    loadChildren: () => import('./components/resouces/resouces.module').then(m => m.ResoucesModule)
+  },
+  {
+    path: 'about-psl',
+    loadChildren: () => import('./components/about/about.module').then(m => m.AboutModule)
+  },
+  {
+    path: 'about-fesf',
+    loadChildren: () => import('./components/fesf/fesf.module').then(m => m.FesfModule)
+  },
+  {
+    path: 'deaf-reach-program',
+    loadChildren: () => import('./components/deaf-reach-program/deaf-reach-program.module').then(m => m.DeafReachProgramModule)
+  },
+  {
+    path: 'testimonial',
+    loadChildren: () => import('./components/testimonial/testimonial.module').then(m => m.TestimonialModule)
+  },
+  {
+    path: 'partners',
+    loadChildren: () => import('./components/partners/partners.module').then(m => m.PartnersModule)
+  },
+  {
+    path: 'faqs',
+    loadChildren: () => import('./components/faqs/faqs.module').then(m => m.FaqsModule)
   },
 ];
 

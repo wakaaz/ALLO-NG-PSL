@@ -27,11 +27,18 @@ export class ListComponent implements OnInit {
     this.genericService.learningTutorial$.subscribe((x: LearningTutorial[]) => {
       this.data = x;
       this.learingTutorialSubject();
-    })
+    });
   }
   learingTutorialSubject() {
     this.subjects = this.data.find(x => x.id == this.paramId)?.subjects;
     console.log('', this.subjects);
+    if (this.subjects?.length) {
+      this.changeSort('A');
+    }
+  }
+
+  changeSort(sort: string) {
+    this.subjects = this.genericService.sortArray(this.subjects, sort);
   }
   decodeURIComponent(url: string): string {
     return decodeURIComponent(url);

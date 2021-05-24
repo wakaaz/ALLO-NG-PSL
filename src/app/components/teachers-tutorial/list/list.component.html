@@ -42,4 +42,55 @@
 </div>
  -->
 
-<h2>Teacher tutorials</h2>
+<!-- <h2>Teacher tutorials</h2> -->
+
+
+<div class="row filter-sort">
+
+    <div class="col-md-6 col pr-0">
+        <div class="search-filter">
+            <i class="fa fa-search"></i>
+            <input type="text" placeholder="Search" class="form-control">
+        </div>
+    </div>
+
+    <div class="col-md-6 col-auto">
+        <select class="custom-select" (change)="changeSort($event.target.value)">
+            <option hidden selected>Sort By</option>
+            <option value="A">A to Z</option>
+            <option value="Z">Z to A</option>
+        </select>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-lg-4 col-md-6 col-12" *ngFor="let subject of subjects">
+        <!-- <p>  subject_id: {{dictionary.id}} ,, grade_id:    </p> -->
+        <!-- <a [routerLink]="['/teacherTutorials/', paramId, subject.id]" class="video-thumb">
+            <div class="v-thumb-img">
+                <div class='playBut'>
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="213.7px"
+                        height="213.7px" viewBox="0 0 213.7 213.7" enable-background="new 0 0 213.7 213.7"
+                        xml:space="preserve">
+
+                        <polygon class='triangle' id="XMLID_18_" fill="none" stroke-width="7" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-miterlimit="10" points="73.5,62.5 148.5,105.8 73.5,149.1 " />
+
+                        <circle class='circle' id="XMLID_17_" fill="none" stroke-width="7" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-miterlimit="10" cx="106.8" cy="106.8" r="103.3" />
+                    </svg>
+                </div>
+                <img [src]="decodeURIComponent(subject.icon)" alt="">
+            </div>
+            <h3>{{subject.title}}</h3>
+        </a> -->
+        <a [routerLink]="['/teacherTutorials/', paramId, subject.id]" class="video-thumb">
+            <div class="v-thumb-img">
+                <img [src]="decodeURIComponent(subject.icon)" [alt]="subject.title">
+            </div>
+            <h3>{{subject.title}}</h3>
+        </a>
+    </div>
+</div>

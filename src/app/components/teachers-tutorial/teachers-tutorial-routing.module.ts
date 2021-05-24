@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ListComponent } from './list/list.component';
 
 import { TeachersTutorialComponent } from './teachers-tutorial.component';
+import { VedioListComponent } from './vedio-list/vedio-list.component';
 
 const routes: Routes = [
   {
@@ -10,6 +11,9 @@ const routes: Routes = [
     children: [
       {
         path: ':id', component: ListComponent
+      },
+      {
+        path: ':id/:subjectId', component: VedioListComponent
       },
     ]
   }
