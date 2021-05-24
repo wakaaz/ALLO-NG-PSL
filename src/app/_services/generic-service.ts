@@ -136,12 +136,23 @@ export class GenericService {
         });
   }
 
-  sortArray(actualArray: Array<Dictionary | LearningSubjects | Story | VideoList >, sortBy: string): Array<any> {
+  sortMainArray(actualArray: Array<Dictionary | LearningSubjects | Story | VideoList >, sortBy: string): Array<any> {
     const sortedArray = actualArray.sort((a: any, b: any) => {
       if (sortBy === 'A') {
         return a.title.charCodeAt(0) - b.title.charCodeAt(0);
       } else {
         return b.title.charCodeAt(0) - a.title.charCodeAt(0);
+      }
+    });
+    return sortedArray;
+  }
+
+  sortSubArray(actualArray: Array<any>, sortBy: string): Array<any> {
+    const sortedArray = actualArray.sort((a: any, b: any) => {
+      if (sortBy === 'A') {
+        return a.english_word.charCodeAt(0) - b.english_word.charCodeAt(0);
+      } else {
+        return b.english_word.charCodeAt(0) - a.english_word.charCodeAt(0);
       }
     });
     return sortedArray;

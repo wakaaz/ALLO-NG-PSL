@@ -12,7 +12,7 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-2 col-md-2 alphabets-list">
+        <div class="col-lg-2 col-md-2 alphabets-list d-none">
 
             <div class="select-dictionary d-block d-md-none">
                 <select class="custom-select" id="inputGroupSelect02">
@@ -64,13 +64,16 @@
 
         </div>
 
-        <div class="col-lg-10 col-md-10 sign-list">
+        <div class="col-lg-12 col-md-12 sign-list">
             <div class="row filter-sort">
 
                 <div class="col-md-6 col pr-0">
                     <div class="search-filter">
-                        <i class="fa fa-search"></i>
-                        <input type="text" placeholder="Search" class="form-control">
+                        <i class="fa fa-search" *ngIf="searchInput.value.length < 1"></i>
+                        <i class="fa fa-times cursor-pointer" *ngIf="searchInput.value.length > 0"
+                            (click)="searchInput.value='';searchWithTitle('')"></i>
+                        <input type="text" placeholder="Search" #searchInput (keyup)="searchWithTitle($event.target.value)"
+                            class="form-control">
                     </div>
                 </div>
 
@@ -84,7 +87,7 @@
 
             </div>
             <div class="row">
-                <div class="col-3" *ngFor="let dictionary of dictionaries">
+                <div class="col-3" *ngFor="let dictionary of dictionariesList">
                     <a [routerLink]="['/dictionary/category', dictionary.id]" class="sign-card">
                         <span>{{dictionary.videos}}</span>
                         <img [src]="decodeURIComponent(dictionary.image)" alt="">
