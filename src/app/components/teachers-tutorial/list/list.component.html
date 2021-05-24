@@ -55,9 +55,10 @@
     </div>
 
     <div class="col-md-6 col-auto">
-        <select class="custom-select">
-            <option selected>Sort By:</option>
-            <option selected>Sort By:</option>
+        <select class="custom-select" (change)="changeSort($event.target.value)">
+            <option hidden selected>Sort By</option>
+            <option value="A">A to Z</option>
+            <option value="Z">Z to A</option>
         </select>
     </div>
 
