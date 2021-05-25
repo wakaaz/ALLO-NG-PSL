@@ -12,6 +12,8 @@ import { GenericService } from 'src/app/_services/generic-service';
 export class ListComponent implements OnInit {
   paramId = 1;
   subjects: Array<Subject> = [];
+  subjectsList: Array<Subject> = [];
+  sortBy: string;
   constructor(
     private route: ActivatedRoute,
     public genericService: GenericService
@@ -23,14 +25,31 @@ export class ListComponent implements OnInit {
       // this.genericService.getPreferences();
       // this.initialiseState(); // reset and set based on new parameter this time
       this.genericService.teacherTutorial$.subscribe((x: any) => {
+        this.subjectsList = [];
         this.subjects = x.find(x => x.id == this.paramId)?.subjects;
-        this.changeSort('A');
+        if (this.subjects?.length) {
+          // JSON.parse(JSON.stringify()) to break refrence
+          this.subjectsList = JSON.parse(JSON.stringify(this.subjects));
+          this.sortBy = 'A';
+          this.changeSort(this.sortBy);
+        }
       });
     });
   }
- 
+
+  searchWithTitle(keyWord: string): void {
+    if (keyWord?.length) {
+      this.subjectsList = this.subjects.filter((subject: Subject) => subject.title.toLowerCase().includes(keyWord.toLowerCase()));
+    } else {
+      // JSON.parse(JSON.stringify()) to break refrence
+      this.subjectsList = JSON.parse(JSON.stringify(this.subjects));
+    }
+    this.changeSort(this.sortBy);
+  }
+
   changeSort(sort: string) {
-    this.subjects = this.genericService.sortArray(this.subjects, sort);
+    this.sortBy = sort;
+    this.subjectsList = this.genericService.sortMainArray(this.subjectsList, this.sortBy);
   }
 
   decodeURIComponent(url: string): string {

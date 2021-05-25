@@ -19,7 +19,7 @@
               <li class="nav-item"><a class="nav-link" [routerLink]="['/stories', 1]" routerLinkActive="active">Stories</a></li>
               <li class="nav-item"><a class="nav-link" [routerLink]="['/learningTutorials', 4]" routerLinkActive="active">Learning Tutorials</a>
               </li>
-              <li class="nav-item"><a class="nav-link" href="#" routerLinkActive="active">Iqra Program</a></li>
+              <li class="nav-item"><a class="nav-link" [routerLink]="['/iqra']" routerLinkActive="active">Iqra Program</a></li>
               <li class="nav-item"><a class="nav-link" [routerLink]="['/resources']" routerLinkActive="active">Resources</a></li>
 
               <li class="nav-item dropdown">
@@ -72,7 +72,7 @@
             <li><a [routerLink]="['/learningTutorials', 4]">Learning Tutorials</a></li>
             <li><a [routerLink]="['/teacherTutorials']">Teacher Tutorials</a></li>
             <li><a [routerLink]="['/stories', 1]">PSL Stories</a></li>
-            <li><a href="#">Iqra Program</a></li>
+            <li><a [routerLink]="['/iqra']">Iqra Program</a></li>
             <li><a href="#">Resources</a></li>
           </ul>
         </div>

@@ -10,6 +10,9 @@ import { GenericService } from 'src/app/_services/generic-service';
 })
 export class ListComponent implements OnInit {
   stories: Array<Story> = [];
+  storiesList: Array<Story> = [];
+  sortBy: string;
+
   constructor(
     private route: ActivatedRoute,
     public genericService: GenericService
@@ -19,17 +22,33 @@ export class ListComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.genericService.getStoriesVedios(params.id);
       this.genericService.stories$.subscribe(storiesData => {
+        this.storiesList = [];
         this.stories = storiesData;
-        this.changeSort('A');
+        // JSON.parse(JSON.stringify()) to break refrence
+        this.storiesList = JSON.parse(JSON.stringify(this.stories));
+        this.sortBy = 'A';
+        this.changeSort(this.sortBy);
       });
     });
   }
+
+  searchWithTitle(keyWord: string): void {
+    if (keyWord?.length) {
+      this.storiesList = this.stories.filter((subject: Story) => subject.title.toLowerCase().includes(keyWord.toLowerCase()));
+    } else {
+      // JSON.parse(JSON.stringify()) to break refrence
+      this.storiesList = JSON.parse(JSON.stringify(this.stories));
+    }
+    this.changeSort(this.sortBy);
+  }
+
   decodeURIComponent(url: string): string {
     return decodeURIComponent(url);
   }
 
   changeSort(sort: string) {
-    this.stories = this.genericService.sortArray(this.stories, sort);
+    this.sortBy = sort;
+    this.storiesList = this.genericService.sortMainArray(this.storiesList, this.sortBy);
   }
 
 }
