@@ -11,7 +11,9 @@ import { GenericService } from 'src/app/_services/generic-service';
 export class ListComponent implements OnInit {
 
   subjects: Subject[] = [];
+  subjectsList: Array<Subject> = [];
   data: LearningTutorial[] = [];
+  sortBy: string;
   paramId = 0;
   constructor(
     private route: ActivatedRoute,
@@ -22,23 +24,38 @@ export class ListComponent implements OnInit {
     this.route.params.subscribe(params => {
       // this.genericService.getStoriesVedios(params.id);
       this.paramId = params.id;
-      this.learingTutorialSubject();
-    });
-    this.genericService.learningTutorial$.subscribe((x: LearningTutorial[]) => {
-      this.data = x;
-      this.learingTutorialSubject();
+      // this.learingTutorialSubject();
+      this.genericService.learningTutorial$.subscribe((x: LearningTutorial[]) => {
+        this.data = x;
+        this.learingTutorialSubject();
+      });
     });
   }
   learingTutorialSubject() {
     this.subjects = this.data.find(x => x.id == this.paramId)?.subjects;
     console.log('', this.subjects);
+    this.subjectsList = [];
     if (this.subjects?.length) {
-      this.changeSort('A');
+      // JSON.parse(JSON.stringify()) to break refrence
+      this.subjectsList = JSON.parse(JSON.stringify(this.subjects));
+      this.sortBy = 'A';
+      this.changeSort(this.sortBy);
     }
   }
 
+  searchWithTitle(keyWord: string): void {
+    if (keyWord?.length) {
+      this.subjectsList = this.subjects.filter((subject: Subject) => subject.title.toLowerCase().includes(keyWord.toLowerCase()));
+    } else {
+      // JSON.parse(JSON.stringify()) to break refrence
+      this.subjectsList = JSON.parse(JSON.stringify(this.subjects));
+    }
+    this.changeSort(this.sortBy);
+  }
+
   changeSort(sort: string) {
-    this.subjects = this.genericService.sortArray(this.subjects, sort);
+    this.sortBy = sort;
+    this.subjectsList = this.genericService.sortMainArray(this.subjectsList, this.sortBy);
   }
   decodeURIComponent(url: string): string {
     return decodeURIComponent(url);
