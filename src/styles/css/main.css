@@ -227,7 +227,7 @@ button {
 	cursor: pointer;
 }
 .d-none {
-    display: none !important;
+    display: none;
 }
 
 .leftside-list ul li a {
