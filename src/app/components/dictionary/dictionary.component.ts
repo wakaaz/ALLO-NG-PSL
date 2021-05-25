@@ -13,7 +13,10 @@ import { GenericService } from 'src/app/_services/generic-service';
 })
 export class DictionaryComponent implements OnInit {
   dictionaries: Dictionary[];
+  dictionariesList: Array<Dictionary>;
+  sortBy: string;
   categoryName = '';
+
   constructor(
     public genericService: GenericService,
     private router: Router,
@@ -22,8 +25,12 @@ export class DictionaryComponent implements OnInit {
   ngOnInit(): void {
     this.genericService.getDictionaryCategories();
     this.genericService.dictionaryCategories$.subscribe((dictionriesData: Array<Dictionary>) => {
+      this.dictionariesList = [];
       this.dictionaries = dictionriesData;
-      this.changeSort('A');
+      // JSON.parse(JSON.stringify(this.dictionaries)) to break refrence
+      this.dictionariesList = JSON.parse(JSON.stringify(this.dictionaries));
+      this.sortBy = 'A';
+      this.changeSort(this.sortBy);
     });
     const url = this.router.url;
     // if (url.split('/')[1] === 'play') {
@@ -38,8 +45,19 @@ export class DictionaryComponent implements OnInit {
     return decodeURIComponent(url);
   }
 
+  searchWithTitle(keyWord: string): void {
+    if (keyWord?.length) {
+      this.dictionariesList = this.dictionaries.filter((dictionary: Dictionary) => dictionary.title.toLowerCase().includes(keyWord.toLowerCase()));
+    } else {
+      // JSON.parse(JSON.stringify()) to break refrence
+      this.dictionariesList = JSON.parse(JSON.stringify(this.dictionaries));
+    }
+    this.changeSort(this.sortBy);
+  }
+
   changeSort(sort: string) {
-    this.dictionaries = this.genericService.sortArray(this.dictionaries, sort);
+    this.sortBy = sort;
+    this.dictionariesList = this.genericService.sortMainArray(this.dictionariesList, this.sortBy);
   }
 
 }

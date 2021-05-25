@@ -223,6 +223,12 @@ button {
 	content: "\f105";
 	font-family: "Font Awesome 5 Free";
 }
+.cursor-pointer {
+	cursor: pointer;
+}
+.d-none {
+    display: none;
+}
 
 .leftside-list ul li a {
 	color: #282828;
