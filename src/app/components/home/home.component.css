@@ -36,7 +36,13 @@
     color: #009e4f;
 }
 .carousel-caption {
-    left: 5% !important;
+    /* left: 5% !important; */
+    height: 100% !important;
+    /* align-content: flex-end; */
+}
+.bottom_show{
+    position:absolute;
+    bottom: 50px;
 }
 .slider-navigate {
     background-color: #009e4f;

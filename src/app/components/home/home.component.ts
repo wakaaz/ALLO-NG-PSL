@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 import { Testimonials, TopSlider } from './carousel.constants';
 
 @Component({
@@ -10,10 +11,19 @@ import { Testimonials, TopSlider } from './carousel.constants';
 export class HomeComponent implements OnInit {
   sliderData = TopSlider;
   testimonials = Testimonials;
+  @ViewChild('topCarousel') carousel: NgbCarousel;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onSwipe(direction: string) {
+    if (direction === 'left') {
+      this.carousel.next();
+    } else {
+      this.carousel.prev();
+    }
   }
 
 }
