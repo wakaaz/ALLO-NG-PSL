@@ -129,6 +129,11 @@ export class GenericService {
   getPreferences(): void {
     this.getDictionaryCategories();
   }
+
+  recommendAWord(data: { name: string, email: string, word: string }): Observable<any> {
+    return this.restService.postRequest('/RecommendAWord', data);
+  }
+
   getToken(): void {
     this.restService.postAuth('/GuestLogin')
         .subscribe(x => {

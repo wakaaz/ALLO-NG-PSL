@@ -92,22 +92,35 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="" placeholder="Name">
+                                <input type="text" class="form-control" id="name" #inputName="ngModel" name="name" [(ngModel)]="name" placeholder="Name" required>
+                                <span class="form-error" *ngIf="isSubmitted && inputName.errors?.required && !inputName.value">
+                                    Name is required!
+                                </span>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="" placeholder="Email">
+                                <input type="text" class="form-control" id="email" #inputEmail="ngModel" name="email" [(ngModel)]="email" placeholder="Email" 
+                                    required [pattern]="emailPattern">
+                                <span class="form-error" *ngIf="isSubmitted && inputEmail.errors?.required && !inputEmail.value">
+                                    Email is required!
+                                </span>
+                                <span class="form-error" *ngIf="isSubmitted && inputEmail.errors?.pattern">
+                                    Enter valid Email!
+                                </span>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="" placeholder="Type Your Word...">
+                                <input type="text" class="form-control" id="word" #inputWord="ngModel" name="word" [(ngModel)]="recommendedWord" placeholder="Type Your Word..." required>
+                                <span class="form-error" *ngIf="isSubmitted && inputWord.errors?.required && !inputWord.value">
+                                    Message is required!
+                                </span>
                             </div>
                         </div>
                     </div>
 
-                    <button type="button" class="btn btn-outline-light">SUBMIT</button>
+                    <button type="button" class="btn btn-outline-light" (click)="recommendWord()">SUBMIT</button>
                 </div>
                 <div class="col-lg-6 col-md-12 recommend-img">
                     <img src="../../../assets/images/recomnend-img.png" alt="">

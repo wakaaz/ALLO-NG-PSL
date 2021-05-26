@@ -40,6 +40,11 @@
     height: 100% !important;
     /* align-content: flex-end; */
 }
+.form-error {
+    float: left;
+    font-size: 13px;
+    color: red;
+}
 .bottom_show{
     position:absolute;
     bottom: 50px;
