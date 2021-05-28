@@ -56,6 +56,10 @@ const routes: Routes = [
     path: 'faqs',
     loadChildren: () => import('./components/faqs/faqs.module').then(m => m.FaqsModule)
   },
+  {
+    path: 'iqra',
+    loadChildren: () => import('./components/iqra/iqra.module').then(m => m.IqraModule)
+  },
 ];
 
 @NgModule({
