@@ -73,6 +73,8 @@ export class PlayerComponent implements OnInit {
         this.genericService.getStoriesVedios(this.categoryId);
       } else if (url.split('/')[2] === 'learningTutorials') {
         this.genericService.getLearningTutorialVideoList(this.gradeId, this.categoryId);
+      } else if (url.split('/')[2] === 'teacherTutorials') {
+        this.genericService.getTeachTutorials(this.gradeId, this.categoryId);
       }
     }
 
@@ -89,7 +91,11 @@ export class PlayerComponent implements OnInit {
           this.categoryName = 'Story';
           this.setObject(this.allVedios);
         } else if (url.split('/')[2] === 'learningTutorials') {
+          this.categoryName = 'Learning Tutorials';
           this.learningVideoSubscription();
+        } else if (url.split('/')[2] === 'teacherTutorials') {
+          this.categoryName = 'Teacher Tutorials';
+          this.tutorVideoSubscription();
         }
       }
     }
@@ -113,6 +119,13 @@ export class PlayerComponent implements OnInit {
       .subscribe((data: any) => {
         this.setObject(data);
       });
+  }
+
+  tutorVideoSubscription(): void {
+    this.genericService.teacherTutorialVideosList$.subscribe(teacherTutorialVideos => {
+      console.log({teacherTutorialVideos});
+      this.setObject(teacherTutorialVideos);
+    });
   }
 
   dictionariesSubscription(): void {

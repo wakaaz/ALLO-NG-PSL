@@ -27,6 +27,7 @@ export class GenericService {
   // private _learningTutorialSubjects$ = new BehaviorSubject<LearningSubjects[]>([]);
   private _dictionaries$ = new BehaviorSubject<Dictionary[]>([]);
   private _learningVideo$ = new BehaviorSubject<VideoList[]>([]);
+  private _teacherTutorialVideosList$ = new BehaviorSubject<VideoList[]>([]);
 
   constructor(
     // private http: HttpClient,
@@ -41,6 +42,10 @@ export class GenericService {
   // get dictionaries list
   get dictionaries$(): Observable<Dictionary[]> {
     return this._dictionaries$.asObservable();
+  }
+
+  get teacherTutorialVideosList$(): Observable<VideoList[]> {
+    return this._teacherTutorialVideosList$.asObservable();
   }
 
   // get Teacher teturial grades
@@ -90,7 +95,6 @@ export class GenericService {
     this.restService.getRequest<any>('/Preferences').pipe(map(x => x.object)).subscribe(x => {
       this._dictionaryCategories$.next(x.dictionary_categories);
       this._teacherTutorial$.next(x.tut_grades);
-      this._teacherTutorial$.next(x.tut_grades);
       this._storyTypes$.next(x.story_types);
       this._learnginSkill$.next(x.life_skills);
       this._learningTutorial$.next(x.learning_tut_grades);
@@ -101,6 +105,11 @@ export class GenericService {
     this.restService.postRequest('/Dictionary', { category_id: id }).pipe(map(x => x.data)).subscribe(x => {
       this._dictionaries$.next(x);
     });
+  }
+  getTeachTutorials(gradeId: number, subjectId: number): void {
+    this.restService.postRequest('/Tutorials', { grade_id: gradeId, subject_id: subjectId }).pipe(map(x => x.data)).subscribe(x => {
+      this._teacherTutorialVideosList$.next(x);
+    })
   }
   getLearningTutorialVideoList(gradeIds: number, subjectId: number): void {
     this.restService.postRequest('/LearningTutorials', { grade_id: gradeIds, subject_id: subjectId }).pipe(map(x => x.data)).subscribe(x => {
