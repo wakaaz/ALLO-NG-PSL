@@ -10,7 +10,7 @@ import { LocalStorageSerivce } from './local-storage-serivce';
 import { VideoList } from '../_models/learning-tutorial'
 import { RestSerivce } from './rest-serivce';
 import { VideosListComponent } from '../components/learning-tutorial/videos-list/videos-list.component';
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +29,7 @@ export class GenericService {
   private _learningVideo$ = new BehaviorSubject<VideoList[]>([]);
 
   constructor(
-    private http: HttpClient,
+    // private http: HttpClient,
     private restService: RestSerivce,
     private localStorageSerivce: LocalStorageSerivce
   ) { }
@@ -118,10 +118,10 @@ export class GenericService {
 
   searchVideos(keyword: string): Observable<any> {
     // original url: /Search
-    // return this.restService.postRequest('/assets/sample-json/search.sample.json', { keyword });
+    return this.restService.postRequest('/Search', { keyword });
     
     // For testing
-    return this.http.get('/assets/sample-json/search.sample.json');
+    // return this.http.get('/assets/sample-json/search.sample.json');
   }
 
   // getStoriesVedios
