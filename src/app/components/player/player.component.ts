@@ -4,6 +4,8 @@ import * as Plyr from 'plyr';
 import { Location } from '@angular/common';
 import { GenericService } from 'src/app/_services/generic-service';
 import { PlyrComponent } from 'ngx-plyr';
+import { NgForm } from '@angular/forms';
+import { VideoService } from './video.service';
 
 // import { PlyrDriver, PlyrDriverCreateParams, PlyrDriverUpdateSourceParams, PlyrDriverDestroyParams } from './plyr-driver';
 
@@ -23,6 +25,8 @@ export class PlayerComponent implements OnInit {
   gradeId: number;
   categoryId: number;
   routerURL: string;
+  selectedVideoQuality: string = '';
+  videoQualities: Array<string> = [];
   currentlyPlayed: any = {
   };
   allVedios: any[] = [];
@@ -32,6 +36,7 @@ export class PlayerComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public genericService: GenericService,
+    private videoService: VideoService,
     private location: Location
   ) { }
 
@@ -123,7 +128,6 @@ export class PlayerComponent implements OnInit {
 
   tutorVideoSubscription(): void {
     this.genericService.teacherTutorialVideosList$.subscribe(teacherTutorialVideos => {
-      console.log({teacherTutorialVideos});
       this.setObject(teacherTutorialVideos);
     });
   }
@@ -191,10 +195,22 @@ export class PlayerComponent implements OnInit {
     // this.player.play();
   }
 
+  /**
+   * Setting the available video qualities to show in the download popup
+   */
+  setAvailableQualities(): void {
+    this.videoQualities = Object.keys(this.currentlyPlayed).filter(key => {
+      if (this.currentlyPlayed[key].url) {
+        return key;
+      }
+    });
+  }
+
   setCurrentlyPlayedVedio(id: number): void {
     const currentlyPlayedIndex = this.allVedios.findIndex(x => x.id == id);
     this.currentlyPlayed = this.allVedios[currentlyPlayedIndex];
     this.setPlayerCurrentSource();
+    this.setAvailableQualities();
     if (currentlyPlayedIndex === this.allVedios.length - 1) {
       this.remeaningVedios = [...this.allVedios];
       this.remeaningVedios.splice(this.allVedios.length - 1, 1);
@@ -207,5 +223,39 @@ export class PlayerComponent implements OnInit {
   }
   onVideoEnded(): void {
     console.log('================Ended Video=================')
+  }
+
+  selectedQuality(quality: string) {
+    this.selectedVideoQuality = quality;
+  }
+
+  /**
+   * First download the video to current origin so that the HTML Anchor tag
+   * download button can download the video otherwise it will redirect the user to link of video
+   * 
+   * @param {NgForm} videoForm to reset the form after it has started the download
+   * @returns void
+   */
+  downloadVideo(videoForm: NgForm): void {
+    if (!this.selectedVideoQuality) {
+      return;
+    } else {
+      alert('Be patient downloading is starting in few seconds...');
+      const url = this.decodeURIComponent(this.currentlyPlayed[this.selectedVideoQuality].url);
+        this.videoService.getVideo(url)
+        .subscribe((blob) => {
+          let blobUrl = window.URL.createObjectURL(blob);
+          const urlParts = url.split('/');
+          const name = urlParts[urlParts.length - 1];
+          const anchor = document.createElement('a');
+          anchor.href = blobUrl;
+          anchor.download = name;
+          anchor.click();
+          URL.revokeObjectURL(blobUrl);
+          videoForm.reset();
+        }, error => {
+          console.log(`error`, error)
+        });
+    }
   }
 }

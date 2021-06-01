@@ -50,46 +50,32 @@
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content top-border">
+            <form #videoDownloadForm="ngForm">
 
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-file-pdf mr-2"></i> Download Video
-                    <span></span>
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
-                        aria-hidden="true">&times;</span> </button>
-            </div>
-
-            <div class="modal-body p-0">
-
-                <div class="col-md-12 lesson-plan-list">
-                    <div class="custom-control custom-radio">
-                        <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                        <label class="custom-control-label" for="customRadio1">Quality</label> <span>1080p60 HD</span>
-                    </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-file-pdf mr-2"></i> Download Video
+                        <span></span>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
+                            aria-hidden="true">&times;</span> </button>
                 </div>
 
-                <div class="col-md-12 lesson-plan-list">
-                    <div class="custom-control custom-radio">
-                        <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-                        <label class="custom-control-label" for="customRadio2">Quality</label> <span>720p60</span>
+                <div class="modal-body p-0">
+
+                    <div class="col-md-12 lesson-plan-list" *ngFor="let quality of videoQualities">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="customRadio_{{quality}}" (click)="selectedQuality(quality)" value="{{quality}}" name="customRadio" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadio_{{quality}}">Quality</label> <span>{{quality}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 lesson-plan-error" *ngIf="videoDownloadForm.submitted && !selectedVideoQuality">
+                        Please select video quality!
                     </div>
                 </div>
-
-                <div class="col-md-12 lesson-plan-list">
-                    <div class="custom-control custom-radio">
-                        <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-                        <label class="custom-control-label" for="customRadio3">Quality</label> <span>480p</span>
-                    </div>
+                <div class="modal-footer border-0">
+                    <button type="submit" class="btn btn-primary w-100" (click)="downloadVideo(videoDownloadForm)">Download Video</button>
                 </div>
-
-
-
-
-
-            </div>
-            <div class="modal-footer border-0">
-                <button type="button" class="btn btn-primary w-100">Download Video</button>
-            </div>
+            </form>
         </div>
     </div>
 </div>
@@ -121,7 +107,8 @@
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12 text-right">
             <div class="custom-control custom-switch"><span>Auto Play</span>
-                <input type="checkbox" class="custom-control-input" id="customSwitch1" (change)="onAutoPlay($event.target.checked ? true : false)">
+                <input type="checkbox" class="custom-control-input" id="customSwitch1"
+                    (change)="onAutoPlay($event.target.checked ? true : false)">
                 <label class="custom-control-label" for="customSwitch1"></label>
             </div>
         </div>
@@ -140,7 +127,8 @@
 
                 </div>
             </div>
-            <a href="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" download="test.mp4"> download test</a>
+            <a href="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" download="test.mp4">
+                download test</a>
             <div class="row v-title-action">
                 <div class="col-lg-7 col-md-12 content-title pr-0">
                     <h2>Matching Words with Pictures</h2>
