@@ -20,6 +20,7 @@ export class PlayerComponent implements OnInit {
   isAutoPlay = false;
   id: number;
   categoryName = '';
+  gradeId: number;
   categoryId: number;
   routerURL: string;
   currentlyPlayed: any = {
@@ -42,6 +43,7 @@ export class PlayerComponent implements OnInit {
       // this.initialiseState(); // reset and set based on new parameter this time
       this.id = params.vedioId;
       this.categoryId = params.id;
+      this.gradeId = params.gradeId;
       this.init(url);
       // this.player.play();
       // console.log(this.player.play());
@@ -70,7 +72,7 @@ export class PlayerComponent implements OnInit {
       } else if (url.split('/')[2] === 'story') {
         this.genericService.getStoriesVedios(this.categoryId);
       } else if (url.split('/')[2] === 'learningTutorials') {
-        // this.genericService.getLearningTutorials(this.id);
+        this.genericService.getLearningTutorialVideoList(this.gradeId, this.categoryId);
       }
     }
 

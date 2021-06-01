@@ -22,6 +22,7 @@
     "@ng-bootstrap/ng-bootstrap": "^8.0.4",
     "bootstrap": "^4.5.0",
     "ngx-plyr": "^4.0.0",
+    "hammerjs": "^2.0.8",
     "plyr": "^3.6.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

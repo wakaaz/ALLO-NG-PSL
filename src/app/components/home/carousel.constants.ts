@@ -3,31 +3,36 @@ export const TopSlider = [
         title: 'RESOURCES',
         description: 'Learning Pakistan Sign Language is easy with these resources.',
         link: '/resources',
-        image: 'https://s3-eu-west-1.amazonaws.com/psl-web-1/images//resourcesSliderImage-1556523290965.jpg'
+        image: 'https://s3-eu-west-1.amazonaws.com/psl-web-1/images//resourcesSliderImage-1556523290965.jpg',
+        color: ''
     },
     {
         title: 'TEACHER TUTORIALS',
         description: 'Over 150 primary classroom based demos in PSL, with easy-to-use methodology and learning tools to train teachers of the Deaf.',
         link: '/teachers',
-        image: 'https://s3-eu-west-1.amazonaws.com/psl-web-1/images//ttSliderImage-1556523325735.jpg'
+        image: 'https://s3-eu-west-1.amazonaws.com/psl-web-1/images//ttSliderImage-1556523325735.jpg',
+        color: ''
     },
     {
         title: 'PSL STORIES',
         description: `Over 40 richly illustrated and animated stories presented in PSL with the option of Urdu or English translation and voice over.`,
         link: '/stories',
-        image: 'https://s3-eu-west-1.amazonaws.com/psl-web-1/images//pslStoriesSliderImage-1556523349694.jpg'
+        image: 'https://s3-eu-west-1.amazonaws.com/psl-web-1/images//pslStoriesSliderImage-1556523349694.jpg',
+        color: ''
     },
     {
         title: 'LEARNING TUTORIALS',
         description: 'Urdu, English and basic Math in PSL, with over 200 illustrated and animated tutorials',
         link: '/primaryleveltutorials',
-        image: 'https://s3-eu-west-1.amazonaws.com/psl-web-1/images//learningTutorialsSliderImage-1556523369049.jpg'
+        image: 'https://s3-eu-west-1.amazonaws.com/psl-web-1/images//learningTutorialsSliderImage-1556523369049.jpg',
+        color: ''
     },
     {
         title: 'PSL DEVELOPMENT TEAM',
         description: 'The PSL development team is comprised of educators, teachers, PSL sign developers and curriculum designers.',
         link: '/about',
-        image: 'https://s3-eu-west-1.amazonaws.com/psl-web-1/images//pslDevSliderImage-1556523401624.jpg'
+        image: 'https://s3-eu-west-1.amazonaws.com/psl-web-1/images//pslDevSliderImage-1556523401624.jpg',
+        color: ''
     }
 ];
 
