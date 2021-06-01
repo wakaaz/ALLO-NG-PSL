@@ -121,7 +121,7 @@
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12 text-right">
             <div class="custom-control custom-switch"><span>Auto Play</span>
-                <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                <input type="checkbox" class="custom-control-input" id="customSwitch1" (change)="onAutoPlay($event.target.checked ? true : false)">
                 <label class="custom-control-label" for="customSwitch1"></label>
             </div>
         </div>
@@ -133,14 +133,14 @@
             <div class="row">
                 <div class="col-12">
                     <!-- <img src="../../../assets/images/thumb.jpg" alt="0" style="width:100%"> -->
-                    <video id="plyrID" controls playsinline style="width:100%">
+                    <video id="plyrID" controls playsinline style="width:100%" (ended)="onVideoEnded()">
                         <a href="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4"
                             download>Download</a>
                     </video>
 
                 </div>
             </div>
-
+            <a href="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" download="test.mp4"> download test</a>
             <div class="row v-title-action">
                 <div class="col-lg-7 col-md-12 content-title pr-0">
                     <h2>Matching Words with Pictures</h2>
