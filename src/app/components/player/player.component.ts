@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as Plyr from 'plyr';
 import { Location } from '@angular/common';
 import { GenericService } from 'src/app/_services/generic-service';
+import { PlyrComponent } from 'ngx-plyr';
 
 // import { PlyrDriver, PlyrDriverCreateParams, PlyrDriverUpdateSourceParams, PlyrDriverDestroyParams } from './plyr-driver';
 
@@ -12,6 +13,11 @@ import { GenericService } from 'src/app/_services/generic-service';
   styleUrls: ['./player.component.css']
 })
 export class PlayerComponent implements OnInit {
+  // get the component instance to have access to plyr instance
+  @ViewChild(PlyrComponent)
+  plyr: PlyrComponent;
+  player: Plyr;
+  isAutoPlay = false;
   id: number;
   categoryName = '';
   categoryId: number;
@@ -20,7 +26,7 @@ export class PlayerComponent implements OnInit {
   };
   allVedios: any[] = [];
   remeaningVedios = [];
-  public player: any;
+  // public player: any;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -29,6 +35,7 @@ export class PlayerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.setPlayer();
     const url = this.router.url;
     this.route.params.subscribe(params => {
       // this.genericService.getDictionaries(params.vedioId);
@@ -36,14 +43,26 @@ export class PlayerComponent implements OnInit {
       this.id = params.vedioId;
       this.categoryId = params.id;
       this.init(url);
+      // this.player.play();
+      // console.log(this.player.play());
+      this.player.play();
     });
 
     // this.allVedios = this.genericService.dictionaries$.tak.value();
     // this.setCurrentlyPlayedVedio(this.id);
     // this.setPlayer();
+    this.player.on('ended', ev => {
+      if (this.isAutoPlay) {
+        // alert('ended event');
+        this.router.navigateByUrl(`${this.updateUrl(this.remeaningVedios[0].id)}/${this.remeaningVedios[0].id}`);
+      }
+    });
+  }
+  onAutoPlay(isChecked: boolean): void {
+    this.isAutoPlay = isChecked;
   }
   init(url: string): void {
-    this.setPlayer();
+    // this.setPlayer();
 
     if (this.allVedios.length === 0) {
       if (url.split('/')[2] === 'dictionary') {
@@ -71,7 +90,6 @@ export class PlayerComponent implements OnInit {
           this.learningVideoSubscription();
         }
       }
-  
     }
   }
   updateUrl(id: string): string {
@@ -109,7 +127,7 @@ export class PlayerComponent implements OnInit {
     this.allVedios = data;
     if (this.allVedios.length > 0) {
       this.setCurrentlyPlayedVedio(this.id);
-      this.setPlayer();
+      // this.setPlayer();
     }
   }
 
@@ -118,6 +136,7 @@ export class PlayerComponent implements OnInit {
   }
 
   setPlayerCurrentSource(): void {
+    // this.player.source = null;
     this.player.source =
     // [
     {
@@ -170,5 +189,8 @@ export class PlayerComponent implements OnInit {
   }
   onBackClicked(): void {
     this.location.back();
+  }
+  onVideoEnded(): void {
+    console.log('================Ended Video=================')
   }
 }
