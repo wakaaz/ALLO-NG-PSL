@@ -92,6 +92,12 @@
     float: left;
     line-height: 1.8;
 }
+.lesson-plan-error {
+    color: red;
+    font-size: 15px;
+    float: left;
+    width: 100%;
+}
 
 .r-video-list {
     background-color: #fff;
