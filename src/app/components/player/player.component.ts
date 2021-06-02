@@ -163,27 +163,27 @@ export class PlayerComponent implements OnInit {
       title: this.currentlyPlayed.english_word,
       sources:
         [
-          {
+          this.currentlyPlayed['1080p'].url && {
             src: this.decodeURIComponent(this.currentlyPlayed['1080p'].url),
             type: 'video/mp4',
             size: 1080,
           },
-          {
+          this.currentlyPlayed['720p'].url && {
             src: this.decodeURIComponent(this.currentlyPlayed['720p'].url),
             type: 'video/mp4',
             size: 720,
           },
-          {
+          this.currentlyPlayed['480p'].url && {
             src: this.decodeURIComponent(this.currentlyPlayed['480p'].url),
             type: 'video/mp4',
             size: 480,
           },
-          {
+          this.currentlyPlayed['360p'].url && {
             src: this.decodeURIComponent(this.currentlyPlayed['360p'].url),
             type: 'video/mp4',
             size: 360,
           },
-          {
+          this.currentlyPlayed['240p'].url && {
             src: this.decodeURIComponent(this.currentlyPlayed['240p'].url),
             type: 'video/mp4',
             size: 240,
@@ -200,7 +200,7 @@ export class PlayerComponent implements OnInit {
    */
   setAvailableQualities(): void {
     this.videoQualities = Object.keys(this.currentlyPlayed).filter(key => {
-      if (this.currentlyPlayed[key].url) {
+      if (this.currentlyPlayed[key]?.url) {
         return key;
       }
     });
