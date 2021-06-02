@@ -180,6 +180,9 @@
     padding: 30px;
     font-size: 16px;
 }
+.form-group>input::placeholder {
+    color: #b8d6c3;
+}
 .recommend-word h2:before {
     background-color: #fff;
 }
