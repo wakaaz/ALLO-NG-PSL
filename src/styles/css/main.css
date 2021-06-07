@@ -216,6 +216,7 @@ ng-scrollbar.leftside-overflow {
 	border-bottom: solid 1px #e2e2e2a6;
 	display: flex;
 	padding: 0;
+	width: calc(100% - 10px);
 }
 .leftside-list ul li a:before {
 	color: #009e4f;
