@@ -153,8 +153,9 @@
         </div>
 
         <div class="col-lg-3 col-md-3 col-sm-12 pl-sm">
-            <div class="r-video-list">
-
+            <!-- <div class="r-video-list"> -->
+                <ng-scrollbar class="r-video-list" thumbClass="white-scrollbars" disabled="false">
+                    <cdk-virtual-scroll-viewport scrollViewport>
                 <h5 class="nextvds">Next Videos</h5>
 
                 <span *ngFor="let vedio of remeaningVedios">
@@ -181,7 +182,9 @@
                         <h3>{{vedio.english_word || currentlyPlayed.title}}</h3>
                     </a>
                 </span>
-            </div>
+                    </cdk-virtual-scroll-viewport>
+                </ng-scrollbar>
+            <!-- </div> -->
 
         </div>
     </div>
