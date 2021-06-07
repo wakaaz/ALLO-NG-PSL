@@ -10,7 +10,7 @@
 }
 ng-scrollbar.leftside-overflow {
 	overflow: hidden;
-	height:  calc(100vh - 260px);
+	height:  calc(100vh - 260px) !important;
 	max-height:  calc(100vh - 260px);
 }
 .leftside-list h3 {
