@@ -10,7 +10,7 @@ export const TopSlider = [
     {
         title: 'TEACHER TUTORIALS',
         description: 'Over 150 primary classroom based demos in PSL, with easy-to-use methodology and learning tools to train teachers of the Deaf.',
-        link: '/teachers',
+        link: '/teacherTutorials',
         // image: 'https://s3-eu-west-1.amazonaws.com/psl-web-1/images//ttSliderImage-1556523325735.jpg',
         image: '../../../assets/../../../assets/images/slider-img-02.jpg',
         
