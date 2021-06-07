@@ -23,7 +23,7 @@ export const TopSlider = [
     {
         title: 'LEARNING TUTORIALS',
         description: 'Urdu, English and basic Math in PSL, with over 200 illustrated and animated tutorials',
-        link: '/primaryleveltutorials',
+        link: '/learningTutorials',
         image: 'https://s3-eu-west-1.amazonaws.com/psl-web-1/images//learningTutorialsSliderImage-1556523369049.jpg',
         color: ''
     },
