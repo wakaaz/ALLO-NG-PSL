@@ -6,6 +6,7 @@ import { DictionaryComponent } from './dictionary.component';
 import { ListComponent } from './list/list.component';
 import { SidebarListComponent } from './sidebar-list/sidebar-list.component';
 
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { SidebarListComponent } from './sidebar-list/sidebar-list.component';
   ],
   imports: [
     CommonModule,
+    NgScrollbarModule,
     DictionaryRoutingModule
   ]
 })

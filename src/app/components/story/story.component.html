@@ -29,14 +29,16 @@
 
             <div class="leftside-list d-none d-md-block">
                 <h3>Class <span>List</span></h3>
-                <div class="leftside-overflow">
-                    <ul>
-                        <li *ngFor="let storyType of genericService.storyTypes$ | async">
-                            <a [routerLink]="['/stories', storyType.id]"
-                                routerLinkActive="active">{{storyType.title}}</a>
-                        </li>
-                    </ul>
-                </div>
+                <ng-scrollbar class="leftside-overflow" thumbClass="white-scrollbars" disabled="false">
+                    <cdk-virtual-scroll-viewport scrollViewport>
+                        <ul>
+                            <li *ngFor="let storyType of genericService.storyTypes$ | async">
+                                <a [routerLink]="['/stories', storyType.id]"
+                                    routerLinkActive="active">{{storyType.title}}</a>
+                            </li>
+                        </ul>
+                    </cdk-virtual-scroll-viewport>
+                </ng-scrollbar>
             </div>
 
         </div>

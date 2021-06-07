@@ -29,16 +29,17 @@
 
             <div class="leftside-list d-none d-md-block">
                 <h3>Dictionary <span>List</span></h3>
-                <div class="leftside-overflow">
-                    <ul>
-                        <li *ngFor="let dictionary of genericService.dictionaryCategories$ | async">
-                            <a [routerLink]="['/dictionary/category', dictionary.id]"
-                                routerLinkActive="active">{{dictionary.title}}</a>
-                        </li>
-                    </ul>
+                    <ng-scrollbar class="leftside-overflow" thumbClass="white-scrollbars" disabled="false">
+                        <cdk-virtual-scroll-viewport scrollViewport>
+                            <ul>
+                                <li *ngFor="let dictionary of genericService.dictionaryCategories$ | async">
+                                    <a [routerLink]="['/dictionary/category', dictionary.id]"
+                                        routerLinkActive="active">{{dictionary.title}}</a>
+                                </li>
+                            </ul>
+                        </cdk-virtual-scroll-viewport>
+                    </ng-scrollbar>
                 </div>
-            </div>
-
         </div>
 
         <div class="col-lg-9 col-md-8">

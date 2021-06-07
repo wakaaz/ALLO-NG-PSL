@@ -162,9 +162,10 @@ button {
 	-moz-border-radius: 6px;
 	box-shadow: 0 0 1.3rem 0 rgba(0, 0, 0, 0.1);
 }
-.leftside-overflow {
+ng-scrollbar.leftside-overflow {
+	overflow: hidden;
 	height: calc(100vh - 260px);
-	overflow-y: scroll;
+	max-height: calc(100vh - 260px);
 }
 .leftside-list h3 {
 	font-size: 20px;
