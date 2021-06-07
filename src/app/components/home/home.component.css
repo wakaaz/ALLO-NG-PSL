@@ -34,6 +34,25 @@
 .slider-img img {
     width: 100%;
 }
+.carousel-control-prev-icon {
+    border: solid #008e47;
+    border-width: 0 5px 5px 0;
+    display: inline-block;
+    padding: 3px;
+    background-image: none !important;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+.carousel-control-next-icon {
+    border: solid #008e47;
+    border-width: 0 5px 5px 0;
+    display: inline-block;
+    padding: 3px;
+    background-image: none !important;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
 
 #slide-ngb-slide-2 .main-slider-bg h1, #slide-ngb-slide-2 .main-slider-bg h5, #slide-ngb-slide-3 .main-slider-bg h1, 
 #slide-ngb-slide-3 .main-slider-bg h5, #slide-ngb-slide-4 .main-slider-bg h1, #slide-ngb-slide-4 .main-slider-bg h5, 
