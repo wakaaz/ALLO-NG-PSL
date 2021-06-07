@@ -240,7 +240,7 @@ export class PlayerComponent implements OnInit {
     if (!this.selectedVideoQuality) {
       return;
     } else {
-      alert('Be patient downloading is starting in few seconds...');
+      alert('Your download should begin automatically in few seconds...');
       const url = this.decodeURIComponent(this.currentlyPlayed[this.selectedVideoQuality].url);
         this.videoService.getVideo(url)
         .subscribe((blob) => {
