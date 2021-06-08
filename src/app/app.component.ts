@@ -18,13 +18,19 @@ export class AppComponent {
   searchWord(keyword: string): void {
     // this.searchArray.length =+1 ; 
     this.searchInput = keyword;
-    this.genericService.searchVideos(keyword).subscribe((res: any) => {
-      if (res.message === 'Success') {
-        this.searchArray = res.data;
-      }
-    }, error => {
-      console.log(`error`, error);
-    });
+    if (this.searchInput) {
+      this.genericService.searchVideos(keyword).subscribe((res: any) => {
+        if (res.message === 'Success') {
+          this.searchArray = res.data;
+        }
+      }, error => {
+        console.log(`error`, error);
+      });
+    } else {
+      setTimeout(() => {
+        this.searchArray = [];
+      }, 100);
+    }
   }
 
   resetSearch() {

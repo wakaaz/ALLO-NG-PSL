@@ -6,11 +6,70 @@
                 complete understanding of Deaf Culture. It is available in English, Urdu and Pakistan Sign
                 Language.</p>
             <div class="resources-img">
-                <button type="button" class="play-btn"><img src="../../../assets/images/play-icon.png" alt=""></button>
+                <button type="button" data-toggle="modal" data-target="#versionModal" class="play-btn"><img
+                        src="../../../assets/images/play-icon.png" alt=""></button>
                 <img class="r-img" src="../../../assets/images/resources-header-img.png" alt="">
             </div>
             <h4>Richard Geary</h4>
             <p class="text-uppercase">Executive Director/Founder<br>Deaf Reach Program</p>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="versionModal" tabindex="-1" role="dialog" aria-labelledby="versionModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content top-border">
+            <div class="modal-header">
+                <h5 class="modal-title" id="versionModalLabel"><i class="fas fa-video"></i> Select the Video
+                    Version to watch
+                    <span></span>
+                </h5>
+                <button type="button" class="close" id="version-modal-btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span> </button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="col-md-12 lesson-plan-list">
+                    <button (click)="selectedLanguage('urdu')" type="button" class="btn btn-primary w-100">The Urdu
+                        Version</button>
+                </div>
+
+                <div class="col-md-12 lesson-plan-list">
+                    <button (click)="selectedLanguage('englis')" type="button" class="btn btn-primary w-100">The English
+                        Version</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+    Button created with display none to open the Video Modal without using JQuery
+    As because bootstrap supports JQuery instead of TypeScript 
+-->
+<button style="display: none;" data-toggle="modal" data-target="#videoModal" id="video-modal">Open Video Modal</button>
+<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="vedioModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content video-modal-content top-border">
+            <div class="modal-header">
+                <h5 class="modal-title" id="vedioModalLabel"><i class="fas fa-video"></i> {{isUrdu ? 'The Urdu
+                    Version' : 'The English Version'}}
+                    <span></span>
+                </h5>
+                <button type="button" class="close" id="video-modal-btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span> </button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="col-md-12 youtube-video">
+                    <iframe *ngIf="isUrdu" src="https://www.youtube.com/embed/IwPsBnmarto"
+                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen=""></iframe>
+                    <iframe *ngIf="isEnglish" src="https://www.youtube.com/embed/4q7Wk_kb7ls"
+                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen=""></iframe>
+                </div>
+            </div>
         </div>
     </div>
 </div>
