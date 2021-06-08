@@ -62,7 +62,7 @@
                   </h4> -->
                   <ul>
                     <li *ngFor="let result of searchArray; let i=index" class="possible-search-items">
-                      <a routerLink="">
+                      <a (click)="goToSearch(result)">
                       {{i + 1}}) {{result.title}}
                       </a>
                     </li>

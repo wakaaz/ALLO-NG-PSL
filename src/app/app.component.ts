@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { GenericService } from './_services/generic-service';
 
 @Component({
@@ -11,7 +12,7 @@ export class AppComponent {
   searchInput: string;
   searchArray: Array<any> = [];
 
-  constructor(private genericService: GenericService) {
+  constructor(private genericService: GenericService, private router: Router) {
     this.genericService.getToken();
   }
 
@@ -35,5 +36,24 @@ export class AppComponent {
 
   resetSearch() {
     this.searchArray.length = 0;
+  }
+
+  goToSearch(selectedItem: any): void {
+    switch (selectedItem.category) {
+      case 'dictionary':
+        this.router.navigateByUrl(`/play/dictionary/category/${selectedItem.category_id}/${selectedItem.id}`);
+        break;
+      case 'stories':
+        this.router.navigateByUrl(`/play/story/${selectedItem.type_id}/${selectedItem.id}`);
+        break;
+      case 'learningTutorials':
+        this.router.navigateByUrl(`/play/learningTutorials/${selectedItem.grade_id}/${selectedItem.subject_id}/${selectedItem.id}`);
+        break;
+      case 'teacherTutorials':
+        this.router.navigateByUrl(`/play/teacherTutorials/${selectedItem.grade_id}/${selectedItem.subject_id}/${selectedItem.id}`);
+        break;
+      default:
+        break;
+    }
   }
 }
