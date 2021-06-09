@@ -4,6 +4,7 @@
 .text-link {
     color: #7a7a7a;
     font-family: "Poppins", sans-serif;
+    cursor: pointer;
 }
 .text-link i {
     color: #009e4f;
