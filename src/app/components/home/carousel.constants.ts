@@ -10,7 +10,7 @@ export const TopSlider = [
     {
         title: 'TEACHER TUTORIALS',
         description: 'Over 150 primary classroom based demos in PSL, with easy-to-use methodology and learning tools to train teachers of the Deaf.',
-        link: '/teacherTutorials',
+        link: '/teacherTutorials/1',
         // image: 'https://s3-eu-west-1.amazonaws.com/psl-web-1/images//ttSliderImage-1556523325735.jpg',
         image: '../../../assets/../../../assets/images/slider-img-02.jpg',
         
@@ -19,7 +19,7 @@ export const TopSlider = [
     {
         title: 'PSL STORIES',
         description: `Over 40 richly illustrated and animated stories presented in PSL with the option of Urdu or English translation and voice over.`,
-        link: '/stories',
+        link: '/stories/1',
         // image: 'https://s3-eu-west-1.amazonaws.com/psl-web-1/images//pslStoriesSliderImage-1556523349694.jpg',
         image: '../../../assets/../../../assets/images/slider-img-03.jpg',
         color: ''
@@ -27,7 +27,7 @@ export const TopSlider = [
     {
         title: 'LEARNING TUTORIALS',
         description: 'Urdu, English and basic Math in PSL, with over 200 illustrated and animated tutorials',
-        link: '/learningTutorials',
+        link: '/learningTutorials/4',
         // image: 'https://s3-eu-west-1.amazonaws.com/psl-web-1/images//learningTutorialsSliderImage-1556523369049.jpg',
         image: '../../../assets/../../../assets/images/slider-img-04.jpg',
         color: ''
