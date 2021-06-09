@@ -263,6 +263,7 @@
     padding: 70px 0px 70px 0px;
     background-color: #fff;
 }
+.testimonials-slider .carousel-indicators{ display: none; }
 .tq-bg {
     background-image: url(../../../assets/images/tq-bg.jpg);
     background-repeat: no-repeat;
@@ -366,6 +367,7 @@
     height: 22px; 
     border-width: 0 4px 4px 0;  filter: invert(1); opacity: 0.8;
 }
+.carousel-indicators li{ background-color: #009e4f; }
 
 @media (max-width: 1440px) {
     .main-slider-bg h1 {
