@@ -87,15 +87,16 @@
             <a (click)="onBackClicked()" class="text-link"><i class="fas fa-chevron-left"></i>Back to Category</a>
         </div>
         <!-- only for Stories Page -->
-        <!-- <div class="col-lg-6 col-md-6 col-6 btn-language">
+        <!-- *ngIf="isStories" : Buttons are hidden because of data inconsistency -->
+        <div *ngIf="false" class="col-lg-6 col-md-6 col-6 btn-language">
             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-outline-primary active">
+                <label class="btn btn-outline-primary active" (click)="languageChanged('english')">
                     <input type="radio" name="options" id="option1" checked>English</label>
-                <label class="btn btn-outline-primary">
+                <label class="btn btn-outline-primary" (click)="languageChanged('urdu')">
                     <input type="radio" name="options" id="option2">Urdu</label>
             </div>
 
-        </div> -->
+        </div>
     </div>
 
     <div class="row content-title">
@@ -179,7 +180,7 @@
                             </div>
                             <img [src]="decodeURIComponent(vedio.poster)" alt="">
                         </div>
-                        <h3>{{vedio.english_word || currentlyPlayed.title}}</h3>
+                        <h3>{{vedio.english_word || vedio.title}}</h3>
                     </a>
                 </span>
                     </cdk-virtual-scroll-viewport>

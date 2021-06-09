@@ -29,6 +29,9 @@ export class PlayerComponent implements OnInit {
   videoQualities: Array<string> = [];
   currentlyPlayed: any = {
   };
+  storiesData: Array<any>
+  isStories: boolean;
+  selectedLanguage = 'english';
   allVedios: any[] = [];
   remeaningVedios = [];
   // public player: any;
@@ -41,6 +44,7 @@ export class PlayerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log('Video Player Component!!!!');
     this.setPlayer();
     const url = this.router.url;
     this.route.params.subscribe(params => {
@@ -70,6 +74,7 @@ export class PlayerComponent implements OnInit {
   }
   init(url: string): void {
     // this.setPlayer();
+    this.isStories = url.split('/')[2] === 'story';
 
     if (this.allVedios.length === 0) {
       if (url.split('/')[2] === 'dictionary') {
@@ -116,6 +121,8 @@ export class PlayerComponent implements OnInit {
   storiesSubscription(): void {
     this.genericService.stories$
       .subscribe(data => {
+        // this.storiesData = JSON.parse(JSON.stringify(data));
+        // const sortedArray = this.selectedLanguageData('english');
         this.setObject(data);
       });
   }
@@ -256,6 +263,19 @@ export class PlayerComponent implements OnInit {
         }, error => {
           console.log(`error`, error)
         });
+    }
+  }
+
+  languageChanged(lang: string): void {
+    // const selectedStories = this.selectedLanguageData(lang);
+    // this.setObject(selectedStories);
+  }
+
+  selectedLanguageData(lang: string): any {
+    if (lang === 'english') { 
+      return this.storiesData.filter(story => story.language === 'english'); 
+    } else {
+      return this.storiesData.filter(story => story.language !== 'english'); 
     }
   }
 }
