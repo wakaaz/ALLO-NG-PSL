@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { GenericService } from './_services/generic-service';
 
 @Component({
@@ -9,11 +9,17 @@ import { GenericService } from './_services/generic-service';
 })
 export class AppComponent {
   title = 'PSL';
+  currentRoute: string;
   searchInput: string;
   searchArray: Array<any> = [];
 
   constructor(private genericService: GenericService, private router: Router) {
     this.genericService.getToken();
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.currentRoute = event.urlAfterRedirects.split('/')[1];
+      }
+    })
   }
 
   searchWord(keyword: string): void {
