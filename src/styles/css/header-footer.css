@@ -12,6 +12,7 @@
 	padding-bottom: 10px;
 	position: absolute;
 	cursor: pointer;
+	z-index: 5;
 }
 .PSL-logo img {
 	height: 40px;
@@ -251,7 +252,7 @@ footer .copyrights .text-right-p{text-align: right}
 }
  
 @media (max-width:812px) {
-.navbar .navbar-nav .nav-link {margin: 16px 8px;font-size: 13px;}
+.navbar .navbar-nav .nav-link {margin: 16px 5px;font-size: 13px;}
 footer{padding-top: 40px;}
 footer h3{font-size: 16px;}
 }
