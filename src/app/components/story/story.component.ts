@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { GenericService } from 'src/app/_services/generic-service';
 
 @Component({
@@ -9,6 +10,7 @@ import { GenericService } from 'src/app/_services/generic-service';
 export class StoryComponent implements OnInit {
 
   constructor(
+    private router: Router,
     public genericService: GenericService
   ) { }
 
@@ -20,6 +22,10 @@ export class StoryComponent implements OnInit {
     if (length === 0) {
       this.genericService.getPreferences();
     }
+  }
+
+  goToDictionary(categoryId: string) {
+    this.router.navigateByUrl(`/stories/${categoryId}`);
   }
 
 }
