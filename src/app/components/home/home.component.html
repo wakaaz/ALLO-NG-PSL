@@ -6,7 +6,7 @@
                 <div class="picsum-img-wrapper slider-img">
                     <img [src]="slide.image" alt="{{slide.title}}">
                 </div>
-                <div class="carousel-caption">
+                <div class="carousel-caption" [id]="'carousel-'+i">
                     <div class="main-slider-bg">      
                             <h1>{{slide.title}}</h1>
                             <h5>{{slide.description}}</h5>
@@ -35,28 +35,28 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-6 col-6">
-                <a href="#" class="card-act">
+                <a routerLink="/dictionary" class="card-act">
                     <h2>PSL <span>DICTIONARY</span></h2>
                     <img src="../../../assets/../../../assets/images/psl-dictionary-icon.svg" alt="">
                     <h1>OVER 5000 <span>WORDS</span></h1>
                 </a>
             </div>
             <div class="col-lg-3 col-md-6 col-6">
-                <a href="#" class="card-act">
+                <a routerLink="/teacherTutorials/1" class="card-act">
                     <h2>TEACHER <span>TUTORIALS</span></h2>
                     <img src="../../../assets/images/psl-teacher-icon.svg" alt="">
                     <h1>OVER 4500 <span>WORDS</span></h1>
                 </a>
             </div>
             <div class="col-lg-3 col-md-6 col-6">
-                <a href="#" class="card-act">
+                <a routerLink="/stories/1" class="card-act">
                     <h2>PSL <span>STORIES</span></h2>
                     <img src="../../../assets/images/psl-story-icon.svg" alt="">
                     <h1>OVER 5000 <span>WORDS</span></h1>
                 </a>
             </div>
             <div class="col-lg-3 col-md-6 col-6">
-                <a href="#" class="card-act">
+                <a routerLink="/learningTutorials/4" class="card-act">
                     <h2>LEARNING <span>TUTORIALS</span></h2>
                     <img src="../../../assets/images/psl-learning-icon.svg" alt="">
                     <h1>OVER 5000 <span>WORDS</span></h1>
