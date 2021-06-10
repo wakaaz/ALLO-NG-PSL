@@ -11,9 +11,10 @@ import { GenericService } from 'src/app/_services/generic-service';
 export class ListComponent implements OnInit {
 
   subjects: Subject[] = [];
-  subjectsList: Array<Subject> = [];
+  subjectsList: Array<Subject>;
   data: LearningTutorial[] = [];
   sortBy: string;
+  isLoading: boolean;
   paramId = 0;
   constructor(
     private route: ActivatedRoute,
@@ -25,6 +26,7 @@ export class ListComponent implements OnInit {
       // this.genericService.getStoriesVedios(params.id);
       this.paramId = params.id;
       // this.learingTutorialSubject();
+      this.isLoading = true;
       this.genericService.learningTutorial$.subscribe((x: LearningTutorial[]) => {
         this.data = x;
         this.learingTutorialSubject();
@@ -34,12 +36,15 @@ export class ListComponent implements OnInit {
   learingTutorialSubject() {
     this.subjects = this.data.find(x => x.id == this.paramId)?.subjects;
     console.log('', this.subjects);
-    this.subjectsList = [];
+    // this.subjectsList = [];
     if (this.subjects?.length) {
       // JSON.parse(JSON.stringify()) to break refrence
       this.subjectsList = JSON.parse(JSON.stringify(this.subjects));
       this.sortBy = 'A';
       this.changeSort(this.sortBy);
+      this.isLoading = false;
+    } else {
+      this.isLoading = false;
     }
   }
 

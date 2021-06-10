@@ -14,6 +14,7 @@ export class ListComponent implements OnInit {
   subjects: Array<Subject> = [];
   subjectsList: Array<Subject> = [];
   sortBy: string;
+  isLoading: boolean;
   constructor(
     private route: ActivatedRoute,
     public genericService: GenericService
@@ -24,9 +25,11 @@ export class ListComponent implements OnInit {
       this.paramId = params.id;
       // this.genericService.getPreferences();
       // this.initialiseState(); // reset and set based on new parameter this time
+      this.isLoading = true;
       this.genericService.teacherTutorial$.subscribe((x: any) => {
         this.subjectsList = [];
         this.subjects = x.find(x => x.id == this.paramId)?.subjects;
+        this.isLoading = false;
         if (this.subjects?.length) {
           // JSON.parse(JSON.stringify()) to break refrence
           this.subjectsList = JSON.parse(JSON.stringify(this.subjects));

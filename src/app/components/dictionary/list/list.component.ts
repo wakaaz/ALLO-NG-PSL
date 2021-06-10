@@ -12,6 +12,7 @@ export class ListComponent implements OnInit, OnDestroy {
   dictionaries: Array<any>;
   dictionariesList: Array<any>;
   sortBy: string;
+  isLoading: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -23,10 +24,12 @@ export class ListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
+      this.isLoading = true;
       this.genericService.getDictionaries(params.id);
       this.genericService.dictionaries$.subscribe(dictionariesData => {
         this.dictionariesList = [];
         this.dictionaries = dictionariesData;
+        this.isLoading = false;
           // JSON.parse(JSON.stringify()) to break refrence
           this.dictionariesList = JSON.parse(JSON.stringify(this.dictionaries));
           this.sortBy = 'A';

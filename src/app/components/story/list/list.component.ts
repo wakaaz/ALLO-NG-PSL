@@ -12,6 +12,7 @@ export class ListComponent implements OnInit {
   stories: Array<Story> = [];
   storiesList: Array<Story> = [];
   sortBy: string;
+  isLoading: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,10 +21,12 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
+      this.isLoading = true;
       this.genericService.getStoriesVedios(params.id);
       this.genericService.stories$.subscribe(storiesData => {
         this.storiesList = [];
         this.stories = storiesData;
+        this.isLoading = false;
         // JSON.parse(JSON.stringify()) to break refrence
         this.storiesList = JSON.parse(JSON.stringify(this.stories));
         this.sortBy = 'A';
