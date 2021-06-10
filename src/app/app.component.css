@@ -40,3 +40,7 @@
     color: #4e4e4e;
     display: block;
 }
+
+.main-container {
+    min-height:95vh;
+}

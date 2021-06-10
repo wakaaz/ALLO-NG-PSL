@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   emailPattern: RegExp;
 
   isSubmitted: boolean;
+  isLoading: boolean;
 
   @ViewChild('topCarousel') carousel: NgbCarousel;
 
@@ -28,6 +29,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+    this.isLoading = true;
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 6000);
   }
 
   onSwipe(direction: string) {

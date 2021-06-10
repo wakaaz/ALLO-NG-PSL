@@ -10,26 +10,27 @@ import { LocalStorageSerivce } from './local-storage-serivce';
 import { VideoList } from '../_models/learning-tutorial'
 import { RestSerivce } from './rest-serivce';
 import { VideosListComponent } from '../components/learning-tutorial/videos-list/videos-list.component';
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GenericService {
-  private _dictionaryCategories$ = new BehaviorSubject<Dictionary[]>([]);
-  private _teacherTutorial$ = new BehaviorSubject<TeacherTutorial[]>([]);
-  private _storyTypes$ = new BehaviorSubject<Story[]>([]);
-  private _stories$ = new BehaviorSubject<Story[]>([]);
-  private _learnginSkill$ = new BehaviorSubject<Skill[]>([]);
-  private _learningTutorial$ = new BehaviorSubject<LearningTutorial[]>([]);
-  private _learningTutorialVideos$ = new BehaviorSubject<VideoList[]>([]);
+  private _dictionaryCategories$ = new BehaviorSubject<Dictionary[]>(null);
+  private _teacherTutorial$ = new BehaviorSubject<TeacherTutorial[]>(null);
+  private _storyTypes$ = new BehaviorSubject<Story[]>(null);
+  private _stories$ = new BehaviorSubject<Story[]>(null);
+  private _learnginSkill$ = new BehaviorSubject<Skill[]>(null);
+  private _learningTutorial$ = new BehaviorSubject<LearningTutorial[]>(null);
+  private _learningTutorialVideos$ = new BehaviorSubject<VideoList[]>(null);
 
-  // private _learningTutorialSubjects$ = new BehaviorSubject<LearningSubjects[]>([]);
-  private _dictionaries$ = new BehaviorSubject<Dictionary[]>([]);
-  private _learningVideo$ = new BehaviorSubject<VideoList[]>([]);
+  // private _learningTutorialSubjects$ = new BehaviorSubject<LearningSubjects[]>(null);
+  private _dictionaries$ = new BehaviorSubject<Dictionary[]>(null);
+  private _learningVideo$ = new BehaviorSubject<VideoList[]>(null);
+  private _teacherTutorialVideosList$ = new BehaviorSubject<VideoList[]>(null);
 
   constructor(
-    private http: HttpClient,
+    // private http: HttpClient,
     private restService: RestSerivce,
     private localStorageSerivce: LocalStorageSerivce
   ) { }
@@ -41,6 +42,10 @@ export class GenericService {
   // get dictionaries list
   get dictionaries$(): Observable<Dictionary[]> {
     return this._dictionaries$.asObservable();
+  }
+
+  get teacherTutorialVideosList$(): Observable<VideoList[]> {
+    return this._teacherTutorialVideosList$.asObservable();
   }
 
   // get Teacher teturial grades
@@ -90,7 +95,6 @@ export class GenericService {
     this.restService.getRequest<any>('/Preferences').pipe(map(x => x.object)).subscribe(x => {
       this._dictionaryCategories$.next(x.dictionary_categories);
       this._teacherTutorial$.next(x.tut_grades);
-      this._teacherTutorial$.next(x.tut_grades);
       this._storyTypes$.next(x.story_types);
       this._learnginSkill$.next(x.life_skills);
       this._learningTutorial$.next(x.learning_tut_grades);
@@ -101,6 +105,11 @@ export class GenericService {
     this.restService.postRequest('/Dictionary', { category_id: id }).pipe(map(x => x.data)).subscribe(x => {
       this._dictionaries$.next(x);
     });
+  }
+  getTeachTutorials(gradeId: number, subjectId: number): void {
+    this.restService.postRequest('/Tutorials', { grade_id: gradeId, subject_id: subjectId }).pipe(map(x => x.data)).subscribe(x => {
+      this._teacherTutorialVideosList$.next(x);
+    })
   }
   getLearningTutorialVideoList(gradeIds: number, subjectId: number): void {
     this.restService.postRequest('/LearningTutorials', { grade_id: gradeIds, subject_id: subjectId }).pipe(map(x => x.data)).subscribe(x => {
@@ -118,10 +127,10 @@ export class GenericService {
 
   searchVideos(keyword: string): Observable<any> {
     // original url: /Search
-    // return this.restService.postRequest('/assets/sample-json/search.sample.json', { keyword });
+    return this.restService.postRequest('/Search', { keyword });
     
     // For testing
-    return this.http.get('/assets/sample-json/search.sample.json');
+    // return this.http.get('/assets/sample-json/search.sample.json');
   }
 
   // getStoriesVedios

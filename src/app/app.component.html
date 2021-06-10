@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
-        <div class="PSL-logo"><a href="index.html"><img alt="" src="../assets/images/psl-logo.png"></a> </div>
+        <div class="PSL-logo"><a routerLink="/"><img alt="" src="../assets/images/psl-logo.png"></a> </div>
 
         <div class="menu-btn" id="nav-toggle" data-toggle="collapse" data-target="#navbarNavDropdown"
           aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,20 +12,20 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
 
-              <li class="nav-item"><a class="nav-link" [routerLink]="['/']" routerLinkActive="active">Home</a></li>
+              <li class="nav-item"><a class="nav-link" [routerLink]="['/']" [ngClass]="currentRoute === '' ? 'active' : ''">Home</a></li>
               <li class="nav-item"><a class="nav-link" [routerLink]="['/dictionary']"
-                  routerLinkActive="active">Dictionary <span class="sr-only">(current)</span></a></li>
+                  [ngClass]="currentRoute === 'dictionary' ? 'active' : ''">Dictionary <span class="sr-only">(current)</span></a></li>
               <li class="nav-item"><a class="nav-link" [routerLink]="['/teacherTutorials', 1]"
-                  routerLinkActive="active">Teacher Tutorials</a></li>
+                  [ngClass]="currentRoute === 'teacherTutorials' ? 'active' : ''">Teacher Tutorials</a></li>
               <li class="nav-item"><a class="nav-link" [routerLink]="['/stories', 1]"
-                  routerLinkActive="active">Stories</a></li>
+                  [ngClass]="currentRoute === 'stories' ? 'active' : ''">Stories</a></li>
               <li class="nav-item"><a class="nav-link" [routerLink]="['/learningTutorials', 4]"
-                  routerLinkActive="active">Learning Tutorials</a>
+                  [ngClass]="currentRoute === 'learningTutorials' ? 'active' : ''">Learning Tutorials</a>
               </li>
-              <li class="nav-item"><a class="nav-link" [routerLink]="['/iqra']" routerLinkActive="active">Iqra
+              <li class="nav-item"><a class="nav-link" [routerLink]="['/iqra']" [ngClass]="currentRoute === 'iqra' ? 'active' : ''">Iqra
                   Program</a></li>
               <li class="nav-item"><a class="nav-link" [routerLink]="['/resources']"
-                  routerLinkActive="active">Resources</a></li>
+                  [ngClass]="currentRoute === 'resources' ? 'active' : ''">Resources</a></li>
 
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
@@ -50,7 +50,7 @@
             <i class="fa fa-search" *ngIf="searchInput.value.length < 1"></i>
             <i class="fa fa-times cursor-pointer" *ngIf="searchInput.value.length > 0"
               (click)="searchInput.value='';resetSearch()"></i>
-            <input type="text" placeholder="Search" #searchInput (keyup)="searchWord($event.target.value)"
+            <input type="text" placeholder="Search" #searchInput (keydown)="resetTimer()" (keyup)="searchWord($event.target.value)"
               class="form-control">
           </div>
           <div *ngIf="searchArray?.length > 0" class="search-possible-results">
@@ -62,7 +62,7 @@
                   </h4> -->
                   <ul>
                     <li *ngFor="let result of searchArray; let i=index" class="possible-search-items">
-                      <a routerLink="">
+                      <a (click)="goToSearch(result)">
                       {{i + 1}}) {{result.title}}
                       </a>
                     </li>
@@ -81,7 +81,7 @@
   </div>
 </div>
 
-<div class="content-wrapper">
+<div class="content-wrapper main-container">
 
   <router-outlet></router-outlet>
 
@@ -97,10 +97,10 @@
           <ul class="widget-list">
             <li><a [routerLink]="['/dictionary']">Dictionary</a></li>
             <li><a [routerLink]="['/learningTutorials', 4]">Learning Tutorials</a></li>
-            <li><a [routerLink]="['/teacherTutorials']">Teacher Tutorials</a></li>
+            <li><a [routerLink]="['/teacherTutorials', 1]">Teacher Tutorials</a></li>
             <li><a [routerLink]="['/stories', 1]">PSL Stories</a></li>
             <li><a [routerLink]="['/iqra']">Iqra Program</a></li>
-            <li><a href="#">Resources</a></li>
+            <li><a [routerLink]="['/resources']">Resources</a></li>
           </ul>
         </div>
       </div>
@@ -109,8 +109,8 @@
         <div class="widget">
           <h3>Download PSL App</h3>
           <p>Download the PSL Phone App with 5,000 Signs</p>
-          <a href="#" target="_blank"><img class="store-img" src="../assets/images/playstore.png" alt=""></a>
-          <a href="#" target="_blank"><img class="store-img" src="../assets/images/appstore.png" alt=""></a>
+          <a href="https://play.google.com/store/apps/details?id=com.grappetite.fesf.psl" target="_blank"><img class="store-img" src="../assets/images/playstore.png" alt=""></a>
+          <a href="https://itunes.apple.com/us/app/pakistan-sign-language-psl/id955003505?mt=8" target="_blank"><img class="store-img" src="../assets/images/appstore.png" alt=""></a>
         </div>
       </div>
 
@@ -131,3 +131,5 @@
   </div>
 
 </footer>
+
+ 

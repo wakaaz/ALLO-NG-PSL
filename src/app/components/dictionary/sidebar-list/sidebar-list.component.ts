@@ -10,6 +10,7 @@ import { GenericService } from 'src/app/_services/generic-service';
 })
 export class SidebarListComponent implements OnInit {
   categoryName = '';
+  isLoading: boolean;
   constructor(
     public genericService: GenericService,
     private router: Router,
@@ -18,8 +19,12 @@ export class SidebarListComponent implements OnInit {
   ngOnInit(): void {
     // if(this.genericService.)
     let length = 0;
+    this.isLoading = true;
     this.genericService.dictionaryCategories$.subscribe(x => {
-      length = x.length;
+      if (x !== null) {
+        this.isLoading = false;
+        length = x.length;
+      }
     });
     if (length === 0) {
       this.genericService.getDictionaryCategories();
@@ -30,5 +35,9 @@ export class SidebarListComponent implements OnInit {
       this.categoryName = 'PSL Dictionary';
     }
     // }
+  }
+
+  goToDictionary(categoryId: string) {
+    this.router.navigateByUrl(`/dictionary/category/${categoryId}`);
   }
 }

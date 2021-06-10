@@ -11,9 +11,11 @@ import { GenericService } from 'src/app/_services/generic-service';
 export class VideosListComponent implements OnInit {
 
   tutorialVideos: Array<VideoList> = [];
-  tutorialVideosList: Array<VideoList> = [];
+  tutorialVideosList: VideoList[];
   videoList: any = [];
+  loaders: Array<number> = [];
   sortBy: string;
+  isLoading: boolean;
   subjectId = 0;
   gradeId = 0;
   constructor(
@@ -23,14 +25,21 @@ export class VideosListComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.gradeId = params.id;
       this.subjectId = params.subjectId;
+      this.loaders.length = 12;
+      this.isLoading = true;
+      this.tutorialVideosList = [];
+      setTimeout(() => {
+        genericService.learningTutorialVideos$.subscribe(videos => {
+          if (videos !== null) {
+            this.tutorialVideos = videos;
+            this.tutorialVideosList = JSON.parse(JSON.stringify(this.tutorialVideos));
+            this.sortBy = 'A';
+            this.changeSort(this.sortBy);
+            this.isLoading = false;
+          } 
+        });
+      }, 1000);
       this.genericService.getLearningTutorialVideoList(this.gradeId, this.subjectId);
-      genericService.learningTutorialVideos$.subscribe(videos => {
-        this.tutorialVideosList = [];
-        this.tutorialVideos = videos;
-        this.tutorialVideosList = JSON.parse(JSON.stringify(this.tutorialVideos));
-        this.sortBy = 'A';
-        this.changeSort(this.sortBy);
-      })
       // this.initialiseState(); // reset and set based on new parameter this time
     });
   }

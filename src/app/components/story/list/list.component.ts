@@ -12,6 +12,8 @@ export class ListComponent implements OnInit {
   stories: Array<Story> = [];
   storiesList: Array<Story> = [];
   sortBy: string;
+  isLoading: boolean;
+  loaders: Array<number> = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -19,16 +21,23 @@ export class ListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loaders.length = 12;
     this.route.params.subscribe(params => {
+      this.isLoading = true;
+      this.storiesList = [];
+      setTimeout(() => {
+        this.genericService.stories$.subscribe(storiesData => {
+          if (storiesData !== null) {
+            this.stories = storiesData;
+            this.isLoading = false;
+            // JSON.parse(JSON.stringify()) to break refrence
+            this.storiesList = JSON.parse(JSON.stringify(this.stories));
+            this.sortBy = 'A';
+            this.changeSort(this.sortBy);
+          }
+        });        
+      }, 1000);
       this.genericService.getStoriesVedios(params.id);
-      this.genericService.stories$.subscribe(storiesData => {
-        this.storiesList = [];
-        this.stories = storiesData;
-        // JSON.parse(JSON.stringify()) to break refrence
-        this.storiesList = JSON.parse(JSON.stringify(this.stories));
-        this.sortBy = 'A';
-        this.changeSort(this.sortBy);
-      });
     });
   }
 

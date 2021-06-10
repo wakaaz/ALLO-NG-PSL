@@ -16,21 +16,27 @@ export class DictionaryComponent implements OnInit {
   dictionariesList: Array<Dictionary>;
   sortBy: string;
   categoryName = '';
+  loaders: Array<number> = [];
 
   constructor(
     public genericService: GenericService,
     private router: Router,
-  ) { }
+  ) {
+    this.loaders.length = 20;
+  }
 
   ngOnInit(): void {
     this.genericService.getDictionaryCategories();
     this.genericService.dictionaryCategories$.subscribe((dictionriesData: Array<Dictionary>) => {
-      this.dictionariesList = [];
-      this.dictionaries = dictionriesData;
-      // JSON.parse(JSON.stringify(this.dictionaries)) to break refrence
-      this.dictionariesList = JSON.parse(JSON.stringify(this.dictionaries));
-      this.sortBy = 'A';
-      this.changeSort(this.sortBy);
+      if (dictionriesData !== null) {
+        this.dictionariesList = [];
+        this.dictionaries = dictionriesData;
+        // JSON.parse(JSON.stringify(this.dictionaries)) to break refrence
+        this.dictionariesList = JSON.parse(JSON.stringify(this.dictionaries));
+        this.sortBy = 'A';
+        this.changeSort(this.sortBy);
+        this.loaders.length = 0;
+      }
     });
     const url = this.router.url;
     // if (url.split('/')[1] === 'play') {
