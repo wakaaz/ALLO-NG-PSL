@@ -20,9 +20,10 @@
 
 </div>
 
-<div class="row" >
+<div class="row">
     <div class="col-lg-4 col-md-6 col-12" *ngFor="let videos of tutorialVideosList">
-        <a [routerLink]="['/play/learningTutorials/', videos.grade_id , videos.subject_id, videos.id]" class="video-thumb">
+        <a [routerLink]="['/play/learningTutorials/', videos.grade_id , videos.subject_id, videos.id]"
+            class="video-thumb">
             <div class="v-thumb-img">
                 <div class='playBut'>
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -37,7 +38,8 @@
                             stroke-linejoin="round" stroke-miterlimit="10" cx="106.8" cy="106.8" r="103.3" />
                     </svg>
                 </div>
-                <img [src]="decodeURIComponent(videos.poster)" alt="">
+                <img [src]="videos.poster ? decodeURIComponent(videos.poster) : '/assets/images/placeholder-image.jpg'"
+                    onError="this.src='/assets/images/placeholder-image.jpg'" alt="{{videos.title}}">
             </div>
             <h3>{{videos.title}}</h3>
         </a>
