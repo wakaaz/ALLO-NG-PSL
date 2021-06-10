@@ -303,6 +303,7 @@ ng-scrollbar.leftside-overflow {
     line-height: 20px; 
     margin-bottom: 10px;
     margin-top: 10px;
+	text-transform: capitalize;
 }
 .video-thumb:hover {
 	text-decoration: none;
@@ -462,6 +463,10 @@ ng-scrollbar.leftside-overflow {
 .lesson-plan-list .custom-radio span {
 	float: right;
 }
+.contentnot-found {
+    width: 100%; text-align: center; height: 60vh;
+}
+.contentnot-found h2 { font-size: 24px; }
 
 @media (max-width: 1024px) {
 	.video-thumb h3 {
@@ -502,6 +507,7 @@ ng-scrollbar.leftside-overflow {
 }
 
 @media (max-width: 767px) {
+	.contentnot-found h2{ font-size: 20px; }
 	.sign-list,
 	.alphabets-list {
 		ms-flex: 0 0 100%;
