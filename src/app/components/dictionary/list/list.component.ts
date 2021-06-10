@@ -27,13 +27,15 @@ export class ListComponent implements OnInit, OnDestroy {
       this.isLoading = true;
       this.genericService.getDictionaries(params.id);
       this.genericService.dictionaries$.subscribe(dictionariesData => {
-        this.dictionariesList = [];
-        this.dictionaries = dictionariesData;
-        this.isLoading = false;
-          // JSON.parse(JSON.stringify()) to break refrence
-          this.dictionariesList = JSON.parse(JSON.stringify(this.dictionaries));
-          this.sortBy = 'A';
-          this.changeSort(this.sortBy);
+        if (dictionariesData !== null) {
+          this.dictionariesList = [];
+          this.dictionaries = dictionariesData;
+          this.isLoading = false;
+            // JSON.parse(JSON.stringify()) to break refrence
+            this.dictionariesList = JSON.parse(JSON.stringify(this.dictionaries));
+            this.sortBy = 'A';
+            this.changeSort(this.sortBy);
+        }
       })
       // this.initialiseState(); // reset and set based on new parameter this time
     });

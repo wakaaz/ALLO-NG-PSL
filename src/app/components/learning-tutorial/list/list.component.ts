@@ -28,8 +28,10 @@ export class ListComponent implements OnInit {
       // this.learingTutorialSubject();
       this.isLoading = true;
       this.genericService.learningTutorial$.subscribe((x: LearningTutorial[]) => {
-        this.data = x;
-        this.learingTutorialSubject();
+        if (x !== null) {
+          this.data = x;
+          this.learingTutorialSubject();
+        }
       });
     });
   }

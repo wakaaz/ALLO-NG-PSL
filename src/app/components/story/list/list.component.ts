@@ -24,13 +24,15 @@ export class ListComponent implements OnInit {
       this.isLoading = true;
       this.genericService.getStoriesVedios(params.id);
       this.genericService.stories$.subscribe(storiesData => {
-        this.storiesList = [];
-        this.stories = storiesData;
-        this.isLoading = false;
-        // JSON.parse(JSON.stringify()) to break refrence
-        this.storiesList = JSON.parse(JSON.stringify(this.stories));
-        this.sortBy = 'A';
-        this.changeSort(this.sortBy);
+        if (storiesData !== null) {
+          this.storiesList = [];
+          this.stories = storiesData;
+          this.isLoading = false;
+          // JSON.parse(JSON.stringify()) to break refrence
+          this.storiesList = JSON.parse(JSON.stringify(this.stories));
+          this.sortBy = 'A';
+          this.changeSort(this.sortBy);
+        }
       });
     });
   }

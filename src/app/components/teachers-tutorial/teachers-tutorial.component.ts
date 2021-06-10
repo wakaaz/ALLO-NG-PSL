@@ -17,7 +17,9 @@ export class TeachersTutorialComponent implements OnInit {
   ngOnInit(): void {
     let length = 0;
     this.genericService.teacherTutorial$.subscribe(x => {
-      length = x.length;
+      if (x !== null) {
+        length = x.length;
+      }
     });
     if (length === 0) {
       this.genericService.getPreferences();

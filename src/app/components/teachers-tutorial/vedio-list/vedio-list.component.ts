@@ -27,13 +27,15 @@ export class VedioListComponent implements OnInit {
       this.isLoading = true;
       this.genericService.getTeachTutorials(params.id, params.subjectId);
       this.genericService.teacherTutorialVideosList$.subscribe(teacherTutorialVideos => {
-        this.tutorTutorialsList = [];
-        this.tutorTutorial = teacherTutorialVideos;
-        this.isLoading = false;
-        if (this.tutorTutorial?.length) {
-          this.tutorTutorialsList = JSON.parse(JSON.stringify(this.tutorTutorial));
-          this.sortBy = 'A';
-          this.changeSort(this.sortBy)
+        if (teacherTutorialVideos !== null) {
+          this.tutorTutorialsList = [];
+          this.tutorTutorial = teacherTutorialVideos;
+          this.isLoading = false;
+          if (this.tutorTutorial?.length) {
+            this.tutorTutorialsList = JSON.parse(JSON.stringify(this.tutorTutorial));
+            this.sortBy = 'A';
+            this.changeSort(this.sortBy)
+          }
         }
       })
     });

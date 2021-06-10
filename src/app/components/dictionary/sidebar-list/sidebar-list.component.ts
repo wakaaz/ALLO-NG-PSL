@@ -19,7 +19,9 @@ export class SidebarListComponent implements OnInit {
     // if(this.genericService.)
     let length = 0;
     this.genericService.dictionaryCategories$.subscribe(x => {
-      length = x.length;
+      if (x !== null) {
+        length = x.length;
+      }
     });
     if (length === 0) {
       this.genericService.getDictionaryCategories();

@@ -27,13 +27,15 @@ export class VideosListComponent implements OnInit {
       this.isLoading = true;
       this.genericService.getLearningTutorialVideoList(this.gradeId, this.subjectId);
       genericService.learningTutorialVideos$.subscribe(videos => {
-        // this.tutorialVideosList = [];
-        console.log('Videos', videos);
-        this.tutorialVideos = videos;
-        this.tutorialVideosList = JSON.parse(JSON.stringify(this.tutorialVideos));
-        this.sortBy = 'A';
-        this.changeSort(this.sortBy);
-        this.isLoading = false;
+        if (videos !== null) {
+          // this.tutorialVideosList = [];
+          console.log('Videos', videos);
+          this.tutorialVideos = videos;
+          this.tutorialVideosList = JSON.parse(JSON.stringify(this.tutorialVideos));
+          this.sortBy = 'A';
+          this.changeSort(this.sortBy);
+          this.isLoading = false;
+        } 
       })
       // this.initialiseState(); // reset and set based on new parameter this time
     });
