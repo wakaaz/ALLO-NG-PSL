@@ -50,7 +50,7 @@
             <i class="fa fa-search" *ngIf="searchInput.value.length < 1"></i>
             <i class="fa fa-times cursor-pointer" *ngIf="searchInput.value.length > 0"
               (click)="searchInput.value='';resetSearch()"></i>
-            <input type="text" placeholder="Search" #searchInput (keyup)="searchWord($event.target.value)"
+            <input type="text" placeholder="Search" #searchInput (keydown)="resetTimer()" (keyup)="searchWord($event.target.value)"
               class="form-control">
           </div>
           <div *ngIf="searchArray?.length > 0" class="search-possible-results">
@@ -131,3 +131,5 @@
   </div>
 
 </footer>
+
+ 

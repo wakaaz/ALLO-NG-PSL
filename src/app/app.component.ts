@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 import { GenericService } from './_services/generic-service';
 
 @Component({
@@ -12,6 +13,7 @@ export class AppComponent {
   currentRoute: string;
   searchInput: string;
   searchArray: Array<any> = [];
+  timer: any;
 
   constructor(private genericService: GenericService, private router: Router) {
     this.genericService.getToken();
@@ -23,21 +25,31 @@ export class AppComponent {
   }
 
   searchWord(keyword: string): void {
-    // this.searchArray.length =+1 ; 
+    // this.searchArray.length =+1 ;
     this.searchInput = keyword;
-    if (this.searchInput) {
-      this.genericService.searchVideos(keyword).subscribe((res: any) => {
-        if (res.message === 'Success') {
-          this.searchArray = res.data;
-        }
-      }, error => {
-        console.log(`error`, error);
-      });
-    } else {
-      setTimeout(() => {
+    if (!this.timer) {
+      if (this.searchInput) {
+        this.timer = setTimeout(() => {
+          this.genericService.searchVideos(keyword)
+          .pipe(take(1))
+          .subscribe((res: any) => {
+            if (res.message === 'Success') {
+              this.searchArray = res.data;
+            }
+            this.resetTimer();
+          }, error => {
+            console.log(`error`, error);
+          });          
+        }, 2000);
+      } else {
         this.searchArray = [];
-      }, 100);
+      }
     }
+  }
+
+  resetTimer() {
+    clearTimeout(this.timer);
+    this.timer = undefined;
   }
 
   resetSearch() {
