@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Dictionary } from 'src/app/_models/dictionary';
 import { GenericService } from 'src/app/_services/generic-service';
@@ -10,12 +10,14 @@ import { GenericService } from 'src/app/_services/generic-service';
 })
 export class ListComponent implements OnInit, OnDestroy {
   dictionaries: Array<any>;
-  dictionariesList: Array<any>;
+  dictionariesList: Array<any> = [];
   sortBy: string;
   isLoading: boolean;
+  loaders: Array<number> = [];
 
   constructor(
     private route: ActivatedRoute,
+    private change: ChangeDetectorRef,
     public genericService: GenericService
   ) { }
   ngOnDestroy(): void {
@@ -23,20 +25,23 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.loaders.length = 12;
     this.route.params.subscribe(params => {
       this.isLoading = true;
-      this.genericService.getDictionaries(params.id);
-      this.genericService.dictionaries$.subscribe(dictionariesData => {
-        if (dictionariesData !== null) {
-          this.dictionariesList = [];
-          this.dictionaries = dictionariesData;
-          this.isLoading = false;
+      this.dictionariesList.length = 0;
+      setTimeout(() => {
+        this.genericService.dictionaries$.subscribe(dictionariesData => {
+          if (dictionariesData !== null) {
+            this.dictionaries = dictionariesData;
             // JSON.parse(JSON.stringify()) to break refrence
             this.dictionariesList = JSON.parse(JSON.stringify(this.dictionaries));
             this.sortBy = 'A';
             this.changeSort(this.sortBy);
-        }
-      })
+            this.isLoading = false;
+          }
+        });        
+      }, 1000);
+      this.genericService.getDictionaries(params.id);
       // this.initialiseState(); // reset and set based on new parameter this time
     });
   }

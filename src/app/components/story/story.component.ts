@@ -9,6 +9,7 @@ import { GenericService } from 'src/app/_services/generic-service';
 })
 export class StoryComponent implements OnInit {
 
+  isLoading: boolean;
   constructor(
     private router: Router,
     public genericService: GenericService
@@ -16,8 +17,10 @@ export class StoryComponent implements OnInit {
 
   ngOnInit(): void {
     let length = 0;
+    this.isLoading = true;
     this.genericService.storyTypes$.subscribe(x => {
       if (x !== null) {
+        this.isLoading = false;
         length = x.length;
       }
     });

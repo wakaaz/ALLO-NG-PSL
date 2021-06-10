@@ -16,11 +16,14 @@ export class DictionaryComponent implements OnInit {
   dictionariesList: Array<Dictionary>;
   sortBy: string;
   categoryName = '';
+  loaders: Array<number> = [];
 
   constructor(
     public genericService: GenericService,
     private router: Router,
-  ) { }
+  ) {
+    this.loaders.length = 20;
+  }
 
   ngOnInit(): void {
     this.genericService.getDictionaryCategories();
@@ -32,6 +35,7 @@ export class DictionaryComponent implements OnInit {
         this.dictionariesList = JSON.parse(JSON.stringify(this.dictionaries));
         this.sortBy = 'A';
         this.changeSort(this.sortBy);
+        this.loaders.length = 0;
       }
     });
     const url = this.router.url;

@@ -14,6 +14,7 @@ export class VedioListComponent implements OnInit {
 
   sortBy: string;
   tutorialId: number;
+  loaders: Array<number> = [];
   isLoading: boolean;
 
   constructor(
@@ -22,22 +23,25 @@ export class VedioListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loaders.length = 12;
     this.route.params.subscribe(params => {
       this.tutorialId = params.subjectId;
       this.isLoading = true;
-      this.genericService.getTeachTutorials(params.id, params.subjectId);
-      this.genericService.teacherTutorialVideosList$.subscribe(teacherTutorialVideos => {
-        if (teacherTutorialVideos !== null) {
-          this.tutorTutorialsList = [];
-          this.tutorTutorial = teacherTutorialVideos;
-          this.isLoading = false;
-          if (this.tutorTutorial?.length) {
-            this.tutorTutorialsList = JSON.parse(JSON.stringify(this.tutorTutorial));
-            this.sortBy = 'A';
-            this.changeSort(this.sortBy)
+      this.tutorTutorialsList = [];
+      setTimeout(() => {
+        this.genericService.teacherTutorialVideosList$.subscribe(teacherTutorialVideos => {
+          if (teacherTutorialVideos !== null) {
+            this.tutorTutorial = teacherTutorialVideos;
+            this.isLoading = false;
+            if (this.tutorTutorial?.length) {
+              this.tutorTutorialsList = JSON.parse(JSON.stringify(this.tutorTutorial));
+              this.sortBy = 'A';
+              this.changeSort(this.sortBy)
+            }
           }
-        }
-      })
+        });        
+      }, 1000);
+      this.genericService.getTeachTutorials(params.id, params.subjectId);
     });
   }
 
