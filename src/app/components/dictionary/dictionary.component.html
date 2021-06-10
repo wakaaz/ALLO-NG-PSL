@@ -72,8 +72,8 @@
                         <i class="fa fa-search" *ngIf="searchInput.value.length < 1"></i>
                         <i class="fa fa-times cursor-pointer" *ngIf="searchInput.value.length > 0"
                             (click)="searchInput.value='';searchWithTitle('')"></i>
-                        <input type="text" placeholder="Search" #searchInput (keyup)="searchWithTitle($event.target.value)"
-                            class="form-control">
+                        <input type="text" placeholder="Search" #searchInput
+                            (keyup)="searchWithTitle($event.target.value)" class="form-control">
                     </div>
                 </div>
 
@@ -90,7 +90,8 @@
                 <div class="col-3" *ngFor="let dictionary of dictionariesList">
                     <a [routerLink]="['/dictionary/category', dictionary.id]" class="sign-card">
                         <span>{{dictionary.videos}}</span>
-                        <img [src]="decodeURIComponent(dictionary.image)" alt="">
+                        <img [src]="dictionary.image ? decodeURIComponent(dictionary.image) : '/assets/images/placeholder-image.jpg'"
+                            onError="this.src='/assets/images/placeholder-image.jpg'" alt="{{dictionary.title}}">
                         <h4>{{dictionary.title}}</h4>
                     </a>
                 </div>

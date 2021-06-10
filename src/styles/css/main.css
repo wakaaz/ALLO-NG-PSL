@@ -162,9 +162,10 @@ button {
 	-moz-border-radius: 6px;
 	box-shadow: 0 0 1.3rem 0 rgba(0, 0, 0, 0.1);
 }
-.leftside-overflow {
-	height: calc(100vh - 260px);
-	overflow-y: scroll;
+ng-scrollbar.leftside-overflow {
+	overflow: hidden;
+	height: calc(100vh - 260px) !important;
+	max-height: calc(100vh - 260px);
 }
 .leftside-list h3 {
 	font-size: 20px;
@@ -215,6 +216,7 @@ button {
 	border-bottom: solid 1px #e2e2e2a6;
 	display: flex;
 	padding: 0;
+	width: calc(100% - 10px);
 }
 .leftside-list ul li a:before {
 	color: #009e4f;
@@ -288,11 +290,20 @@ button {
 	width: 100%;
 }
 .video-thumb h3 {
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 1;
-	padding: 10px;
-	margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 0 10px;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    position: relative;
+    line-height: 20px; 
+    margin-bottom: 10px;
+    margin-top: 10px;
+	text-transform: capitalize;
 }
 .video-thumb:hover {
 	text-decoration: none;
@@ -452,6 +463,10 @@ button {
 .lesson-plan-list .custom-radio span {
 	float: right;
 }
+.contentnot-found {
+    width: 100%; text-align: center; height: 60vh;
+}
+.contentnot-found h2 { font-size: 24px; }
 
 @media (max-width: 1024px) {
 	.video-thumb h3 {
@@ -492,6 +507,7 @@ button {
 }
 
 @media (max-width: 767px) {
+	.contentnot-found h2{ font-size: 20px; }
 	.sign-list,
 	.alphabets-list {
 		ms-flex: 0 0 100%;

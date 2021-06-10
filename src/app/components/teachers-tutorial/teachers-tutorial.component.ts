@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { GenericService } from 'src/app/_services/generic-service';
 
 @Component({
@@ -9,6 +10,7 @@ import { GenericService } from 'src/app/_services/generic-service';
 export class TeachersTutorialComponent implements OnInit {
 
   constructor(
+    private router: Router,
     public genericService: GenericService
   ) { }
 
@@ -22,4 +24,7 @@ export class TeachersTutorialComponent implements OnInit {
     }
   }
 
+  goToDictionary(categoryId: string) {
+    this.router.navigateByUrl(`/teacherTutorials/${categoryId}`);
+  }
 }

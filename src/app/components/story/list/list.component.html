@@ -38,7 +38,8 @@
                             stroke-linejoin="round" stroke-miterlimit="10" cx="106.8" cy="106.8" r="103.3" />
                     </svg>
                 </div>
-                <img [src]="decodeURIComponent(story.poster)" alt="">
+                <img [src]="story.poster ? decodeURIComponent(story.poster) : '/assets/images/placeholder-image.jpg'"
+                    onError="this.src='/assets/images/placeholder-image.jpg'" alt="{{story.title}}">
             </div>
             <h3>{{story.title}}</h3>
         </a>

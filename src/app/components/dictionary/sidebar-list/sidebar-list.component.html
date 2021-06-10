@@ -15,30 +15,27 @@
         <div class="col-lg-3 col-md-4">
 
             <div class="select-dictionary d-block d-md-none">
-                <select class="custom-select" id="inputGroupSelect02">
-                    <option selected>Select Dictionary</option>
-                    <option>Adjectives</option>
-                    <option>Adverbs</option>
-                    <option>Airport</option>
-                    <option>Alphabet</option>
-                    <option>Beauty</option>
-                    <option>Bedroom</option>
-                    <option>Alphabet</option>
-                </select>
+                <select class="custom-select" id="inputGroupSelect02" (change)="goToDictionary($event.target.value)">
+                    <option selected disabled>Select Dictionary</option>
+                    <option [value]="dictionary.id" *ngFor="let dictionary of genericService.dictionaryCategories$ | async">
+                        {{dictionary.title}}
+                    </option>
+               </select>
             </div>
 
             <div class="leftside-list d-none d-md-block">
                 <h3>Dictionary <span>List</span></h3>
-                <div class="leftside-overflow">
-                    <ul>
-                        <li *ngFor="let dictionary of genericService.dictionaryCategories$ | async">
-                            <a [routerLink]="['/dictionary/category', dictionary.id]"
-                                routerLinkActive="active">{{dictionary.title}}</a>
-                        </li>
-                    </ul>
+                    <ng-scrollbar class="leftside-overflow" thumbClass="white-scrollbars" disabled="false">
+                        <cdk-virtual-scroll-viewport scrollViewport>
+                            <ul>
+                                <li *ngFor="let dictionary of genericService.dictionaryCategories$ | async">
+                                    <a [routerLink]="['/dictionary/category', dictionary.id]"
+                                        routerLinkActive="active">{{dictionary.title}}</a>
+                                </li>
+                            </ul>
+                        </cdk-virtual-scroll-viewport>
+                    </ng-scrollbar>
                 </div>
-            </div>
-
         </div>
 
         <div class="col-lg-9 col-md-8">

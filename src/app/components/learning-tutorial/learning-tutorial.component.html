@@ -15,28 +15,27 @@
         <div class="col-lg-3 col-md-4">
 
             <div class="select-dictionary d-block d-md-none">
-                <select class="custom-select" id="inputGroupSelect02">
-                    <option selected>Select Dictionary</option>
-                    <option>Adjectives</option>
-                    <option>Adverbs</option>
-                    <option>Airport</option>
-                    <option>Alphabet</option>
-                    <option>Beauty</option>
-                    <option>Bedroom</option>
-                    <option>Alphabet</option>
+                <select class="custom-select" id="inputGroupSelect02" (change)="goToDictionary($event.target.value)">
+                    <option selected disabled>Select Tutorial</option>
+                    <option *ngFor="let tutorial of genericService.learningTutorial$ | async"
+                        [value]="tutorial.id">
+                        {{tutorial.grade}}
+                    </option>
                 </select>
             </div>
 
             <div class="leftside-list d-none d-md-block">
                 <h3>Class <span>List</span></h3>
-                <div class="leftside-overflow">
-                    <ul>
-                        <li *ngFor="let tutorial of genericService.learningTutorial$ | async">
-                            <a [routerLink]="['/learningTutorials', tutorial.id]"
-                                routerLinkActive="active">{{tutorial.grade}}</a>
-                        </li>
-                    </ul>
-                </div>
+                <ng-scrollbar class="leftside-overflow" thumbClass="white-scrollbars" disabled="false">
+                    <cdk-virtual-scroll-viewport scrollViewport>
+                        <ul>
+                            <li *ngFor="let tutorial of genericService.learningTutorial$ | async">
+                                <a [routerLink]="['/learningTutorials', tutorial.id]"
+                                    routerLinkActive="active">{{tutorial.grade}}</a>
+                            </li>
+                        </ul>
+                    </cdk-virtual-scroll-viewport>
+                </ng-scrollbar>
             </div>
 
         </div>

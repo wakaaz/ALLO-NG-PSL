@@ -4,6 +4,7 @@
 .text-link {
     color: #7a7a7a;
     font-family: "Poppins", sans-serif;
+    cursor: pointer;
 }
 .text-link i {
     color: #009e4f;
@@ -92,8 +93,14 @@
     float: left;
     line-height: 1.8;
 }
+.lesson-plan-error {
+    color: red;
+    font-size: 15px;
+    float: left;
+    width: 100%;
+}
 
-.r-video-list {
+ng-scrollbar.r-video-list {
     background-color: #fff;
     padding: 15px;
     display: inline-block;
@@ -102,33 +109,47 @@
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
     box-shadow: 0 0 1.3rem 0 rgba(0, 0, 0, 0.1);
-    height: 632px;
-    overflow-y: scroll;
+    height: 635px !important;
+    max-height: 635px !important;
+    overflow: hidden;
 }
-
-.r-video-list .video-thumb {
+.custom-control-input:checked~.custom-control-label::before {
+    color: #fff;
+    border-color: #009e4f !important;
+    background-color: #009e4f !important;
+}
+.plyr__control {
+    background: #009e4f;
+}
+ng-scrollbar.r-video-list .video-thumb {
     box-shadow: none;
     background-color: transparent;
     margin-bottom: 0;
+    margin-right: 20px;
+    margin-left: 10px;
 }
-.r-video-list .video-thumb:hover {
+ng-scrollbar.r-video-list .video-thumb:hover {
     box-shadow: none;
     background-color: transparent;
     color: #009e4f;
 }
-.r-video-list .video-thumb img,
-.r-video-list .video-thumb .playBut {
+ng-scrollbar.r-video-list .video-thumb img,
+ng-scrollbar.r-video-list .video-thumb .playBut {
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
 }
-.r-video-list .video-thumb h3 {
+ng-scrollbar.r-video-list .video-thumb h3 {
     padding: 5px 0px 5px 0px;
     line-height: normal;
 }
-
+.video-page .ng-scroll-viewport {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 @media (max-width: 1024px) {
-    .r-video-list {
-        height: 560px;
+    ng-scrollbar.r-video-list {
+        height: 560px !important;
+        max-height: 560px !important;
     }
     .text-link {
         font-size: 13px;
@@ -155,8 +176,9 @@
     .pl-sm {
         padding-left: 0;
     }
-    .r-video-list {
-        height: 456px;
+    ng-scrollbar.r-video-list {
+        height: 456px !important;
+        max-height: 456px !important;
     }
     .v-title {
         font-size: 18px !important;
@@ -164,7 +186,7 @@
     .video-page h4 {
         font-size: 14px;
     }
-    .r-video-list .video-thumb h3 {
+    ng-scrollbar.r-video-list .video-thumb h3 {
         font-size: 13px;
     }
     .v-title-action .content-title h2 {
@@ -176,6 +198,7 @@
     .nextvds {
         display: block;
         margin-bottom: 10px;
+        margin-left: 10px;
         font-size: 16px;
     }
     .text-link {
@@ -199,12 +222,13 @@
         font-size: 13px;
         letter-spacing: normal;
     }
-    .r-video-list {
+    ng-scrollbar.r-video-list {
         height: auto;
+        max-height: auto;
     }
-    .r-video-list .video-thumb {
+    ng-scrollbar.r-video-list .video-thumb {
         float: left;
-        width: 48%;
+        width: 47%;
         margin-right: 1%;
         margin-left: 1%;
     }
@@ -213,11 +237,11 @@
     }
 }
 @media (max-width: 425px) {
-    .r-video-list .video-thumb {
+    ng-scrollbar.r-video-list .video-thumb {
         float: none;
-        width: 100%;
+        width: 93%;
         margin-right: 0;
-        margin-left: 0;
+        margin-left: 5px;
     }
     .v-title-action .btn {
         font-size: 12.5px;

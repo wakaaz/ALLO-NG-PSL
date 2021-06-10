@@ -31,4 +31,8 @@ export class SidebarListComponent implements OnInit {
     }
     // }
   }
+
+  goToDictionary(categoryId: string) {
+    this.router.navigateByUrl(`/dictionary/category/${categoryId}`);
+  }
 }

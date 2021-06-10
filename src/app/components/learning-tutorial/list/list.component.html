@@ -42,9 +42,10 @@
             </div>
             <h3>{{dictionary.title}}</h3>
         </a> -->
-        <a  [routerLink]="['/learningTutorials/', paramId, dictionary.id]" class="video-thumb">
+        <a [routerLink]="['/learningTutorials/', paramId, dictionary.id]" class="video-thumb">
             <div class="v-thumb-img">
-                <img [src]="decodeURIComponent(dictionary.icon)" [alt]="dictionary.title">
+                <img [src]="dictionary.icon ? decodeURIComponent(dictionary.icon) : '/assets/images/placeholder-image.jpg'"
+                    onError="this.src='/assets/images/placeholder-image.jpg'" [alt]="dictionary.title">
             </div>
             <h3>{{dictionary.title}}</h3>
         </a>

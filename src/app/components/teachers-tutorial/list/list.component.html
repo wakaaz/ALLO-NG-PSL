@@ -69,7 +69,7 @@
 
 <div class="row">
     <div class="col-lg-4 col-md-6 col-12" *ngFor="let subject of subjectsList">
-        <!-- <p>  subject_id: {{dictionary.id}} ,, grade_id:    </p> -->
+                <!-- <p>  subject_id: {{dictionary.id}} ,, grade_id:    </p> -->
         <!-- <a [routerLink]="['/teacherTutorials/', paramId, subject.id]" class="video-thumb">
             <div class="v-thumb-img">
                 <div class='playBut'>
@@ -91,7 +91,8 @@
         </a> -->
         <a [routerLink]="['/teacherTutorials/', paramId, subject.id]" class="video-thumb">
             <div class="v-thumb-img">
-                <img [src]="decodeURIComponent(subject.icon)" [alt]="subject.title">
+                <img [src]="subject.icon ? decodeURIComponent(subject.icon) : '/assets/images/placeholder-image.jpg'"
+                    onError="this.src='/assets/images/placeholder-image.jpg'" [alt]="subject.title">
             </div>
             <h3>{{subject.title}}</h3>
         </a>
