@@ -19,6 +19,8 @@ export class HomeComponent implements OnInit {
   emailPattern: RegExp;
 
   isSubmitted: boolean;
+  recommendSuccess: boolean;
+  recommendError: boolean;
   isLoading: boolean;
 
   @ViewChild('topCarousel') carousel: NgbCarousel;
@@ -49,12 +51,30 @@ export class HomeComponent implements OnInit {
       return;
     } else {
       this.genericService.recommendAWord({name: this.name, email: this.email, word: this.recommendedWord}).subscribe(res => {
+        if (res.message === 'Success') {
+          this.recommendError = false;
+          this.recommendSuccess = true;
+        } else {
+          this.recommendError = true;
+          this.recommendSuccess = false;
+        }
         this.resetForm();
+        this.resetMessages();
       }, error => {
+        this.recommendError = true;
+        this.recommendSuccess = false;
         this.resetForm(); // for testing
+        this.resetMessages();
         console.log(`Error in recommend word :>>`, error);
       });
     }
+  }
+
+  resetMessages() {
+    setTimeout(() => {
+      this.recommendError = false;
+      this.recommendSuccess = false;
+    }, 5000);
   }
 
   resetForm(): void {
