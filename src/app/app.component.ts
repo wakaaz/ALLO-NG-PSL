@@ -57,7 +57,7 @@ export class AppComponent {
   }
 
   goToSearch(selectedItem: any): void {
-    switch (selectedItem.category) {
+    switch (selectedItem.table_name) {
       case 'dictionary':
         this.router.navigateByUrl(`/play/dictionary/category/${selectedItem.category_id}/${selectedItem.id}`);
         break;
@@ -73,5 +73,6 @@ export class AppComponent {
       default:
         break;
     }
+    (document.getElementById('search-toggle') as HTMLButtonElement).click();
   }
 }

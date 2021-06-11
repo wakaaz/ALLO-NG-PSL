@@ -178,7 +178,8 @@
                                         cy="106.8" r="103.3" />
                                 </svg>
                             </div>
-                            <img [src]="decodeURIComponent(vedio.poster)" alt="">
+                            <img [src]="vedio.poster ? decodeURIComponent(vedio.poster) : '/assets/images/placeholder-image.jpg'"
+                            onError="this.src='/assets/images/placeholder-image.jpg'" alt="">
                         </div>
                         <h3>{{vedio.english_word || vedio.title}}</h3>
                     </a>

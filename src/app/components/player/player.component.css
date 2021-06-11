@@ -33,6 +33,7 @@
 .v-title-action .content-title h2 {
     margin: 0;
     margin-bottom: 15px;
+    text-transform: capitalize;
     font-size: 20px !important;
 }
 .v-title-action .border-top {

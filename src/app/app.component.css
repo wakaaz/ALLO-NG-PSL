@@ -22,8 +22,7 @@
 .all-searched-items {
     max-height: 180px;
     margin: 5px 0;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 .search-sec h4 {
     color: #009e4f;
@@ -38,6 +37,7 @@
 .possible-search-items {
     margin-bottom: 8px;
     padding: 5px 5px;
+    width: 97%;
 }
 .possible-search-items a {
     font-size: 14px;
