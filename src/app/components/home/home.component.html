@@ -1,190 +1,196 @@
-<div class="main-slider">
-    <span style="float:'left'; width: '100%'; height: auto;" (swipeleft)="onSwipe('left')" (swiperight)="onSwipe('right')" 
-        >
-        <ngb-carousel #topCarousel *ngIf="sliderData.length">
-            <ng-template ngbSlide *ngFor="let slide of sliderData; let i=index">
-                <div class="picsum-img-wrapper slider-img">
-                    <img [src]="slide.image" alt="{{slide.title}}">
-                </div>
-                <div class="carousel-caption" [id]="'carousel-'+i">
-                    <div class="main-slider-bg">      
+<span [hidden]="isLoading">
+    <div class="main-slider">
+        <span style="float:'left'; width: '100%'; height: auto;" (swipeleft)="onSwipe('left')"
+            (swiperight)="onSwipe('right')">
+            <ngb-carousel #topCarousel *ngIf="sliderData.length">
+                <ng-template ngbSlide *ngFor="let slide of sliderData; let i=index">
+                    <div class="picsum-img-wrapper slider-img">
+                        <img [src]="slide.image" alt="{{slide.title}}">
+                    </div>
+                    <div class="carousel-caption" [id]="'carousel-'+i">
+                        <div class="main-slider-bg">
                             <h1>{{slide.title}}</h1>
                             <h5>{{slide.description}}</h5>
                             <button class="btn btn-primary" routerLink="{{slide.link}}">Learn More</button>
-                      
+
+                        </div>
                     </div>
-                </div>
-                
-                <!-- <div class="carousel-caption">
+
+                    <!-- <div class="carousel-caption">
                     <div class="bottom_show">
                         <h3 class="main-slider-bg slider-title">{{slide.title}}</h3>
                         <p class="main-slider-bg slider-description">{{slide.description}}</p>
                         <button class="main-slider-bg slider-navigate" routerLink="{{slide.link}}">Learn More</button>
                     </div>
                 </div> -->
-            </ng-template>
-        </ngb-carousel>
-    </span>
-</div>
-
-
-
-
-
-<div class="card-act-vds">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-6">
-                <a routerLink="/dictionary" class="card-act">
-                    <h2>PSL <span>DICTIONARY</span></h2>
-                    <img src="../../../assets/../../../assets/images/psl-dictionary-icon.svg" alt="">
-                    <h1>OVER 5000 <span>WORDS</span></h1>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-6 col-6">
-                <a routerLink="/teacherTutorials/1" class="card-act">
-                    <h2>TEACHER <span>TUTORIALS</span></h2>
-                    <img src="../../../assets/images/psl-teacher-icon.svg" alt="">
-                    <h1>OVER 4500 <span>WORDS</span></h1>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-6 col-6">
-                <a routerLink="/stories/1" class="card-act">
-                    <h2>PSL <span>STORIES</span></h2>
-                    <img src="../../../assets/images/psl-story-icon.svg" alt="">
-                    <h1>OVER 5000 <span>WORDS</span></h1>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-6 col-6">
-                <a routerLink="/learningTutorials/4" class="card-act">
-                    <h2>LEARNING <span>TUTORIALS</span></h2>
-                    <img src="../../../assets/images/psl-learning-icon.svg" alt="">
-                    <h1>OVER 5000 <span>WORDS</span></h1>
-                </a>
-            </div>
-        </div>
+                </ng-template>
+            </ngb-carousel>
+        </span>
     </div>
-</div>
 
-<div class="psl-about">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-sm-6 about-img"><img src="../../../assets/images/left-images.jpg" alt=""></div>
-            <div class="col-lg-6 col-md-12 d-flex align-items-center">
-                <div>
-                    <h2>ABOUT <span>PSL</span></h2>
-                    <p>For the 1st time in Pakistan – a wealth of Pakistan Sign Language learning resources at your
-                        fingertips! An invaluable resource for deaf students and their families, those involved in Deaf
-                        education, and anyone who wants to learn an exciting new language.</p>
-
-                    <div class="about-img-sm"><img src="../../../assets/images/left-images.jpg" alt=""></div>
-
-                    <h2>The Deaf Reach Program</h2>
-                    <p>Deaf Reach Schools and Training Centers, a program of Family Educational Services Foundation
-                        (FESF), envisions a future where education is a reality for all deaf children in Pakistan. By
-                        investing in PSL learning resources, Deaf Reach is working to make literacy, education and
-                        skills training...</p>
-                    <button type="button" routerLink="/deaf-reach-program" class="btn btn-outline-primary">LEARN MORE</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<div class="recommend-word">
-    <div class="container">
-
-        <div class="recommend-content">
+    <div class="card-act-vds">
+        <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-12 set-width-tab">
-                    <h2>RECOMMEND A WORD</h2>
-                    <p>Do you want us to add a sign to the PSL Dictionary?<br> Send us your suggestion.</p>
+                <div class="col-lg-3 col-md-6 col-6">
+                    <a routerLink="/dictionary" class="card-act">
+                        <h2>PSL <span>DICTIONARY</span></h2>
+                        <img src="../../../assets/../../../assets/images/psl-dictionary-icon.svg" alt="">
+                        <h1>OVER 5000 <span>WORDS</span></h1>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6 col-6">
+                    <a routerLink="/teacherTutorials/1" class="card-act">
+                        <h2>TEACHER <span>TUTORIALS</span></h2>
+                        <img src="../../../assets/images/psl-teacher-icon.svg" alt="">
+                        <h1>OVER 4500 <span>WORDS</span></h1>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6 col-6">
+                    <a routerLink="/stories/1" class="card-act">
+                        <h2>PSL <span>STORIES</span></h2>
+                        <img src="../../../assets/images/psl-story-icon.svg" alt="">
+                        <h1>OVER 5000 <span>WORDS</span></h1>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6 col-6">
+                    <a routerLink="/learningTutorials/4" class="card-act">
+                        <h2>LEARNING <span>TUTORIALS</span></h2>
+                        <img src="../../../assets/images/psl-learning-icon.svg" alt="">
+                        <h1>OVER 5000 <span>WORDS</span></h1>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="name" #inputName="ngModel" name="name" [(ngModel)]="name" placeholder="Name" required>
-                                <span class="form-error" *ngIf="isSubmitted && inputName.errors?.required && !inputName.value">
-                                    Name is required!
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="email" #inputEmail="ngModel" name="email" [(ngModel)]="email" placeholder="Email" 
-                                    required [pattern]="emailPattern">
-                                <span class="form-error" *ngIf="isSubmitted && inputEmail.errors?.required && !inputEmail.value">
-                                    Email is required!
-                                </span>
-                                <span class="form-error" *ngIf="isSubmitted && inputEmail.errors?.pattern">
-                                    Enter valid Email!
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="word" #inputWord="ngModel" name="word" [(ngModel)]="recommendedWord" placeholder="Type Your Word..." required>
-                                <span class="form-error" *ngIf="isSubmitted && inputWord.errors?.required && !inputWord.value">
-                                    Message is required!
-                                </span>
-                            </div>
-                        </div>
+    <div class="psl-about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-sm-6 about-img"><img src="../../../assets/images/left-images.jpg" alt=""></div>
+                <div class="col-lg-6 col-md-12 d-flex align-items-center">
+                    <div>
+                        <h2>ABOUT <span>PSL</span></h2>
+                        <p>For the 1st time in Pakistan – a wealth of Pakistan Sign Language learning resources at your
+                            fingertips! An invaluable resource for deaf students and their families, those involved in
+                            Deaf
+                            education, and anyone who wants to learn an exciting new language.</p>
+
+                        <div class="about-img-sm"><img src="../../../assets/images/left-images.jpg" alt=""></div>
+
+                        <h2>The Deaf Reach Program</h2>
+                        <p>Deaf Reach Schools and Training Centers, a program of Family Educational Services Foundation
+                            (FESF), envisions a future where education is a reality for all deaf children in Pakistan.
+                            By
+                            investing in PSL learning resources, Deaf Reach is working to make literacy, education and
+                            skills training...</p>
+                        <button type="button" routerLink="/deaf-reach-program" class="btn btn-outline-primary">LEARN
+                            MORE</button>
                     </div>
+                </div>
 
-                    <button type="button" class="btn btn-outline-light" (click)="recommendWord()">SUBMIT</button>
-                </div>
-                <div class="col-lg-6 col-md-12 recommend-img">
-                    <img src="../../../assets/images/recomnend-img.png" alt="">
-                </div>
             </div>
         </div>
-
     </div>
-</div>
 
+    <div class="recommend-word">
+        <div class="container">
 
-<div class="download-tutorials">
-    <div class="container">
+            <div class="recommend-content">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 set-width-tab">
+                        <h2>RECOMMEND A WORD</h2>
+                        <p>Do you want us to add a sign to the PSL Dictionary?<br> Send us your suggestion.</p>
 
-        <div class="row">
-            <div class="col-lg-6 col-md-12 d-flex align-items-center">
-                <div>
-                    <h2>Download Tutorials to watch on the go.</h2>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="name" #inputName="ngModel" name="name"
+                                        [(ngModel)]="name" placeholder="Name" required>
+                                    <span class="form-error"
+                                        *ngIf="isSubmitted && inputName.errors?.required && !inputName.value">
+                                        Name is required!
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="email" #inputEmail="ngModel"
+                                        name="email" [(ngModel)]="email" placeholder="Email" required
+                                        [pattern]="emailPattern">
+                                    <span class="form-error"
+                                        *ngIf="isSubmitted && inputEmail.errors?.required && !inputEmail.value">
+                                        Email is required!
+                                    </span>
+                                    <span class="form-error" *ngIf="isSubmitted && inputEmail.errors?.pattern">
+                                        Enter valid Email!
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="word" #inputWord="ngModel" name="word"
+                                        [(ngModel)]="recommendedWord" placeholder="Type Your Word..." required>
+                                    <span class="form-error"
+                                        *ngIf="isSubmitted && inputWord.errors?.required && !inputWord.value">
+                                        Message is required!
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
 
-                    <div class="download-img-sm"><img src="../../../assets/images/download-img.png" alt=""></div>
-
-                    <p class="mb-0">For the 1st time in Pakistan – a wealth of Pakistan Sign Language learning resources
-                        at your fingertips! An invaluable resource for deaf students and their families.</p>
+                        <button type="button" class="btn btn-outline-light" (click)="recommendWord()">SUBMIT</button>
+                    </div>
+                    <div class="col-lg-6 col-md-12 recommend-img">
+                        <img src="../../../assets/images/recomnend-img.png" alt="">
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-12 download-img">
-                <img src="../../../assets/images/download-img.png" alt="">
-            </div>
+
         </div>
-
     </div>
-</div>
 
-<div class="testimonials-slider">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="tq-bg" *ngIf="testimonials?.length">
-                    <h2 class="head-green">OUR</h2>
-                    <h2 class="ml-set">TESTIMONIALS</h2>
-                    <!-- <div class="test-arrow">
+    <div class="download-tutorials">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-6 col-md-12 d-flex align-items-center">
+                    <div>
+                        <h2>Download Tutorials to watch on the go.</h2>
+
+                        <div class="download-img-sm"><img src="../../../assets/images/download-img.png" alt=""></div>
+
+                        <p class="mb-0">For the 1st time in Pakistan – a wealth of Pakistan Sign Language learning
+                            resources
+                            at your fingertips! An invaluable resource for deaf students and their families.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 download-img">
+                    <img src="../../../assets/images/download-img.png" alt="">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="testimonials-slider">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tq-bg" *ngIf="testimonials?.length">
+                        <h2 class="head-green">OUR</h2>
+                        <h2 class="ml-set">TESTIMONIALS</h2>
+                        <!-- <div class="test-arrow">
                         <button type="button" class="btn"><i class="fas fa-chevron-left"></i></button>
                         <button type="button" class="btn"><i class="fas fa-chevron-right"></i></button>
                     </div> -->
-                    <ngb-carousel>
-                        <ng-template ngbSlide *ngFor="let testimonial of testimonials; let i=index">
+                        <ngb-carousel>
+                            <ng-template ngbSlide *ngFor="let testimonial of testimonials; let i=index">
                                 <p>
                                     {{testimonial.quote}}
                                 </p>
-            
+
                                 <div class="row">
-            
+
                                     <div class="col-auto testimonials-img">
                                         <img src="../../../assets/images/avatar.svg" alt="">
                                     </div>
@@ -193,29 +199,39 @@
                                         <span *ngIf="testimonial.department">{{testimonial.department}}</span>
                                         <span *ngIf="testimonial.location">, {{testimonial.location}}</span>
                                     </div>
-            
+
                                 </div>
-                        </ng-template>
-                    </ngb-carousel>
+                            </ng-template>
+                        </ngb-carousel>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="bottom-logo">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-2 d-flex justify-content-center"><img src="../../../assets/images/pso-logo.png" alt="">
-            </div>
-            <div class="col-md-2 d-flex justify-content-center"><img src="../../../assets/images/ppaf-logo.png" alt="">
-            </div>
-            <div class="col-md-2 d-flex justify-content-center"><img src="../../../assets/images/ideas-logo.png" alt="">
-            </div>
-            <div class="col-md-2 d-flex justify-content-center"><img src="../../../assets/images/netHope-logo.png"
-                    alt=""></div>
-            <div class="col-md-2 d-flex justify-content-center"><img src="../../../assets/images/danpak.png" alt="">
+    <div class="bottom-logo">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-2 d-flex justify-content-center"><img src="../../../assets/images/pso-logo.png"
+                        alt="">
+                </div>
+                <div class="col-md-2 d-flex justify-content-center"><img src="../../../assets/images/ppaf-logo.png"
+                        alt="">
+                </div>
+                <div class="col-md-2 d-flex justify-content-center"><img src="../../../assets/images/ideas-logo.png"
+                        alt="">
+                </div>
+                <div class="col-md-2 d-flex justify-content-center"><img src="../../../assets/images/netHope-logo.png"
+                        alt=""></div>
+                <div class="col-md-2 d-flex justify-content-center"><img src="../../../assets/images/danpak.png" alt="">
+                </div>
             </div>
         </div>
+    </div>
+</span>
+
+<div *ngIf="isLoading" class="loader-wrap">
+    <div class="main-loader">
+        <img src="/assets/images/loader.gif" alt="">
     </div>
 </div>

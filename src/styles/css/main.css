@@ -466,11 +466,25 @@ ng-scrollbar.leftside-overflow {
 .contentnot-found {
     width: 100%; text-align: center; height: 60vh;
 }
-.contentnot-found h2 { font-size: 24px; font-weight: 600; }
+.contentnot-found h2 { font-size: 20px; font-weight: 600; color: #888484; }
 .contentnot-found img {
-	height: 70%;
-    width: 50%;
+	height: auto;
+    width: 40%;
     margin-bottom: 30px;
+}
+.loader-wrap {
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #fff; z-index: 2000; position: relative;
+}
+.main-loader {
+	position: relative; background-color: red;
+} 
+.main-loader .loader-img {
+	position: absolute;
+	z-index: 99;
 }
 
 @media (max-width: 1024px) {
@@ -512,7 +526,10 @@ ng-scrollbar.leftside-overflow {
 }
 
 @media (max-width: 767px) {
-	.contentnot-found h2{ font-size: 20px; }
+	.contentnot-found img {
+		width: 50%;
+	}
+	.contentnot-found h2{ font-size: 18px; }
 	.sign-list,
 	.alphabets-list {
 		ms-flex: 0 0 100%;

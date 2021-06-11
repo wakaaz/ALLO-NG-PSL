@@ -1,54 +1,71 @@
-<div class="sub-header about-fesf-bg align-items-center">
-    <div class="container">
-        <div class="sub-header-content">
-            <h2>FESF</h2>
-            <p>Family Educational Services Foundation (FESF) is a non-profit educational organization.</p>
+<span [hidden]="isLoading">
+    <div class="sub-header about-fesf-bg align-items-center">
+        <div class="container">
+            <div class="sub-header-content">
+                <h2>FESF</h2>
+                <p>Family Educational Services Foundation (FESF) is a non-profit educational organization.</p>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="sub-page">
+    <div class="sub-page">
 
-    <div class="container">
+        <div class="container">
 
-        <div class="row">
-            <div class="col-lg-12">
-                <div>
-                    <h2>ABOUT <span>FESF</span></h2>
-                    <p>FAMILY EDUCATIONAL SERVICES FOUNDATION (FESF) was established by like-minded educators working in
-                        Pakistan for close to three decades. A foundational goal of FESF is to provide high-quality
-                        educational
-                        services and build capacity in some of the most neglected sectors of Pakistan's society.</p>
-                    <p>Our mission is to enhance the quality of life for all members of the community, especially those
-                        who
-                        are disadvantaged. We invest in educational development and provide innovative training programs
-                        and
-                        services, empowering the recipients to gain competency and realize their full potential.</p>
-                    <p>Family Educational Services Foundation (FESF) is a non-profit educational organization active in
-                        Pakistan since 1984. FESF is dedicated to enhancing the quality of life for all members of the
-                        community, especially those who are disadvantaged. We invest in educational development and
-                        provide
-                        innovative training programs, developmental tools and services to enable recipients to gain
-                        competency
-                        and self-sufficiency, empowering them to reach their full potential.</p>
-                    <p> FESF is set up under a license from the Securities and Exchange Commission of Pakistan under
-                        section
-                        42 of the Companies Act, 2017, Approved U/S 2(36)(c) of the Income Tax Ordinance 2001, read with
-                        I.T.
-                        rule 214 and 220 of tax rules 2002. FESF accounts are audited by Deloitte Yousuf Adil.</p>
-                    <p>FESF is approved and eligible for Zakat by Zakat & Ushr Dept., Gov't of Pakistan. All donations
-                        are tax
-                        exempted. Zakat donations are collected and utilized under the supervision of a 3 member Shariah
-                        advisory committee headed by Mufti Ibrahim Essa. Zakat funds are kept in a separate Shariah
-                        compliant
-                        bank account and expensed according to Shariah guidelines.</p>
-                    <p> Donate now to sponsor the ongoing development of PSL resources. Learn more</p>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div>
+                        <h2>ABOUT <span>FESF</span></h2>
+                        <p>FAMILY EDUCATIONAL SERVICES FOUNDATION (FESF) was established by like-minded educators
+                            working in
+                            Pakistan for close to three decades. A foundational goal of FESF is to provide high-quality
+                            educational
+                            services and build capacity in some of the most neglected sectors of Pakistan's society.</p>
+                        <p>Our mission is to enhance the quality of life for all members of the community, especially
+                            those
+                            who
+                            are disadvantaged. We invest in educational development and provide innovative training
+                            programs
+                            and
+                            services, empowering the recipients to gain competency and realize their full potential.</p>
+                        <p>Family Educational Services Foundation (FESF) is a non-profit educational organization active
+                            in
+                            Pakistan since 1984. FESF is dedicated to enhancing the quality of life for all members of
+                            the
+                            community, especially those who are disadvantaged. We invest in educational development and
+                            provide
+                            innovative training programs, developmental tools and services to enable recipients to gain
+                            competency
+                            and self-sufficiency, empowering them to reach their full potential.</p>
+                        <p> FESF is set up under a license from the Securities and Exchange Commission of Pakistan under
+                            section
+                            42 of the Companies Act, 2017, Approved U/S 2(36)(c) of the Income Tax Ordinance 2001, read
+                            with
+                            I.T.
+                            rule 214 and 220 of tax rules 2002. FESF accounts are audited by Deloitte Yousuf Adil.</p>
+                        <p>FESF is approved and eligible for Zakat by Zakat & Ushr Dept., Gov't of Pakistan. All
+                            donations
+                            are tax
+                            exempted. Zakat donations are collected and utilized under the supervision of a 3 member
+                            Shariah
+                            advisory committee headed by Mufti Ibrahim Essa. Zakat funds are kept in a separate Shariah
+                            compliant
+                            bank account and expensed according to Shariah guidelines.</p>
+                        <p> Donate now to sponsor the ongoing development of PSL resources. Learn more</p>
+                    </div>
+                </div>
+                <div class="col-lg-12 mt-30"><img class="img-auto" src="../../../assets/images/about-fesf.jpg" alt="">
                 </div>
             </div>
-            <div class="col-lg-12 mt-30"><img class="img-auto" src="../../../assets/images/about-fesf.jpg" alt=""></div>
+
+
         </div>
 
-
     </div>
+</span>
 
+<div *ngIf="isLoading" class="loader-wrap">
+    <div class="main-loader">
+        <img src="/assets/images/loader.gif" alt="">
+    </div>
 </div>
