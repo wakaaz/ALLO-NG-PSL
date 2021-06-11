@@ -2,46 +2,50 @@
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content top-border">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-file-pdf mr-2"></i> Download Lesson Plan
-                    <span></span>
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
-                        aria-hidden="true">&times;</span> </button>
-            </div>
-            <div class="modal-body p-0">
-                <div class="col-md-12 lesson-plan-list">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck1">
-                        <label class="custom-control-label" for="customCheck1">Lesson Plan Title Here 1</label>
+            <form #lessonDownloadForm="ngForm">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-file-pdf mr-2"></i> Download Lesson
+                        Plan
+                        <span></span>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" id="close-lesson" (click)="lessonDownloadForm.resetForm()"
+                        aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                </div>
+                <div *ngIf="currentlyPlayed.documents && currentlyPlayed.documents.length && !success" class="modal-body p-0">
+                    <div class="col-md-12 lesson-plan-list" *ngFor="let document of currentlyPlayed.documents">
+                        <div>
+                            <input type="checkbox" class="lesson-checkbox" (click)="selecteLesson(document)"
+                                id="customCheck1_{{document.name}}" name="customCheck1_{{document.name}}">
+                            <label class="lesson-name" for="customCheck1">{{document.name}}</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 lesson-plan-error"
+                        *ngIf="lessonDownloadForm.submitted && !selectedLessons.length">
+                        Please select lesson(s) to download!
                     </div>
                 </div>
-
-                <div class="col-md-12 lesson-plan-list">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck2">
-                        <label class="custom-control-label" for="customCheck2">Lesson Plan Title Here 1</label>
+                <div *ngIf="!success" class="modal-footer border-0">
+                    <button type="submit" class="btn btn-primary w-100"
+                        (click)="downloadLessons(lessonDownloadForm)">Download
+                        Lesson</button>
+                </div>
+                <div *ngIf="success" class="modal-body confir_pay">
+                    <div class="col-12">
+                        <div class="check_mark">
+                            <div class="sa-icon sa-success animate">
+                                <span class="sa-line sa-tip animateSuccessTip"></span>
+                                <span class="sa-line sa-long animateSuccessLong"></span>
+                                <div class="sa-placeholder"></div>
+                                <div class="sa-fix"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <h3 class="download-title">Your download should begin automatically in few seconds...</h3>
                     </div>
                 </div>
-
-                <div class="col-md-12 lesson-plan-list">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck3">
-                        <label class="custom-control-label" for="customCheck3">Lesson Plan Title Here 1</label>
-                    </div>
-                </div>
-
-                <div class="col-md-12 lesson-plan-list">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck4">
-                        <label class="custom-control-label" for="customCheck4">Lesson Plan Title Here 1</label>
-                    </div>
-                </div>
-
-            </div>
-            <div class="modal-footer border-0">
-                <button type="button" class="btn btn-primary w-100">Download Lesson</button>
-            </div>
+            </form>
         </div>
     </div>
 </div>
@@ -51,35 +55,53 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content top-border">
             <form #videoDownloadForm="ngForm">
-
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-file-pdf mr-2"></i> Download Video
                         <span></span>
                     </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
+                    <button type="button" id="close-video" class="close" data-dismiss="modal" aria-label="Close"
+                        (click)="videoDownloadForm.resetForm()"> <span
                             aria-hidden="true">&times;</span> </button>
                 </div>
 
-                <div class="modal-body p-0">
+                <div *ngIf="!success" class="modal-body p-0">
 
                     <div class="col-md-12 lesson-plan-list" *ngFor="let quality of videoQualities">
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="customRadio_{{quality}}" (click)="selectedQuality(quality)" value="{{quality}}" name="customRadio" class="custom-control-input">
-                            <label class="custom-control-label" for="customRadio_{{quality}}">Quality</label> <span>{{quality}}</span>
+                            <input type="radio" id="customRadio_{{quality}}" (click)="selectedQuality(quality)"
+                                value="{{quality}}" name="customRadio" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadio_{{quality}}">Quality</label>
+                            <span>{{quality}}</span>
                         </div>
                     </div>
-                    <div class="col-md-12 lesson-plan-error" *ngIf="videoDownloadForm.submitted && !selectedVideoQuality">
+                    <div class="col-md-12 lesson-plan-error"
+                        *ngIf="videoDownloadForm.submitted && !selectedVideoQuality">
                         Please select video quality!
                     </div>
                 </div>
-                <div class="modal-footer border-0">
-                    <button type="submit" class="btn btn-primary w-100" (click)="downloadVideo(videoDownloadForm)">Download Video</button>
+                <div *ngIf="!success" class="modal-footer border-0">
+                    <button type="submit" class="btn btn-primary w-100"
+                        (click)="downloadVideo(videoDownloadForm)">Download Video</button>
+                </div>
+                <div *ngIf="success" class="modal-body confir_pay">
+                    <div class="col-12">
+                        <div class="check_mark">
+                            <div class="sa-icon sa-success animate">
+                                <span class="sa-line sa-tip animateSuccessTip"></span>
+                                <span class="sa-line sa-long animateSuccessLong"></span>
+                                <div class="sa-placeholder"></div>
+                                <div class="sa-fix"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <h3 class="download-title">Your download should begin automatically in few seconds...</h3>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
 
 <div class="container video-page">
     <div class="row">
@@ -138,7 +160,8 @@
 
                 <div class="col-12">
                     <div class="row m-0 border-top">
-                        <div *ngIf="false" class="col-auto pl-0 pr-0 xsm-w"><button data-toggle="modal" data-target="#exampleModal"
+                        <div *ngIf="currentlyPlayed.documents && currentlyPlayed.documents.length"
+                            class="col-auto pl-0 pr-0 xsm-w"><button data-toggle="modal" data-target="#exampleModal"
                                 type="button" class="btn btn-primary"><i class="fas fa-file-pdf"></i> Download Lesson
                                 Plan</button></div>
                         <div class="col pr-0 text-right xsm-w">
@@ -155,37 +178,38 @@
 
         <div class="col-lg-3 col-md-3 col-sm-12 pl-sm">
             <!-- <div class="r-video-list"> -->
-                <ng-scrollbar class="r-video-list" thumbClass="white-scrollbars" disabled="false">
-                    <cdk-virtual-scroll-viewport scrollViewport>
-                <h5 class="nextvds">Next Videos</h5>
+            <ng-scrollbar class="r-video-list" thumbClass="white-scrollbars" disabled="false">
+                <cdk-virtual-scroll-viewport scrollViewport>
+                    <h5 class="nextvds">Next Videos</h5>
 
-                <span *ngFor="let vedio of remeaningVedios">
-                    <a [routerLink]="[updateUrl(vedio.id), vedio.id]" class="video-thumb">
-                        <div class="v-thumb-img">
-                            <div class='playBut'>
-                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                    xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px"
-                                    width="213.7px" height="213.7px" viewBox="0 0 213.7 213.7"
-                                    enable-background="new 0 0 213.7 213.7" xml:space="preserve">
+                    <span *ngFor="let vedio of remeaningVedios">
+                        <a [routerLink]="[updateUrl(vedio.id), vedio.id]" class="video-thumb">
+                            <div class="v-thumb-img">
+                                <div class='playBut'>
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px"
+                                        width="213.7px" height="213.7px" viewBox="0 0 213.7 213.7"
+                                        enable-background="new 0 0 213.7 213.7" xml:space="preserve">
 
-                                    <polygon class='triangle' id="XMLID_18_" fill="none" stroke-width="7"
-                                        stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+                                        <polygon class='triangle' id="XMLID_18_" fill="none" stroke-width="7"
+                                            stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
+                                            points="
 				73.5,62.5 148.5,105.8 73.5,149.1 " />
 
-                                    <circle class='circle' id="XMLID_17_" fill="none" stroke-width="7"
-                                        stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="106.8"
-                                        cy="106.8" r="103.3" />
-                                </svg>
+                                        <circle class='circle' id="XMLID_17_" fill="none" stroke-width="7"
+                                            stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
+                                            cx="106.8" cy="106.8" r="103.3" />
+                                    </svg>
+                                </div>
+                                <img [src]="vedio.poster ? decodeURIComponent(vedio.poster) : '/assets/images/placeholder-image.jpg'"
+                                    onError="this.src='/assets/images/placeholder-image.jpg'" alt="">
                             </div>
-                            <img [src]="vedio.poster ? decodeURIComponent(vedio.poster) : '/assets/images/placeholder-image.jpg'"
-                            onError="this.src='/assets/images/placeholder-image.jpg'" alt="">
-                        </div>
-                        <h3>{{vedio.english_word || vedio.title}}</h3>
-                    </a>
-                </span>
-                    </cdk-virtual-scroll-viewport>
-                </ng-scrollbar>
+                            <h3>{{vedio.english_word || vedio.title}}</h3>
+                        </a>
+                    </span>
+                </cdk-virtual-scroll-viewport>
+            </ng-scrollbar>
             <!-- </div> -->
 
         </div>

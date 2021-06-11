@@ -28,11 +28,13 @@ export class PlayerComponent implements OnInit, OnDestroy {
   oldCategoryId: number;
   routerURL: string;
   selectedVideoQuality: string = '';
+  selectedLessons: Array<{name: string, url: string}> = [];
   videoQualities: Array<string> = [];
   currentlyPlayed: any = {
   };
   storiesData: Array<any>
   isStories: boolean;
+  success: boolean;
   selectedLanguage = 'english';
   allVedios: any[] = [];
   remeaningVedios = [];
@@ -131,7 +133,9 @@ export class PlayerComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         // this.storiesData = JSON.parse(JSON.stringify(data));
         // const sortedArray = this.selectedLanguageData('english');
-        this.setObject(data);
+        if (data !== null) {
+          this.setObject(data);
+        }
       });
   }
   learningVideoSubscription(): void {
@@ -263,10 +267,53 @@ export class PlayerComponent implements OnInit, OnDestroy {
     if (!this.selectedVideoQuality) {
       return;
     } else {
-      alert('Your download should begin automatically in few seconds...');
       const url = this.decodeURIComponent(this.currentlyPlayed[this.selectedVideoQuality].url);
+      this.videoService.getVideo(url)
+      .subscribe((blob) => {
+          this.success = true;
+          let blobUrl = window.URL.createObjectURL(blob);
+          const urlParts = url.split('/');
+          const name = urlParts[urlParts.length - 1];
+          const anchor = document.createElement('a');
+          anchor.href = blobUrl;
+          anchor.download = name;
+          setTimeout(() => {
+            const button = document.getElementById('close-video');
+            button.click();
+            this.success = false;            
+          }, 5000);
+          anchor.click();
+          URL.revokeObjectURL(blobUrl);
+          videoForm.resetForm();
+        }, error => {
+          console.log(`error`, error)
+        });
+    }
+  }
+
+  selecteLesson(document: {name: string, url: string}): void {
+    const index = this.selectedLessons.findIndex(lesson => lesson.name === document.name);
+    if (index > -1) {
+      this.selectedLessons.splice(index, 1);
+    } else {
+      this.selectedLessons.push(document);
+    }
+  }
+
+  downloadLessons(lessonForm: NgForm): void {
+    if (this.selectedLessons.length === 0) {
+      return;
+    } else {
+      this.selectedLessons.forEach(lesson => {
+        const url = this.decodeURIComponent(lesson.url);
         this.videoService.getVideo(url)
         .subscribe((blob) => {
+          this.success = true;
+          setTimeout(() => {
+            const button = document.getElementById('close-lesson');
+            button.click();
+            this.success = false;            
+          }, 5000);
           let blobUrl = window.URL.createObjectURL(blob);
           const urlParts = url.split('/');
           const name = urlParts[urlParts.length - 1];
@@ -275,10 +322,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
           anchor.download = name;
           anchor.click();
           URL.revokeObjectURL(blobUrl);
-          videoForm.reset();
+          lessonForm.resetForm();
         }, error => {
           console.log(`error`, error)
         });
+      });
     }
   }
 
