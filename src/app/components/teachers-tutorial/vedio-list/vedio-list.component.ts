@@ -12,6 +12,7 @@ export class VedioListComponent implements OnInit {
   tutorTutorial: Array<VideoList> = [];
   tutorTutorialsList: Array<VideoList> = [];
 
+  subjectTitle: string;
   sortBy: string;
   tutorialId: number;
   loaders: Array<number> = [];
@@ -20,7 +21,9 @@ export class VedioListComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public genericService: GenericService
-  ) { }
+  ) {
+   
+  }
 
   ngOnInit(): void {
     this.loaders.length = 12;
@@ -28,6 +31,11 @@ export class VedioListComponent implements OnInit {
       this.tutorialId = params.subjectId;
       this.isLoading = true;
       this.tutorTutorialsList = [];
+      this.genericService.teacherTutorial$.subscribe((x: any) => {
+        if (x !== null) {
+          this.subjectTitle = x.find(x => x.id == params.id)?.subjects.find(subject => subject.id == this.tutorialId).title;
+        }
+      });
       setTimeout(() => {
         this.genericService.teacherTutorialVideosList$.subscribe(teacherTutorialVideos => {
           if (teacherTutorialVideos !== null) {
@@ -41,7 +49,7 @@ export class VedioListComponent implements OnInit {
           }
         });        
       }, 1000);
-      this.genericService.getTeachTutorials(params.id, params.subjectId);
+      this.genericService.getTeachTutorials(params.id, this.tutorialId);
     });
   }
 
