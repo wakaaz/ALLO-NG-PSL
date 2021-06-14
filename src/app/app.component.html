@@ -52,7 +52,7 @@
               (click)="searchInput.value='';resetSearch()" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
               aria-controls="collapseExample"></i>
             <input type="text" placeholder="Search" #searchInput (keydown)="resetTimer()" (keyup)="searchWord($event.target.value)"
-              class="form-control">
+              class="form-control" style="font-size: 14px !important;">
           </div>
           <div *ngIf="searchArray?.length > 0" class="search-possible-results">
             <div class="search-result">

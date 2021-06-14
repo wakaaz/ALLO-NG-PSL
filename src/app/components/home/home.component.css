@@ -12,7 +12,7 @@
     -webkit-align-items: center;
     align-items: center; 
 }
-.carousel-control-next, .carousel-control-prev{
+.main-slider .carousel-control-next, .main-slider .carousel-control-prev{
     background-color: #636363;
     padding: 19px;
     border-radius: 50%;
@@ -391,7 +391,7 @@
 }
 
 @media (max-width: 1366px) {
-    .carousel-control-next, .carousel-control-prev{ 
+    .main-slider .carousel-control-next, .main-slider .carousel-control-prev{ 
         height: 45px;
         width: 45px;
         margin: auto 8px; padding: 15px;
@@ -456,7 +456,7 @@
     }
     .main-slider-bg { 
         max-width: 400px;}
-        .carousel-control-next, .carousel-control-prev{ 
+        .main-slider .carousel-control-next, .main-slider .carousel-control-prev{ 
             height: 40px;
             width: 40px;
             margin: auto 5px; padding: 12px;
@@ -551,7 +551,7 @@
     .main-slider-bg { 
         max-width: 250px;}
 
-        .carousel-control-next, .carousel-control-prev{ 
+        .main-slider  .carousel-control-next, .main-slider .carousel-control-prev{ 
             height: 40px;
             width: 40px;
             margin: auto 5px; padding: 12px;
@@ -642,7 +642,7 @@
         padding: 30px 0px 0px 0px;
     }
 
-    .carousel-control-next, .carousel-control-prev{ 
+    .main-slider .carousel-control-next, .main-slider .carousel-control-prev{ 
         height: 35px;
         width: 35px; padding: 10px;
     }

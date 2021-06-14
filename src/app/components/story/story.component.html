@@ -15,7 +15,7 @@
         <div class="col-lg-3 col-md-4">
 
             <div class="select-dictionary d-block d-md-none">
-                <select *ngIf="!isLoading" class="custom-select" id="inputGroupSelect02" (change)="goToDictionary($event.target.value)">
+                <select *ngIf="!isLoading" class="custom-select" id="inputGroupSelect02" (change)="goToDictionary($event.target.value)" style="font-size: 13px !important;">
                     <option selected>Select Story</option>
                     <option *ngFor="let storyType of genericService.storyTypes$ | async" [value]="storyType.id">
                         {{storyType.title}}

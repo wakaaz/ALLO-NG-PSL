@@ -84,7 +84,7 @@
 	-moz-border-radius:6px;
     box-shadow: 0 4px 7px 0 rgba(0,0,0,.1); text-decoration: none; overflow: hidden;
 	-webkit-transition: all .5s ease;
-	transition: all .5s ease; 
+	transition: all .5s ease;  width: 100%;
 }
 .video-thumb .v-thumb-img{position: relative;}
 .video-thumb .v-thumb-img img{ width: 100%;}
