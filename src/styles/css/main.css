@@ -508,11 +508,7 @@ ng-scrollbar.leftside-overflow {
 		flex: 0 0 25%;
 		max-width: 25%;
 	}
-	.sign-list {
-		ms-flex: 0 0 75%;
-		flex: 0 0 75%;
-		max-width: 75%;
-	}
+
 	.sign-list .col-3 {
 		ms-flex: 0 0 33.333%;
 		flex: 0 0 33.333%;
