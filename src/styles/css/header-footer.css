@@ -133,9 +133,9 @@
 	font-size: 14px;
 	cursor: pointer;
 }
-/* .expend-search:hover {
+.expend-search:hover {
 	background-color: rgba(0,0,0,0.6);
-} */
+}
 .top-search {
 	background-color: #01944a;
 	width: 100%;
