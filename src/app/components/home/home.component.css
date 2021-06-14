@@ -42,6 +42,9 @@
     width: 100%;
 }
 
+.message {
+    padding: 10px 15px;
+}
 
 #carousel-2 .main-slider-bg h1, #carousel-2 .main-slider-bg h5, #carousel-3 .main-slider-bg h1, 
 #carousel-3 .main-slider-bg h5, #carousel-4 .main-slider-bg h1, #carousel-4 .main-slider-bg h5, 

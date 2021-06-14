@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as Plyr from 'plyr';
 import { Location } from '@angular/common';
@@ -6,6 +6,7 @@ import { GenericService } from 'src/app/_services/generic-service';
 import { PlyrComponent } from 'ngx-plyr';
 import { NgForm } from '@angular/forms';
 import { VideoService } from './video.service';
+import { Subscription } from 'rxjs';
 
 // import { PlyrDriver, PlyrDriverCreateParams, PlyrDriverUpdateSourceParams, PlyrDriverDestroyParams } from './plyr-driver';
 
@@ -14,7 +15,7 @@ import { VideoService } from './video.service';
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.css']
 })
-export class PlayerComponent implements OnInit {
+export class PlayerComponent implements OnInit, OnDestroy {
   // get the component instance to have access to plyr instance
   @ViewChild(PlyrComponent)
   plyr: PlyrComponent;
@@ -24,16 +25,24 @@ export class PlayerComponent implements OnInit {
   categoryName = '';
   gradeId: number;
   categoryId: number;
+  oldCategoryId: number;
   routerURL: string;
   selectedVideoQuality: string = '';
+  selectedLessons: Array<{name: string, url: string}> = [];
   videoQualities: Array<string> = [];
   currentlyPlayed: any = {
   };
   storiesData: Array<any>
   isStories: boolean;
+  success: boolean;
   selectedLanguage = 'english';
   allVedios: any[] = [];
   remeaningVedios = [];
+
+  dictionariesSubscription$: Subscription;
+  learningTutorialsSubscription$: Subscription;
+  storiesSubscription$: Subscription;
+  teacherTutorialsSubscription$: Subscription;
   // public player: any;
   constructor(
     private route: ActivatedRoute,
@@ -76,7 +85,8 @@ export class PlayerComponent implements OnInit {
     // this.setPlayer();
     this.isStories = url.split('/')[2] === 'story';
 
-    if (this.allVedios.length === 0) {
+    if (this.allVedios.length === 0 || this.categoryId !== this.oldCategoryId) {
+      this.oldCategoryId = this.categoryId;
       if (url.split('/')[2] === 'dictionary') {
         this.genericService.getDictionaries(this.categoryId);
       } else if (url.split('/')[2] === 'story') {
@@ -119,30 +129,38 @@ export class PlayerComponent implements OnInit {
     return urlArray.join('/');
   }
   storiesSubscription(): void {
-    this.genericService.stories$
+    this.storiesSubscription$ = this.genericService.stories$
       .subscribe(data => {
         // this.storiesData = JSON.parse(JSON.stringify(data));
         // const sortedArray = this.selectedLanguageData('english');
-        this.setObject(data);
+        if (data !== null) {
+          this.setObject(data);
+        }
       });
   }
   learningVideoSubscription(): void {
-    this.genericService.learningTutorialVideos$
+    this.learningTutorialsSubscription$ = this.genericService.learningTutorialVideos$
       .subscribe((data: any) => {
-        this.setObject(data);
+        if (data !== null) {
+          this.setObject(data);
+        }
       });
   }
 
   tutorVideoSubscription(): void {
-    this.genericService.teacherTutorialVideosList$.subscribe(teacherTutorialVideos => {
-      this.setObject(teacherTutorialVideos);
+    this.teacherTutorialsSubscription$ = this.genericService.teacherTutorialVideosList$.subscribe(teacherTutorialVideos => {
+      if (teacherTutorialVideos !== null) {
+        this.setObject(teacherTutorialVideos);
+      }
     });
   }
 
   dictionariesSubscription(): void {
-    this.genericService.dictionaries$
+    this.dictionariesSubscription$ = this.genericService.dictionaries$
       .subscribe(data => {
-        this.setObject(data);
+        if (data !== null) {
+          this.setObject(data);
+        }
       });
   }
   decodeURIComponent(url: string): string {
@@ -215,14 +233,16 @@ export class PlayerComponent implements OnInit {
 
   setCurrentlyPlayedVedio(id: number): void {
     const currentlyPlayedIndex = this.allVedios.findIndex(x => x.id == id);
-    this.currentlyPlayed = this.allVedios[currentlyPlayedIndex];
-    this.setPlayerCurrentSource();
-    this.setAvailableQualities();
-    if (currentlyPlayedIndex === this.allVedios.length - 1) {
-      this.remeaningVedios = [...this.allVedios];
-      this.remeaningVedios.splice(this.allVedios.length - 1, 1);
-    } else {
-      this.remeaningVedios = this.allVedios.slice(currentlyPlayedIndex + 1);
+    if (currentlyPlayedIndex > -1) {
+      this.currentlyPlayed = this.allVedios[currentlyPlayedIndex];
+      this.setPlayerCurrentSource();
+      this.setAvailableQualities();
+      if (currentlyPlayedIndex === this.allVedios.length - 1) {
+        this.remeaningVedios = [...this.allVedios];
+        this.remeaningVedios.splice(this.allVedios.length - 1, 1);
+      } else {
+        this.remeaningVedios = this.allVedios.slice(currentlyPlayedIndex + 1);
+      }
     }
   }
   onBackClicked(): void {
@@ -247,10 +267,53 @@ export class PlayerComponent implements OnInit {
     if (!this.selectedVideoQuality) {
       return;
     } else {
-      alert('Your download should begin automatically in few seconds...');
       const url = this.decodeURIComponent(this.currentlyPlayed[this.selectedVideoQuality].url);
+      this.videoService.getVideo(url)
+      .subscribe((blob) => {
+          this.success = true;
+          let blobUrl = window.URL.createObjectURL(blob);
+          const urlParts = url.split('/');
+          const name = urlParts[urlParts.length - 1];
+          const anchor = document.createElement('a');
+          anchor.href = blobUrl;
+          anchor.download = name;
+          setTimeout(() => {
+            const button = document.getElementById('close-video');
+            button.click();
+            this.success = false;            
+          }, 5000);
+          anchor.click();
+          URL.revokeObjectURL(blobUrl);
+          videoForm.resetForm();
+        }, error => {
+          console.log(`error`, error)
+        });
+    }
+  }
+
+  selecteLesson(document: {name: string, url: string}): void {
+    const index = this.selectedLessons.findIndex(lesson => lesson.name === document.name);
+    if (index > -1) {
+      this.selectedLessons.splice(index, 1);
+    } else {
+      this.selectedLessons.push(document);
+    }
+  }
+
+  downloadLessons(lessonForm: NgForm): void {
+    if (this.selectedLessons.length === 0) {
+      return;
+    } else {
+      this.selectedLessons.forEach(lesson => {
+        const url = this.decodeURIComponent(lesson.url);
         this.videoService.getVideo(url)
         .subscribe((blob) => {
+          this.success = true;
+          setTimeout(() => {
+            const button = document.getElementById('close-lesson');
+            button.click();
+            this.success = false;            
+          }, 5000);
           let blobUrl = window.URL.createObjectURL(blob);
           const urlParts = url.split('/');
           const name = urlParts[urlParts.length - 1];
@@ -259,10 +322,11 @@ export class PlayerComponent implements OnInit {
           anchor.download = name;
           anchor.click();
           URL.revokeObjectURL(blobUrl);
-          videoForm.reset();
+          lessonForm.resetForm();
         }, error => {
           console.log(`error`, error)
         });
+      });
     }
   }
 
@@ -277,5 +341,13 @@ export class PlayerComponent implements OnInit {
     } else {
       return this.storiesData.filter(story => story.language !== 'english'); 
     }
+  }
+
+  ngOnDestroy(): void {
+    this.player.destroy();
+    if (this.storiesSubscription$) { this.storiesSubscription$.unsubscribe(); }
+    if (this.learningTutorialsSubscription$) { this.learningTutorialsSubscription$.unsubscribe(); }
+    if (this.teacherTutorialsSubscription$) { this.teacherTutorialsSubscription$.unsubscribe(); }
+    if (this.dictionariesSubscription$ ) { this.dictionariesSubscription$.unsubscribe(); }
   }
 }

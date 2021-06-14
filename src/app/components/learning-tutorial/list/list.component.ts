@@ -11,10 +11,12 @@ import { GenericService } from 'src/app/_services/generic-service';
 export class ListComponent implements OnInit {
 
   subjects: Subject[] = [];
-  subjectsList: Array<Subject> = [];
+  subjectsList: Array<Subject>;
   data: LearningTutorial[] = [];
   sortBy: string;
+  isLoading: boolean;
   paramId = 0;
+  loaders: Array<number> = [];
   constructor(
     private route: ActivatedRoute,
     public genericService: GenericService
@@ -23,23 +25,30 @@ export class ListComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       // this.genericService.getStoriesVedios(params.id);
+      this.loaders.length = 6;
       this.paramId = params.id;
       // this.learingTutorialSubject();
+      this.isLoading = true;
+      this.subjectsList = [];
       this.genericService.learningTutorial$.subscribe((x: LearningTutorial[]) => {
-        this.data = x;
-        this.learingTutorialSubject();
+        if (x !== null) {
+          this.data = x;
+          this.learingTutorialSubject();
+        }
       });
     });
   }
   learingTutorialSubject() {
     this.subjects = this.data.find(x => x.id == this.paramId)?.subjects;
     console.log('', this.subjects);
-    this.subjectsList = [];
     if (this.subjects?.length) {
       // JSON.parse(JSON.stringify()) to break refrence
       this.subjectsList = JSON.parse(JSON.stringify(this.subjects));
       this.sortBy = 'A';
       this.changeSort(this.sortBy);
+      this.isLoading = false;
+    } else {
+      this.isLoading = false;
     }
   }
 

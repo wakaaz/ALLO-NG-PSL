@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./resouces.component.css']
 })
 export class ResoucesComponent implements OnInit {
+  isLoading: boolean;
 
   isUrdu: boolean;
   isEnglish: boolean;
@@ -13,6 +14,10 @@ export class ResoucesComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.isLoading = true;
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 6000);
   }
 
   selectedLanguage(lang: string): void {

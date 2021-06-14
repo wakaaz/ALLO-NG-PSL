@@ -1,3 +1,4 @@
+<span [hidden]="isLoading">
 <div class="sub-header align-items-center">
     <div class="container">
         <div class="sub-header-content">
@@ -56,4 +57,11 @@
         </div>
     </div>
 
+</div>
+</span>
+
+<div *ngIf="isLoading" class="loader-wrap">
+    <div class="main-loader">
+        <img src="/assets/images/loader.gif" alt="">
+    </div>
 </div>

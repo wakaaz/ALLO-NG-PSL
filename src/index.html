@@ -2,6 +2,166 @@
 <html lang="en">
 
 <head>
+  <style>
+    .shine {
+      background: #f6f7f8;
+      background-image: linear-gradient(to right, #f6f7f8 0%, #e4e4e4 20%, #f6f7f8 40%, #f6f7f8 100%);
+      background-repeat: no-repeat;
+      background-size: 500px 300px;
+      display: inline-block;
+      position: relative;
+      border-radius: 5px;
+      -webkit-animation-duration: 1s;
+      -webkit-animation-fill-mode: forwards;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-name: placeholderShimmer;
+      -webkit-animation-timing-function: linear;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+
+    .lines {
+      height: 20px;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+
+    @-webkit-keyframes placeholderShimmer {
+      0% {
+        background-position: -468px 0;
+      }
+
+      100% {
+        background-position: 468px 0;
+      }
+    }
+
+    @-webkit-keyframes placeholderShimmer2 {
+      0% {
+        background-position: -1000px 0;
+      }
+
+      100% {
+        background-position: 1000px 0;
+      }
+    }
+
+    .dictionary-icon-effect-e1 {
+      height: 100px
+    }
+
+    .dictionary-icon-effect-e2 {
+      height: 39px;
+      margin-bottom: 30px
+    }
+
+    .video-thumb-e1 {
+      height: 134px;
+      margin-bottom: 5px;
+    }
+
+    .video-thumb-e2 {
+      height: 32px;
+      margin-bottom: 30px;
+    }
+
+    .effect-sm-left {
+      height: 25px;
+      margin-bottom: 3px;
+    }
+
+    @media(max-width:1024px) {
+      .video-thumb-e1 {
+        height: 116px;
+      }
+
+      .video-thumb-e2 {
+        height: 24px;
+      }
+    }
+
+    @media(max-width:767px) {
+      .dictionary-icon-effect-e1 {
+        height: 90px
+      }
+
+      .dictionary-icon-effect-e2 {
+        height: 29px;
+      }
+
+      .video-thumb-e1 {
+        height: 136px;
+      }
+
+      .video-thumb-e2 {
+        height: 28px;
+      }
+    }
+
+    @media(max-width:480px) {
+      .video-thumb-e1 {
+        height: 116px;
+      }
+
+      .video-thumb-e2 {
+        height: 24px;
+      }
+    }
+
+    @media(max-width:375px) {
+      .dictionary-icon-effect-e1 {
+        height: 85px
+      }
+
+      .dictionary-icon-effect-e2 {
+        height: 24px;
+      }
+    }
+
+    @-webkit-keyframes rotatePlaceholder {
+      0% {
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+      }
+
+      5% {
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+      }
+
+      12% {
+        transform: rotate(-405deg);
+        -webkit-transform: rotate(-405deg);
+      }
+
+      100% {
+        transform: rotate(-405deg);
+        -webkit-transform: rotate(-405deg);
+      }
+    }
+
+    @keyframes rotatePlaceholder {
+      0% {
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+      }
+
+      5% {
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+      }
+
+      12% {
+        transform: rotate(-405deg);
+        -webkit-transform: rotate(-405deg);
+      }
+
+      100% {
+        transform: rotate(-405deg);
+        -webkit-transform: rotate(-405deg);
+      }
+    }
+  </style>
   <meta charset="utf-8">
   <title>PSL</title>
   <base href="/">

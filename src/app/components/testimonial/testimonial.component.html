@@ -1,4 +1,4 @@
-<div class="content-wrapper pb-0">
+<div [hidden]="isLoading" class="content-wrapper pb-0">
 
     <div class="sub-page">
 
@@ -298,5 +298,11 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<div *ngIf="isLoading" class="loader-wrap">
+    <div class="main-loader">
+        <img src="/assets/images/loader.gif" alt="">
     </div>
 </div>

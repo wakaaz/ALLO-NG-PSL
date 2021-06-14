@@ -16,18 +16,18 @@ import { VideosListComponent } from '../components/learning-tutorial/videos-list
   providedIn: 'root'
 })
 export class GenericService {
-  private _dictionaryCategories$ = new BehaviorSubject<Dictionary[]>([]);
-  private _teacherTutorial$ = new BehaviorSubject<TeacherTutorial[]>([]);
-  private _storyTypes$ = new BehaviorSubject<Story[]>([]);
-  private _stories$ = new BehaviorSubject<Story[]>([]);
-  private _learnginSkill$ = new BehaviorSubject<Skill[]>([]);
-  private _learningTutorial$ = new BehaviorSubject<LearningTutorial[]>([]);
-  private _learningTutorialVideos$ = new BehaviorSubject<VideoList[]>([]);
+  private _dictionaryCategories$ = new BehaviorSubject<Dictionary[]>(null);
+  private _teacherTutorial$ = new BehaviorSubject<TeacherTutorial[]>(null);
+  private _storyTypes$ = new BehaviorSubject<Story[]>(null);
+  private _stories$ = new BehaviorSubject<Story[]>(null);
+  private _learnginSkill$ = new BehaviorSubject<Skill[]>(null);
+  private _learningTutorial$ = new BehaviorSubject<LearningTutorial[]>(null);
+  private _learningTutorialVideos$ = new BehaviorSubject<VideoList[]>(null);
 
-  // private _learningTutorialSubjects$ = new BehaviorSubject<LearningSubjects[]>([]);
-  private _dictionaries$ = new BehaviorSubject<Dictionary[]>([]);
-  private _learningVideo$ = new BehaviorSubject<VideoList[]>([]);
-  private _teacherTutorialVideosList$ = new BehaviorSubject<VideoList[]>([]);
+  // private _learningTutorialSubjects$ = new BehaviorSubject<LearningSubjects[]>(null);
+  private _dictionaries$ = new BehaviorSubject<Dictionary[]>(null);
+  private _learningVideo$ = new BehaviorSubject<VideoList[]>(null);
+  private _teacherTutorialVideosList$ = new BehaviorSubject<VideoList[]>(null);
 
   constructor(
     // private http: HttpClient,

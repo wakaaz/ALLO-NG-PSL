@@ -49,8 +49,9 @@
           <div class="search-div">
             <i class="fa fa-search" *ngIf="searchInput.value.length < 1"></i>
             <i class="fa fa-times cursor-pointer" *ngIf="searchInput.value.length > 0"
-              (click)="searchInput.value='';resetSearch()"></i>
-            <input type="text" placeholder="Search" #searchInput (keyup)="searchWord($event.target.value)"
+              (click)="searchInput.value='';resetSearch()" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+              aria-controls="collapseExample"></i>
+            <input type="text" placeholder="Search" #searchInput (keydown)="resetTimer()" (keyup)="searchWord($event.target.value)"
               class="form-control">
           </div>
           <div *ngIf="searchArray?.length > 0" class="search-possible-results">
@@ -60,20 +61,24 @@
                   <!-- <h4>
                     {{search.category}}
                   </h4> -->
-                  <ul>
-                    <li *ngFor="let result of searchArray; let i=index" class="possible-search-items">
-                      <a (click)="goToSearch(result)">
-                      {{i + 1}}) {{result.title}}
-                      </a>
-                    </li>
-                  </ul>
+                  <ng-scrollbar class="all-searched-items" thumbClass="white-scrollbars" disabled="false">
+                    <cdk-virtual-scroll-viewport scrollViewport>
+                      <ul>
+                        <li *ngFor="let result of searchArray; let i=index" class="possible-search-items">
+                          <a (click)="goToSearch(result)">
+                            {{i + 1}}) {{result.title}}
+                          </a>
+                        </li>
+                      </ul>
+                    </cdk-virtual-scroll-viewport>
+                  </ng-scrollbar>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="expend-search" (click)="searchInput.value='';resetSearch()" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+        <div class="expend-search" id="search-toggle" (click)="searchInput.value='';resetSearch()" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
           aria-controls="collapseExample"><i class="fas fa-search"></i> Search</div>
       </div>
 
@@ -131,3 +136,5 @@
   </div>
 
 </footer>
+
+ 

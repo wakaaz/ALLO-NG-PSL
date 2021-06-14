@@ -68,21 +68,23 @@
             <div class="row filter-sort">
 
                 <div class="col-md-6 col pr-0">
-                    <div class="search-filter">
+                    <div *ngIf="loaders.length === 0" class="search-filter">
                         <i class="fa fa-search" *ngIf="searchInput.value.length < 1"></i>
                         <i class="fa fa-times cursor-pointer" *ngIf="searchInput.value.length > 0"
                             (click)="searchInput.value='';searchWithTitle('')"></i>
                         <input type="text" placeholder="Search" #searchInput
                             (keyup)="searchWithTitle($event.target.value)" class="form-control">
                     </div>
+                    <div *ngIf="loaders.length > 0" class="shine dictionary-icon-effect-e2 search-filter" style="height: 30px; border: none; margin-bottom: 0;"></div> 
                 </div>
 
                 <div class="col-md-6 col-auto">
-                    <select class="custom-select" (change)="changeSort($event.target.value)">
+                    <select *ngIf="loaders.length === 0" class="custom-select" (change)="changeSort($event.target.value)">
                         <option hidden selected>Sort By</option>
                         <option value="A">A to Z</option>
                         <option value="Z">Z to A</option>
                     </select>
+                    <div *ngIf="loaders.length > 0" class="shine dictionary-icon-effect-e2 custom-select" style="height: 30px; border: none; width: 30%; margin-bottom: 0;"></div> 
                 </div>
 
             </div>
@@ -94,6 +96,10 @@
                             onError="this.src='/assets/images/placeholder-image.jpg'" alt="{{dictionary.title}}">
                         <h4>{{dictionary.title}}</h4>
                     </a>
+                </div>
+                <div *ngFor="let loader of loaders" class="col-3">
+                    <div class="shine dictionary-icon-effect-e1"></div>		
+                    <div class="shine dictionary-icon-effect-e2"></div> 
                 </div>
             </div>
         </div>
