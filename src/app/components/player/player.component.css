@@ -133,9 +133,13 @@ ng-scrollbar.r-video-list .video-thumb {
     box-shadow: none;
     background-color: transparent;
     margin-bottom: 0;
-    margin-right: 20px;
-    margin-left: 10px;
+    margin-right: 10px;
+    margin-left: 10px; width: auto;  
 }
+
+ng-scrollbar.r-video-list .video-thumb .v-thumb-img{width: 254px;}
+
+
 ng-scrollbar.r-video-list .video-thumb:hover {
     box-shadow: none;
     background-color: transparent;
@@ -374,8 +378,11 @@ ng-scrollbar.r-video-list .video-thumb h3 {
     .v-title {
         font-size: 20px !important;
     }
+    ng-scrollbar.r-video-list .video-thumb .v-thumb-img{width: 208px;}
 }
-
+@media (max-width: 800px) {
+ng-scrollbar.r-video-list .video-thumb .v-thumb-img{width: 170px; min-height: 96px;}
+}
 @media (max-width: 812px) {
     .pl-sm {
         padding-left: 0;
@@ -439,7 +446,22 @@ ng-scrollbar.r-video-list .video-thumb h3 {
     .pl-sm {
         padding-left: 15px;
     }
+    ng-scrollbar.r-video-list .video-thumb .v-thumb-img{width: 247px; min-height: 140px;}
+
+
+    .pl-sm{padding: 0px !important;}
+
+    ng-scrollbar.r-video-list  {
+        height: 100% !important;
+        max-height: 100% !important;
+    } 
+ 
 }
+
+@media (max-width: 480px) {
+    ng-scrollbar.r-video-list .video-thumb .v-thumb-img{ width: 208px; min-height: 117px;}
+}
+
 @media (max-width: 425px) {
     ng-scrollbar.r-video-list .video-thumb {
         float: none;
@@ -457,6 +479,13 @@ ng-scrollbar.r-video-list .video-thumb h3 {
     .nextvds {
         font-size: 15px;
     }
+    ng-scrollbar.r-video-list .video-thumb .v-thumb-img{ width: 384px; min-height: 208px;}
+}
+@media (max-width: 420px) {
+    ng-scrollbar.r-video-list .video-thumb .v-thumb-img{ width: 386px; min-height: 216px;}
+}
+@media (max-width: 414px) {
+    ng-scrollbar.r-video-list .video-thumb .v-thumb-img{ width: 380px; min-height: 214px;}
 }
 @media (max-width: 375px) {
     .xsm-w {
@@ -470,4 +499,9 @@ ng-scrollbar.r-video-list .video-thumb h3 {
     .v-title-action {
         padding-bottom: 20px;
     }
+ng-scrollbar.r-video-list .video-thumb .v-thumb-img{ width: 333px; min-height: 183px;}
+}
+
+@media (max-width: 320px) {
+    ng-scrollbar.r-video-list .video-thumb .v-thumb-img{ width: 281px; min-height: 156px;}
 }

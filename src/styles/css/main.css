@@ -282,11 +282,13 @@ ng-scrollbar.leftside-overflow {
 	text-decoration: none;
 	overflow: hidden;
 	-webkit-transition: all 0.5s ease;
-	transition: all 0.5s ease;
+	transition: all 0.5s ease;  width: 100%;
 }
 .video-thumb .v-thumb-img {
-	position: relative;
+	position: relative; min-height: 143px; background-image: url(../../assets/images/loader-video.gif); background-position: center center;
+	background-repeat: no-repeat; background-color: #fff;
 }
+ 
 .video-thumb .v-thumb-img img {
 	width: 100%;
 }
@@ -395,6 +397,7 @@ ng-scrollbar.leftside-overflow {
 	padding: 20px 10px 10px 10px;
 	width: 100%;
 	text-align: center;
+	min-height: 155px;
 }
 .sign-card img {
 	width: 50px;
@@ -478,10 +481,10 @@ ng-scrollbar.leftside-overflow {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #fff; z-index: 2000; position: relative;
+	background-color: #fff; z-index: 1920; 
 }
 .main-loader {
-	position: relative; background-color: red;
+	position: relative;  
 } 
 .main-loader .loader-img {
 	position: absolute;
@@ -501,6 +504,7 @@ ng-scrollbar.leftside-overflow {
 		flex: 0 0 25%;
 		max-width: 25%;
 	}
+   .video-thumb .v-thumb-img{min-height: 118px;}
 }
 @media (max-width: 812px) {
 	.alphabets-list {
@@ -551,8 +555,14 @@ ng-scrollbar.leftside-overflow {
 		padding: 8px 15px;
 		line-height: 1.8;
 	}
+	.sign-card {
+		min-height: 135px;
+	}
+	.video-thumb .v-thumb-img{min-height: 290px;}
 }
-
+@media (max-width: 480px) {
+.video-thumb .v-thumb-img{min-height: 258px;}
+}
 @media (max-width: 425px) {
 	.select-dictionary {
 		margin-bottom: 20px;
@@ -560,15 +570,25 @@ ng-scrollbar.leftside-overflow {
 	.video-thumb h3 {
 		font-size: 12px;
 	}
+	.video-thumb .v-thumb-img{min-height: 220px;}
 }
-
+@media (max-width: 420px) {
+	.video-thumb .v-thumb-img{min-height: 219px;}
+}
+@media (max-width: 414px) {
+	.video-thumb .v-thumb-img{min-height: 214px;}
+}
 @media (max-width: 375px) {
+	.sign-card {
+		min-height: 125px;
+	}
 	.sign-card img {
 		width: 35px;
 	}
 	.sign-card h4 {
 		font-size: 13px;
 	}
+	.video-thumb .v-thumb-img{min-height: 193px;}
 }
 @media (max-width: 375px) {
 	.sign-card img {
@@ -577,4 +597,8 @@ ng-scrollbar.leftside-overflow {
 	.sign-card h4 {
 		font-size: 12px;
 	}
+}
+
+@media (max-width: 320px) {
+.video-thumb .v-thumb-img{min-height: 162px;}
 }

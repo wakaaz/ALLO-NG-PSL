@@ -15,7 +15,7 @@
         <div class="col-lg-2 col-md-2 alphabets-list d-none">
 
             <div class="select-dictionary d-block d-md-none">
-                <select class="custom-select" id="inputGroupSelect02">
+                <select class="custom-select" id="inputGroupSelect02" style="font-size: 13px !important;">
                     <option selected>Select Alphabets</option>
                     <option>A</option>
                     <option>B</option>
@@ -73,13 +73,13 @@
                         <i class="fa fa-times cursor-pointer" *ngIf="searchInput.value.length > 0"
                             (click)="searchInput.value='';searchWithTitle('')"></i>
                         <input type="text" placeholder="Search" #searchInput
-                            (keyup)="searchWithTitle($event.target.value)" class="form-control">
+                            (keyup)="searchWithTitle($event.target.value)" class="form-control" style="font-size:13px !important;">
                     </div>
                     <div *ngIf="loaders.length > 0" class="shine dictionary-icon-effect-e2 search-filter" style="height: 30px; border: none; margin-bottom: 0;"></div> 
                 </div>
 
                 <div class="col-md-6 col-auto">
-                    <select *ngIf="loaders.length === 0" class="custom-select" (change)="changeSort($event.target.value)">
+                    <select *ngIf="loaders.length === 0" class="custom-select" (change)="changeSort($event.target.value)" style="font-size: 13px !important;">
                         <option hidden selected>Sort By</option>
                         <option value="A">A to Z</option>
                         <option value="Z">Z to A</option>

@@ -105,7 +105,7 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="name" #inputName="ngModel" name="name"
-                                        [(ngModel)]="name" placeholder="Name" required>
+                                        [(ngModel)]="name" placeholder="Name" required  style="font-size:15px !important;">
                                     <span class="form-error"
                                         *ngIf="isSubmitted && inputName.errors?.required && !inputName.value">
                                         Name is required!
@@ -116,7 +116,7 @@
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="email" #inputEmail="ngModel"
                                         name="email" [(ngModel)]="email" placeholder="Email" required
-                                        [pattern]="emailPattern">
+                                        [pattern]="emailPattern" style="font-size:15px !important;">
                                     <span class="form-error"
                                         *ngIf="isSubmitted && inputEmail.errors?.required && !inputEmail.value">
                                         Email is required!
@@ -129,7 +129,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="word" #inputWord="ngModel" name="word"
-                                        [(ngModel)]="recommendedWord" placeholder="Type Your Word..." required>
+                                        [(ngModel)]="recommendedWord" placeholder="Type Your Word..." required  style="font-size:15px !important;">
                                     <span class="form-error"
                                         *ngIf="isSubmitted && inputWord.errors?.required && !inputWord.value">
                                         Message is required!
