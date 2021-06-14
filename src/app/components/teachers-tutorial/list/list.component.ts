@@ -11,27 +11,34 @@ import { GenericService } from 'src/app/_services/generic-service';
 })
 export class ListComponent implements OnInit {
   paramId = 1;
+  loaders: Array<number> = [];
   subjects: Array<Subject> = [];
   subjectsList: Array<Subject> = [];
   sortBy: string;
+  isLoading: boolean;
   constructor(
     private route: ActivatedRoute,
     public genericService: GenericService
   ) { }
 
   ngOnInit(): void {
+    this.loaders.length = 12;
     this.route.params.subscribe(params => {
       this.paramId = params.id;
       // this.genericService.getPreferences();
       // this.initialiseState(); // reset and set based on new parameter this time
+      this.isLoading = true;
+      this.subjectsList = [];
       this.genericService.teacherTutorial$.subscribe((x: any) => {
-        this.subjectsList = [];
-        this.subjects = x.find(x => x.id == this.paramId)?.subjects;
-        if (this.subjects?.length) {
-          // JSON.parse(JSON.stringify()) to break refrence
-          this.subjectsList = JSON.parse(JSON.stringify(this.subjects));
-          this.sortBy = 'A';
-          this.changeSort(this.sortBy);
+        if (x !== null) {
+          this.subjects = x.find(x => x.id == this.paramId)?.subjects;
+          this.isLoading = false;
+          if (this.subjects?.length) {
+            // JSON.parse(JSON.stringify()) to break refrence
+            this.subjectsList = JSON.parse(JSON.stringify(this.subjects));
+            this.sortBy = 'A';
+            this.changeSort(this.sortBy);
+          }
         }
       });
     });

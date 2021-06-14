@@ -12,31 +12,47 @@ export class VedioListComponent implements OnInit {
   tutorTutorial: Array<VideoList> = [];
   tutorTutorialsList: Array<VideoList> = [];
 
+  subjectTitle: string;
   sortBy: string;
   tutorialId: number;
+  loaders: Array<number> = [];
+  isLoading: boolean;
 
   constructor(
     private route: ActivatedRoute,
     public genericService: GenericService
-  ) { }
+  ) {
+   
+  }
 
   ngOnInit(): void {
+    this.loaders.length = 12;
     this.route.params.subscribe(params => {
       this.tutorialId = params.subjectId;
-      this.genericService.getTeachTutorials(params.id, params.subjectId);
-      this.genericService.teacherTutorialVideosList$.subscribe(teacherTutorialVideos => {
-        this.tutorTutorialsList = [];
-        this.tutorTutorial = teacherTutorialVideos;
-        if (this.tutorTutorial?.length) {
-          this.tutorTutorialsList = JSON.parse(JSON.stringify(this.tutorTutorial));
-          this.sortBy = 'A';
-          this.changeSort(this.sortBy)
+      this.isLoading = true;
+      this.tutorTutorialsList = [];
+      this.genericService.teacherTutorial$.subscribe((x: any) => {
+        if (x !== null) {
+          this.subjectTitle = x.find(x => x.id == params.id)?.subjects.find(subject => subject.id == this.tutorialId).title;
         }
-      })
+      });
+      setTimeout(() => {
+        this.genericService.teacherTutorialVideosList$.subscribe(teacherTutorialVideos => {
+          if (teacherTutorialVideos !== null) {
+            this.tutorTutorial = teacherTutorialVideos;
+            this.isLoading = false;
+            if (this.tutorTutorial?.length) {
+              this.tutorTutorialsList = JSON.parse(JSON.stringify(this.tutorTutorial));
+              this.sortBy = 'A';
+              this.changeSort(this.sortBy)
+            }
+          }
+        });        
+      }, 1000);
+      this.genericService.getTeachTutorials(params.id, this.tutorialId);
     });
   }
 
-  
   searchWithTitle(keyWord: string): void {
     if (keyWord?.length) {
       this.tutorTutorialsList = this.tutorTutorial.filter((video: VideoList) => video.title.toLowerCase().includes(keyWord.toLowerCase()));

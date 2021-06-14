@@ -8,6 +8,7 @@ import { GenericService } from 'src/app/_services/generic-service';
   styleUrls: ['./learning-tutorial.component.css']
 })
 export class LearningTutorialComponent implements OnInit {
+  isLoading: boolean;
 
   constructor(
     private router: Router,
@@ -16,8 +17,12 @@ export class LearningTutorialComponent implements OnInit {
 
   ngOnInit(): void {
     let length = 0;
+    this.isLoading = true;
     this.genericService.storyTypes$.subscribe(x => {
-      length = x.length;
+      if (x !== null) {
+        this.isLoading = false;
+        length = x.length;
+      }
     });
     if (length === 0) {
       this.genericService.getPreferences();

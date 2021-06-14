@@ -10,6 +10,8 @@ import * as Hammer from 'hammerjs';
 import { HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
+import { NgScrollbarModule } from 'ngx-scrollbar';
+
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any> {
     swipe: { direction: Hammer.DIRECTION_ALL },
@@ -24,6 +26,7 @@ export class MyHammerConfig extends HammerGestureConfig {
   imports: [
     BrowserModule,
     HttpClientModule,
+    NgScrollbarModule,
     FormsModule,
     HammerModule,
     AppRoutingModule,
