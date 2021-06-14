@@ -5,7 +5,10 @@
 	height:0;
 	overflow:hidden;
 }
-
+#videoModal .modal-dialog {
+	max-width: 900px;
+	padding: 17px;
+}
 .youtube-video iframe {
 	position:absolute;
 	top:0;
