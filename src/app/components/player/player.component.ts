@@ -273,21 +273,19 @@ export class PlayerComponent implements OnInit, OnDestroy {
     if (!this.selectedVideoQuality) {
       return;
     } else {
+      this.success = true;
       const url = this.decodeURIComponent(this.currentlyPlayed[this.selectedVideoQuality].url);
       this.videoService.getVideo(url)
         .subscribe((blob) => {
-          this.success = true;
           let blobUrl = window.URL.createObjectURL(blob);
           const urlParts = url.split('/');
           const name = urlParts[urlParts.length - 1];
           const anchor = document.createElement('a');
           anchor.href = blobUrl;
           anchor.download = name;
-          setTimeout(() => {
-            const button = document.getElementById('close-video');
-            button.click();
-            this.success = false;
-          }, 5000);
+          const button = document.getElementById('close-video');
+          button.click();
+          this.success = false;
           anchor.click();
           URL.revokeObjectURL(blobUrl);
           videoForm.resetForm();
