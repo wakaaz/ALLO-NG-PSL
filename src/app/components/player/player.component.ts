@@ -318,7 +318,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     } else {
       this.selectedLessons.forEach(lesson => {
         const url = this.decodeURIComponent(lesson.url);
-        this.videoService.getLesson(url)
+        this.videoService.getLesson(url.replace('http://', 'https://'))
           .subscribe((blob) => {
             this.success = true;
             setTimeout(() => {
