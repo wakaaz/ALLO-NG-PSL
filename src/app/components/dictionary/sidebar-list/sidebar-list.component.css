@@ -8,7 +8,11 @@
 	-moz-border-radius:6px;
     box-shadow: 0 0 1.3rem 0 rgba(0,0,0,.1);	
 }
-.leftside-overflow{height:  calc(100vh - 260px); overflow-y: scroll;}
+ng-scrollbar.leftside-overflow {
+	overflow: hidden;
+	height:  calc(100vh - 260px) !important;
+	max-height:  calc(100vh - 260px);
+}
 .leftside-list h3 {
     font-size: 20px;
     display: block;
@@ -48,6 +52,7 @@
 	list-style: none;
 	border-bottom: solid 1px #e2e2e2a6;
 	display: flex; padding: 0;
+	width: calc(100% - 10px);
 }
 .leftside-list ul li a:before {
 	color: #009e4f;
@@ -84,11 +89,11 @@
 	-moz-border-radius:6px;
     box-shadow: 0 4px 7px 0 rgba(0,0,0,.1); text-decoration: none; overflow: hidden;
 	-webkit-transition: all .5s ease;
-	transition: all .5s ease; 
+	transition: all .5s ease; width: 100%;
 }
 .video-thumb .v-thumb-img{position: relative;}
 .video-thumb .v-thumb-img img{ width: 100%;}
-.video-thumb h3{font-size: 14px; font-weight: 400; line-height: 1; padding: 10px; margin:0}
+.video-thumb h3{font-size: 14px; font-weight: 400; line-height: 1; }
 .video-thumb:hover{text-decoration: none; color: #fff; background-color:#009e4f;
 	box-shadow: 0 4px 7px 0 rgba(0,158,79, 0.5);
 	-webkit-transition: all .5s ease;

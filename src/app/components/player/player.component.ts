@@ -1,9 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as Plyr from 'plyr';
 import { Location } from '@angular/common';
 import { GenericService } from 'src/app/_services/generic-service';
 import { PlyrComponent } from 'ngx-plyr';
+import { NgForm } from '@angular/forms';
+import { VideoService } from './video.service';
+import { Subscription } from 'rxjs';
 
 // import { PlyrDriver, PlyrDriverCreateParams, PlyrDriverUpdateSourceParams, PlyrDriverDestroyParams } from './plyr-driver';
 
@@ -12,7 +15,7 @@ import { PlyrComponent } from 'ngx-plyr';
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.css']
 })
-export class PlayerComponent implements OnInit {
+export class PlayerComponent implements OnInit, OnDestroy {
   // get the component instance to have access to plyr instance
   @ViewChild(PlyrComponent)
   plyr: PlyrComponent;
@@ -20,22 +23,40 @@ export class PlayerComponent implements OnInit {
   isAutoPlay = false;
   id: number;
   categoryName = '';
+  copy: string;
+  downloadError: string;
   gradeId: number;
   categoryId: number;
+  oldCategoryId: number;
   routerURL: string;
+  selectedVideoQuality: string = '';
+  selectedLessons: Array<{ name: string, url: string }> = [];
+  videoQualities: Array<string> = [];
+  videoLink: string;
   currentlyPlayed: any = {
   };
+  storiesData: Array<any>
+  isStories: boolean;
+  success: boolean;
+  selectedLanguage = 'english';
   allVedios: any[] = [];
   remeaningVedios = [];
+
+  dictionariesSubscription$: Subscription;
+  learningTutorialsSubscription$: Subscription;
+  storiesSubscription$: Subscription;
+  teacherTutorialsSubscription$: Subscription;
   // public player: any;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     public genericService: GenericService,
+    private videoService: VideoService,
     private location: Location
   ) { }
 
   ngOnInit(): void {
+    this.copy = 'Copy';
     this.setPlayer();
     const url = this.router.url;
     this.route.params.subscribe(params => {
@@ -65,14 +86,18 @@ export class PlayerComponent implements OnInit {
   }
   init(url: string): void {
     // this.setPlayer();
+    this.isStories = url.split('/')[2] === 'story';
 
-    if (this.allVedios.length === 0) {
+    if (this.allVedios.length === 0 || this.categoryId !== this.oldCategoryId) {
+      this.oldCategoryId = this.categoryId;
       if (url.split('/')[2] === 'dictionary') {
         this.genericService.getDictionaries(this.categoryId);
       } else if (url.split('/')[2] === 'story') {
         this.genericService.getStoriesVedios(this.categoryId);
       } else if (url.split('/')[2] === 'learningTutorials') {
         this.genericService.getLearningTutorialVideoList(this.gradeId, this.categoryId);
+      } else if (url.split('/')[2] === 'teacherTutorials') {
+        this.genericService.getTeachTutorials(this.gradeId, this.categoryId);
       }
     }
 
@@ -89,7 +114,11 @@ export class PlayerComponent implements OnInit {
           this.categoryName = 'Story';
           this.setObject(this.allVedios);
         } else if (url.split('/')[2] === 'learningTutorials') {
+          this.categoryName = 'Learning Tutorials';
           this.learningVideoSubscription();
+        } else if (url.split('/')[2] === 'teacherTutorials') {
+          this.categoryName = 'Teacher Tutorials';
+          this.tutorVideoSubscription();
         }
       }
     }
@@ -103,22 +132,38 @@ export class PlayerComponent implements OnInit {
     return urlArray.join('/');
   }
   storiesSubscription(): void {
-    this.genericService.stories$
+    this.storiesSubscription$ = this.genericService.stories$
       .subscribe(data => {
-        this.setObject(data);
+        // this.storiesData = JSON.parse(JSON.stringify(data));
+        // const sortedArray = this.selectedLanguageData('english');
+        if (data !== null) {
+          this.setObject(data);
+        }
       });
   }
   learningVideoSubscription(): void {
-    this.genericService.learningTutorialVideos$
+    this.learningTutorialsSubscription$ = this.genericService.learningTutorialVideos$
       .subscribe((data: any) => {
-        this.setObject(data);
+        if (data !== null) {
+          this.setObject(data);
+        }
       });
   }
 
+  tutorVideoSubscription(): void {
+    this.teacherTutorialsSubscription$ = this.genericService.teacherTutorialVideosList$.subscribe(teacherTutorialVideos => {
+      if (teacherTutorialVideos !== null) {
+        this.setObject(teacherTutorialVideos);
+      }
+    });
+  }
+
   dictionariesSubscription(): void {
-    this.genericService.dictionaries$
+    this.dictionariesSubscription$ = this.genericService.dictionaries$
       .subscribe(data => {
-        this.setObject(data);
+        if (data !== null) {
+          this.setObject(data);
+        }
       });
   }
   decodeURIComponent(url: string): string {
@@ -146,27 +191,27 @@ export class PlayerComponent implements OnInit {
       title: this.currentlyPlayed.english_word,
       sources:
         [
-          {
+          this.currentlyPlayed['1080p'].url && {
             src: this.decodeURIComponent(this.currentlyPlayed['1080p'].url),
             type: 'video/mp4',
             size: 1080,
           },
-          {
+          this.currentlyPlayed['720p'].url && {
             src: this.decodeURIComponent(this.currentlyPlayed['720p'].url),
             type: 'video/mp4',
             size: 720,
           },
-          {
+          this.currentlyPlayed['480p'].url && {
             src: this.decodeURIComponent(this.currentlyPlayed['480p'].url),
             type: 'video/mp4',
             size: 480,
           },
-          {
+          this.currentlyPlayed['360p'].url && {
             src: this.decodeURIComponent(this.currentlyPlayed['360p'].url),
             type: 'video/mp4',
             size: 360,
           },
-          {
+          this.currentlyPlayed['240p'].url && {
             src: this.decodeURIComponent(this.currentlyPlayed['240p'].url),
             type: 'video/mp4',
             size: 240,
@@ -174,19 +219,38 @@ export class PlayerComponent implements OnInit {
         ],
       poster: this.decodeURIComponent(this.currentlyPlayed.poster)
     };
+    this.videoLink =
+      this.currentlyPlayed['720p'].url ? this.decodeURIComponent(this.currentlyPlayed['720p'].url) :
+        this.currentlyPlayed['480p'].url ? this.decodeURIComponent(this.currentlyPlayed['480p'].url) :
+          this.currentlyPlayed['360p'].url ? this.decodeURIComponent(this.currentlyPlayed['360p'].url) :
+            this.currentlyPlayed['240p'].url ? this.decodeURIComponent(this.currentlyPlayed['240p'].url) : '';
     //  ];
     // this.player.play();
   }
 
+  /**
+   * Setting the available video qualities to show in the download popup
+   */
+  setAvailableQualities(): void {
+    this.videoQualities = Object.keys(this.currentlyPlayed).filter(key => {
+      if (this.currentlyPlayed[key]?.url) {
+        return key;
+      }
+    });
+  }
+
   setCurrentlyPlayedVedio(id: number): void {
     const currentlyPlayedIndex = this.allVedios.findIndex(x => x.id == id);
-    this.currentlyPlayed = this.allVedios[currentlyPlayedIndex];
-    this.setPlayerCurrentSource();
-    if (currentlyPlayedIndex === this.allVedios.length - 1) {
-      this.remeaningVedios = [...this.allVedios];
-      this.remeaningVedios.splice(this.allVedios.length - 1, 1);
-    } else {
-      this.remeaningVedios = this.allVedios.slice(currentlyPlayedIndex + 1);
+    if (currentlyPlayedIndex > -1) {
+      this.currentlyPlayed = this.allVedios[currentlyPlayedIndex];
+      this.setPlayerCurrentSource();
+      this.setAvailableQualities();
+      if (currentlyPlayedIndex === this.allVedios.length - 1) {
+        this.remeaningVedios = [...this.allVedios];
+        this.remeaningVedios.splice(this.allVedios.length - 1, 1);
+      } else {
+        this.remeaningVedios = this.allVedios.slice(currentlyPlayedIndex + 1);
+      }
     }
   }
   onBackClicked(): void {
@@ -194,5 +258,139 @@ export class PlayerComponent implements OnInit {
   }
   onVideoEnded(): void {
     console.log('================Ended Video=================')
+  }
+
+  selectedQuality(quality: string) {
+    this.selectedVideoQuality = quality;
+  }
+
+  /**
+   * First download the video to current origin so that the HTML Anchor tag
+   * download button can download the video otherwise it will redirect the user to link of video
+   * 
+   * @param {NgForm} videoForm to reset the form after it has started the download
+   * @returns void
+   */
+  downloadVideo(videoForm: NgForm): void {
+    if (!this.selectedVideoQuality) {
+      return;
+    } else {
+      this.success = true;
+      const url = this.decodeURIComponent(this.currentlyPlayed[this.selectedVideoQuality].url);
+      this.videoService.getVideo(url)
+        .subscribe((blob) => {
+          this.downloadError = '';
+          let blobUrl = window.URL.createObjectURL(blob);
+          const urlParts = url.split('/');
+          const name = urlParts[urlParts.length - 1];
+          const anchor = document.createElement('a');
+          anchor.href = blobUrl;
+          anchor.download = name;
+          const button = document.getElementById('close-video');
+          button.click();
+          this.success = false;
+          anchor.click();
+          URL.revokeObjectURL(blobUrl);
+          videoForm.resetForm();
+        }, error => {
+          this.success = true;
+          this.downloadError = 'Something went wrong, Please try again...';
+          setTimeout(() => {
+            this.downloadError = '';
+          }, 5000);
+          console.log(`error`, error)
+        });
+    }
+  }
+
+  selecteLesson(document: { name: string, url: string }): void {
+    const index = this.selectedLessons.findIndex(lesson => lesson.name === document.name);
+    if (index > -1) {
+      this.selectedLessons.splice(index, 1);
+    } else {
+      this.selectedLessons.push(document);
+    }
+  }
+
+  downloadLessons(lessonForm: NgForm): void {
+    if (this.selectedLessons.length === 0) {
+      return;
+    } else {
+      this.selectedLessons.forEach(lesson => {
+        const url = this.decodeURIComponent(lesson.url);
+        const urlParts = url.split('/');
+        const name = urlParts[urlParts.length - 1];
+        const anchor = document.createElement('a');
+        anchor.href = url.replace('http://', 'https://');
+        anchor.target = '_blank';
+        anchor.download = name;
+        anchor.click();
+        lessonForm.resetForm();
+      });
+    }
+  }
+
+  shareToFacebook() {
+    window.open(
+      `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(this.videoLink.trim())}`,
+      'fb-share',
+      'width=555, height=600'
+    );
+  }
+
+  shareToTwitter() {
+    window.open(
+      `https://twitter.com/intent/tweet?&url=${encodeURIComponent(this.videoLink.trim())}`,
+      'tweet',
+      'width=555, height=600'
+    );
+  }
+
+  shareToWhatsapp() {
+    window.open(`https://web.whatsapp.com/send?text=${encodeURIComponent(this.videoLink.trim())}`, 'width=555, height=600');
+  }
+
+  copyLink() {
+    const textarea = document.createElement('textarea');
+    textarea.textContent = this.videoLink;
+    document.body.appendChild(textarea);
+
+    const selection = document.getSelection();
+    const range = document.createRange();
+    range.selectNode(textarea);
+    selection.removeAllRanges();
+    selection.addRange(range);
+
+    const copied = document.execCommand('copy');
+    if (copied) {
+      this.copy = 'Copied';
+      setTimeout(() => {
+        this.copy = 'Copy';
+      }, 3000);
+    }
+    selection.removeAllRanges();
+
+    document.body.removeChild(textarea);
+  }
+
+  languageChanged(lang: string): void {
+    // const selectedStories = this.selectedLanguageData(lang);
+    // this.setObject(selectedStories);
+  }
+
+  selectedLanguageData(lang: string): any {
+    if (lang === 'english') {
+      return this.storiesData.filter(story => story.language === 'english');
+    } else {
+      return this.storiesData.filter(story => story.language !== 'english');
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.player.destroy();
+    if (this.storiesSubscription$) { this.storiesSubscription$.unsubscribe(); }
+    if (this.learningTutorialsSubscription$) { this.learningTutorialsSubscription$.unsubscribe(); }
+    if (this.teacherTutorialsSubscription$) { this.teacherTutorialsSubscription$.unsubscribe(); }
+    if (this.dictionariesSubscription$) { this.dictionariesSubscription$.unsubscribe(); }
   }
 }

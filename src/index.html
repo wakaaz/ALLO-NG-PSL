@@ -2,10 +2,202 @@
 <html lang="en">
 
 <head>
+  <style>
+    .shine {
+      background: #f6f7f8;
+      background-image: linear-gradient(to right, #f6f7f8 0%, #e4e4e4 20%, #f6f7f8 40%, #f6f7f8 100%);
+      background-repeat: no-repeat;
+      background-size: 500px 300px;
+      display: inline-block;
+      position: relative;
+      border-radius: 5px;
+      -webkit-animation-duration: 1s;
+      -webkit-animation-fill-mode: forwards;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-name: placeholderShimmer;
+      -webkit-animation-timing-function: linear;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+
+    .lines {
+      height: 20px;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+
+    @-webkit-keyframes placeholderShimmer {
+      0% {
+        background-position: -468px 0;
+      }
+
+      100% {
+        background-position: 468px 0;
+      }
+    }
+
+    @-webkit-keyframes placeholderShimmer2 {
+      0% {
+        background-position: -1000px 0;
+      }
+
+      100% {
+        background-position: 1000px 0;
+      }
+    }
+
+    .dictionary-icon-effect-e1 {
+      height: 100px
+    }
+
+    .dictionary-icon-effect-e2 {
+      height: 39px;
+      margin-bottom: 30px
+    }
+
+    .video-thumb-e1 {
+      height: 134px;
+      margin-bottom: 5px;
+    }
+
+    .video-thumb-e2 {
+      height: 32px;
+      margin-bottom: 30px;
+    }
+
+    .effect-sm-left {
+      height: 25px;
+      margin-bottom: 3px;
+    }
+
+    @media(max-width:1024px) {
+      .video-thumb-e1 {
+        height: 116px;
+      }
+
+      .video-thumb-e2 {
+        height: 24px;
+      }
+    }
+
+    @media(max-width:767px) {
+      .dictionary-icon-effect-e1 {
+        height: 90px
+      }
+
+      .dictionary-icon-effect-e2 {
+        height: 29px;
+      }
+
+      .video-thumb-e1 {
+        height: 136px;
+      }
+
+      .video-thumb-e2 {
+        height: 28px;
+      }
+    }
+
+    @media(max-width:480px) {
+      .video-thumb-e1 {
+        height: 116px;
+      }
+
+      .video-thumb-e2 {
+        height: 24px;
+      }
+    }
+
+    @media(max-width:375px) {
+      .dictionary-icon-effect-e1 {
+        height: 85px
+      }
+
+      .dictionary-icon-effect-e2 {
+        height: 24px;
+      }
+    }
+
+    @-webkit-keyframes rotatePlaceholder {
+      0% {
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+      }
+
+      5% {
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+      }
+
+      12% {
+        transform: rotate(-405deg);
+        -webkit-transform: rotate(-405deg);
+      }
+
+      100% {
+        transform: rotate(-405deg);
+        -webkit-transform: rotate(-405deg);
+      }
+    }
+
+    @keyframes rotatePlaceholder {
+      0% {
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+      }
+
+      5% {
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+      }
+
+      12% {
+        transform: rotate(-405deg);
+        -webkit-transform: rotate(-405deg);
+      }
+
+      100% {
+        transform: rotate(-405deg);
+        -webkit-transform: rotate(-405deg);
+      }
+    }
+
+    
+    @media (max-width:767px) {
+  
+    .pl-sm .ng-scroll-layer, .pl-sm .ng-scroll-viewport-wrapper, .pl-sm .ng-scrollbar-wrapper, .pl-sm .ng-scroll-viewport {
+        position: relative !important;
+        left: auto;
+        right: auto;
+        top: auto; 
+        bottom: auto;
+        position: relative !important;
+        left: auto;
+        right: auto;
+        top: auto; 
+        bottom: auto;
+    }  
+    .r-video-list .video-thumb{padding-left: 0;} 
+    .pl-sm .ng-scroll-viewport-wrapper {overflow: visible !important;}
+}
+</style>
+
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <meta name="author" content="">
+  <meta name="title" content="PSL | Pakistan Sign Language">
+  <meta name="og:title" content="PSL | Pakistan Sign Language">
+  <meta property="og:title" content="PSL | Pakistan Sign Language">
+  <meta name="description"
+    content="For the 1st time in Pakistan – a wealth of Pakistan Sign Language learning resources at your fingertips! An invaluable resource for deaf students and their families, those involved in Deaf education, and anyone who wants to learn an exciting new language.">
+  <meta name="og:description"
+    content="For the 1st time in Pakistan – a wealth of Pakistan Sign Language learning resources at your fingertips! An invaluable resource for deaf students and their families, those involved in Deaf education, and anyone who wants to learn an exciting new language.">
+  <meta name="og:image" content="http://www.psl.org.pk/assets/images/logo-og.png">
+  <meta property="og:image" content="http://www.psl.org.pk/assets/images/logo-og.png">
+  <meta property="og:url" content="http://www.psl.org.pk">
+  <meta name="twitter:card" content="http://www.psl.org.pk/assets/images/logo-og.png">
   <title>PSL</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 

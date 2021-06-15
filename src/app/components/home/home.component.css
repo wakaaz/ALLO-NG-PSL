@@ -1,4 +1,60 @@
+.carousel-caption{
+    position: absolute;
+    top: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center; 
+}
+.main-slider .carousel-control-next, .main-slider .carousel-control-prev{
+    background-color: #636363;
+    padding: 19px;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    margin: auto 10px;
+}
 .main-slider {
+	height: 100%;
+	width: 100%;
+	display: table;
+	position: relative;
+} 
+.main-slider-bg {
+	position: relative;
+	padding:0;
+	text-align: left; background-size: 100%; max-width: 600px;  
+}
+.main-slider-bg h1 {
+	font-size: 60px; color: #009e4f; line-height: 1;
+}
+.main-slider-bg h5 {
+	font-size: 20px; font-weight: 500; color: #282828; margin-bottom: 0; line-height: normal
+}
+.main-slider-bg .btn-primary{ font-size: 16px; margin-top: 15px;}
+.slider-img img {
+    width: 100%;
+}
+
+.message {
+    padding: 10px 15px;
+}
+
+#carousel-2 .main-slider-bg h1, #carousel-2 .main-slider-bg h5, #carousel-3 .main-slider-bg h1, 
+#carousel-3 .main-slider-bg h5, #carousel-4 .main-slider-bg h1, #carousel-4 .main-slider-bg h5, 
+#carousel-5 .main-slider-bg h1, #carousel-5 .main-slider-bg h5{color: #fff !important; text-shadow: 0px 0px 10px rgba(0,0,0, 0.5);}
+
+#carousel-2 .main-slider-bg{ margin-right: 0; margin-left: auto; text-align: right; margin-bottom: 3%; margin-top: auto;} 
+#carousel-3 .main-slider-bg{ margin-bottom: 3%; margin-top: auto;} 
+#carousel-4 .main-slider-bg{ margin-bottom: 3%; margin-top: auto;}  
+
+/* .main-slider {
     height: 100%;
     width: 100%;
     display: table;
@@ -36,10 +92,11 @@
     color: #009e4f;
 }
 .carousel-caption {
-    /* left: 5% !important; */
+ 
     height: 100% !important;
-    /* align-content: flex-end; */
-}
+ 
+} */
+
 .form-error {
     float: left;
     font-size: 13px;
@@ -70,7 +127,7 @@
 }
 
 .card-act-vds {
-    padding: 0px 0px 50px 0px;
+    padding: 50px 0px 50px 0px;
     background-color: #fff;
     background-image: url(../../../assets/images/gray-bg-sec.jpg);
     background-repeat: no-repeat;
@@ -180,6 +237,9 @@
     padding: 30px;
     font-size: 16px;
 }
+.form-group>input::placeholder {
+    color: #b8d6c3;
+}
 .recommend-word h2:before {
     background-color: #fff;
 }
@@ -213,6 +273,7 @@
     padding: 70px 0px 70px 0px;
     background-color: #fff;
 }
+.testimonials-slider .carousel-indicators{ display: none; }
 .tq-bg {
     background-image: url(../../../assets/images/tq-bg.jpg);
     background-repeat: no-repeat;
@@ -283,7 +344,7 @@
     margin-top: 3px;
 }
 .bottom-logo {
-    padding: 40px 0px 0px 0px;
+    padding: 40px 0px 40px 0px;
 }
 .bottom-logo img {
     height: 65px;
@@ -300,49 +361,56 @@
     width: 100%;
     height: auto;
 }
-
-@media (max-width: 1680px) {
-    /* .main-slider-bg {
-        padding: 10% 0;
-    } */
+.testimonials-slider .carousel-control-next, .testimonials-slider .carousel-control-prev{
+    position: absolute;
+    top: -62px;
+    right: -5px;
+    display: block; 
+    width: 35px; height: 35px; padding: 8px; 
+    }
+    .testimonials-slider .carousel-control-prev{
+        right: 35px; left: auto;
 }
 
+.testimonials-slider .carousel-control-next-icon, .testimonials-slider .carousel-control-prev-icon {
+    width: 22px;
+    height: 22px; 
+    border-width: 0 4px 4px 0;  filter: invert(1); opacity: 0.8;
+}
+.carousel-indicators li{ background-color: #009e4f; }
+
 @media (max-width: 1440px) {
-    /* .main-slider-bg {
-        padding: 14% 0;
-    } */
     .main-slider-bg h1 {
-        font-size: 55px;
+        font-size: 50px;  
     }
     .main-slider-bg h5 {
-        max-width: 473px;
-        font-size: 20px;
+        font-size:18px; 
     }
+    .main-slider-bg { 
+        max-width: 490px;}
 }
 
 @media (max-width: 1366px) {
-    /* .main-slider-bg {
-        padding: 15% 0;
-    } */
+    .main-slider .carousel-control-next, .main-slider .carousel-control-prev{ 
+        height: 45px;
+        width: 45px;
+        margin: auto 8px; padding: 15px;
+    }
 }
 
 @media (max-width: 1280px) {
-    /* .main-slider-bg {
-        padding: 18% 0;
-    } */
+    .main-slider-bg h1 {
+        font-size: 45px;  
+    }
+    .main-slider-bg h5 {
+        font-size:16px; 
+    }
+    .main-slider-bg { 
+        max-width: 450px;}
 }
 
 @media (max-width: 1024px) {
-    /* .main-slider-bg {
-        padding: 20% 0;
-    } */
-    .main-slider-bg h1 {
-        font-size: 45px;
-    }
-    .main-slider-bg h5 {
-        max-width: 420px;
-        font-size: 18px;
-    }
+    
     .card-act-vds .card-act {
         padding: 10px;
     }
@@ -379,16 +447,24 @@
     .recommend-word .form-control {
         font-size: 14px;
     }
+
+    .main-slider-bg h1 {
+        font-size: 40px;  
+    }
+    .main-slider-bg h5 {
+        font-size:14px; 
+    }
+    .main-slider-bg { 
+        max-width: 400px;}
+        .main-slider .carousel-control-next, .main-slider .carousel-control-prev{ 
+            height: 40px;
+            width: 40px;
+            margin: auto 5px; padding: 12px;
+        }
 }
 
 @media (max-width: 800px) {
-    .main-slider-bg h1 {
-        font-size: 32px;
-    }
-    .main-slider-bg h5 {
-        max-width: 350px;
-        font-size: 16px;
-    }
+    
     .card-act-vds .card-act {
         padding: 20px;
         margin-bottom: 30px;
@@ -423,20 +499,21 @@
         flex: 0 0 420px;
         max-width: 420px;
     }
+
+    .main-slider-bg h1 {
+        font-size: 30px;  
+    }
+    .main-slider-bg h5 {
+        font-size:13px; 
+    }
+    .main-slider-bg { 
+        max-width: 300px;}
+        .main-slider-bg .btn-primary {font-size: 13px; margin-top: 15px; padding: 5px 10px;}     
+
 }
 
 @media (max-width: 767px) {
-    .main-slider-bg h1,
-    .psl-about h2,
-    .recommend-word h2,
-    .download-tutorials h2,
-    .testimonials-slider h2 {
-        font-size: 24px;
-    }
-    .main-slider-bg h5 {
-        font-size: 14px;
-        max-width: 250px;
-    }
+    
     .card-act-vds .card-act h2,
     .card-act-vds .card-act h1 {
         font-size: 16px;
@@ -463,32 +540,28 @@
         width: 40px;
         height: 40px;
     }
+    .card-act-vds {padding-top: 30px 0px 30px 0px;}
+ 
+    .main-slider-bg h1 {
+        font-size: 25px;  
+    }
+    .main-slider-bg h5 {
+        font-size:12px; 
+    }
+    .main-slider-bg { 
+        max-width: 250px;}
+
+        .main-slider  .carousel-control-next, .main-slider .carousel-control-prev{ 
+            height: 40px;
+            width: 40px;
+            margin: auto 5px; padding: 12px;
+        }
+       
+
 }
 
 @media (max-width: 480px) {
-    /* .main-slider-bg {
-        padding: 0px;
-        background-image: url(../../../assets/images/slider-img-01-sm.jpg);
-        background-repeat: no-repeat;
-        background-position: center center;
-    } */
-    .main-slider-bg .container {
-        height: calc(100vh - 56px);
-        background-color: rgba(255, 255, 255, 0.85);
-        vertical-align: middle;
-        display: table-cell;
-        padding-left: 30px;
-        padding-right: 30px;
-        text-shadow: 5px 5px 5px #fff;
-    }
-    .main-slider-bg h1 {
-        font-size: 32px;
-    }
-    .main-slider-bg h5 {
-        max-width: 100%;
-        font-size: 16px;
-        font-weight: 400;
-    }
+   
     .card-act-vds .card-act {
         padding: 10px;
         margin-bottom: 30px;
@@ -516,6 +589,17 @@
     .about-img-sm,
     .download-img-sm {
         width: 100%;
+    }
+
+    .main-slider .carousel-item{ background-color: #282828;}
+    .main-slider .slider-img{ opacity: 0.3;}
+    .main-slider .slider-img img{ width: 200%;}
+    .main-slider .main-slider-bg h1, .main-slider .main-slider-bg h5{color: #fff !important; text-shadow: 0px 0px 5px rgba(0,0,0, 0.4);}
+    .main-slider .main-slider-bg { max-width: 100%; margin: auto !important; text-align: left !important;}
+    .main-slider-bg h1 {font-size: 22px;}
+     
+    #carousel-0 .slider-img img, #carousel-1 .slider-img img {
+        margin-left: -250px;
     }
 }
 
@@ -553,6 +637,15 @@
     .bottom-logo {
         padding: 20px 0px 0px 0px;
     }
+
+    .card-act-vds {
+        padding: 30px 0px 0px 0px;
+    }
+
+    .main-slider .carousel-control-next, .main-slider .carousel-control-prev{ 
+        height: 35px;
+        width: 35px; padding: 10px;
+    }
 }
 
 @media (max-width: 375px) {
@@ -573,4 +666,5 @@
     footer .copyrights p {
         font-size: 12px;
     }
+    .main-slider-bg h1 {font-size: 20px;}
 }

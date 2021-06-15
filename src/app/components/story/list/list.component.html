@@ -1,21 +1,27 @@
 <div class="row filter-sort">
 
     <div class="col-md-6 col pr-0">
-        <div class="search-filter">
+        <div *ngIf="!isLoading" class="search-filter">
             <i class="fa fa-search" *ngIf="searchInput.value.length < 1"></i>
             <i class="fa fa-times cursor-pointer" *ngIf="searchInput.value.length > 0"
                 (click)="searchInput.value='';searchWithTitle('')"></i>
             <input type="text" placeholder="Search" #searchInput (keyup)="searchWithTitle($event.target.value)"
-                class="form-control">
+                class="form-control" style="font-size:13px !important;">
+        </div>
+        <div *ngIf="isLoading" class="search-filter">
+            <div class="shine effect-sm-left" style="height: 32px"></div>
         </div>
     </div>
 
-    <div class="col-md-6 col-auto">
-        <select class="custom-select" (change)="changeSort($event.target.value)">
+    <div *ngIf="!isLoading" class="col-md-6 col-auto">
+        <select class="custom-select" (change)="changeSort($event.target.value)" style="font-size: 13px !important;">
             <option hidden selected>Sort By</option>
             <option value="A">A to Z</option>
             <option value="Z">Z to A</option>
         </select>
+    </div>
+    <div *ngIf="isLoading" class="col-md-6 col-auto">
+        <div class="shine effect-sm-left" style="min-width:80px; border: none; height: 32px"></div>
     </div>
 
 </div>
@@ -38,9 +44,22 @@
                             stroke-linejoin="round" stroke-miterlimit="10" cx="106.8" cy="106.8" r="103.3" />
                     </svg>
                 </div>
-                <img [src]="decodeURIComponent(story.poster)" alt="">
+                <img [src]="story.poster ? decodeURIComponent(story.poster) : '/assets/images/placeholder-image.jpg'"
+                    onError="this.src='/assets/images/placeholder-image.jpg'" alt="{{story.title}}">
             </div>
             <h3>{{story.title}}</h3>
         </a>
+    </div>
+    <span style="height: auto; width: 100%; display: flex; flex-wrap: wrap;" *ngIf="isLoading">
+        <div *ngFor="let loader of loaders" class="col-lg-4 col-md-6 col-12">
+            <div class="shine video-thumb-e1"></div>
+            <div class="shine video-thumb-e2"></div>
+        </div>
+    </span>
+    <div *ngIf="!isLoading && storiesList.length === 0" class="col-12 d-flex align-items-center contentnot-found">
+        <div class="w-100">
+            <img src="/assets/images/no-videos.svg" alt="" srcset="">
+            <h2 class="m-0">Videos not found!</h2>
+        </div>
     </div>
 </div>

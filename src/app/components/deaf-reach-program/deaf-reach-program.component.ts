@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeafReachProgramComponent implements OnInit {
 
+  isLoading: boolean;
   constructor() { }
 
   ngOnInit(): void {
+     this.isLoading = true;
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 6000);
   }
 
 }

@@ -15,28 +15,39 @@
         <div class="col-lg-3 col-md-4">
 
             <div class="select-dictionary d-block d-md-none">
-                <select class="custom-select" id="inputGroupSelect02">
-                    <option selected>Select Dictionary</option>
-                    <option>Adjectives</option>
-                    <option>Adverbs</option>
-                    <option>Airport</option>
-                    <option>Alphabet</option>
-                    <option>Beauty</option>
-                    <option>Bedroom</option>
-                    <option>Alphabet</option>
+                <select *ngIf="!isLoading" class="custom-select" id="inputGroupSelect02" (change)="goToDictionary($event.target.value)" style="font-size: 13px !important;">
+                    <option selected>Select Tutorial</option>
+                    <option *ngFor="let tutorial of genericService.teacherTutorial$ | async" [value]="tutorial.id">
+                        {{tutorial.grade}}
+                    </option>
                 </select>
+                <div *ngIf="isLoading" class="shine effect-sm-left"></div>
             </div>
 
-            <div class="leftside-list d-none d-md-block">
+            <div *ngIf="!isLoading" class="leftside-list d-none d-md-block">
                 <h3>Class <span>List</span></h3>
-                <div class="leftside-overflow">
+                <ng-scrollbar class="leftside-overflow" thumbClass="white-scrollbars" disabled="false">
+                    <cdk-virtual-scroll-viewport scrollViewport>
                     <ul>
                         <li *ngFor="let tutorial of genericService.teacherTutorial$ | async">
                             <a [routerLink]="['/teacherTutorials', tutorial.id]"
                                 routerLinkActive="active">{{tutorial.grade}}</a>
                         </li>
                     </ul>
-                </div>
+                </cdk-virtual-scroll-viewport>
+                </ng-scrollbar>
+            </div>
+            <div *ngIf="isLoading" class="leftside-list d-none d-md-block" style="box-shadow: none">		
+                <div class="shine effect-sm-left"></div>
+                <div class="shine effect-sm-left"></div>
+                <div class="shine effect-sm-left"></div>	
+                <div class="shine effect-sm-left"></div>
+                <div class="shine effect-sm-left"></div>
+                <div class="shine effect-sm-left"></div>
+                <div class="shine effect-sm-left"></div>
+                <div class="shine effect-sm-left"></div>
+                <div class="shine effect-sm-left"></div>	
+                <div class="shine effect-sm-left"></div>
             </div>
 
         </div>

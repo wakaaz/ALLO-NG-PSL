@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row content-title">
         <div class="col-lg-6 col-md-6 col-sm-12">
-            <h2>Learnign Tutorial</h2>
+            <h2>Learning <span>Tutorial</span></h2>
         </div>
         <!-- <div class="col-lg-6 col-md-6 col-sm-12 d-none d-md-block">
             <ol class="breadcrumb">
@@ -15,28 +15,40 @@
         <div class="col-lg-3 col-md-4">
 
             <div class="select-dictionary d-block d-md-none">
-                <select class="custom-select" id="inputGroupSelect02">
-                    <option selected>Select Dictionary</option>
-                    <option>Adjectives</option>
-                    <option>Adverbs</option>
-                    <option>Airport</option>
-                    <option>Alphabet</option>
-                    <option>Beauty</option>
-                    <option>Bedroom</option>
-                    <option>Alphabet</option>
+                <select *ngIf="!isLoading" class="custom-select" id="inputGroupSelect02" (change)="goToDictionary($event.target.value)" style="font-size: 13px !important;">
+                    <option selected disabled>Select Tutorial</option>
+                    <option *ngFor="let tutorial of genericService.learningTutorial$ | async"
+                        [value]="tutorial.id">
+                        {{tutorial.grade}}
+                    </option>
                 </select>
+                <div *ngIf="isLoading" class="shine effect-sm-left"></div>
             </div>
 
-            <div class="leftside-list d-none d-md-block">
+            <div *ngIf="!isLoading" class="leftside-list d-none d-md-block">
                 <h3>Class <span>List</span></h3>
-                <div class="leftside-overflow">
-                    <ul>
-                        <li *ngFor="let tutorial of genericService.learningTutorial$ | async">
-                            <a [routerLink]="['/learningTutorials', tutorial.id]"
-                                routerLinkActive="active">{{tutorial.grade}}</a>
-                        </li>
-                    </ul>
-                </div>
+                <ng-scrollbar class="leftside-overflow" thumbClass="white-scrollbars" disabled="false">
+                    <cdk-virtual-scroll-viewport scrollViewport>
+                        <ul>
+                            <li *ngFor="let tutorial of genericService.learningTutorial$ | async">
+                                <a [routerLink]="['/learningTutorials', tutorial.id]"
+                                    routerLinkActive="active">{{tutorial.grade}}</a>
+                            </li>
+                        </ul>
+                    </cdk-virtual-scroll-viewport>
+                </ng-scrollbar>
+            </div>
+            <div *ngIf="isLoading" class="leftside-list d-none d-md-block" style="box-shadow: none">		
+                <div class="shine effect-sm-left"></div>
+                <div class="shine effect-sm-left"></div>
+                <div class="shine effect-sm-left"></div>	
+                <div class="shine effect-sm-left"></div>
+                <div class="shine effect-sm-left"></div>
+                <div class="shine effect-sm-left"></div>
+                <div class="shine effect-sm-left"></div>
+                <div class="shine effect-sm-left"></div>
+                <div class="shine effect-sm-left"></div>	
+                <div class="shine effect-sm-left"></div>
             </div>
 
         </div>

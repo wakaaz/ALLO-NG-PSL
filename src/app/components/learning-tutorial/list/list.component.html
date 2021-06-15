@@ -1,52 +1,51 @@
 <div class="row filter-sort">
 
     <div class="col-md-6 col pr-0">
-        <div class="search-filter">
+        <div class="search-filter" *ngIf="!isLoading">
             <i class="fa fa-search" *ngIf="searchInput.value.length < 1"></i>
             <i class="fa fa-times cursor-pointer" *ngIf="searchInput.value.length > 0"
                 (click)="searchInput.value='';searchWithTitle('')"></i>
             <input type="text" placeholder="Search" #searchInput (keyup)="searchWithTitle($event.target.value)"
-                class="form-control">
+                class="form-control" style="font-size:13px !important;">
+        </div>
+        <div *ngIf="isLoading" class="search-filter">
+            <div class="shine effect-sm-left" style="height: 32px"></div>
         </div>
     </div>
 
-    <div class="col-md-6 col-auto">
-        <select class="custom-select" (change)="changeSort($event.target.value)">
+    <div *ngIf="!isLoading" class="col-md-6 col-auto">
+        <select class="custom-select" (change)="changeSort($event.target.value)" style="font-size: 13px !important;">
             <option hidden selected>Sort By</option>
             <option value="A">A to Z</option>
             <option value="Z">Z to A</option>
         </select>
+    </div>
+    <div *ngIf="isLoading" class="col-md-6 col-auto">	
+        <div class="shine effect-sm-left" style="min-width:80px; border: none; height: 32px"></div>
     </div>
 
 </div>
 
 <div class="row">
     <div class="col-lg-4 col-md-6 col-12" *ngFor="let dictionary of subjectsList">
-        <!-- <p>  subject_id: {{dictionary.id}} ,, grade_id:    </p> -->
-        <!-- <a [routerLink]="['/learningTutorials/', paramId, dictionary.id]" class="video-thumb">
+        <a [routerLink]="['/learningTutorials/', paramId, dictionary.id]" class="video-thumb">
             <div class="v-thumb-img">
-                <div class='playBut'>
-                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="213.7px"
-                        height="213.7px" viewBox="0 0 213.7 213.7" enable-background="new 0 0 213.7 213.7"
-                        xml:space="preserve">
-
-                        <polygon class='triangle' id="XMLID_18_" fill="none" stroke-width="7" stroke-linecap="round"
-                            stroke-linejoin="round" stroke-miterlimit="10" points="73.5,62.5 148.5,105.8 73.5,149.1 " />
-
-                        <circle class='circle' id="XMLID_17_" fill="none" stroke-width="7" stroke-linecap="round"
-                            stroke-linejoin="round" stroke-miterlimit="10" cx="106.8" cy="106.8" r="103.3" />
-                    </svg>
-                </div>
-                <img [src]="decodeURIComponent(dictionary.icon)" alt="">
-            </div>
-            <h3>{{dictionary.title}}</h3>
-        </a> -->
-        <a  [routerLink]="['/learningTutorials/', paramId, dictionary.id]" class="video-thumb">
-            <div class="v-thumb-img">
-                <img [src]="decodeURIComponent(dictionary.icon)" [alt]="dictionary.title">
+                <img [src]="dictionary.icon ? decodeURIComponent(dictionary.icon) : '/assets/images/placeholder-image.jpg'"
+                    onError="this.src='/assets/images/placeholder-image.jpg'" [alt]="dictionary.title">
             </div>
             <h3>{{dictionary.title}}</h3>
         </a>
+    </div>
+    <span style="height: auto; width: 100%; display: flex; flex-wrap: wrap;" *ngIf="isLoading">
+        <div *ngFor="let loader of loaders" class="col-lg-4 col-md-6 col-12">
+            <div class="shine video-thumb-e1"></div>
+            <div class="shine video-thumb-e2"></div>
+        </div>
+    </span>
+    <div *ngIf="!isLoading && subjectsList?.length === 0" class="col-12 d-flex align-items-center contentnot-found">
+        <div class="w-100">
+            <img src="/assets/images/no-videos.svg" alt="" srcset="">
+            <h2 class="m-0">Videos not found!</h2>
+        </div>
     </div>
 </div>
