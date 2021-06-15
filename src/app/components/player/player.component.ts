@@ -23,6 +23,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   isAutoPlay = false;
   id: number;
   categoryName = '';
+  downloadError: string;
   gradeId: number;
   categoryId: number;
   oldCategoryId: number;
@@ -277,6 +278,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
       const url = this.decodeURIComponent(this.currentlyPlayed[this.selectedVideoQuality].url);
       this.videoService.getVideo(url)
         .subscribe((blob) => {
+          this.downloadError = '';
           let blobUrl = window.URL.createObjectURL(blob);
           const urlParts = url.split('/');
           const name = urlParts[urlParts.length - 1];
@@ -290,6 +292,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
           URL.revokeObjectURL(blobUrl);
           videoForm.resetForm();
         }, error => {
+          this.success = true;
+          this.downloadError = 'Something went wrong, Please try again...';
+          setTimeout(() => {
+            this.downloadError = '';
+          }, 5000);
           console.log(`error`, error)
         });
     }
