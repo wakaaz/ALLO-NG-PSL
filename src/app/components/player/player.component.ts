@@ -23,6 +23,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   isAutoPlay = false;
   id: number;
   categoryName = '';
+  copy: string;
   downloadError: string;
   gradeId: number;
   categoryId: number;
@@ -55,7 +56,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    console.log('Video Player Component!!!!');
+    this.copy = 'Copy';
     this.setPlayer();
     const url = this.router.url;
     this.route.params.subscribe(params => {
@@ -372,7 +373,13 @@ export class PlayerComponent implements OnInit, OnDestroy {
     selection.removeAllRanges();
     selection.addRange(range);
 
-    document.execCommand('copy');
+    const copied = document.execCommand('copy');
+    if (copied) {
+      this.copy = 'Copied';
+      setTimeout(() => {
+        this.copy = 'Copy';
+      }, 3000);
+    }
     selection.removeAllRanges();
 
     document.body.removeChild(textarea);

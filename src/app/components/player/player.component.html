@@ -131,7 +131,7 @@
                 <div *ngIf="videoLink" class="col-12 invite_through_link float-left w-100 pl-40">
                     <span class="link_invite float-left col-12">
                         <input type="text" name="video-link" (click)="copyLink()" readonly value="{{videoLink.trim()}}" id="">
-                        <button class="copy-btn" (click)="copyLink()">Copy</button>
+                        <button class="copy-btn" (click)="copyLink()">{{copy}}</button>
                     </span>
                 </div>
             </div>

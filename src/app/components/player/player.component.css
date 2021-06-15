@@ -258,7 +258,7 @@ ng-scrollbar.r-video-list .video-thumb h3 {
 
 .share-to {
     margin: 10px;
-    padding: 5px;
+    padding: 0;
     font-size: 36px;
     cursor: pointer;
 }
@@ -273,9 +273,7 @@ ng-scrollbar.r-video-list .video-thumb h3 {
     color: #009e4f;
     cursor: pointer;
 }
-.share-to:hover {
-    border: 2px solid #11c86d;
-}
+
 .ta-center {
     text-align: center;
 }
