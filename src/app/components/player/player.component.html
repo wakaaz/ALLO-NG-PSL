@@ -11,7 +11,7 @@
                     <button type="button" class="close" data-dismiss="modal" id="close-lesson" (click)="lessonDownloadForm.resetForm()"
                         aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
                 </div>
-                <div *ngIf="currentlyPlayed.documents && currentlyPlayed.documents.length && !success" class="modal-body p-0">
+                <div *ngIf="currentlyPlayed.documents && currentlyPlayed.documents.length" class="modal-body p-0">
                     <div class="col-md-12 lesson-plan-list" *ngFor="let document of currentlyPlayed.documents">
                         <div>
                             <input type="checkbox" class="lesson-checkbox" (click)="selecteLesson(document)"
@@ -25,25 +25,10 @@
                         Please select lesson(s) to download!
                     </div>
                 </div>
-                <div *ngIf="!success" class="modal-footer border-0">
+                <div class="modal-footer border-0">
                     <button type="submit" class="btn btn-primary w-100"
                         (click)="downloadLessons(lessonDownloadForm)">Download
                         Lesson</button>
-                </div>
-                <div *ngIf="success" class="modal-body confir_pay">
-                    <div class="col-12">
-                        <div class="check_mark">
-                            <div class="sa-icon sa-success animate">
-                                <span class="sa-line sa-tip animateSuccessTip"></span>
-                                <span class="sa-line sa-long animateSuccessLong"></span>
-                                <div class="sa-placeholder"></div>
-                                <div class="sa-fix"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <h3 class="download-title">Your download should begin automatically in few seconds...</h3>
-                    </div>
                 </div>
             </form>
         </div>

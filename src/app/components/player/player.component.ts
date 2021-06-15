@@ -220,10 +220,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
       poster: this.decodeURIComponent(this.currentlyPlayed.poster)
     };
     this.videoLink =
-    this.currentlyPlayed['720p'].url ? this.decodeURIComponent(this.currentlyPlayed['720p'].url) : 
-    this.currentlyPlayed['480p'].url ? this.decodeURIComponent(this.currentlyPlayed['480p'].url) : 
-    this.currentlyPlayed['360p'].url ? this.decodeURIComponent(this.currentlyPlayed['360p'].url) : 
-    this.currentlyPlayed['240p'].url ? this.decodeURIComponent(this.currentlyPlayed['240p'].url) : '';
+      this.currentlyPlayed['720p'].url ? this.decodeURIComponent(this.currentlyPlayed['720p'].url) :
+        this.currentlyPlayed['480p'].url ? this.decodeURIComponent(this.currentlyPlayed['480p'].url) :
+          this.currentlyPlayed['360p'].url ? this.decodeURIComponent(this.currentlyPlayed['360p'].url) :
+            this.currentlyPlayed['240p'].url ? this.decodeURIComponent(this.currentlyPlayed['240p'].url) : '';
     //  ];
     // this.player.play();
   }
@@ -318,26 +318,14 @@ export class PlayerComponent implements OnInit, OnDestroy {
     } else {
       this.selectedLessons.forEach(lesson => {
         const url = this.decodeURIComponent(lesson.url);
-        this.videoService.getLesson(url.replace('http://', 'https://'))
-          .subscribe((blob) => {
-            this.success = true;
-            setTimeout(() => {
-              const button = document.getElementById('close-lesson');
-              button.click();
-              this.success = false;
-            }, 5000);
-            let blobUrl = window.URL.createObjectURL(blob);
-            const urlParts = url.split('/');
-            const name = urlParts[urlParts.length - 1];
-            const anchor = document.createElement('a');
-            anchor.href = blobUrl;
-            anchor.download = name;
-            anchor.click();
-            URL.revokeObjectURL(blobUrl);
-            lessonForm.resetForm();
-          }, error => {
-            console.log(`error`, error)
-          });
+        const urlParts = url.split('/');
+        const name = urlParts[urlParts.length - 1];
+        const anchor = document.createElement('a');
+        anchor.href = url.replace('http://', 'https://');
+        anchor.target = '_blank';
+        anchor.download = name;
+        anchor.click();
+        lessonForm.resetForm();
       });
     }
   }

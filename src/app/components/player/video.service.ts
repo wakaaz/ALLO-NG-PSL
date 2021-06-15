@@ -19,22 +19,4 @@ export class VideoService {
     getVideo(url: string): Observable<Blob> {
         return this.http.get(url, { responseType: 'blob' });
     }
-
-    getLesson(url: string) {
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Accept': '*/*',
-                'Content-Type': 'application/*',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Headers': 'X-Requested-With,content-type',
-                'Access-Control-Allow-Credentials': 'true'
-            })
-        };
-
-        //   httpOptions.headers.append('Access-Control-Allow-Origin', '*');
-        //   httpOptions.headers.append('Access-Control-Allow-Methods', 'HEAD, GET, POST, OPTIONS');
-        //   httpOptions.headers.append('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-        //   httpOptions.headers.append('Access-Control-Allow-Credentials', 'true');}
-        return this.http.get(url, httpOptions);
-    }
 }
