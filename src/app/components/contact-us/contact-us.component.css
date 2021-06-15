@@ -3,6 +3,10 @@
     font-size: 16px;
     font-weight: 500;
 }
+.link-email {
+    margin-bottom: 20px;
+    display: block;
+}
 .sub-page {
     background: transparent;
 }
