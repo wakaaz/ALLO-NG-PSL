@@ -28,8 +28,9 @@ export class PlayerComponent implements OnInit, OnDestroy {
   oldCategoryId: number;
   routerURL: string;
   selectedVideoQuality: string = '';
-  selectedLessons: Array<{name: string, url: string}> = [];
+  selectedLessons: Array<{ name: string, url: string }> = [];
   videoQualities: Array<string> = [];
+  videoLink: string;
   currentlyPlayed: any = {
   };
   storiesData: Array<any>
@@ -216,6 +217,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
         ],
       poster: this.decodeURIComponent(this.currentlyPlayed.poster)
     };
+    this.videoLink =
+    this.currentlyPlayed['720p'].url ? this.decodeURIComponent(this.currentlyPlayed['720p'].url) : 
+    this.currentlyPlayed['480p'].url ? this.decodeURIComponent(this.currentlyPlayed['480p'].url) : 
+    this.currentlyPlayed['360p'].url ? this.decodeURIComponent(this.currentlyPlayed['360p'].url) : 
+    this.currentlyPlayed['240p'].url ? this.decodeURIComponent(this.currentlyPlayed['240p'].url) : '';
     //  ];
     // this.player.play();
   }
@@ -269,7 +275,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     } else {
       const url = this.decodeURIComponent(this.currentlyPlayed[this.selectedVideoQuality].url);
       this.videoService.getVideo(url)
-      .subscribe((blob) => {
+        .subscribe((blob) => {
           this.success = true;
           let blobUrl = window.URL.createObjectURL(blob);
           const urlParts = url.split('/');
@@ -280,7 +286,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
           setTimeout(() => {
             const button = document.getElementById('close-video');
             button.click();
-            this.success = false;            
+            this.success = false;
           }, 5000);
           anchor.click();
           URL.revokeObjectURL(blobUrl);
@@ -291,7 +297,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
   }
 
-  selecteLesson(document: {name: string, url: string}): void {
+  selecteLesson(document: { name: string, url: string }): void {
     const index = this.selectedLessons.findIndex(lesson => lesson.name === document.name);
     if (index > -1) {
       this.selectedLessons.splice(index, 1);
@@ -306,28 +312,65 @@ export class PlayerComponent implements OnInit, OnDestroy {
     } else {
       this.selectedLessons.forEach(lesson => {
         const url = this.decodeURIComponent(lesson.url);
-        this.videoService.getVideo(url)
-        .subscribe((blob) => {
-          this.success = true;
-          setTimeout(() => {
-            const button = document.getElementById('close-lesson');
-            button.click();
-            this.success = false;            
-          }, 5000);
-          let blobUrl = window.URL.createObjectURL(blob);
-          const urlParts = url.split('/');
-          const name = urlParts[urlParts.length - 1];
-          const anchor = document.createElement('a');
-          anchor.href = blobUrl;
-          anchor.download = name;
-          anchor.click();
-          URL.revokeObjectURL(blobUrl);
-          lessonForm.resetForm();
-        }, error => {
-          console.log(`error`, error)
-        });
+        this.videoService.getLesson(url)
+          .subscribe((blob) => {
+            this.success = true;
+            setTimeout(() => {
+              const button = document.getElementById('close-lesson');
+              button.click();
+              this.success = false;
+            }, 5000);
+            let blobUrl = window.URL.createObjectURL(blob);
+            const urlParts = url.split('/');
+            const name = urlParts[urlParts.length - 1];
+            const anchor = document.createElement('a');
+            anchor.href = blobUrl;
+            anchor.download = name;
+            anchor.click();
+            URL.revokeObjectURL(blobUrl);
+            lessonForm.resetForm();
+          }, error => {
+            console.log(`error`, error)
+          });
       });
     }
+  }
+
+  shareToFacebook() {
+    window.open(
+      `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(this.videoLink.trim())}`,
+      'fb-share',
+      'width=555, height=600'
+    );
+  }
+
+  shareToTwitter() {
+    window.open(
+      `https://twitter.com/intent/tweet?&url=${encodeURIComponent(this.videoLink.trim())}`,
+      'tweet',
+      'width=555, height=600'
+    );
+  }
+
+  shareToWhatsapp() {
+    window.open(`https://web.whatsapp.com/send?text=${encodeURIComponent(this.videoLink.trim())}`, 'width=555, height=600');
+  }
+
+  copyLink() {
+    const textarea = document.createElement('textarea');
+    textarea.textContent = this.videoLink;
+    document.body.appendChild(textarea);
+
+    const selection = document.getSelection();
+    const range = document.createRange();
+    range.selectNode(textarea);
+    selection.removeAllRanges();
+    selection.addRange(range);
+
+    document.execCommand('copy');
+    selection.removeAllRanges();
+
+    document.body.removeChild(textarea);
   }
 
   languageChanged(lang: string): void {
@@ -336,10 +379,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   selectedLanguageData(lang: string): any {
-    if (lang === 'english') { 
-      return this.storiesData.filter(story => story.language === 'english'); 
+    if (lang === 'english') {
+      return this.storiesData.filter(story => story.language === 'english');
     } else {
-      return this.storiesData.filter(story => story.language !== 'english'); 
+      return this.storiesData.filter(story => story.language !== 'english');
     }
   }
 
@@ -348,6 +391,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
     if (this.storiesSubscription$) { this.storiesSubscription$.unsubscribe(); }
     if (this.learningTutorialsSubscription$) { this.learningTutorialsSubscription$.unsubscribe(); }
     if (this.teacherTutorialsSubscription$) { this.teacherTutorialsSubscription$.unsubscribe(); }
-    if (this.dictionariesSubscription$ ) { this.dictionariesSubscription$.unsubscribe(); }
+    if (this.dictionariesSubscription$) { this.dictionariesSubscription$.unsubscribe(); }
   }
 }

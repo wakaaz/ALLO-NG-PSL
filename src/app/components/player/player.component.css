@@ -256,6 +256,49 @@ ng-scrollbar.r-video-list .video-thumb h3 {
   -webkit-animation: animateSuccessLong 0.85s;
   animation: animateSuccessLong 0.85s; }
 
+.share-to {
+    margin: 10px;
+    padding: 5px;
+    font-size: 36px;
+    cursor: pointer;
+}
+.invite_through_link {
+    margin-top: 10px;
+}
+
+.link_invite input {
+    width: 220px;
+    min-width: 190px;
+    padding: 3px;
+    color: #009e4f;
+    cursor: pointer;
+}
+.share-to:hover {
+    border: 2px solid #11c86d;
+}
+.ta-center {
+    text-align: center;
+}
+.fa-facebook-square {
+    color: royalblue;
+}
+.fa-twitter-square {
+    color: rgb(101, 135, 236);
+}
+.fa-whatsapp-square {
+    color: #009e4f;
+}
+.copy-btn {
+    padding: 5px;
+    border: none;
+    color: #fff;
+    min-width: 65px;
+    margin-top: 10px;
+    margin-left: 1px;
+    background-color: #009e4f;
+}
+
+
 @-webkit-keyframes animateSuccessLong {
   0% {
     width: 0;

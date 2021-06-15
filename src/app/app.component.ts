@@ -56,6 +56,12 @@ export class AppComponent {
     this.searchArray.length = 0;
   }
 
+  collapseMenu(menuButton: HTMLDivElement): void {
+    if (window.innerWidth < 768) {
+      menuButton.click();
+    }
+  }
+
   goToSearch(selectedItem: any): void {
     switch (selectedItem.table_name) {
       case 'dictionary':

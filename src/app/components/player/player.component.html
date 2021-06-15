@@ -56,7 +56,7 @@
         <div class="modal-content top-border">
             <form #videoDownloadForm="ngForm">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-file-pdf mr-2"></i> Download Video
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-download mr-2"></i> Download Video
                         <span></span>
                     </h5>
                     <button type="button" id="close-video" class="close" data-dismiss="modal" aria-label="Close"
@@ -99,6 +99,39 @@
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-share" tabindex="-1" role="dialog" aria-labelledby="ShareModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content top-border">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-share mr-2"></i> Share Video
+                    <span></span>
+                </h5>
+                <button type="button" id="close-share" class="close" data-dismiss="modal" aria-label="Close"> <span
+                        aria-hidden="true">&times;</span> </button>
+            </div>
+            <div class="modal-body ta-center">
+                <div class="col-12">
+                    <span class="share-to" (click)="shareToFacebook()">
+                        <i class="fab fa-facebook-square"></i>
+                    </span>
+                    <span class="share-to" (click)="shareToTwitter()">
+                        <i class="fab fa-twitter-square"></i>
+                    </span>
+                    <span class="share-to" (click)="shareToWhatsapp()">
+                        <i class="fab fa-whatsapp-square"></i>
+                    </span>
+                </div>
+                <div *ngIf="videoLink" class="col-12 invite_through_link float-left w-100 pl-40">
+                    <span class="link_invite float-left col-12">
+                        <input type="text" name="video-link" (click)="copyLink()" readonly value="{{videoLink.trim()}}" id="">
+                        <button class="copy-btn" (click)="copyLink()">Copy</button>
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -165,7 +198,7 @@
                                 type="button" class="btn btn-primary"><i class="fas fa-file-pdf"></i> Download Lesson
                                 Plan</button></div>
                         <div class="col pr-0 text-right xsm-w">
-                            <a href="#" class="text-link text-decoration-none mr-3"><i
+                            <a href="#" class="text-link text-decoration-none mr-3" data-toggle="modal" data-target="#modal-share"><i
                                     class="fas fa-share"></i>Share</a>
                             <a href="#" data-toggle="modal" data-target="#exampleModal-vds"
                                 class="text-link text-decoration-none"><i class="fas fa-download"></i>Download</a>
