@@ -60,6 +60,10 @@ const routes: Routes = [
     path: 'iqra',
     loadChildren: () => import('./components/iqra/iqra.module').then(m => m.IqraModule)
   },
+  {
+    path: 'contact-us',
+    loadChildren: () => import('./components/contact-us/contact-us.module').then(m => m.ContactUs)
+  },
 ];
 
 @NgModule({

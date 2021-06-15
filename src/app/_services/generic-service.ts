@@ -154,6 +154,10 @@ export class GenericService {
     return this.restService.postRequest('/RecommendAWord', data);
   }
 
+  sendMessage(form: any): Observable<any> {
+    return this.restService.postRequest('/ContactUs', form);
+  }
+
   getToken(): void {
     this.restService.postAuth('/GuestLogin')
         .subscribe(x => {

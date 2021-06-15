@@ -1,0 +1,12 @@
+.gray-color {
+    color: #888;
+    font-size: 16px;
+    font-weight: 500;
+}
+.sub-page {
+    background: transparent;
+}
+.form-error {
+    color: red;
+    font-size: 14px;
+}
