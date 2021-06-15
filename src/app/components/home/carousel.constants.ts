@@ -35,7 +35,7 @@ export const TopSlider = [
     {
         title: 'PSL DEVELOPMENT TEAM',
         description: 'The PSL development team is comprised of educators, teachers, PSL sign developers and curriculum designers.',
-        link: '/about',
+        link: '/deaf-reach-program',
         // image: 'https://s3-eu-west-1.amazonaws.com/psl-web-1/images//pslDevSliderImage-1556523401624.jpg',
         image: '../../../assets/../../../assets/images/slider-img-05.jpg',
         color: ''
