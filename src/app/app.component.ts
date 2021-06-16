@@ -14,6 +14,7 @@ export class AppComponent {
   searchInput: string;
   searchArray: Array<any> = [];
   timer: any;
+  searching: boolean;
 
   constructor(private genericService: GenericService, private router: Router) {
     this.genericService.getToken();
@@ -25,19 +26,21 @@ export class AppComponent {
   }
 
   searchWord(keyword: string): void {
-    // this.searchArray.length =+1 ;
     this.searchInput = keyword;
     if (!this.timer) {
       if (this.searchInput) {
+        this.searching = true;
         this.timer = setTimeout(() => {
           this.genericService.searchVideos(keyword)
           .pipe(take(1))
           .subscribe((res: any) => {
+            this.searching = false;
             if (res.message === 'Success') {
               this.searchArray = res.data;
             }
             this.resetTimer();
           }, error => {
+            this.searching = false;
             console.log(`error`, error);
           });          
         }, 2000);

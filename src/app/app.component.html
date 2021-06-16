@@ -54,10 +54,10 @@
             <input type="text" placeholder="Search" #searchInput (keydown)="resetTimer()" (keyup)="searchWord($event.target.value)"
               class="form-control" style="font-size: 14px !important;">
           </div>
-          <div *ngIf="searchArray?.length > 0" class="search-possible-results">
+          <div *ngIf="searchArray?.length > 0 || searching" class="search-possible-results">
             <div class="search-result">
               <div class="all-searched-items">
-                <div class="signs-section search-sec">
+                <div [hidden]="searching" class="signs-section search-sec">
                   <!-- <h4>
                     {{search.category}}
                   </h4> -->
@@ -72,6 +72,11 @@
                       </ul>
                     </cdk-virtual-scroll-viewport>
                   </ng-scrollbar>
+                </div>
+                <div *ngIf="searching" class="signs-section search-sec ta-center">
+                  <div class="shine effect-sm-left" style="height: 25px; margin-bottom: 10px;"></div>
+                  <div class="shine effect-sm-left" style="height: 25px; margin-bottom: 10px;"></div>
+                  <div class="shine effect-sm-left" style="height: 25px; margin-bottom: 10px;"></div>
                 </div>
               </div>
             </div>

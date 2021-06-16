@@ -45,7 +45,9 @@
     color: #4e4e4e;
     display: block; text-transform: capitalize;
 }
-
+.ta-center {
+    text-align: center;
+}
 .main-container {
     min-height:95vh;
 }
