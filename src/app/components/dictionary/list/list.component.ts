@@ -1,6 +1,5 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Dictionary } from 'src/app/_models/dictionary';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { GenericService } from 'src/app/_services/generic-service';
 
 @Component({
@@ -17,7 +16,6 @@ export class ListComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private change: ChangeDetectorRef,
     public genericService: GenericService
   ) { }
   ngOnDestroy(): void {
