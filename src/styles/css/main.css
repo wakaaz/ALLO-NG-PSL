@@ -287,7 +287,15 @@ ng-scrollbar.leftside-overflow {
 	position: relative; min-height: 143px; background-image: url(../../assets/images/loader-video.gif); background-position: center center;
 	background-repeat: no-repeat; background-color: #fff;
 }
- 
+@font-face {
+	font-family: myurduFont;
+	src: url("../webfonts/jameel-noori-nastaleeq-regular.ttf");
+}
+.urduFont{
+	font-family: myurduFont;
+	color: #009e4f !important;
+}
+
 .video-thumb .v-thumb-img img {
 	width: 100%;
 }
@@ -302,7 +310,7 @@ ng-scrollbar.leftside-overflow {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     position: relative;
-    line-height: 20px; 
+    line-height: 20px;
     margin-bottom: 10px;
     margin-top: 10px;
 	text-transform: capitalize;
