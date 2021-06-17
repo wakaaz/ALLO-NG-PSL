@@ -7,6 +7,7 @@ import { PlyrComponent } from 'ngx-plyr';
 import { NgForm } from '@angular/forms';
 import { VideoService } from './video.service';
 import { Subscription } from 'rxjs';
+import { HttpEvent, HttpEventType } from '@angular/common/http';
 
 // import { PlyrDriver, PlyrDriverCreateParams, PlyrDriverUpdateSourceParams, PlyrDriverDestroyParams } from './plyr-driver';
 
@@ -40,6 +41,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   isStories: boolean;
   success: boolean;
   selectedLanguage = 'english';
+  progress: string;
   allVedios: any[] = [];
   remeaningVedios = [];
 
@@ -277,20 +279,19 @@ export class PlayerComponent implements OnInit, OnDestroy {
       this.success = true;
       const url = this.decodeURIComponent(this.currentlyPlayed[this.selectedVideoQuality].url);
       this.videoService.getVideo(url)
-        .subscribe((blob) => {
-          this.downloadError = '';
-          let blobUrl = window.URL.createObjectURL(blob);
-          const urlParts = url.split('/');
-          const name = urlParts[urlParts.length - 1];
-          const anchor = document.createElement('a');
-          anchor.href = blobUrl;
-          anchor.download = name;
-          const button = document.getElementById('close-video');
-          button.click();
-          this.success = false;
-          anchor.click();
-          URL.revokeObjectURL(blobUrl);
-          videoForm.resetForm();
+        .subscribe((data: HttpEvent<any>) => {
+          switch (data.type) {
+            case HttpEventType.Sent:
+              break;
+            case HttpEventType.ResponseHeader:
+              break;
+            case HttpEventType.DownloadProgress:
+              const downloadProgress = Math.round((data.loaded / data.total) * 100);
+              this.progress = downloadProgress+'%';
+              break;
+            case HttpEventType.Response:
+              this.processDownloading(data.body, url, videoForm);
+          }
         }, error => {
           this.success = true;
           this.downloadError = 'Something went wrong, Please try again...';
@@ -300,6 +301,23 @@ export class PlayerComponent implements OnInit, OnDestroy {
           console.log(`error`, error)
         });
     }
+  }
+
+  processDownloading(blob, url: string, videoForm: NgForm) {
+    this.downloadError = '';
+    this.progress = '0%';
+    let blobUrl = window.URL.createObjectURL(blob);
+    const urlParts = url.split('/');
+    const name = urlParts[urlParts.length - 1];
+    const anchor = document.createElement('a');
+    anchor.href = blobUrl;
+    anchor.download = name;
+    const button = document.getElementById('close-video');
+    button.click();
+    this.success = false;
+    anchor.click();
+    URL.revokeObjectURL(blobUrl);
+    videoForm.resetForm();
   }
 
   selecteLesson(document: { name: string, url: string }): void {

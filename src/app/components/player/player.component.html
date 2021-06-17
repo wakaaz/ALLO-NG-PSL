@@ -45,7 +45,7 @@
                         <span></span>
                     </h5>
                     <button type="button" id="close-video" class="close" data-dismiss="modal" aria-label="Close"
-                        (click)="videoDownloadForm.resetForm()"> <span
+                        (click)="videoDownloadForm.resetForm(); success=false;progress='0%';"> <span
                             aria-hidden="true">&times;</span> </button>
                 </div>
 
@@ -83,7 +83,9 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <h3 class="download-title">Your download should begin automatically in few seconds...</h3>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" [ngStyle]="{'width': progress}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
                     </div>
                 </div>
             </form>
