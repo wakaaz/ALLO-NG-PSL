@@ -220,11 +220,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
         ],
       poster: this.decodeURIComponent(this.currentlyPlayed.poster)
     };
-    this.videoLink =
-      this.currentlyPlayed['720p'].url ? this.decodeURIComponent(this.currentlyPlayed['720p'].url) :
-        this.currentlyPlayed['480p'].url ? this.decodeURIComponent(this.currentlyPlayed['480p'].url) :
-          this.currentlyPlayed['360p'].url ? this.decodeURIComponent(this.currentlyPlayed['360p'].url) :
-            this.currentlyPlayed['240p'].url ? this.decodeURIComponent(this.currentlyPlayed['240p'].url) : '';
+    this.videoLink = window.location.href || '';
     //  ];
     // this.player.play();
   }
@@ -335,7 +331,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   shareToFacebook() {
     window.open(
-      `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(this.videoLink.trim())}`,
+      `https://www.facebook.com/sharer/sharer.php?u=${this.videoLink.trim()}`,
       'fb-share',
       'width=555, height=600'
     );
@@ -343,14 +339,14 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   shareToTwitter() {
     window.open(
-      `https://twitter.com/intent/tweet?&url=${encodeURIComponent(this.videoLink.trim())}`,
+      `https://twitter.com/intent/tweet?&url=${this.videoLink.trim()}`,
       'tweet',
       'width=555, height=600'
     );
   }
 
   shareToWhatsapp() {
-    window.open(`https://web.whatsapp.com/send?text=${encodeURIComponent(this.videoLink.trim())}`, 'width=555, height=600');
+    window.open(`https://web.whatsapp.com/send?text=${this.videoLink.trim()}`, 'width=555, height=600');
   }
 
   copyLink() {
