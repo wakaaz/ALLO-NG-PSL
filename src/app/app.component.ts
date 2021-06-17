@@ -15,8 +15,16 @@ export class AppComponent {
   searchArray: Array<any> = [];
   timer: any;
   searching: boolean;
+  isSubmitted: boolean;
+  subscribeSuccess: boolean;
+  subscribeError: boolean;
+  email: string;
+  emailPattern: RegExp;
 
   constructor(private genericService: GenericService, private router: Router) {
+    this.emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+    this.subscribeSuccess = false;
+    this.subscribeError = false;
     this.genericService.getToken();
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -83,5 +91,33 @@ export class AppComponent {
         break;
     }
     (document.getElementById('search-toggle') as HTMLButtonElement).click();
+  }
+
+  subscribeToEmails(): void {
+    if (!this.email || !this.emailPattern.test(this.email)) {
+      return;
+    } else {
+      this.genericService.subscribeToEmails(this.email).subscribe(res => {
+        if (res.message === 'Success') {
+          this.subscribeSuccess = true;
+          this.subscribeError = false;
+        } else {
+          this.subscribeSuccess = false;
+          this.subscribeError = true;
+        }
+        this.resetAlert();
+      }, error => {
+        this.subscribeSuccess = false;
+        this.subscribeError = true;
+        this.resetAlert();
+      });
+    }
+  }
+
+  resetAlert(): void {
+    setTimeout(() => {
+      this.subscribeSuccess = false;
+      this.subscribeError = false;      
+    }, 5000);
   }
 }

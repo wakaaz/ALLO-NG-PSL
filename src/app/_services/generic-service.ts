@@ -158,6 +158,10 @@ export class GenericService {
     return this.restService.postRequest('/ContactUs', form);
   }
 
+  subscribeToEmails(email: string): Observable<any> {
+    return this.restService.postRequest('/Subscribe', {email});
+  }
+
   getToken(): void {
     this.restService.postAuth('/GuestLogin')
         .subscribe(x => {

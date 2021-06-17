@@ -101,7 +101,7 @@
 <footer>
   <div class="container">
     <div class="row">
-      <div class="col-lg-8 col-md-6">
+      <div class="col-lg-4 col-md-6">
         <div class="widget">
           <h3>Quick Links</h3>
           <ul class="widget-list">
@@ -114,6 +114,40 @@
             <li><a [routerLink]="['/deaf-reach-program']">The Deaf Reach Program</a></li>
             <li><a [routerLink]="['/contact-us']">Contact Us</a></li>
           </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div *ngIf="!subscribeSuccess && !subscribeError" class="widget">
+          <div class="col-md-8">
+            <h3>SUBSCRIBE</h3>
+            <div class="form-group">
+              <label style="font-size: 13px;" for="">Subscribe to connect with us!</label>
+              <input type="text" class="form-control" id="email" #inputEmail="ngModel" name="email" [(ngModel)]="email"
+                placeholder="Email" required [pattern]="emailPattern" style="font-size:15px !important;">
+              <span class="form-error" *ngIf="isSubmitted && inputEmail.errors?.required && !inputEmail.value">
+                Email is required!
+              </span>
+              <span class="form-error" *ngIf="isSubmitted && inputEmail.errors?.pattern">
+                Enter valid Email!
+              </span>
+            </div>
+            <button type="button" class="btn btn-outline-light w-100" (click)="subscribeToEmails()">SUBSCRIBE</button>
+          </div>
+        </div>
+        <div *ngIf="subscribeSuccess || subscribeError" class="widget">
+          <div class="col-md-8">
+            <div *ngIf="subscribeSuccess" class="row message">
+              <div class="alert alert-success" role="alert">
+                Successfully subscribed to emails!
+              </div>
+            </div>
+            <div *ngIf="subscribeError" class="row message">
+              <div class="alert alert-danger" role="alert">
+                Something went wrong please try again later!
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
