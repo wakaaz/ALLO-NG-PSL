@@ -24,6 +24,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   id: number;
   categoryName = '';
   copy: string;
+  url: string;
   downloadError: string;
   gradeId: number;
   categoryId: number;
@@ -58,14 +59,14 @@ export class PlayerComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.copy = 'Copy';
     this.setPlayer();
-    const url = this.router.url;
+    this.url = this.router.url;
     this.route.params.subscribe(params => {
       // this.genericService.getDictionaries(params.vedioId);
       // this.initialiseState(); // reset and set based on new parameter this time
       this.id = params.vedioId;
       this.categoryId = params.id;
       this.gradeId = params.gradeId;
-      this.init(url);
+      this.init();
       // this.player.play();
       // console.log(this.player.play());
       this.player.play();
@@ -84,39 +85,39 @@ export class PlayerComponent implements OnInit, OnDestroy {
   onAutoPlay(isChecked: boolean): void {
     this.isAutoPlay = isChecked;
   }
-  init(url: string): void {
+  init(): void {
     // this.setPlayer();
-    this.isStories = url.split('/')[2] === 'story';
+    this.isStories = this.url.split('/')[2] === 'story';
 
     if (this.allVedios.length === 0 || this.categoryId !== this.oldCategoryId) {
       this.oldCategoryId = this.categoryId;
-      if (url.split('/')[2] === 'dictionary') {
+      if (this.url.split('/')[2] === 'dictionary') {
         this.genericService.getDictionaries(this.categoryId);
-      } else if (url.split('/')[2] === 'story') {
+      } else if (this.url.split('/')[2] === 'story') {
         this.genericService.getStoriesVedios(this.categoryId);
-      } else if (url.split('/')[2] === 'learningTutorials') {
+      } else if (this.url.split('/')[2] === 'learningTutorials') {
         this.genericService.getLearningTutorialVideoList(this.gradeId, this.categoryId);
-      } else if (url.split('/')[2] === 'teacherTutorials') {
+      } else if (this.url.split('/')[2] === 'teacherTutorials') {
         this.genericService.getTeachTutorials(this.gradeId, this.categoryId);
       }
     }
 
 
-    if (url.split('/')[1] === 'play') {
-      if (url.split('/')[2] === 'dictionary') {
+    if (this.url.split('/')[1] === 'play') {
+      if (this.url.split('/')[2] === 'dictionary') {
         this.dictionariesSubscription();
         this.setObject(this.allVedios);
         this.routerURL =
           this.categoryName = 'PSL Dictionary';
       } else {
-        if (url.split('/')[2] === 'story') {
+        if (this.url.split('/')[2] === 'story') {
           this.storiesSubscription();
           this.categoryName = 'Story';
           this.setObject(this.allVedios);
-        } else if (url.split('/')[2] === 'learningTutorials') {
+        } else if (this.url.split('/')[2] === 'learningTutorials') {
           this.categoryName = 'Learning Tutorials';
           this.learningVideoSubscription();
-        } else if (url.split('/')[2] === 'teacherTutorials') {
+        } else if (this.url.split('/')[2] === 'teacherTutorials') {
           this.categoryName = 'Teacher Tutorials';
           this.tutorVideoSubscription();
         }
@@ -254,7 +255,9 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
   }
   onBackClicked(): void {
-    this.location.back();
+    const urlArray = this.url.split('/play')[1].split('/');
+    urlArray.pop();
+    this.router.navigateByUrl(urlArray.join('/').replace('story', 'stories'))
   }
   onVideoEnded(): void {
     console.log('================Ended Video=================')
