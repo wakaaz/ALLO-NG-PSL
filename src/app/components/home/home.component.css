@@ -598,7 +598,7 @@
     .main-slider .main-slider-bg { max-width: 100%; margin: auto !important; text-align: left !important;}
     .main-slider-bg h1 {font-size: 22px;}
      
-    #carousel-0 .slider-img img, #carousel-1 .slider-img img {
+    #carousel-img-0 img, #carousel-img-1 img {
         margin-left: -250px;
     }
 }
