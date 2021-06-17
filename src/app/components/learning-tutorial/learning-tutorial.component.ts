@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { GenericService } from 'src/app/_services/generic-service';
 
 @Component({
@@ -9,6 +9,8 @@ import { GenericService } from 'src/app/_services/generic-service';
 })
 export class LearningTutorialComponent implements OnInit {
   isLoading: boolean;
+  path: string;
+  hasSubjectId: boolean;
 
   constructor(
     private router: Router,
@@ -18,6 +20,14 @@ export class LearningTutorialComponent implements OnInit {
   ngOnInit(): void {
     let length = 0;
     this.isLoading = true;
+    this.path = this.router.url;
+    this.checkSubjectId();
+    this.router.events.subscribe(routerEvent => {
+      if (routerEvent instanceof NavigationEnd) {
+        this.path = routerEvent.urlAfterRedirects;
+        this.checkSubjectId();
+      }
+    });
     this.genericService.storyTypes$.subscribe(x => {
       if (x !== null) {
         this.isLoading = false;
@@ -29,7 +39,17 @@ export class LearningTutorialComponent implements OnInit {
     }
   }
 
-  goToDictionary(categoryId: string) {
+  checkSubjectId(): void {
+    this.hasSubjectId = this.path.split('/').length === 4;
+  }
+
+  backToClass(): void {
+    const urlArray = this.path.split('/');
+    urlArray.pop();
+    this.router.navigateByUrl(`${urlArray.join('/')}`);
+  }
+
+  goToGrade(categoryId: string) {
     this.router.navigateByUrl(`/learningTutorials/${categoryId}`);
   }
 
