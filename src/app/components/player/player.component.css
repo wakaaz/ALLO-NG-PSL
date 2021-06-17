@@ -152,7 +152,7 @@ ng-scrollbar.r-video-list .video-thumb .playBut {
     -moz-border-radius: 6px;
 }
 ng-scrollbar.r-video-list .video-thumb h3 {
-    padding: 5px 0px 5px 0px;
+    padding: 5px 0px 2px 0px;
     line-height: normal;
 }
 .video-page .ng-scroll-viewport {
