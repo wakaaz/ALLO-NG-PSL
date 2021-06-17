@@ -549,7 +549,9 @@ ng-scrollbar.r-video-list .video-thumb .v-thumb-img{width: 142px; min-height: 80
     }
 ng-scrollbar.r-video-list .video-thumb .v-thumb-img{ width: 345px; min-height: 194px;}
 }
-
+@media (max-width: 374px) {
+    ng-scrollbar.r-video-list .video-thumb .v-thumb-img{ width: 332px; min-height: 187px;}
+}
 @media (max-width: 320px) {
     ng-scrollbar.r-video-list .video-thumb .v-thumb-img{ width: 290px; min-height: 163px;}
 }
