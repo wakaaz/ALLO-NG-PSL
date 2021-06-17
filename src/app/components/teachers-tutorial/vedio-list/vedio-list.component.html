@@ -52,7 +52,8 @@
                                 stroke-linejoin="round" stroke-miterlimit="10" cx="106.8" cy="106.8" r="103.3" />
                         </svg>
                     </div>
-                    <img [src]="decodeURIComponent(tutorialVideo.poster)" alt="">
+                    <img [src]="tutorialVideo.poster ? decodeURIComponent(tutorialVideo.poster) : '/assets/images/placeholder-image.jpg'"
+                    onError="this.src='/assets/images/placeholder-image.jpg'" alt="{{tutorialVideo.title}}">
                 </div>
                 <h3>{{tutorialVideo.title}}</h3>
             </a>
