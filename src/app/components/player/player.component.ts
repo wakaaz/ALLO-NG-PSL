@@ -293,7 +293,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
               this.processDownloading(data.body, url, videoForm);
           }
         }, error => {
-          this.success = true;
+          this.success = false;
           this.downloadError = 'Something went wrong, Please try again...';
           setTimeout(() => {
             this.downloadError = '';
@@ -303,7 +303,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
   }
 
-  processDownloading(blob, url: string, videoForm: NgForm) {
+  processDownloading(blob: Blob, url: string, videoForm: NgForm) {
     this.downloadError = '';
     this.progress = '0%';
     let blobUrl = window.URL.createObjectURL(blob);
@@ -364,7 +364,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   shareToWhatsapp() {
-    window.open(`https://web.whatsapp.com/send?text=${this.videoLink.trim()}`, 'width=555, height=600');
+    if (navigator.userAgent.includes('Mobile')) {
+      window.open(`whatsapp://send?text=${this.videoLink.trim()}`);
+    } else {
+      window.open(`https://web.whatsapp.com/send?text=${this.videoLink.trim()}`, 'width=555, height=600');
+    }
   }
 
   copyLink() {
