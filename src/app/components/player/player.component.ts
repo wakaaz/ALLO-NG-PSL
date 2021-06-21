@@ -60,6 +60,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.copy = 'Copy';
+    this.progress = '0%';
     this.setPlayer();
     this.url = this.router.url;
     this.route.params.subscribe(params => {
@@ -294,6 +295,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
           }
         }, error => {
           this.success = false;
+          this.progress = '0%';
           this.downloadError = 'Something went wrong, Please try again...';
           setTimeout(() => {
             this.downloadError = '';

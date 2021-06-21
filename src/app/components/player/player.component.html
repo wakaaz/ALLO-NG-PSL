@@ -41,7 +41,7 @@
         <div class="modal-content top-border">
             <form #videoDownloadForm="ngForm">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-download mr-2"></i> Download Video
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-download mr-2"></i> {{success === true ? 'Downloading ' : 'Download '}}Video
                         <span></span>
                     </h5>
                     <button type="button" id="close-video" class="close" data-dismiss="modal" aria-label="Close"
@@ -74,12 +74,7 @@
                 <div *ngIf="success" class="modal-body confir_pay">
                     <div class="col-12">
                         <div class="check_mark">
-                            <div class="sa-icon sa-success animate">
-                                <span class="sa-line sa-tip animateSuccessTip"></span>
-                                <span class="sa-line sa-long animateSuccessLong"></span>
-                                <div class="sa-placeholder"></div>
-                                <div class="sa-fix"></div>
-                            </div>
+                            <img src="/assets/images/direct-download.svg" alt="Downloading" />
                         </div>
                     </div>
                     <div class="col-12">
@@ -190,7 +185,7 @@
                         <div class="col pr-0 text-right xsm-w">
                             <a href="#" class="text-link text-decoration-none mr-3" data-toggle="modal" data-target="#modal-share"><i
                                     class="fas fa-share"></i>Share</a>
-                            <a href="#" data-toggle="modal" data-target="#exampleModal-vds"
+                            <a href="#" data-toggle="modal" data-target="#exampleModal-vds" data-backdrop="static"
                                 class="text-link text-decoration-none"><i class="fas fa-download"></i>Download</a>
                         </div>
                     </div>
