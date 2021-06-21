@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Dictionary } from 'src/app/_models/dictionary';
 import { GenericService } from 'src/app/_services/generic-service';
 
@@ -9,12 +10,13 @@ import { GenericService } from 'src/app/_services/generic-service';
   styleUrls: ['./sidebar-list.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class SidebarListComponent implements OnInit {
+export class SidebarListComponent implements OnInit, OnDestroy {
   categoryName = '';
   isLoading: boolean;
   dictionaryId: string;
   selectedDictionaryName: string;
   dictionaryList: Array<Dictionary>;
+  dictionaryCategoriesSubscription$: Subscription;
   constructor(
     public genericService: GenericService,
     private router: Router,
@@ -25,7 +27,7 @@ export class SidebarListComponent implements OnInit {
     // if(this.genericService.)
     let length = 0;
     this.isLoading = true;
-    this.genericService.dictionaryCategories$.subscribe(x => {
+    this.dictionaryCategoriesSubscription$ = this.genericService.dictionaryCategories$.subscribe(x => {
       if (x !== null) {
         this.isLoading = false;
         length = x.length;
@@ -54,5 +56,9 @@ export class SidebarListComponent implements OnInit {
 
   setDictionaryName(): void {
     this.selectedDictionaryName = this.dictionaryList.find(dictionary => dictionary.id === Number(this.dictionaryId))?.title;
+  }
+
+  ngOnDestroy() {
+    if (this.dictionaryCategoriesSubscription$) { this.dictionaryCategoriesSubscription$.unsubscribe(); }
   }
 }

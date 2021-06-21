@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { GenericService } from 'src/app/_services/generic-service';
 
 @Component({
@@ -7,11 +8,13 @@ import { GenericService } from 'src/app/_services/generic-service';
   templateUrl: './teachers-tutorial.component.html',
   styleUrls: ['./teachers-tutorial.component.css']
 })
-export class TeachersTutorialComponent implements OnInit {
+export class TeachersTutorialComponent implements OnInit, OnDestroy {
 
   path: string;
   isLoading: boolean;
   hasSubjectId: boolean;
+
+  teacherTutorialSubscription$: Subscription;
 
   constructor(
     private router: Router,
@@ -29,7 +32,7 @@ export class TeachersTutorialComponent implements OnInit {
         this.checkSubjectId();
       }
     });
-    this.genericService.teacherTutorial$.subscribe(x => {
+    this.teacherTutorialSubscription$ = this.genericService.teacherTutorial$.subscribe(x => {
       if (x !== null) {
         this.isLoading = false;
         length = x.length;
@@ -52,5 +55,9 @@ export class TeachersTutorialComponent implements OnInit {
 
   goToDictionary(categoryId: string) {
     this.router.navigateByUrl(`/teacherTutorials/${categoryId}`);
+  }
+
+  ngOnDestroy() {
+    if (this.teacherTutorialSubscription$) { this.teacherTutorialSubscription$.unsubscribe(); }
   }
 }

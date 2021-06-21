@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Story } from 'src/app/_models/story';
 import { GenericService } from 'src/app/_services/generic-service';
 
@@ -8,12 +9,14 @@ import { GenericService } from 'src/app/_services/generic-service';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnDestroy {
   stories: Array<Story> = [];
   storiesList: Array<Story> = [];
   sortBy: string;
   isLoading: boolean;
   loaders: Array<number> = [];
+
+  storiesSubscription$: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,7 +29,7 @@ export class ListComponent implements OnInit {
       this.isLoading = true;
       this.storiesList = [];
       setTimeout(() => {
-        this.genericService.stories$.subscribe(storiesData => {
+        this.storiesSubscription$ = this.genericService.stories$.subscribe(storiesData => {
           if (storiesData !== null) {
             this.stories = storiesData;
             this.isLoading = false;
@@ -60,4 +63,7 @@ export class ListComponent implements OnInit {
     this.storiesList = this.genericService.sortMainArray(this.storiesList, this.sortBy);
   }
 
+  ngOnDestroy() {
+    if (this.storiesSubscription$) { this.storiesSubscription$.unsubscribe(); }
+  }
 }

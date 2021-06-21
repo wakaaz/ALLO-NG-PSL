@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { VideoList } from 'src/app/_models/teacher-tutorial';
 import { GenericService } from 'src/app/_services/generic-service';
 
@@ -8,7 +9,7 @@ import { GenericService } from 'src/app/_services/generic-service';
   templateUrl: './vedio-list.component.html',
   styleUrls: ['./vedio-list.component.css']
 })
-export class VedioListComponent implements OnInit {
+export class VedioListComponent implements OnInit, OnDestroy {
   tutorTutorial: Array<VideoList> = [];
   tutorTutorialsList: Array<VideoList> = [];
 
@@ -17,6 +18,9 @@ export class VedioListComponent implements OnInit {
   tutorialId: number;
   loaders: Array<number> = [];
   isLoading: boolean;
+
+  teacherTutorialSubscription$: Subscription;
+  teacherTutorialVideosListSubscription$: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,13 +35,13 @@ export class VedioListComponent implements OnInit {
       this.tutorialId = params.subjectId;
       this.isLoading = true;
       this.tutorTutorialsList = [];
-      this.genericService.teacherTutorial$.subscribe((x: any) => {
+      this.teacherTutorialSubscription$ = this.genericService.teacherTutorial$.subscribe((x: any) => {
         if (x !== null) {
           this.subjectTitle = x.find(x => x.id == params.id)?.subjects.find(subject => subject.id == this.tutorialId).title;
         }
       });
       setTimeout(() => {
-        this.genericService.teacherTutorialVideosList$.subscribe(teacherTutorialVideos => {
+        this.teacherTutorialVideosListSubscription$ = this.genericService.teacherTutorialVideosList$.subscribe(teacherTutorialVideos => {
           if (teacherTutorialVideos !== null) {
             this.tutorTutorial = teacherTutorialVideos;
             this.isLoading = false;
@@ -70,6 +74,11 @@ export class VedioListComponent implements OnInit {
   
   decodeURIComponent(url: string): string {
     return decodeURIComponent(url);
+  }
+
+  ngOnDestroy() {
+    if (this.teacherTutorialSubscription$) { this.teacherTutorialSubscription$.unsubscribe(); }
+    if (this.teacherTutorialVideosListSubscription$) { this.teacherTutorialVideosListSubscription$.unsubscribe(); }
   }
 
 }

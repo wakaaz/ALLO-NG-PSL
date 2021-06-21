@@ -113,7 +113,6 @@ export class GenericService {
   }
   getLearningTutorialVideoList(gradeIds: number, subjectId: number): void {
     this.restService.postRequest('/LearningTutorials', { grade_id: gradeIds, subject_id: subjectId }).pipe(map(x => x.data)).subscribe(x => {
-      console.log('getLearningTutorialVideoList', x)
       this._learningTutorialVideos$.next(x);
     });
   }
