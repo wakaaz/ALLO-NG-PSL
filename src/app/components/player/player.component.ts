@@ -37,10 +37,12 @@ export class PlayerComponent implements OnInit, OnDestroy {
   videoLink: string;
   currentlyPlayed: any = {
   };
-  storiesData: Array<any>
+  storiesData: Array<any> = [];
+  englishStories: Array<any> = [];
+  urduStories: Array<any> = [];
   isStories: boolean;
   success: boolean;
-  selectedLanguage = 'english';
+  selectedLanguage: string;
   progress: string;
   allVedios: any[] = [];
   remeaningVedios = [];
@@ -81,7 +83,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.player.on('ended', ev => {
       if (this.isAutoPlay) {
         // alert('ended event');
-        this.router.navigateByUrl(`${this.updateUrl(this.remeaningVedios[0].id)}/${this.remeaningVedios[0].id}`);
+        this.router.navigateByUrl(`${this.updateUrl()}/${this.remeaningVedios[0].id}`);
       }
     });
   }
@@ -114,6 +116,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
           this.categoryName = 'PSL Dictionary';
       } else {
         if (this.url.split('/')[2] === 'story') {
+          this.selectedLanguage = localStorage.getItem('language') || 'english';
           this.storiesSubscription();
           this.categoryName = 'Story';
           this.setObject(this.allVedios);
@@ -127,7 +130,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
       }
     }
   }
-  updateUrl(id: string): string {
+  updateUrl(): string {
     const url = this.router.url;
     const urlArray = url.split('/');
     // urlArray[urlArray.length - 1] = id;
@@ -141,7 +144,16 @@ export class PlayerComponent implements OnInit, OnDestroy {
         // this.storiesData = JSON.parse(JSON.stringify(data));
         // const sortedArray = this.selectedLanguageData('english');
         if (data !== null) {
-          this.setObject(data);
+          this.storiesData = data;
+          let selectedStories = [];
+          this.englishStories = this.storiesData.filter(story => (story.language === 'english'));
+          this.urduStories = this.storiesData.filter(story => (story.language !== 'english'));
+          if (this.selectedLanguage === 'english') {
+            selectedStories = this.englishStories;
+          } else {
+            selectedStories = this.urduStories;
+          }
+          this.setObject(selectedStories);
         }
       });
   }
@@ -250,6 +262,17 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.remeaningVedios.splice(this.allVedios.length - 1, 1);
       } else {
         this.remeaningVedios = this.allVedios.slice(currentlyPlayedIndex + 1);
+      }
+      if (this.isStories) {
+        const mainIndex = this.storiesData.findIndex(x => x.id == id);
+        if (mainIndex === this.storiesData.length - 1) {
+          this.englishStories = this.storiesData.filter(story => (story.language === 'english'));
+          this.urduStories = this.storiesData.filter(story => (story.language !== 'english'));
+        } else {
+          const remainingStories = this.storiesData.slice(mainIndex);
+          this.englishStories = remainingStories.filter(story => (story.language === 'english'));
+          this.urduStories = remainingStories.filter(story => (story.language !== 'english'));
+        }
       }
     }
   }
@@ -396,16 +419,38 @@ export class PlayerComponent implements OnInit, OnDestroy {
     document.body.removeChild(textarea);
   }
 
-  languageChanged(lang: string): void {
-    // const selectedStories = this.selectedLanguageData(lang);
-    // this.setObject(selectedStories);
+  languageChanged(lang: string, event: Event): void {
+    event.stopPropagation();
+    this.selectedLanguage = lang;
+    localStorage.setItem('language', this.selectedLanguage);
+    const selectedStories = this.selectedLanguageData(lang);
+    this.id = selectedStories[0].id;
+    this.router.navigateByUrl(`${this.updateUrl()}/${selectedStories[0].id}`);
   }
 
   selectedLanguageData(lang: string): any {
-    if (lang === 'english') {
-      return this.storiesData.filter(story => story.language === 'english');
+    let mainIndex = this.storiesData.findIndex(x => x.id == this.id);
+    if (mainIndex === this.storiesData.length - 1) {
+      this.englishStories = this.storiesData.filter(story => (story.language === 'english'));
+      this.urduStories = this.storiesData.filter(story => (story.language !== 'english'));
     } else {
-      return this.storiesData.filter(story => story.language !== 'english');
+      if (this.selectedLanguage === 'english') {
+        mainIndex = mainIndex - 1;
+      }
+      const remainingStories = this.storiesData.slice(mainIndex);
+      this.englishStories = remainingStories.filter(story => (story.language === 'english'));
+      if (this.englishStories.length < 2) {
+        this.englishStories = this.englishStories.concat(this.storiesData.filter(story => (story.language === 'english')));
+      }
+      this.urduStories = remainingStories.filter(story => (story.language !== 'english'));
+      if (this.urduStories.length < 2) {
+        this.urduStories = this.urduStories.concat(this.storiesData.filter(story => (story.language !== 'english')));
+      }
+    }
+    if (lang === 'english') {
+      return this.englishStories;
+    } else {
+      return this.urduStories;
     }
   }
 
