@@ -51,12 +51,12 @@
 
                 <div *ngIf="!success" class="modal-body p-0">
 
-                    <div class="col-md-12 lesson-plan-list" *ngFor="let quality of videoQualities">
+                    <div class="col-md-12 lesson-plan-list" *ngFor="let video of videoQualities">
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="customRadio_{{quality}}" (click)="selectedQuality(quality)"
-                                value="{{quality}}" name="customRadio" class="custom-control-input">
-                            <label class="custom-control-label" for="customRadio_{{quality}}">Quality</label>
-                            <span>{{quality}}</span>
+                            <input type="radio" id="customRadio_{{video.quality}}" (click)="selectedQuality(video.quality)"
+                                value="{{video.quality}}" name="customRadio" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadio_{{video.quality}}">{{video.quality}}</label>
+                            <span>{{video.size}}</span>
                         </div>
                     </div>
                     <div class="col-md-12 lesson-plan-error"

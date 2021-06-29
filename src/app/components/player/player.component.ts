@@ -33,7 +33,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   routerURL: string;
   selectedVideoQuality: string = '';
   selectedLessons: Array<{ name: string, url: string }> = [];
-  videoQualities: Array<string> = [];
+  videoQualities: Array<any> = [];
   videoLink: string;
   currentlyPlayed: any = {
   };
@@ -248,7 +248,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
       if (this.currentlyPlayed[key]?.url) {
         return key;
       }
-    });
+    }).map(video => { return { quality: video, size: this.currentlyPlayed[video]?.filesize }; });
   }
 
   setCurrentlyPlayedVedio(id: number): void {
