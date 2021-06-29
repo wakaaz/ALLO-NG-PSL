@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { LearningTutorial, Subject } from 'src/app/_models/learning-tutorial';
 import { GenericService } from 'src/app/_services/generic-service';
 
@@ -8,7 +9,7 @@ import { GenericService } from 'src/app/_services/generic-service';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnDestroy {
 
   subjects: Subject[] = [];
   subjectsList: Array<Subject>;
@@ -17,6 +18,7 @@ export class ListComponent implements OnInit {
   isLoading: boolean;
   paramId = 0;
   loaders: Array<number> = [];
+  learningTutorialSubscription$: Subscription;
   constructor(
     private route: ActivatedRoute,
     public genericService: GenericService
@@ -40,7 +42,6 @@ export class ListComponent implements OnInit {
   }
   learingTutorialSubject() {
     this.subjects = this.data.find(x => x.id == this.paramId)?.subjects;
-    console.log('', this.subjects);
     if (this.subjects?.length) {
       // JSON.parse(JSON.stringify()) to break refrence
       this.subjectsList = JSON.parse(JSON.stringify(this.subjects));
@@ -68,5 +69,9 @@ export class ListComponent implements OnInit {
   }
   decodeURIComponent(url: string): string {
     return decodeURIComponent(url);
+  }
+
+  ngOnDestroy() {
+    if (this.learningTutorialSubscription$) { this.learningTutorialSubscription$.unsubscribe(); }
   }
 }

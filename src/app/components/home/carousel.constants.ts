@@ -4,7 +4,7 @@ export const TopSlider = [
         description: 'Learning Pakistan Sign Language is easy with these resources.',
         link: '/resources',
         // image: 'https://s3-eu-west-1.amazonaws.com/psl-web-1/images//resourcesSliderImage-1556523290965.jpg',
-        image: '../../../assets/../../../assets/images/slider-img-01.jpg',
+        image: '/assets/images/slider-img-01.jpg',
         color: ''
     },
     {
@@ -12,7 +12,7 @@ export const TopSlider = [
         description: 'Over 150 primary classroom based demos in PSL, with easy-to-use methodology and learning tools to train teachers of the Deaf.',
         link: '/teacherTutorials/1',
         // image: 'https://s3-eu-west-1.amazonaws.com/psl-web-1/images//ttSliderImage-1556523325735.jpg',
-        image: '../../../assets/../../../assets/images/slider-img-02.jpg',
+        image: '/assets/images/slider-img-02.jpg',
         
         color: ''
     },
@@ -21,7 +21,7 @@ export const TopSlider = [
         description: `Over 40 richly illustrated and animated stories presented in PSL with the option of Urdu or English translation and voice over.`,
         link: '/stories/1',
         // image: 'https://s3-eu-west-1.amazonaws.com/psl-web-1/images//pslStoriesSliderImage-1556523349694.jpg',
-        image: '../../../assets/../../../assets/images/slider-img-03.jpg',
+        image: '/assets/images/slider-img-03.jpg',
         color: ''
     },
     {
@@ -29,15 +29,15 @@ export const TopSlider = [
         description: 'Urdu, English and basic Math in PSL, with over 200 illustrated and animated tutorials',
         link: '/learningTutorials/4',
         // image: 'https://s3-eu-west-1.amazonaws.com/psl-web-1/images//learningTutorialsSliderImage-1556523369049.jpg',
-        image: '../../../assets/../../../assets/images/slider-img-04.jpg',
+        image: '/assets/images/slider-img-04.jpg',
         color: ''
     },
     {
         title: 'PSL DEVELOPMENT TEAM',
         description: 'The PSL development team is comprised of educators, teachers, PSL sign developers and curriculum designers.',
-        link: '/about',
+        link: '/deaf-reach-program',
         // image: 'https://s3-eu-west-1.amazonaws.com/psl-web-1/images//pslDevSliderImage-1556523401624.jpg',
-        image: '../../../assets/../../../assets/images/slider-img-05.jpg',
+        image: '/assets/images/slider-img-05.jpg',
         color: ''
     }
 ];

@@ -1,0 +1,90 @@
+<div class="sub-page">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>CONTACT <span>US</span></h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 contact">
+                <h4>Call Us</h4>
+                <a class="phoneno gray-color" href="tel:+923028492227">923028492227</a>
+                <h4>Email</h4>
+                <a class="link-email gray-color" style="margin-bottom: 20px;" href="mailto:info@fesf.org.pk">info@fesf.org.pk</a>
+            </div>
+
+            <div class="col-lg-6 contactform">
+                <div class="row">
+                    <div *ngIf="hasError" class="col-md-12 main-error">
+                        <div class="alert alert-danger" role="alert">
+                            Something went wrong please try again later!
+                        </div>
+                    </div>
+                    <div *ngIf="hasSuccess" class="col-md-12">
+                        <div class="alert alert-success" role="alert">
+                            Thank you for contacting us!
+                        </div>
+                    </div>
+
+                    <form #contactForm="ngForm" style="width: 100%;">
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" [(ngModel)]="name" #ctrlName="ngModel"
+                                    placeholder="Name" name="ctrl-name" required>
+                                <span class="form-error" *ngIf="(contactForm.submitted || ctrlName.touched || ctrlName.dirty) && ctrlName.errors?.required">
+                                    Name is required!
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" [(ngModel)]="email" #ctrlEmail="ngModel" required
+                                    placeholder="Email" name="ctrl-email" [pattern]="emailPattern">
+                                    <span class="form-error" *ngIf="(contactForm.submitted || ctrlEmail.touched || ctrlEmail.dirty) && ctrlEmail.errors?.required">
+                                        Email is required!
+                                    </span>
+                                    <span class="form-error" *ngIf="(contactForm.submitted || ctrlEmail.touched || ctrlEmail.dirty) && ctrlEmail.errors?.pattern && !ctrlEmail.errors?.required">
+                                        Enter valid Email!
+                                    </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" [(ngModel)]="subject" #ctrlSubject="ngModel" required
+                                    placeholder="Subject" name="ctrl-subject">
+                                    <span class="form-error" *ngIf="(contactForm.submitted || ctrlSubject.touched || ctrlSubject.dirty) && ctrlSubject.errors?.required">
+                                        Subject is required!
+                                    </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <textarea class="form-control" [(ngModel)]="message" #ctrlMessage="ngModel" required
+                                    placeholder="Message" name="ctrl-message" rows="8"></textarea>
+                                    <span class="form-error" *ngIf="(contactForm.submitted || ctrlMessage.touched || ctrlMessage.dirty) && ctrlMessage.errors?.required">
+                                        Message is required!
+                                    </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <button type="submit" (click)="sendMessage(contactForm)" class="btn btn-outline-primary">Send Message</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

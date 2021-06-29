@@ -91,7 +91,7 @@
             <div class="row">
                 <div class="col-3" *ngFor="let dictionary of dictionariesList">
                     <a [routerLink]="['/dictionary/category', dictionary.id]" class="sign-card">
-                        <span>{{dictionary.videos}}</span>
+                        <span *ngIf="false">{{dictionary.videos}}</span>
                         <img [src]="dictionary.image ? decodeURIComponent(dictionary.image) : '/assets/images/placeholder-image.jpg'"
                             onError="this.src='/assets/images/placeholder-image.jpg'" alt="{{dictionary.title}}">
                         <h4>{{dictionary.title}}</h4>

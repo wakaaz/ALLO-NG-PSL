@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Story } from 'src/app/_models/story';
 import { GenericService } from 'src/app/_services/generic-service';
 
@@ -8,12 +9,17 @@ import { GenericService } from 'src/app/_services/generic-service';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnDestroy {
+  allStories: Array<any> = [];
   stories: Array<Story> = [];
   storiesList: Array<Story> = [];
   sortBy: string;
   isLoading: boolean;
+  selectedLanguage: string;
+
   loaders: Array<number> = [];
+
+  storiesSubscription$: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,13 +28,26 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loaders.length = 12;
+    const language = localStorage.getItem('language');
+    if (language) {
+      this.selectedLanguage = language;
+    } else {
+      this.selectedLanguage = 'english';
+      localStorage.setItem('language', this.selectedLanguage);
+    }
+    console.log('Language ---> ', this.selectedLanguage);
     this.route.params.subscribe(params => {
       this.isLoading = true;
       this.storiesList = [];
       setTimeout(() => {
-        this.genericService.stories$.subscribe(storiesData => {
+        this.storiesSubscription$ = this.genericService.stories$.subscribe(storiesData => {
           if (storiesData !== null) {
-            this.stories = storiesData;
+            this.allStories = storiesData;
+            if (this.selectedLanguage === 'english') {
+              this.stories = this.allStories.filter(story => story.language === 'english');
+            } else {
+              this.stories = this.allStories.filter(story => story.language !== 'english');
+            }
             this.isLoading = false;
             // JSON.parse(JSON.stringify()) to break refrence
             this.storiesList = JSON.parse(JSON.stringify(this.stories));
@@ -60,4 +79,20 @@ export class ListComponent implements OnInit {
     this.storiesList = this.genericService.sortMainArray(this.storiesList, this.sortBy);
   }
 
+  languageChanged(lang: string): void {
+    this.selectedLanguage = lang;
+    localStorage.setItem('language', this.selectedLanguage);
+    if (this.selectedLanguage === 'english') {
+      this.stories = this.allStories.filter(story => story.language === 'english');
+    } else {
+      this.stories = this.allStories.filter(story => story.language !== 'english');
+    }
+    // JSON.parse(JSON.stringify()) to break refrence
+    this.storiesList = JSON.parse(JSON.stringify(this.stories));
+    this.changeSort(this.sortBy);
+  }
+
+  ngOnDestroy() {
+    if (this.storiesSubscription$) { this.storiesSubscription$.unsubscribe(); }
+  }
 }

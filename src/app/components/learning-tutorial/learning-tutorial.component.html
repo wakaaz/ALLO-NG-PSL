@@ -1,7 +1,8 @@
 <div class="container">
     <div class="row content-title">
         <div class="col-lg-6 col-md-6 col-sm-12">
-            <h2>Learning Tutorial</h2>
+            <a *ngIf="hasSubjectId" (click)="backToClass()" class="text-link"><i class="fas fa-chevron-left"></i>Back to Class</a>
+            <h2>Learning <span>Tutorial</span></h2>
         </div>
         <!-- <div class="col-lg-6 col-md-6 col-sm-12 d-none d-md-block">
             <ol class="breadcrumb">
@@ -15,7 +16,7 @@
         <div class="col-lg-3 col-md-4">
 
             <div class="select-dictionary d-block d-md-none">
-                <select *ngIf="!isLoading" class="custom-select" id="inputGroupSelect02" (change)="goToDictionary($event.target.value)" style="font-size: 13px !important;">
+                <select *ngIf="!isLoading" class="custom-select" id="inputGroupSelect02" (change)="goToGrade($event.target.value)" style="font-size: 13px !important;">
                     <option selected disabled>Select Tutorial</option>
                     <option *ngFor="let tutorial of genericService.learningTutorial$ | async"
                         [value]="tutorial.id">

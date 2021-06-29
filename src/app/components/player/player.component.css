@@ -89,6 +89,7 @@
     font-size: 14px;
     float: right;
     margin-right: 10px;
+    z-index: 0 !important;
 }
 .custom-switch span {
     float: left;
@@ -151,7 +152,7 @@ ng-scrollbar.r-video-list .video-thumb .playBut {
     -moz-border-radius: 6px;
 }
 ng-scrollbar.r-video-list .video-thumb h3 {
-    padding: 5px 0px 5px 0px;
+    padding: 5px 0px 2px 0px;
     line-height: normal;
 }
 .video-page .ng-scroll-viewport {
@@ -258,7 +259,7 @@ ng-scrollbar.r-video-list .video-thumb h3 {
 
 .share-to {
     margin: 10px;
-    padding: 5px;
+    padding: 0;
     font-size: 36px;
     cursor: pointer;
 }
@@ -273,9 +274,7 @@ ng-scrollbar.r-video-list .video-thumb h3 {
     color: #009e4f;
     cursor: pointer;
 }
-.share-to:hover {
-    border: 2px solid #11c86d;
-}
+
 .ta-center {
     text-align: center;
 }
@@ -482,7 +481,7 @@ ng-scrollbar.r-video-list .video-thumb .v-thumb-img{width: 142px; min-height: 80
     }
     ng-scrollbar.r-video-list .video-thumb {
         float: left;
-        
+        width: 46%;
         margin-left: 10px;
     }
     .pl-sm {
@@ -501,6 +500,9 @@ ng-scrollbar.r-video-list .video-thumb .v-thumb-img{width: 142px; min-height: 80
 }
 
 @media (max-width: 480px) {
+    ng-scrollbar.r-video-list .video-thumb { 
+        width: 45%; 
+    }  
     ng-scrollbar.r-video-list .video-thumb .v-thumb-img{ width: 218px; min-height: 123px;}
 }
 
@@ -519,16 +521,21 @@ ng-scrollbar.r-video-list .video-thumb .v-thumb-img{width: 142px; min-height: 80
     .nextvds {
         font-size: 15px; margin-left: 15px;
     }
+    ng-scrollbar.r-video-list .video-thumb { 
+        width: 100% !important; 
+    }  
     ng-scrollbar.r-video-list .video-thumb .v-thumb-img{ width: 393px; min-height: 221px;}
  
 }
+
 @media (max-width: 420px) {
     ng-scrollbar.r-video-list .video-thumb .v-thumb-img{ width: 390px; min-height: 220px;}
 }
 @media (max-width: 414px) {
     ng-scrollbar.r-video-list .video-thumb .v-thumb-img{ width: 380px; min-height: 214px;}
 }
-@media (max-width: 375px) {
+
+@media (max-width: 400px) {
     .xsm-w {
         width: 100%;
         text-align: center !important;
@@ -542,7 +549,9 @@ ng-scrollbar.r-video-list .video-thumb .v-thumb-img{width: 142px; min-height: 80
     }
 ng-scrollbar.r-video-list .video-thumb .v-thumb-img{ width: 345px; min-height: 194px;}
 }
-
+@media (max-width: 374px) {
+    ng-scrollbar.r-video-list .video-thumb .v-thumb-img{ width: 332px; min-height: 187px;}
+}
 @media (max-width: 320px) {
     ng-scrollbar.r-video-list .video-thumb .v-thumb-img{ width: 290px; min-height: 163px;}
 }

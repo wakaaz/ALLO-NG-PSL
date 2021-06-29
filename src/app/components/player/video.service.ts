@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpEvent, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
@@ -16,25 +16,7 @@ export class VideoService {
      * @param url to fetch the Video from other Origin
      * @returns the video as blob to download
      */
-    getVideo(url: string): Observable<Blob> {
-        return this.http.get(url, { responseType: 'blob' });
-    }
-
-    getLesson(url: string) {
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Accept': '*/*',
-                'Content-Type': 'application/*',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Headers': 'X-Requested-With,content-type',
-                'Access-Control-Allow-Credentials': 'true'
-            })
-        };
-
-        //   httpOptions.headers.append('Access-Control-Allow-Origin', '*');
-        //   httpOptions.headers.append('Access-Control-Allow-Methods', 'HEAD, GET, POST, OPTIONS');
-        //   httpOptions.headers.append('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-        //   httpOptions.headers.append('Access-Control-Allow-Credentials', 'true');}
-        return this.http.get(url, httpOptions);
+    getVideo(url: string): Observable<HttpEvent<Blob>> {
+        return this.http.get(url, { reportProgress: true, observe: 'events', responseType: 'blob' });
     }
 }

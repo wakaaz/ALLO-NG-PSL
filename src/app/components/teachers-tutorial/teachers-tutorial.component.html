@@ -1,6 +1,7 @@
 <div class="container">
     <div class="row content-title">
         <div class="col-lg-6 col-md-6 col-sm-12">
+            <a *ngIf="hasSubjectId" (click)="backToClass()" class="text-link"><i class="fas fa-chevron-left"></i>Back to Class</a>
             <h2>Teacher <span>Tutorial</span></h2>
         </div>
         <!-- <div class="col-lg-6 col-md-6 col-sm-12 d-none d-md-block">

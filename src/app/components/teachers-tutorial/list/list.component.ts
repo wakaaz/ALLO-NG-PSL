@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Subject } from 'src/app/_models/learning-tutorial';
 import { TeacherTutorial } from 'src/app/_models/teacher-tutorial';
 import { GenericService } from 'src/app/_services/generic-service';
@@ -9,13 +10,14 @@ import { GenericService } from 'src/app/_services/generic-service';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnDestroy {
   paramId = 1;
   loaders: Array<number> = [];
   subjects: Array<Subject> = [];
   subjectsList: Array<Subject> = [];
   sortBy: string;
   isLoading: boolean;
+  teacherTutorialSubscription$: Subscription;
   constructor(
     private route: ActivatedRoute,
     public genericService: GenericService
@@ -29,7 +31,7 @@ export class ListComponent implements OnInit {
       // this.initialiseState(); // reset and set based on new parameter this time
       this.isLoading = true;
       this.subjectsList = [];
-      this.genericService.teacherTutorial$.subscribe((x: any) => {
+      this.teacherTutorialSubscription$ = this.genericService.teacherTutorial$.subscribe((x: any) => {
         if (x !== null) {
           this.subjects = x.find(x => x.id == this.paramId)?.subjects;
           this.isLoading = false;
@@ -61,5 +63,9 @@ export class ListComponent implements OnInit {
 
   decodeURIComponent(url: string): string {
     return decodeURIComponent(url);
+  }
+
+  ngOnDestroy() {
+    if (this.teacherTutorialSubscription$) { this.teacherTutorialSubscription$.unsubscribe(); }
   }
 }
