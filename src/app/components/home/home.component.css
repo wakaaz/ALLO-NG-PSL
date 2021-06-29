@@ -135,7 +135,7 @@
 }
 .card-act-vds .card-act {
     background-color: #fff;
-    padding: 20px;
+    padding: 20px 8px;
     width: 100%;
     border-radius: 6px;
     -webkit-border-radius: 6px;
@@ -148,9 +148,9 @@
     transition: 0.3s ease;
 }
 .card-act-vds .card-act h2 {
-    font-size: 18px;
+    font-size: 16px;
     margin-bottom: 15px;
-    letter-spacing: 0.5px;
+    letter-spacing: normal;
 }
 .card-act-vds .card-act h2 span {
     color: #009e4f;
@@ -158,7 +158,7 @@
 .card-act-vds .card-act img {
     width: 100%;
     max-height: 130px;
-    margin-bottom: 15px;
+    margin-bottom: 15px; padding: 15px;
 }
 .card-act-vds .card-act h1 {
     font-size: 20px;
@@ -410,12 +410,12 @@
 }
 
 @media (max-width: 1024px) {
-    
+    .card-act-vds .card-act h2 span {display: block;}
     .card-act-vds .card-act {
         padding: 10px;
     }
     .card-act-vds .card-act h2 {
-        font-size: 16px;
+        font-size: 14.5px;
     }
     .card-act-vds .card-act h1 {
         font-size: 18px;
@@ -427,7 +427,7 @@
         height: 50px;
     }
     .card-act-vds .card-act img {
-        max-height: 110px;
+        max-height: 110px; padding: 0;
     }
     .psl-about h2,
     .recommend-word h2,
@@ -464,7 +464,7 @@
 }
 
 @media (max-width: 800px) {
-    
+    .card-act-vds .card-act h2 span {display: inline-block;}
     .card-act-vds .card-act {
         padding: 20px;
         margin-bottom: 30px;
@@ -504,10 +504,10 @@
         font-size: 30px;  
     }
     .main-slider-bg h5 {
-        font-size:13px; 
+        font-size:13px; letter-spacing: normal;
     }
     .main-slider-bg { 
-        max-width: 300px;}
+        max-width: 400px;}
         .main-slider-bg .btn-primary {font-size: 13px; margin-top: 15px; padding: 5px 10px;}     
 
 }
@@ -549,7 +549,7 @@
         font-size:12px; 
     }
     .main-slider-bg { 
-        max-width: 250px;}
+        max-width: 400px;}
 
         .main-slider  .carousel-control-next, .main-slider .carousel-control-prev{ 
             height: 40px;
@@ -667,4 +667,7 @@
         font-size: 12px;
     }
     .main-slider-bg h1 {font-size: 20px;}
+}
+@media (max-width:320px) {
+    .main-slider-bg h1 {font-size: 18px; margin-bottom: 0;}
 }

@@ -562,6 +562,10 @@ ng-scrollbar.leftside-overflow {
 		min-height: 135px;
 	}
 	.video-thumb .v-thumb-img{min-height: 290px;}
+
+	.main-loader img {  
+	 width: auto; height:65px;
+	}
 }
 @media (max-width: 480px) {
 .video-thumb .v-thumb-img{min-height: 258px;}

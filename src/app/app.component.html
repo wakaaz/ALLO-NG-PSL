@@ -119,11 +119,11 @@
 
       <div class="col-lg-4 col-md-6">
         <div *ngIf="!subscribeSuccess && !subscribeError" class="widget">
-          <div class="col-md-8">
+          <div class="col-md-10 p-0">
             <h3>SUBSCRIBE</h3>
             <div class="form-group">
               <label style="font-size: 13px;" for="">Subscribe to connect with us!</label>
-              <input type="text" class="form-control" id="email" #inputEmail="ngModel" name="email" [(ngModel)]="email"
+              <input type="text" class="form-control border-0" id="email" #inputEmail="ngModel" name="email" [(ngModel)]="email"
                 placeholder="Email" required [pattern]="emailPattern" style="font-size:15px !important;">
               <span class="form-error" *ngIf="isSubmitted && inputEmail.errors?.required && !inputEmail.value">
                 Email is required!
