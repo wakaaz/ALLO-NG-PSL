@@ -24,6 +24,9 @@ export class PlayerComponent implements OnInit, OnDestroy {
   isAutoPlay = false;
   id: number;
   categoryName = '';
+  videoTitle: string = '';
+  gradeName: string;
+  subjectName: string;
   copy: string;
   url: string;
   downloadError: string;
@@ -236,6 +239,9 @@ export class PlayerComponent implements OnInit, OnDestroy {
       poster: this.decodeURIComponent(this.currentlyPlayed.poster)
     };
     this.videoLink = window.location.href || '';
+    this.videoTitle = this.categoryName === 'PSL Dictionary' && this.currentlyPlayed.category_name ? this.currentlyPlayed.category_name : this.currentlyPlayed.title || this.currentlyPlayed.english_word;
+    this.gradeName = this.categoryName.includes('Tutorials') && this.currentlyPlayed.grade_name ? this.currentlyPlayed.grade_name : '';
+    this.subjectName = this.categoryName.includes('Tutorials') && this.currentlyPlayed.subject_name ? this.currentlyPlayed.subject_name : '';
     //  ];
     // this.player.play();
   }

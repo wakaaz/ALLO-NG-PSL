@@ -139,10 +139,9 @@
 
     <div class="row content-title">
         <div class="col-lg-9 col-md-9 col-sm-12">
-            <h2 class="v-title">{{ categoryName }} / <span>{{currentlyPlayed.english_word ||
-                    currentlyPlayed.title}}</span></h2>
-            <!-- Only For Teachers -->
-            <!-- <h4>Grade 1 <span>-</span> Mathematics</h4> -->
+            <h2 class="v-title">{{ categoryName }} / <span>{{videoTitle}}</span></h2>
+            <!-- Only For Teachers and Learning Tutorials -->
+            <h4 *ngIf="gradeName && subjectName">{{gradeName}} <span>-</span> {{subjectName}}</h4>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12 text-right">
             <div class="custom-control custom-switch"><span>Auto Play</span>
