@@ -132,7 +132,7 @@
                 Enter valid Email!
               </span>
             </div>
-            <button type="button" class="btn btn-outline-light w-100" (click)="subscribeToEmails()">SUBSCRIBE</button>
+            <button type="button" class="btn btn-outline-light w-100" (click)="subscribeToEmails(inputEmail)">SUBSCRIBE</button>
           </div>
         </div>
         <div *ngIf="subscribeSuccess || subscribeError" class="widget">
