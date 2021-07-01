@@ -8,6 +8,7 @@ import { NgForm } from '@angular/forms';
 import { VideoService } from './video.service';
 import { Subscription } from 'rxjs';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
+import { take } from 'rxjs/operators';
 
 // import { PlyrDriver, PlyrDriverCreateParams, PlyrDriverUpdateSourceParams, PlyrDriverDestroyParams } from './plyr-driver';
 
@@ -144,8 +145,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
   storiesSubscription(): void {
     this.storiesSubscription$ = this.genericService.stories$
       .subscribe(data => {
-        // this.storiesData = JSON.parse(JSON.stringify(data));
-        // const sortedArray = this.selectedLanguageData('english');
         if (data !== null) {
           this.storiesData = data;
           let selectedStories = [];
@@ -426,23 +425,22 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   languageChanged(lang: string, event: Event): void {
-    event.stopPropagation();
-    this.selectedLanguage = lang;
-    localStorage.setItem('language', this.selectedLanguage);
-    const selectedStories = this.selectedLanguageData(lang);
-    this.id = selectedStories[0].id;
-    this.router.navigateByUrl(`${this.updateUrl()}/${selectedStories[0].id}`);
+    if (lang !== this.selectedLanguage) {
+      event.stopPropagation();
+      this.selectedLanguage = lang;
+      localStorage.setItem('language', this.selectedLanguage);
+      const selectedStories = this.selectedLanguageData(lang);
+      this.id = selectedStories[0].id;
+      this.router.navigateByUrl(`${this.updateUrl()}/${selectedStories[0].id}`);
+    }
   }
 
   selectedLanguageData(lang: string): any {
-    let mainIndex = this.storiesData.findIndex(x => x.id == this.id);
+    let mainIndex = this.storiesData.findIndex(x => x.id == this.currentlyPlayed.parent);
     if (mainIndex === this.storiesData.length - 1) {
       this.englishStories = this.storiesData.filter(story => (story.language === 'english'));
       this.urduStories = this.storiesData.filter(story => (story.language !== 'english'));
     } else {
-      if (this.selectedLanguage === 'english') {
-        mainIndex = mainIndex - 1;
-      }
       const remainingStories = this.storiesData.slice(mainIndex);
       this.englishStories = remainingStories.filter(story => (story.language === 'english'));
       if (this.englishStories.length < 2) {
