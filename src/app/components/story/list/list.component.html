@@ -61,7 +61,7 @@
                 <img [src]="story.poster ? decodeURIComponent(story.poster) : '/assets/images/placeholder-image.jpg'"
                     onError="this.src='/assets/images/placeholder-image.jpg'" alt="{{story.title}}">
             </div>
-            <h3>{{story.title}}</h3>
+            <h3 [ngClass]="selectedLanguage === 'urdu' ? 'urduFont' : ''">{{story.title}}</h3>
         </a>
     </div>
     <span style="height: auto; width: 100%; display: flex; flex-wrap: wrap;" *ngIf="isLoading">
