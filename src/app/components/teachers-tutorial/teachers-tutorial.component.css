@@ -12,6 +12,12 @@
 .text-link:hover {
     color: #009e4f;
 }
+.breadcrumb a:hover {
+    opacity: 0.5;
+}
+.breadcrumb #class_name {
+    cursor: pointer;
+}
 @media (max-width: 1024px) {
     .text-link {
         font-size: 13px;
