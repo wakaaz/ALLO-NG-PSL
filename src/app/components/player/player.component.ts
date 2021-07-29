@@ -146,8 +146,16 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.storiesSubscription$ = this.genericService.stories$
       .subscribe(data => {
         if (data !== null) {
+          debugger;
           this.storiesData = data;
           let selectedStories = [];
+          const currentVideo = this.storiesData.find(x => x.id == this.id);
+          let lang = 'english';
+          if (currentVideo.language !== 'english') {
+            lang = 'urdu';
+          }
+          this.selectedLanguage = lang;
+          localStorage.setItem('language', this.selectedLanguage);
           this.englishStories = this.storiesData.filter(story => (story.language === 'english'));
           this.urduStories = this.storiesData.filter(story => (story.language !== 'english'));
           if (this.selectedLanguage === 'english') {
