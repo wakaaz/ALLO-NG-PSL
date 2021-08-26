@@ -12,6 +12,8 @@ export class TeachersTutorialComponent implements OnInit, OnDestroy {
 
   path: string;
   isLoading: boolean;
+  className: string;
+  data: Array<any> = [];
   hasSubjectId: boolean;
 
   teacherTutorialSubscription$: Subscription;
@@ -34,6 +36,12 @@ export class TeachersTutorialComponent implements OnInit, OnDestroy {
     });
     this.teacherTutorialSubscription$ = this.genericService.teacherTutorial$.subscribe(x => {
       if (x !== null) {
+        this.data = x;
+        const urlArray = this.path.split('/');
+        urlArray.pop();
+        const classId = urlArray[urlArray.length - 1];
+        const selectedClass = this.data.find(subClass => subClass.id == Number(classId));
+        this.className = selectedClass?.grade;
         this.isLoading = false;
         length = x.length;
       }

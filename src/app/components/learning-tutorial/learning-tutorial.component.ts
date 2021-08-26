@@ -12,6 +12,8 @@ export class LearningTutorialComponent implements OnInit, OnDestroy {
   isLoading: boolean;
   path: string;
   hasSubjectId: boolean;
+  className: string;
+  subjects: Array<any>;
 
   storyTypesSubscription$: Subscription;
 
@@ -44,12 +46,37 @@ export class LearningTutorialComponent implements OnInit, OnDestroy {
 
   checkSubjectId(): void {
     this.hasSubjectId = this.path.split('/').length === 4;
+    if (this.hasSubjectId) {
+      const urlArray = this.path.split('/');
+      urlArray.pop();
+      const classId = urlArray[urlArray.length - 1];
+      this.getSubjects(classId);
+    }
+  }
+
+  getSubjects(classId: any): void {
+    this.genericService.learningTutorial$.subscribe((res: any[]) => {
+      if (res !== null) {
+        const selectedClass = res.find(x => x.id == classId);
+        this.className = selectedClass?.grade;
+        this.subjects = selectedClass?.subjects;
+        this.sortSubjects();
+      }
+    });
+  }
+
+  sortSubjects() {
+    this.subjects = this.genericService.sortMainArray(this.subjects, 'A');
   }
 
   backToClass(): void {
     const urlArray = this.path.split('/');
     urlArray.pop();
     this.router.navigateByUrl(`${urlArray.join('/')}`);
+  }
+
+  goToSubject(url: string): void {
+    this.router.navigateByUrl(url);
   }
 
   goToGrade(categoryId: string) {

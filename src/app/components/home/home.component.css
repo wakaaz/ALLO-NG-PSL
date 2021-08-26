@@ -410,7 +410,6 @@
 }
 
 @media (max-width: 1024px) {
-    .card-act-vds .card-act h2 span {display: block;}
     .card-act-vds .card-act {
         padding: 10px;
     }
@@ -464,7 +463,6 @@
 }
 
 @media (max-width: 800px) {
-    .card-act-vds .card-act h2 span {display: inline-block;}
     .card-act-vds .card-act {
         padding: 20px;
         margin-bottom: 30px;

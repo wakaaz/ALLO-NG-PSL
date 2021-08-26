@@ -14,11 +14,11 @@
 
               <li class="nav-item"><a (click)="collapseMenu(menuButton)" class="nav-link" [routerLink]="['/']" [ngClass]="currentRoute === '' ? 'active' : ''">Home</a></li>
               <li class="nav-item"><a (click)="collapseMenu(menuButton)" class="nav-link" [routerLink]="['/dictionary']"
-                  [ngClass]="currentRoute === 'dictionary' ? 'active' : ''">Dictionary <span class="sr-only">(current)</span></a></li>
+                  [ngClass]="currentRoute === 'dictionary' ? 'active' : ''">PSL Dictionary <span class="sr-only">(current)</span></a></li>
               <li class="nav-item"><a (click)="collapseMenu(menuButton)" class="nav-link" [routerLink]="['/teacherTutorials', 1]"
                   [ngClass]="currentRoute === 'teacherTutorials' ? 'active' : ''">Teacher Tutorials</a></li>
               <li class="nav-item"><a (click)="collapseMenu(menuButton)" class="nav-link" [routerLink]="['/stories', 1]"
-                  [ngClass]="currentRoute === 'stories' ? 'active' : ''">Stories</a></li>
+                  [ngClass]="currentRoute === 'stories' ? 'active' : ''">PSL Stories</a></li>
               <li class="nav-item"><a (click)="collapseMenu(menuButton)" class="nav-link" [routerLink]="['/learningTutorials', 4]"
                   [ngClass]="currentRoute === 'learningTutorials' ? 'active' : ''">Learning Tutorials</a>
               </li>
@@ -105,7 +105,7 @@
         <div class="widget">
           <h3>Quick Links</h3>
           <ul class="widget-list">
-            <li><a [routerLink]="['/dictionary']">Dictionary</a></li>
+            <li><a [routerLink]="['/dictionary']">PSL Dictionary</a></li>
             <li><a [routerLink]="['/learningTutorials', 4]">Learning Tutorials</a></li>
             <li><a [routerLink]="['/teacherTutorials', 1]">Teacher Tutorials</a></li>
             <li><a [routerLink]="['/stories', 1]">PSL Stories</a></li>
@@ -132,7 +132,7 @@
                 Enter valid Email!
               </span>
             </div>
-            <button type="button" class="btn btn-outline-light w-100" (click)="subscribeToEmails()">SUBSCRIBE</button>
+            <button type="button" class="btn btn-outline-light w-100" (click)="subscribeToEmails(inputEmail)">SUBSCRIBE</button>
           </div>
         </div>
         <div *ngIf="subscribeSuccess || subscribeError" class="widget">
@@ -154,7 +154,7 @@
       <div class="col-lg-4 col-md-6">
         <div class="widget">
           <h3>Download PSL App</h3>
-          <p>Download the PSL Phone App with 5,000 Signs</p>
+          <p>Download the PSL Phone App</p>
           <a href="https://play.google.com/store/apps/details?id=com.grappetite.fesf.psl" target="_blank"><img class="store-img" src="../assets/images/playstore.png" alt=""></a>
           <a href="https://itunes.apple.com/us/app/pakistan-sign-language-psl/id955003505?mt=8" target="_blank"><img class="store-img" src="../assets/images/appstore.png" alt=""></a>
         </div>

@@ -51,12 +51,12 @@
 
                 <div *ngIf="!success" class="modal-body p-0">
 
-                    <div class="col-md-12 lesson-plan-list" *ngFor="let quality of videoQualities">
+                    <div class="col-md-12 lesson-plan-list" *ngFor="let video of videoQualities">
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="customRadio_{{quality}}" (click)="selectedQuality(quality)"
-                                value="{{quality}}" name="customRadio" class="custom-control-input">
-                            <label class="custom-control-label" for="customRadio_{{quality}}">Quality</label>
-                            <span>{{quality}}</span>
+                            <input type="radio" id="customRadio_{{video.quality}}" (click)="selectedQuality(video.quality)"
+                                value="{{video.quality}}" name="customRadio" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadio_{{video.quality}}">{{video.quality}}</label>
+                            <span>{{video.size}}</span>
                         </div>
                     </div>
                     <div class="col-md-12 lesson-plan-error"
@@ -139,10 +139,9 @@
 
     <div class="row content-title">
         <div class="col-lg-9 col-md-9 col-sm-12">
-            <h2 class="v-title">{{ categoryName }} / <span>{{currentlyPlayed.english_word ||
-                    currentlyPlayed.title}}</span></h2>
-            <!-- Only For Teachers -->
-            <!-- <h4>Grade 1 <span>-</span> Mathematics</h4> -->
+            <h2 class="v-title">{{ categoryName }} / <span [ngClass]="selectedLanguage === 'urdu' ? 'urduFont' : ''">{{videoTitle}}</span></h2>
+            <!-- Only For Teachers and Learning Tutorials -->
+            <h4 *ngIf="gradeName && subjectName">{{gradeName}} <span>-</span> {{subjectName}}</h4>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12 text-right">
             <div class="custom-control custom-switch"><span>Auto Play</span>
@@ -167,12 +166,12 @@
                 </div>
             </div>
             <div class="row v-title-action">
-                <div class="col-lg-7 col-md-12 content-title pr-0">
-                    <h2>{{currentlyPlayed.english_word || currentlyPlayed.title}}</h2>
-                </div>
-                <div class="col-lg-5 col-md-12 content-title pl-0 text-right">
+                <div class="col-12 content-title pr-0">
+                    <h2 [ngClass]="selectedLanguage === 'urdu' ? 'urduFont' : ''">{{currentlyPlayed.english_word || currentlyPlayed.title}}</h2>
                     <h2 class="urduFont">{{currentlyPlayed.urdu_word}}</h2>
                 </div>
+                <!-- <div class="col-lg-5 col-md-12 content-title pl-0">
+                </div> -->
 
                 <div class="col-12">
                     <div class="row m-0 border-top">

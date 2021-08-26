@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgModel } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { GenericService } from './_services/generic-service';
@@ -93,7 +94,7 @@ export class AppComponent {
     (document.getElementById('search-toggle') as HTMLButtonElement).click();
   }
 
-  subscribeToEmails(): void {
+  subscribeToEmails(input: NgModel): void {
     if (!this.email || !this.emailPattern.test(this.email)) {
       return;
     } else {
@@ -101,6 +102,7 @@ export class AppComponent {
         if (res.message === 'Success') {
           this.subscribeSuccess = true;
           this.subscribeError = false;
+          input.reset('');
         } else {
           this.subscribeSuccess = false;
           this.subscribeError = true;

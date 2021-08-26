@@ -595,7 +595,7 @@ ng-scrollbar.leftside-overflow {
 	.sign-card h4 {
 		font-size: 13px;
 	}
-	.video-thumb .v-thumb-img{min-height: 193px;}
+	.video-thumb .v-thumb-img{min-height: 185px;}
 }
 @media (max-width: 375px) {
 	.sign-card img {

@@ -9,7 +9,7 @@ export const TopSlider = [
     },
     {
         title: 'TEACHER TUTORIALS',
-        description: 'Over 150 primary classroom based demos in PSL, with easy-to-use methodology and learning tools to train teachers of the Deaf.',
+        description: 'Over 500 primary classroom based demos in PSL, with easy-to-use methodology and learning tools to train teachers of the Deaf.',
         link: '/teacherTutorials/1',
         // image: 'https://s3-eu-west-1.amazonaws.com/psl-web-1/images//ttSliderImage-1556523325735.jpg',
         image: '/assets/images/slider-img-02.jpg',
@@ -18,7 +18,7 @@ export const TopSlider = [
     },
     {
         title: 'PSL STORIES',
-        description: `Over 40 richly illustrated and animated stories presented in PSL with the option of Urdu or English translation and voice over.`,
+        description: `Over 70 richly illustrated and animated stories presented in PSL with the option of Urdu or English translation and voice over.`,
         link: '/stories/1',
         // image: 'https://s3-eu-west-1.amazonaws.com/psl-web-1/images//pslStoriesSliderImage-1556523349694.jpg',
         image: '/assets/images/slider-img-03.jpg',
@@ -26,7 +26,7 @@ export const TopSlider = [
     },
     {
         title: 'LEARNING TUTORIALS',
-        description: 'Urdu, English and basic Math in PSL, with over 200 illustrated and animated tutorials',
+        description: 'Urdu, English and basic Math in PSL, with over 700 illustrated and animated tutorials',
         link: '/learningTutorials/4',
         // image: 'https://s3-eu-west-1.amazonaws.com/psl-web-1/images//learningTutorialsSliderImage-1556523369049.jpg',
         image: '/assets/images/slider-img-04.jpg',
@@ -133,22 +133,22 @@ export const Testimonials = [
         department: 'President, World Federation of the Deaf',
         location: 'Finland'
     },
-    {
-        quote: 'We have been learning PSL for four years now so that we can communicate better with our deaf daughter. It is wonderful that now the PSL video is being shown in our weekly classes. The repetition and practice helps us to learn better and remember the signs. Already we are able to have meaningful discussions with our daughter. We work as tailors from our home. It was difficult teaching our daughter, but now we know the signs to help her stitch with us. We hope the video will be made available for our home so we can practice more often.',
-        name: 'Ghulam Mustafa',
-        department: 'Father of Fatima, 19 year old student at Deaf Reach.',
-        location: ''
-    },
-    {
-        quote: 'We watch the PSL video everyday with our teacher. It helps me learn three languages, because it is written in Urdu and English. The pictures help me to remember the spelling and now I am getting better grades. My parents are very excited about how fast I am learning, and I know that they are proud of me.',
-        name: 'Zeeshan.',
-        department: '',
-        location: ''
-    },
-    {
-        quote: 'The PSL video is very, very useful in the KG class where I teach. The children are pay good attention to the video. I have noticed that the signs they learn from the PSL video are the ones that they use more and more in everyday language. It is very simple for them to remember because they practice the signs every day by watching the video. I think the videos are a very effective way to improve my students’ vocabulary and help them to express themselves confidently and clearly.',
-        name: 'Riffat',
-        department: 'Teacher of the Deaf and mother of four deaf children studying at Deaf Reach.',
-        location: ''
-    }
+    // {
+    //     quote: 'We have been learning PSL for four years now so that we can communicate better with our deaf daughter. It is wonderful that now the PSL video is being shown in our weekly classes. The repetition and practice helps us to learn better and remember the signs. Already we are able to have meaningful discussions with our daughter. We work as tailors from our home. It was difficult teaching our daughter, but now we know the signs to help her stitch with us. We hope the video will be made available for our home so we can practice more often.',
+    //     name: 'Ghulam Mustafa',
+    //     department: 'Father of Fatima, 19 year old student at Deaf Reach.',
+    //     location: ''
+    // },
+    // {
+    //     quote: 'We watch the PSL video everyday with our teacher. It helps me learn three languages, because it is written in Urdu and English. The pictures help me to remember the spelling and now I am getting better grades. My parents are very excited about how fast I am learning, and I know that they are proud of me.',
+    //     name: 'Zeeshan.',
+    //     department: '',
+    //     location: ''
+    // },
+    // {
+    //     quote: 'The PSL video is very, very useful in the KG class where I teach. The children are pay good attention to the video. I have noticed that the signs they learn from the PSL video are the ones that they use more and more in everyday language. It is very simple for them to remember because they practice the signs every day by watching the video. I think the videos are a very effective way to improve my students’ vocabulary and help them to express themselves confidently and clearly.',
+    //     name: 'Riffat',
+    //     department: 'Teacher of the Deaf and mother of four deaf children studying at Deaf Reach.',
+    //     location: ''
+    // }
 ];

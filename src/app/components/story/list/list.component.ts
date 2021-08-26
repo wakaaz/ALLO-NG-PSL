@@ -35,7 +35,6 @@ export class ListComponent implements OnInit, OnDestroy {
       this.selectedLanguage = 'english';
       localStorage.setItem('language', this.selectedLanguage);
     }
-    console.log('Language ---> ', this.selectedLanguage);
     this.route.params.subscribe(params => {
       this.isLoading = true;
       this.storiesList = [];
