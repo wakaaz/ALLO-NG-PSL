@@ -29,7 +29,7 @@
 .main-slider-bg {
 	position: relative;
 	padding:0;
-	text-align: left; background-size: 100%; max-width: 600px;  
+	text-align: left; background-size: 100%; max-width: 660px;  
 }
 .main-slider-bg h1 {
 	font-size: 60px; color: #009e4f; line-height: 1;
@@ -402,11 +402,8 @@
     .main-slider-bg h1 {
         font-size: 45px;  
     }
-    .main-slider-bg h5 {
-        font-size:16px; 
-    }
-    .main-slider-bg { 
-        max-width: 450px;}
+    .main-slider-bg h5{font-size:16px;}
+    .main-slider-bg {max-width: 480px;}
 }
 
 @media (max-width: 1024px) {
@@ -448,18 +445,18 @@
     }
 
     .main-slider-bg h1 {
-        font-size: 40px;  
+        font-size: 36px;  
     }
     .main-slider-bg h5 {
         font-size:14px; 
     }
-    .main-slider-bg { 
-        max-width: 400px;}
+    .main-slider-bg {max-width: 400px;}
         .main-slider .carousel-control-next, .main-slider .carousel-control-prev{ 
             height: 40px;
             width: 40px;
             margin: auto 5px; padding: 12px;
         }
+    .main-slider-bg .btn-primary {font-size: 14px; margin-top: 10px;}
 }
 
 @media (max-width: 800px) {
@@ -497,19 +494,17 @@
         flex: 0 0 420px;
         max-width: 420px;
     }
-
+    .main-slider-bg {max-width: 330px;}
     .main-slider-bg h1 {
-        font-size: 30px;  
+        font-size: 30px; margin:0;  
     }
     .main-slider-bg h5 {
         font-size:13px; letter-spacing: normal;
     }
-    .main-slider-bg { 
-        max-width: 400px;}
-        .main-slider-bg .btn-primary {font-size: 13px; margin-top: 15px; padding: 5px 10px;}     
-
+    .main-slider-bg .btn-primary {font-size: 12px; padding: 5px 10px;}     
+    #carousel-2 .main-slider-bg,  #carousel-3 .main-slider-bg, #carousel-4 .main-slider-bg{ margin-bottom: 0} 
 }
-
+ 
 @media (max-width: 767px) {
     
     .card-act-vds .card-act h2,
@@ -541,21 +536,19 @@
     .card-act-vds {padding-top: 30px 0px 30px 0px;}
  
     .main-slider-bg h1 {
-        font-size: 25px;  
+        font-size: 22px;  
     }
     .main-slider-bg h5 {
-        font-size:12px; 
+        font-size:11px; 
     }
-    .main-slider-bg { 
-        max-width: 400px;}
+    .main-slider-bg {max-width: 256px;}
 
         .main-slider  .carousel-control-next, .main-slider .carousel-control-prev{ 
             height: 40px;
             width: 40px;
             margin: auto 5px; padding: 12px;
         }
-       
-
+        .main-slider-bg .btn-primary {margin-top: 5px; font-size: 11px; padding: 3px 8px;}
 }
 
 @media (max-width: 480px) {
@@ -588,18 +581,18 @@
     .download-img-sm {
         width: 100%;
     }
-
+    .main-slider-bg .btn-primary {font-size: 12px; padding: 5px 10px; margin-top: 10px;}
     .main-slider .carousel-item{ background-color: #282828;}
     .main-slider .slider-img{ opacity: 0.3;}
     .main-slider .slider-img img{ width: 200%;}
     .main-slider .main-slider-bg h1, .main-slider .main-slider-bg h5{color: #fff !important; text-shadow: 0px 0px 5px rgba(0,0,0, 0.4);}
     .main-slider .main-slider-bg { max-width: 100%; margin: auto !important; text-align: left !important;}
-    .main-slider-bg h1 {font-size: 22px;}
+    .main-slider-bg h1 {font-size: 22px; margin-bottom: 8px;}
      
     #carousel-img-0 img, #carousel-img-1 img {
         margin-left: -250px;
     }
-}
+}         
 
 @media (max-width: 479px) {
     .card-act-vds .card-act h2,
@@ -668,4 +661,6 @@
 }
 @media (max-width:320px) {
     .main-slider-bg h1 {font-size: 18px; margin-bottom: 0;}
+    .main-slider-bg h5{line-height: 15px;}
+    .main-slider-bg .btn-primary {padding: 3px 10px; margin-top: 5px;}
 }
