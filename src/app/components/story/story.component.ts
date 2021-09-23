@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { GenericService } from 'src/app/_services/generic-service';
 
 @Component({
@@ -7,9 +8,10 @@ import { GenericService } from 'src/app/_services/generic-service';
   templateUrl: './story.component.html',
   styleUrls: ['./story.component.css']
 })
-export class StoryComponent implements OnInit {
+export class StoryComponent implements OnInit, OnDestroy {
 
   isLoading: boolean;
+  storyTypesSubscription$: Subscription;
   constructor(
     private router: Router,
     public genericService: GenericService
@@ -31,6 +33,10 @@ export class StoryComponent implements OnInit {
 
   goToDictionary(categoryId: string) {
     this.router.navigateByUrl(`/stories/${categoryId}`);
+  }
+
+  ngOnDestroy() {
+    if (this.storyTypesSubscription$) { this.storyTypesSubscription$.unsubscribe(); }
   }
 
 }

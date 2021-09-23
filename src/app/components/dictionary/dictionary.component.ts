@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Dictionary } from 'src/app/_models/dictionary';
 import { GenericService } from 'src/app/_services/generic-service';
 
@@ -11,12 +12,14 @@ import { GenericService } from 'src/app/_services/generic-service';
   ],
   // encapsulation: ViewEncapsulation.None
 })
-export class DictionaryComponent implements OnInit {
+export class DictionaryComponent implements OnInit, OnDestroy {
   dictionaries: Dictionary[];
   dictionariesList: Array<Dictionary>;
   sortBy: string;
   categoryName = '';
   loaders: Array<number> = [];
+
+  dictionaryCategoriesSubscription$: Subscription;
 
   constructor(
     public genericService: GenericService,
@@ -27,7 +30,7 @@ export class DictionaryComponent implements OnInit {
 
   ngOnInit(): void {
     this.genericService.getDictionaryCategories();
-    this.genericService.dictionaryCategories$.subscribe((dictionriesData: Array<Dictionary>) => {
+    this.dictionaryCategoriesSubscription$ = this.genericService.dictionaryCategories$.subscribe((dictionriesData: Array<Dictionary>) => {
       if (dictionriesData !== null) {
         this.dictionariesList = [];
         this.dictionaries = dictionriesData;
@@ -64,6 +67,10 @@ export class DictionaryComponent implements OnInit {
   changeSort(sort: string) {
     this.sortBy = sort;
     this.dictionariesList = this.genericService.sortMainArray(this.dictionariesList, this.sortBy);
+  }
+
+  ngOnDestroy() {
+    if (this.dictionaryCategoriesSubscription$) { this.dictionaryCategoriesSubscription$.unsubscribe(); }
   }
 
 }

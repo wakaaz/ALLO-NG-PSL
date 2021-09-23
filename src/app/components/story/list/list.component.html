@@ -1,3 +1,17 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-12 btn-language">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-outline-primary" [ngClass]="selectedLanguage === 'english' ? 'active' : ''"
+                (click)="languageChanged('english')">
+                <input type="radio" name="options" id="option1"
+                    [checked]="selectedLanguage === 'english'">English</label>
+            <label class="btn btn-outline-primary" [ngClass]="selectedLanguage === 'urdu' ? 'active' : ''"
+                (click)="languageChanged('urdu')">
+                <input type="radio" name="options" id="option2" [checked]="selectedLanguage === 'urdu'">Urdu</label>
+        </div>
+
+    </div>
+</div>
 <div class="row filter-sort">
 
     <div class="col-md-6 col pr-0">
@@ -47,7 +61,7 @@
                 <img [src]="story.poster ? decodeURIComponent(story.poster) : '/assets/images/placeholder-image.jpg'"
                     onError="this.src='/assets/images/placeholder-image.jpg'" alt="{{story.title}}">
             </div>
-            <h3>{{story.title}}</h3>
+            <h3 [ngClass]="selectedLanguage === 'urdu' ? 'urduFont' : ''">{{story.title}}</h3>
         </a>
     </div>
     <span style="height: auto; width: 100%; display: flex; flex-wrap: wrap;" *ngIf="isLoading">

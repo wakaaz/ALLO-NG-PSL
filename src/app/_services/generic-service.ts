@@ -113,7 +113,6 @@ export class GenericService {
   }
   getLearningTutorialVideoList(gradeIds: number, subjectId: number): void {
     this.restService.postRequest('/LearningTutorials', { grade_id: gradeIds, subject_id: subjectId }).pipe(map(x => x.data)).subscribe(x => {
-      console.log('getLearningTutorialVideoList', x)
       this._learningTutorialVideos$.next(x);
     });
   }
@@ -158,6 +157,10 @@ export class GenericService {
     return this.restService.postRequest('/ContactUs', form);
   }
 
+  subscribeToEmails(email: string): Observable<any> {
+    return this.restService.postRequest('/Subscribe', {email});
+  }
+
   getToken(): void {
     this.restService.postAuth('/GuestLogin')
         .subscribe(x => {
@@ -168,9 +171,19 @@ export class GenericService {
   sortMainArray(actualArray: Array<Dictionary | LearningSubjects | Story | VideoList >, sortBy: string): Array<any> {
     const sortedArray = actualArray.sort((a: any, b: any) => {
       if (sortBy === 'A') {
-        return a.title.charCodeAt(0) - b.title.charCodeAt(0);
+        // return a.title.charCodeAt(0) - b.title.charCodeAt(0);
+        if (a.title.toLowerCase() > b.title.toLowerCase()) {
+          return 1;
+        } else {
+          return -1;
+        }
       } else {
-        return b.title.charCodeAt(0) - a.title.charCodeAt(0);
+        if (b.title.toLowerCase() > a.title.toLowerCase()) {
+          return 1;
+        } else {
+          return -1;
+        }
+        // return b.title.charCodeAt(0) - a.title.charCodeAt(0);
       }
     });
     return sortedArray;
@@ -179,9 +192,17 @@ export class GenericService {
   sortSubArray(actualArray: Array<any>, sortBy: string): Array<any> {
     const sortedArray = actualArray.sort((a: any, b: any) => {
       if (sortBy === 'A') {
-        return a.english_word.charCodeAt(0) - b.english_word.charCodeAt(0);
+        if (a.english_word.toLowerCase() > b.english_word.toLowerCase()) {
+          return 1;
+        } else {
+          return -1;
+        }
       } else {
-        return b.english_word.charCodeAt(0) - a.english_word.charCodeAt(0);
+        if (b.english_word.toLowerCase() > a.english_word.toLowerCase()) {
+          return 1;
+        } else {
+          return -1;
+        }
       }
     });
     return sortedArray;

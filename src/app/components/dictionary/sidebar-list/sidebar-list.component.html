@@ -5,8 +5,8 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 d-none d-md-block">
             <ol class="breadcrumb">
-                <li><a href="#"><span>{{categoryName}} </span></a></li>
-                <li><span>Airport</span></li>
+                <li><a [routerLink]="['/dictionary']"><span>{{categoryName}} </span></a></li>
+                <li><span>{{selectedDictionaryName}}</span></li>
             </ol>
         </div>
     </div>
@@ -31,7 +31,7 @@
                     <cdk-virtual-scroll-viewport scrollViewport>
                         <ul>
                             <li *ngFor="let dictionary of genericService.dictionaryCategories$ | async">
-                                <a [routerLink]="['/dictionary/category', dictionary.id]"
+                                <a [routerLink]="['/dictionary/category', dictionary.id]" (click)="dictionaryChanged(dictionary.id)"
                                     routerLinkActive="active">{{dictionary.title}}</a>
                             </li>
                         </ul>

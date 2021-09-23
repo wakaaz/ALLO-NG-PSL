@@ -2,9 +2,9 @@
     <div class="main-slider">
         <span style="float:'left'; width: '100%'; height: auto;" (swipeleft)="onSwipe('left')"
             (swiperight)="onSwipe('right')">
-            <ngb-carousel #topCarousel *ngIf="sliderData.length">
+            <ngb-carousel *ngIf="sliderData.length" #topCarousel interval="7000">
                 <ng-template ngbSlide *ngFor="let slide of sliderData; let i=index">
-                    <div class="picsum-img-wrapper slider-img">
+                    <div class="picsum-img-wrapper slider-img" [id]="'carousel-img-'+i">
                         <img [src]="slide.image" alt="{{slide.title}}">
                     </div>
                     <div class="carousel-caption" [id]="'carousel-'+i">
@@ -15,7 +15,6 @@
 
                         </div>
                     </div>
-
                     <!-- <div class="carousel-caption">
                     <div class="bottom_show">
                         <h3 class="main-slider-bg slider-title">{{slide.title}}</h3>
@@ -31,34 +30,41 @@
     <div class="card-act-vds">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-6">
+                <div class="col-lg col-md-6 col-6">
                     <a routerLink="/dictionary" class="card-act">
                         <h2>PSL <span>DICTIONARY</span></h2>
-                        <img src="../../../assets/../../../assets/images/psl-dictionary-icon.svg" alt="">
-                        <h1>OVER 5000 <span>WORDS</span></h1>
+                        <img src="/assets/images/psl-dictionary-icon.svg" alt="">
+                        <h1>OVER 6000 <span>WORDS</span></h1>
                     </a>
                 </div>
-                <div class="col-lg-3 col-md-6 col-6">
+                <div class="col-lg col-md-6 col-6">
                     <a routerLink="/teacherTutorials/1" class="card-act">
                         <h2>TEACHER <span>TUTORIALS</span></h2>
-                        <img src="../../../assets/images/psl-teacher-icon.svg" alt="">
-                        <h1>OVER 4500 <span>WORDS</span></h1>
+                        <img src="/assets/images/psl-teacher-icon.svg" alt="">
+                        <h1>OVER 500 <span>TUTORIALS</span></h1>
                     </a>
                 </div>
-                <div class="col-lg-3 col-md-6 col-6">
+                <div class="col-lg col-md-6 col-6">
                     <a routerLink="/stories/1" class="card-act">
                         <h2>PSL <span>STORIES</span></h2>
-                        <img src="../../../assets/images/psl-story-icon.svg" alt="">
-                        <h1>OVER 5000 <span>WORDS</span></h1>
+                        <img src="/assets/images/psl-story-icon.svg" alt="">
+                        <h1>OVER 100 <span>STORIES</span></h1>
                     </a>
                 </div>
-                <div class="col-lg-3 col-md-6 col-6">
+                <div class="col-lg col-md-6 col-6">
                     <a routerLink="/learningTutorials/4" class="card-act">
                         <h2>LEARNING <span>TUTORIALS</span></h2>
-                        <img src="../../../assets/images/psl-learning-icon.svg" alt="">
-                        <h1>OVER 5000 <span>WORDS</span></h1>
+                        <img src="/assets/images/psl-learning-icon.svg" alt="">
+                        <h1>OVER 700 <span>TUTORIALS</span></h1>
                     </a>
                 </div>
+                <!-- <div class="col-lg col-md-6 col-6">
+                    <a routerLink="/iqra" class="card-act">
+                        <h2>IQRA <span>PROGRAM</span></h2>
+                        <img src="/assets/images/psl-learning-icon.svg" alt="">
+                        <h1>BUILD <span>VOCABULARY</span></h1>
+                    </a>
+                </div> -->
             </div>
         </div>
     </div>
@@ -66,16 +72,14 @@
     <div class="psl-about">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-sm-6 about-img"><img src="../../../assets/images/left-images.jpg" alt=""></div>
+                <div class="col-lg-6 col-sm-6 about-img"><img src="/assets/images/left-images.jpg" alt=""></div>
                 <div class="col-lg-6 col-md-12 d-flex align-items-center">
                     <div>
                         <h2>ABOUT <span>PSL</span></h2>
-                        <p>For the 1st time in Pakistan – a wealth of Pakistan Sign Language learning resources at your
-                            fingertips! An invaluable resource for deaf students and their families, those involved in
-                            Deaf
-                            education, and anyone who wants to learn an exciting new language.</p>
+                        <p>For the 1st time in Pakistan – a wealth of Pakistan Sign Language learning resources at your fingertips! An invaluable resource for deaf students 
+                            and their families, those involved in Deaf education, and anyone who wants to learn an exciting new language.</p>
 
-                        <div class="about-img-sm"><img src="../../../assets/images/left-images.jpg" alt=""></div>
+                        <div class="about-img-sm"><img src="/assets/images/left-images.jpg" alt=""></div>
 
                         <h2>The Deaf Reach Program</h2>
                         <p>Deaf Reach Schools and Training Centers, a program of Family Educational Services Foundation
@@ -83,8 +87,8 @@
                             By
                             investing in PSL learning resources, Deaf Reach is working to make literacy, education and
                             skills training...</p>
-                        <button type="button" routerLink="/deaf-reach-program" class="btn btn-outline-primary">LEARN
-                            MORE</button>
+                        <a type="button" routerLink="/deaf-reach-program" class="btn btn-outline-primary">LEARN
+                            MORE</a>
                     </div>
                 </div>
 
@@ -151,7 +155,7 @@
                         <button type="button" class="btn btn-outline-light" (click)="recommendWord()">SUBMIT</button>
                     </div>
                     <div class="col-lg-6 col-md-12 recommend-img">
-                        <img src="../../../assets/images/recomnend-img.png" alt="">
+                        <img src="/assets/images/recomnend-img.png" alt="">
                     </div>
                 </div>
             </div>
@@ -167,15 +171,14 @@
                     <div>
                         <h2>Download Tutorials to watch on the go.</h2>
 
-                        <div class="download-img-sm"><img src="../../../assets/images/download-img.png" alt=""></div>
+                        <div class="download-img-sm"><img src="/assets/images/download-img.png" alt=""></div>
 
-                        <p class="mb-0">For the 1st time in Pakistan – a wealth of Pakistan Sign Language learning
-                            resources
-                            at your fingertips! An invaluable resource for deaf students and their families.</p>
+                        <p class="mb-0">Teachers, parent and Deaf students can now access hundreds of tutorials that supplement learning and teaching outcomes. 
+                            All tutorials are in English, Urdu & PSL, and are in line with the National Curriculum and Best Practices in Deaf education.</p>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 download-img">
-                    <img src="../../../assets/images/download-img.png" alt="">
+                    <img src="/assets/images/download-img.png" alt="">
                 </div>
             </div>
 
@@ -202,7 +205,7 @@
                                 <div class="row">
 
                                     <div class="col-auto testimonials-img">
-                                        <img src="../../../assets/images/avatar.svg" alt="">
+                                        <img src="/assets/images/avatar.svg" alt="">
                                     </div>
                                     <div class="col">
                                         <h4>{{testimonial.name}}</h4>
@@ -222,18 +225,22 @@
     <div class="bottom-logo">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-md-2 d-flex justify-content-center"><img src="../../../assets/images/pso-logo.png"
+                <div class="col d-flex justify-content-center"><img src="/assets/images/pso-logo.png"
                         alt="">
                 </div>
-                <div class="col-md-2 d-flex justify-content-center"><img src="../../../assets/images/ppaf-logo.png"
+                <div class="col d-flex justify-content-center"><img src="/assets/images/ppaf-logo.png"
                         alt="">
                 </div>
-                <div class="col-md-2 d-flex justify-content-center"><img src="../../../assets/images/ideas-logo.png"
+                <div class="col d-flex justify-content-center"><img src="/assets/images/ideas-logo.png"
                         alt="">
                 </div>
-                <div class="col-md-2 d-flex justify-content-center"><img src="../../../assets/images/netHope-logo.png"
+                <div class="col d-flex justify-content-center"><img src="/assets/images/netHope-logo.png"
                         alt=""></div>
-                <div class="col-md-2 d-flex justify-content-center"><img src="../../../assets/images/danpak.png" alt="">
+                <div class="col d-flex justify-content-center"><img src="/assets/images/danpak.png" alt="">
+                </div>
+                <div class="col d-flex justify-content-center"><img src="/assets/images/uk-aid.png" alt="">
+                </div>
+                <div class="col d-flex justify-content-center"><img src="/assets/images/khaki-foundation-g.png" alt="">
                 </div>
             </div>
         </div>

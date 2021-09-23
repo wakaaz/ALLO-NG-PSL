@@ -1,6 +1,6 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Dictionary } from 'src/app/_models/dictionary';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { GenericService } from 'src/app/_services/generic-service';
 
 @Component({
@@ -15,14 +15,12 @@ export class ListComponent implements OnInit, OnDestroy {
   isLoading: boolean;
   loaders: Array<number> = [];
 
+  dictionariesSubscription$: Subscription;
+
   constructor(
     private route: ActivatedRoute,
-    private change: ChangeDetectorRef,
     public genericService: GenericService
   ) { }
-  ngOnDestroy(): void {
-    // this.genericService.setEmptyDictionaries();
-  }
 
   ngOnInit(): void {
     this.loaders.length = 12;
@@ -30,7 +28,7 @@ export class ListComponent implements OnInit, OnDestroy {
       this.isLoading = true;
       this.dictionariesList.length = 0;
       setTimeout(() => {
-        this.genericService.dictionaries$.subscribe(dictionariesData => {
+        this.dictionariesSubscription$ = this.genericService.dictionaries$.subscribe(dictionariesData => {
           if (dictionariesData !== null) {
             this.dictionaries = dictionariesData;
             // JSON.parse(JSON.stringify()) to break refrence
@@ -63,5 +61,9 @@ export class ListComponent implements OnInit, OnDestroy {
 
   decodeURIComponent(url: string): string {
     return decodeURIComponent(url);
+  }
+
+  ngOnDestroy() {
+    if (this.dictionariesSubscription$) { this.dictionariesSubscription$.unsubscribe(); }
   }
 }

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { LearningTutorial, VideoList } from 'src/app/_models/learning-tutorial';
 import { GenericService } from 'src/app/_services/generic-service';
 
@@ -8,7 +9,7 @@ import { GenericService } from 'src/app/_services/generic-service';
   templateUrl: './videos-list.component.html',
   styleUrls: ['./videos-list.component.css']
 })
-export class VideosListComponent implements OnInit {
+export class VideosListComponent implements OnInit, OnDestroy {
 
   tutorialVideos: Array<VideoList> = [];
   tutorialVideosList: VideoList[];
@@ -19,6 +20,8 @@ export class VideosListComponent implements OnInit {
   isLoading: boolean;
   subjectId = 0;
   gradeId = 0;
+  learningTutorialSubscription$: Subscription;
+  learningTutorialVideosSubscription$: Subscription;
   constructor(
     private route: ActivatedRoute,
     public genericService: GenericService
@@ -29,7 +32,7 @@ export class VideosListComponent implements OnInit {
       this.loaders.length = 12;
       this.isLoading = true;
       this.tutorialVideosList = [];
-      this.genericService.learningTutorial$.subscribe((x: LearningTutorial[]) => {
+      this.learningTutorialSubscription$ = this.genericService.learningTutorial$.subscribe((x: LearningTutorial[]) => {
         if (x !== null) {
           this.subjectTitle = x.find(x => x.id ==this.gradeId)?.subjects.find(subject => subject.id == this.subjectId).title;
         }
@@ -70,5 +73,10 @@ export class VideosListComponent implements OnInit {
   changeSort(sort: string) {
     this.sortBy = sort;
     this.tutorialVideosList = this.genericService.sortMainArray(this.tutorialVideosList, this.sortBy);
+  }
+
+  ngOnDestroy() {
+    if (this.learningTutorialSubscription$) { this.learningTutorialSubscription$.unsubscribe(); }
+    if (this.learningTutorialVideosSubscription$) { this.learningTutorialVideosSubscription$.unsubscribe(); }
   }
 }

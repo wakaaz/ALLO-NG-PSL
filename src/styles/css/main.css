@@ -164,8 +164,8 @@ button {
 }
 ng-scrollbar.leftside-overflow {
 	overflow: hidden;
-	height: calc(100vh - 260px) !important;
-	max-height: calc(100vh - 260px);
+	height: calc(100vh - 280px) !important;
+	max-height: calc(100vh - 280px);
 }
 .leftside-list h3 {
 	font-size: 20px;
@@ -287,7 +287,15 @@ ng-scrollbar.leftside-overflow {
 	position: relative; min-height: 143px; background-image: url(../../assets/images/loader-video.gif); background-position: center center;
 	background-repeat: no-repeat; background-color: #fff;
 }
- 
+@font-face {
+	font-family: myurduFont;
+	src: url("../webfonts/jameel-noori-nastaleeq-regular.ttf");
+}
+.urduFont{
+	font-family: myurduFont;
+	color: #009e4f !important;
+}
+
 .video-thumb .v-thumb-img img {
 	width: 100%;
 }
@@ -302,7 +310,7 @@ ng-scrollbar.leftside-overflow {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     position: relative;
-    line-height: 20px; 
+    line-height: 20px;
     margin-bottom: 10px;
     margin-top: 10px;
 	text-transform: capitalize;
@@ -554,6 +562,10 @@ ng-scrollbar.leftside-overflow {
 		min-height: 135px;
 	}
 	.video-thumb .v-thumb-img{min-height: 290px;}
+
+	.main-loader img {  
+	 width: auto; height:65px;
+	}
 }
 @media (max-width: 480px) {
 .video-thumb .v-thumb-img{min-height: 258px;}
@@ -583,7 +595,7 @@ ng-scrollbar.leftside-overflow {
 	.sign-card h4 {
 		font-size: 13px;
 	}
-	.video-thumb .v-thumb-img{min-height: 193px;}
+	.video-thumb .v-thumb-img{min-height: 185px;}
 }
 @media (max-width: 375px) {
 	.sign-card img {

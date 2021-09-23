@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
+import { AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { NgbCarousel, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import { GenericService } from 'src/app/_services/generic-service';
 import { Testimonials, TopSlider } from './carousel.constants';
 
@@ -9,7 +9,7 @@ import { Testimonials, TopSlider } from './carousel.constants';
   styleUrls: ['./home.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   sliderData = TopSlider;
   testimonials = Testimonials;
 
@@ -33,11 +33,21 @@ export class HomeComponent implements OnInit {
     this.emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
     this.isLoading = true;
     setTimeout(() => {
+      if (this.carousel) {
+        this.carousel.cycle();
+      }
       this.isLoading = false;
     }, 6000);
   }
 
+  ngAfterViewInit(): void {
+    if (this.carousel) {
+      this.carousel.pause();
+    }
+  }
+
   onSwipe(direction: string) {
+    this.carousel.pause();
     if (direction === 'left') {
       this.carousel.next();
     } else {

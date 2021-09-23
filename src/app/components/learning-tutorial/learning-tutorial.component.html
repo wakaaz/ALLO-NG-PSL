@@ -1,21 +1,22 @@
 <div class="container">
     <div class="row content-title">
         <div class="col-lg-6 col-md-6 col-sm-12">
-            <h2>Learning <span>Tutorial</span></h2>
+            <a *ngIf="hasSubjectId" (click)="backToClass()" class="text-link"><i class="fas fa-chevron-left"></i>Back to Class</a>
+            <h2>Learning <span>Tutorials</span></h2>
         </div>
-        <!-- <div class="col-lg-6 col-md-6 col-sm-12 d-none d-md-block">
+        <div *ngIf="hasSubjectId" class="col-lg-6 col-md-6 col-sm-12 d-none d-md-block">
             <ol class="breadcrumb">
-                <li><a href="#"><span>{{categoryName}} </span></a></li>
-                <li><span>Airport</span></li>
+                <li><a><span>Learning Tutorials </span></a></li>
+                <li id="class_name" (click)="backToClass()"><span>{{className}}</span></li>
             </ol>
-        </div> -->
+        </div>
+
     </div>
 
     <div class="row">
-        <div class="col-lg-3 col-md-4">
-
+        <div *ngIf="!hasSubjectId" class="col-lg-3 col-md-4">
             <div class="select-dictionary d-block d-md-none">
-                <select *ngIf="!isLoading" class="custom-select" id="inputGroupSelect02" (change)="goToDictionary($event.target.value)" style="font-size: 13px !important;">
+                <select *ngIf="!isLoading" class="custom-select" id="inputGroupSelect02" (change)="goToGrade($event.target.value)" style="font-size: 13px !important;">
                     <option selected disabled>Select Tutorial</option>
                     <option *ngFor="let tutorial of genericService.learningTutorial$ | async"
                         [value]="tutorial.id">
@@ -33,6 +34,45 @@
                             <li *ngFor="let tutorial of genericService.learningTutorial$ | async">
                                 <a [routerLink]="['/learningTutorials', tutorial.id]"
                                     routerLinkActive="active">{{tutorial.grade}}</a>
+                            </li>
+                        </ul>
+                    </cdk-virtual-scroll-viewport>
+                </ng-scrollbar>
+            </div>
+            <div *ngIf="isLoading" class="leftside-list d-none d-md-block" style="box-shadow: none">		
+                <div class="shine effect-sm-left"></div>
+                <div class="shine effect-sm-left"></div>
+                <div class="shine effect-sm-left"></div>	
+                <div class="shine effect-sm-left"></div>
+                <div class="shine effect-sm-left"></div>
+                <div class="shine effect-sm-left"></div>
+                <div class="shine effect-sm-left"></div>
+                <div class="shine effect-sm-left"></div>
+                <div class="shine effect-sm-left"></div>	
+                <div class="shine effect-sm-left"></div>
+            </div>
+
+        </div>
+        <div *ngIf="hasSubjectId" class="col-lg-3 col-md-4">
+            <div class="select-dictionary d-block d-md-none">
+                <select *ngIf="!isLoading" class="custom-select" id="inputGroupSelect02" (change)="goToSubject($event.target.value)" style="font-size: 13px !important;">
+                    <option selected disabled>Select Subject</option>
+                    <option *ngFor="let tutorial of subjects"
+                        [value]="'/learningTutorials/' + tutorial.grade_id +'/' + tutorial.id">
+                        {{tutorial.title}}
+                    </option>
+                </select>
+                <div *ngIf="isLoading" class="shine effect-sm-left"></div>
+            </div>
+
+            <div *ngIf="!isLoading" class="leftside-list d-none d-md-block">
+                <h3>Subjects <span>List</span></h3>
+                <ng-scrollbar class="leftside-overflow" thumbClass="white-scrollbars" disabled="false">
+                    <cdk-virtual-scroll-viewport scrollViewport>
+                        <ul>
+                            <li *ngFor="let subject of subjects">
+                                <a [routerLink]="['/learningTutorials', subject.grade_id, subject.id]"
+                                    routerLinkActive="active">{{subject.title}}</a>
                             </li>
                         </ul>
                     </cdk-virtual-scroll-viewport>
