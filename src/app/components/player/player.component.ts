@@ -15,7 +15,7 @@ import { take } from 'rxjs/operators';
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
-  styleUrls: ['./player.component.css']
+  styleUrls: ['./player.component.css'],
 })
 export class PlayerComponent implements OnInit, OnDestroy {
   // get the component instance to have access to plyr instance
@@ -36,11 +36,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
   oldCategoryId: number;
   routerURL: string;
   selectedVideoQuality: string = '';
-  selectedLessons: Array<{ name: string, url: string }> = [];
+  selectedLessons: Array<{ name: string; url: string }> = [];
   videoQualities: Array<any> = [];
   videoLink: string;
-  currentlyPlayed: any = {
-  };
+  currentlyPlayed: any = {};
   storiesData: Array<any> = [];
   englishStories: Array<any> = [];
   urduStories: Array<any> = [];
@@ -62,14 +61,14 @@ export class PlayerComponent implements OnInit, OnDestroy {
     public genericService: GenericService,
     private videoService: VideoService,
     private location: Location
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.copy = 'Copy';
     this.progress = '0%';
     this.setPlayer();
     this.url = this.router.url;
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       // this.genericService.getDictionaries(params.vedioId);
       // this.initialiseState(); // reset and set based on new parameter this time
       this.id = params.vedioId;
@@ -84,10 +83,12 @@ export class PlayerComponent implements OnInit, OnDestroy {
     // this.allVedios = this.genericService.dictionaries$.tak.value();
     // this.setCurrentlyPlayedVedio(this.id);
     // this.setPlayer();
-    this.player.on('ended', ev => {
+    this.player.on('ended', (ev) => {
       if (this.isAutoPlay) {
         // alert('ended event');
-        this.router.navigateByUrl(`${this.updateUrl()}/${this.remeaningVedios[0].id}`);
+        this.router.navigateByUrl(
+          `${this.updateUrl()}/${this.remeaningVedios[0].id}`
+        );
       }
     });
   }
@@ -105,19 +106,20 @@ export class PlayerComponent implements OnInit, OnDestroy {
       } else if (this.url.split('/')[2] === 'story') {
         this.genericService.getStoriesVedios(this.categoryId);
       } else if (this.url.split('/')[2] === 'learningTutorials') {
-        this.genericService.getLearningTutorialVideoList(this.gradeId, this.categoryId);
+        this.genericService.getLearningTutorialVideoList(
+          this.gradeId,
+          this.categoryId
+        );
       } else if (this.url.split('/')[2] === 'teacherTutorials') {
         this.genericService.getTeachTutorials(this.gradeId, this.categoryId);
       }
     }
 
-
     if (this.url.split('/')[1] === 'play') {
       if (this.url.split('/')[2] === 'dictionary') {
         this.dictionariesSubscription();
         this.setObject(this.allVedios);
-        this.routerURL =
-          this.categoryName = 'PSL Dictionary';
+        this.routerURL = this.categoryName = 'PSL Dictionary';
       } else {
         if (this.url.split('/')[2] === 'story') {
           this.selectedLanguage = localStorage.getItem('language') || 'english';
@@ -143,21 +145,25 @@ export class PlayerComponent implements OnInit, OnDestroy {
     return urlArray.join('/');
   }
   storiesSubscription(): void {
-    this.storiesSubscription$ = this.genericService.stories$
-      .subscribe(data => {
+    this.storiesSubscription$ = this.genericService.stories$.subscribe(
+      (data) => {
         if (data !== null) {
           debugger;
           this.storiesData = data;
           let selectedStories = [];
-          const currentVideo = this.storiesData.find(x => x.id == this.id);
+          const currentVideo = this.storiesData.find((x) => x.id == this.id);
           let lang = 'english';
           if (currentVideo.language !== 'english') {
             lang = 'urdu';
           }
           this.selectedLanguage = lang;
           localStorage.setItem('language', this.selectedLanguage);
-          this.englishStories = this.storiesData.filter(story => (story.language === 'english'));
-          this.urduStories = this.storiesData.filter(story => (story.language !== 'english'));
+          this.englishStories = this.storiesData.filter(
+            (story) => story.language === 'english'
+          );
+          this.urduStories = this.storiesData.filter(
+            (story) => story.language !== 'english'
+          );
           if (this.selectedLanguage === 'english') {
             selectedStories = this.englishStories;
           } else {
@@ -165,11 +171,12 @@ export class PlayerComponent implements OnInit, OnDestroy {
           }
           this.setObject(selectedStories);
         }
-      });
+      }
+    );
   }
   learningVideoSubscription(): void {
-    this.learningTutorialsSubscription$ = this.genericService.learningTutorialVideos$
-      .subscribe((data: any) => {
+    this.learningTutorialsSubscription$ =
+      this.genericService.learningTutorialVideos$.subscribe((data: any) => {
         if (data !== null) {
           this.setObject(data);
         }
@@ -177,16 +184,19 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   tutorVideoSubscription(): void {
-    this.teacherTutorialsSubscription$ = this.genericService.teacherTutorialVideosList$.subscribe(teacherTutorialVideos => {
-      if (teacherTutorialVideos !== null) {
-        this.setObject(teacherTutorialVideos);
-      }
-    });
+    this.teacherTutorialsSubscription$ =
+      this.genericService.teacherTutorialVideosList$.subscribe(
+        (teacherTutorialVideos) => {
+          if (teacherTutorialVideos !== null) {
+            this.setObject(teacherTutorialVideos);
+          }
+        }
+      );
   }
 
   dictionariesSubscription(): void {
-    this.dictionariesSubscription$ = this.genericService.dictionaries$
-      .subscribe(data => {
+    this.dictionariesSubscription$ =
+      this.genericService.dictionaries$.subscribe((data) => {
         if (data !== null) {
           this.setObject(data);
         }
@@ -205,18 +215,28 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   setPlayer(): void {
-    this.player = new Plyr('#plyrID', { captions: { active: true }, autoplay: true });
+    this.player = new Plyr('#plyrID', {
+      // Quality default
+  quality: {
+    default: 720,
+    // The options to display in the UI, if available for the source media
+    options: [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240],
+  },
+      captions: {
+        active: true,
+      },
+      autoplay: true,
+    });
   }
 
   setPlayerCurrentSource(): void {
     // this.player.source = null;
     this.player.source =
-    // [
-    {
-      type: 'video',
-      title: this.currentlyPlayed.english_word,
-      sources:
-        [
+      // [
+      {
+        type: 'video',
+        title: this.currentlyPlayed.english_word,
+        sources: [
           this.currentlyPlayed['1080p'].url && {
             src: this.decodeURIComponent(this.currentlyPlayed['1080p'].url),
             type: 'video/mp4',
@@ -241,14 +261,25 @@ export class PlayerComponent implements OnInit, OnDestroy {
             src: this.decodeURIComponent(this.currentlyPlayed['240p'].url),
             type: 'video/mp4',
             size: 240,
-          }
+          },
         ],
-      poster: this.decodeURIComponent(this.currentlyPlayed.poster)
-    };
+        poster: this.decodeURIComponent(this.currentlyPlayed.poster),
+      };
     this.videoLink = window.location.href || '';
-    this.videoTitle = this.categoryName === 'PSL Dictionary' && this.currentlyPlayed.category_name ? this.currentlyPlayed.category_name : this.currentlyPlayed.title || this.currentlyPlayed.english_word;
-    this.gradeName = this.categoryName.includes('Tutorials') && this.currentlyPlayed.grade_name ? this.currentlyPlayed.grade_name : '';
-    this.subjectName = this.categoryName.includes('Tutorials') && this.currentlyPlayed.subject_name ? this.currentlyPlayed.subject_name : '';
+    this.videoTitle =
+      this.categoryName === 'PSL Dictionary' &&
+      this.currentlyPlayed.category_name
+        ? this.currentlyPlayed.category_name
+        : this.currentlyPlayed.title || this.currentlyPlayed.english_word;
+    this.gradeName =
+      this.categoryName.includes('Tutorials') && this.currentlyPlayed.grade_name
+        ? this.currentlyPlayed.grade_name
+        : '';
+    this.subjectName =
+      this.categoryName.includes('Tutorials') &&
+      this.currentlyPlayed.subject_name
+        ? this.currentlyPlayed.subject_name
+        : '';
     //  ];
     // this.player.play();
   }
@@ -257,15 +288,19 @@ export class PlayerComponent implements OnInit, OnDestroy {
    * Setting the available video qualities to show in the download popup
    */
   setAvailableQualities(): void {
-    this.videoQualities = Object.keys(this.currentlyPlayed).filter(key => {
-      if (this.currentlyPlayed[key]?.url) {
-        return key;
-      }
-    }).map(video => { return { quality: video, size: this.currentlyPlayed[video]?.filesize }; });
+    this.videoQualities = Object.keys(this.currentlyPlayed)
+      .filter((key) => {
+        if (this.currentlyPlayed[key]?.url) {
+          return key;
+        }
+      })
+      .map((video) => {
+        return { quality: video, size: this.currentlyPlayed[video]?.filesize };
+      });
   }
 
   setCurrentlyPlayedVedio(id: number): void {
-    const currentlyPlayedIndex = this.allVedios.findIndex(x => x.id == id);
+    const currentlyPlayedIndex = this.allVedios.findIndex((x) => x.id == id);
     if (currentlyPlayedIndex > -1) {
       this.currentlyPlayed = this.allVedios[currentlyPlayedIndex];
       this.setPlayerCurrentSource();
@@ -277,14 +312,22 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.remeaningVedios = this.allVedios.slice(currentlyPlayedIndex + 1);
       }
       if (this.isStories) {
-        const mainIndex = this.storiesData.findIndex(x => x.id == id);
+        const mainIndex = this.storiesData.findIndex((x) => x.id == id);
         if (mainIndex === this.storiesData.length - 1) {
-          this.englishStories = this.storiesData.filter(story => (story.language === 'english'));
-          this.urduStories = this.storiesData.filter(story => (story.language !== 'english'));
+          this.englishStories = this.storiesData.filter(
+            (story) => story.language === 'english'
+          );
+          this.urduStories = this.storiesData.filter(
+            (story) => story.language !== 'english'
+          );
         } else {
           const remainingStories = this.storiesData.slice(mainIndex);
-          this.englishStories = remainingStories.filter(story => (story.language === 'english'));
-          this.urduStories = remainingStories.filter(story => (story.language !== 'english'));
+          this.englishStories = remainingStories.filter(
+            (story) => story.language === 'english'
+          );
+          this.urduStories = remainingStories.filter(
+            (story) => story.language !== 'english'
+          );
         }
       }
     }
@@ -292,10 +335,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
   onBackClicked(): void {
     const urlArray = this.url.split('/play')[1].split('/');
     urlArray.pop();
-    this.router.navigateByUrl(urlArray.join('/').replace('story', 'stories'))
+    this.router.navigateByUrl(urlArray.join('/').replace('story', 'stories'));
   }
   onVideoEnded(): void {
-    console.log('================Ended Video=================')
+    console.log('================Ended Video=================');
   }
 
   selectedQuality(quality: string) {
@@ -305,7 +348,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   /**
    * First download the video to current origin so that the HTML Anchor tag
    * download button can download the video otherwise it will redirect the user to link of video
-   * 
+   *
    * @param {NgForm} videoForm to reset the form after it has started the download
    * @returns void
    */
@@ -314,30 +357,36 @@ export class PlayerComponent implements OnInit, OnDestroy {
       return;
     } else {
       this.success = true;
-      const url = this.decodeURIComponent(this.currentlyPlayed[this.selectedVideoQuality].url);
-      this.videoService.getVideo(url)
-        .subscribe((data: HttpEvent<any>) => {
+      const url = this.decodeURIComponent(
+        this.currentlyPlayed[this.selectedVideoQuality].url
+      );
+      this.videoService.getVideo(url).subscribe(
+        (data: HttpEvent<any>) => {
           switch (data.type) {
             case HttpEventType.Sent:
               break;
             case HttpEventType.ResponseHeader:
               break;
             case HttpEventType.DownloadProgress:
-              const downloadProgress = Math.round((data.loaded / data.total) * 100);
-              this.progress = downloadProgress+'%';
+              const downloadProgress = Math.round(
+                (data.loaded / data.total) * 100
+              );
+              this.progress = downloadProgress + '%';
               break;
             case HttpEventType.Response:
               this.processDownloading(data.body, url, videoForm);
           }
-        }, error => {
+        },
+        (error) => {
           this.success = false;
           this.progress = '0%';
           this.downloadError = 'Something went wrong, Please try again...';
           setTimeout(() => {
             this.downloadError = '';
           }, 5000);
-          console.log(`error`, error)
-        });
+          console.log(`error`, error);
+        }
+      );
     }
   }
 
@@ -358,8 +407,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
     videoForm.resetForm();
   }
 
-  selecteLesson(document: { name: string, url: string }): void {
-    const index = this.selectedLessons.findIndex(lesson => lesson.name === document.name);
+  selecteLesson(document: { name: string; url: string }): void {
+    const index = this.selectedLessons.findIndex(
+      (lesson) => lesson.name === document.name
+    );
     if (index > -1) {
       this.selectedLessons.splice(index, 1);
     } else {
@@ -371,7 +422,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     if (this.selectedLessons.length === 0) {
       return;
     } else {
-      this.selectedLessons.forEach(lesson => {
+      this.selectedLessons.forEach((lesson) => {
         const url = this.decodeURIComponent(lesson.url);
         const urlParts = url.split('/');
         const name = urlParts[urlParts.length - 1];
@@ -405,7 +456,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
     if (navigator.userAgent.includes('Mobile')) {
       window.open(`whatsapp://send?text=${this.videoLink.trim()}`);
     } else {
-      window.open(`https://web.whatsapp.com/send?text=${this.videoLink.trim()}`, 'width=555, height=600');
+      window.open(
+        `https://web.whatsapp.com/send?text=${this.videoLink.trim()}`,
+        'width=555, height=600'
+      );
     }
   }
 
@@ -444,19 +498,33 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   selectedLanguageData(lang: string): any {
-    let mainIndex = this.storiesData.findIndex(x => x.id == this.currentlyPlayed.parent);
+    let mainIndex = this.storiesData.findIndex(
+      (x) => x.id == this.currentlyPlayed.parent
+    );
     if (mainIndex === this.storiesData.length - 1) {
-      this.englishStories = this.storiesData.filter(story => (story.language === 'english'));
-      this.urduStories = this.storiesData.filter(story => (story.language !== 'english'));
+      this.englishStories = this.storiesData.filter(
+        (story) => story.language === 'english'
+      );
+      this.urduStories = this.storiesData.filter(
+        (story) => story.language !== 'english'
+      );
     } else {
       const remainingStories = this.storiesData.slice(mainIndex);
-      this.englishStories = remainingStories.filter(story => (story.language === 'english'));
+      this.englishStories = remainingStories.filter(
+        (story) => story.language === 'english'
+      );
       if (this.englishStories.length < 2) {
-        this.englishStories = this.englishStories.concat(this.storiesData.filter(story => (story.language === 'english')));
+        this.englishStories = this.englishStories.concat(
+          this.storiesData.filter((story) => story.language === 'english')
+        );
       }
-      this.urduStories = remainingStories.filter(story => (story.language !== 'english'));
+      this.urduStories = remainingStories.filter(
+        (story) => story.language !== 'english'
+      );
       if (this.urduStories.length < 2) {
-        this.urduStories = this.urduStories.concat(this.storiesData.filter(story => (story.language !== 'english')));
+        this.urduStories = this.urduStories.concat(
+          this.storiesData.filter((story) => story.language !== 'english')
+        );
       }
     }
     if (lang === 'english') {
@@ -468,9 +536,17 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.player.destroy();
-    if (this.storiesSubscription$) { this.storiesSubscription$.unsubscribe(); }
-    if (this.learningTutorialsSubscription$) { this.learningTutorialsSubscription$.unsubscribe(); }
-    if (this.teacherTutorialsSubscription$) { this.teacherTutorialsSubscription$.unsubscribe(); }
-    if (this.dictionariesSubscription$) { this.dictionariesSubscription$.unsubscribe(); }
+    if (this.storiesSubscription$) {
+      this.storiesSubscription$.unsubscribe();
+    }
+    if (this.learningTutorialsSubscription$) {
+      this.learningTutorialsSubscription$.unsubscribe();
+    }
+    if (this.teacherTutorialsSubscription$) {
+      this.teacherTutorialsSubscription$.unsubscribe();
+    }
+    if (this.dictionariesSubscription$) {
+      this.dictionariesSubscription$.unsubscribe();
+    }
   }
 }
