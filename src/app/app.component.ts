@@ -7,7 +7,7 @@ import { GenericService } from './_services/generic-service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'PSL';
@@ -27,11 +27,11 @@ export class AppComponent {
     this.subscribeSuccess = false;
     this.subscribeError = false;
     this.genericService.getToken();
-    this.router.events.subscribe(event => {
+    this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.currentRoute = event.urlAfterRedirects.split('/')[1];
       }
-    })
+    });
   }
 
   searchWord(keyword: string): void {
@@ -40,18 +40,23 @@ export class AppComponent {
       if (this.searchInput) {
         this.searching = true;
         this.timer = setTimeout(() => {
-          this.genericService.searchVideos(keyword)
-          .pipe(take(1))
-          .subscribe((res: any) => {
-            this.searching = false;
-            if (res.message === 'Success') {
-              this.searchArray = res.data;
-            }
-            this.resetTimer();
-          }, error => {
-            this.searching = false;
-            console.log(`error`, error);
-          });          
+          this.genericService
+            .searchVideos(keyword)
+            .pipe(take(1))
+            .subscribe(
+              (res: any) => {
+                this.searching = false;
+                if (res.message === 'Success') {
+                  this.searchArray = res.data;
+                  console.log(this.searchArray);
+                }
+                this.resetTimer();
+              },
+              (error) => {
+                this.searching = false;
+                console.log(`error`, error);
+              }
+            );
         }, 2000);
       } else {
         this.searchArray = [];
@@ -77,16 +82,24 @@ export class AppComponent {
   goToSearch(selectedItem: any): void {
     switch (selectedItem.table_name) {
       case 'dictionary':
-        this.router.navigateByUrl(`/play/dictionary/category/${selectedItem.category_id}/${selectedItem.id}`);
+        this.router.navigateByUrl(
+          `/play/dictionary/category/${selectedItem.category_id}/${selectedItem.id}`
+        );
         break;
       case 'stories':
-        this.router.navigateByUrl(`/play/story/${selectedItem.type_id}/${selectedItem.id}`);
+        this.router.navigateByUrl(
+          `/play/story/${selectedItem.type_id}/${selectedItem.id}`
+        );
         break;
       case 'learningTutorials':
-        this.router.navigateByUrl(`/play/learningTutorials/${selectedItem.grade_id}/${selectedItem.subject_id}/${selectedItem.id}`);
+        this.router.navigateByUrl(
+          `/play/learningTutorials/${selectedItem.grade_id}/${selectedItem.subject_id}/${selectedItem.id}`
+        );
         break;
       case 'teacherTutorials':
-        this.router.navigateByUrl(`/play/teacherTutorials/${selectedItem.grade_id}/${selectedItem.subject_id}/${selectedItem.id}`);
+        this.router.navigateByUrl(
+          `/play/teacherTutorials/${selectedItem.grade_id}/${selectedItem.subject_id}/${selectedItem.id}`
+        );
         break;
       default:
         break;
@@ -98,28 +111,31 @@ export class AppComponent {
     if (!this.email || !this.emailPattern.test(this.email)) {
       return;
     } else {
-      this.genericService.subscribeToEmails(this.email).subscribe(res => {
-        if (res.message === 'Success') {
-          this.subscribeSuccess = true;
-          this.subscribeError = false;
-          input.reset('');
-        } else {
+      this.genericService.subscribeToEmails(this.email).subscribe(
+        (res) => {
+          if (res.message === 'Success') {
+            this.subscribeSuccess = true;
+            this.subscribeError = false;
+            input.reset('');
+          } else {
+            this.subscribeSuccess = false;
+            this.subscribeError = true;
+          }
+          this.resetAlert();
+        },
+        (error) => {
           this.subscribeSuccess = false;
           this.subscribeError = true;
+          this.resetAlert();
         }
-        this.resetAlert();
-      }, error => {
-        this.subscribeSuccess = false;
-        this.subscribeError = true;
-        this.resetAlert();
-      });
+      );
     }
   }
 
   resetAlert(): void {
     setTimeout(() => {
       this.subscribeSuccess = false;
-      this.subscribeError = false;      
+      this.subscribeError = false;
     }, 5000);
   }
 }

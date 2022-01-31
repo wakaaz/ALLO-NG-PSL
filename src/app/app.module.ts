@@ -7,30 +7,33 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import * as Hammer from 'hammerjs';
-import { HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import {
+  HammerModule,
+  HammerGestureConfig,
+  HAMMER_GESTURE_CONFIG,
+} from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 export class MyHammerConfig extends HammerGestureConfig {
-  overrides = <any> {
+  overrides = <any>{
     swipe: { direction: Hammer.DIRECTION_ALL },
   };
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-  ],
+  declarations: [AppComponent, HomeComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
     NgScrollbarModule,
+    ScrollingModule,
     FormsModule,
     HammerModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
   ],
   providers: [
     {
@@ -38,6 +41,6 @@ export class MyHammerConfig extends HammerGestureConfig {
       useClass: MyHammerConfig,
     },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
