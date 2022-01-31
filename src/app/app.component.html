@@ -177,7 +177,7 @@
             class="search-possible-results"
           >
             <div class="search-result">
-              <div class="all-searched-items">
+              <!-- <div class="all-searched-items">
                 <div *ngIf="!searching" class="signs-section search-sec">
                   <ng-scrollbar
                     class="white-theme"
@@ -221,7 +221,64 @@
                     style="height: 25px; margin-bottom: 10px"
                   ></div>
                 </div>
+              </div> -->
+            
+            
+              <div class="all-searched-items" style="overflow-y: none">
+
+               
+
+                <div *ngIf="!searching" class="signs-section search-sec">
+
+                  <!-- <ng-scrollbar
+                  class="white-theme"
+                  thumbClass="white-scrollbars"
+                  [disableOnBreakpoints]="false"
+                > -->
+                  <cdk-virtual-scroll-viewport
+                      itemSize="30"
+                      class="cdk-viewport"
+                    >
+                  
+                      <ul>
+                        <li
+                          *cdkVirtualFor="
+                            let result of searchArray;
+                            let i = index
+                          "
+                          class="possible-search-items"
+                        >
+                          <a (click)="goToSearch(result)">
+                            {{ i + 1 }}) {{ result.title }}
+                          </a>
+                        </li>
+                      </ul>
+                   </cdk-virtual-scroll-viewport>
+                  <!-- </ng-scrollbar> -->
+                 
+                </div>
+                <div
+                  *ngIf="searching"
+                  class="signs-section search-sec ta-center"
+                >
+                  <div
+                    class="shine effect-sm-left"
+                    style="height: 25px; margin-bottom: 10px"
+                  ></div>
+                  <div
+                    class="shine effect-sm-left"
+                    style="height: 25px; margin-bottom: 10px"
+                  ></div>
+                  <div
+                    class="shine effect-sm-left"
+                    style="height: 25px; margin-bottom: 10px"
+                  ></div>
+                </div>
+               
+
+
               </div>
+            
             </div>
           </div>
         </div>
