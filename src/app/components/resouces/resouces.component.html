@@ -1,153 +1,242 @@
 <span [hidden]="isLoading">
-    <div class="sub-header resources-bg align-items-center">
-        <div class="container position-relative">
-            <div class="sub-header-content">
-                <h2>What is <span>Deafness?</span></h2>
-                <p>This video is created by Deaf Reach to educate viewers about the causes of deafness and to better
-                    understand Deaf culture. It is available in English, Urdu and Pakistan Sign Language.</p>
-                <div class="resources-img">
-                    <button type="button" data-toggle="modal" data-target="#versionModal" class="play-btn"><img
-                            src="/assets/images/play-icon.png" alt=""></button>
-                    <img class="r-img" src="/assets/images/resources-header-img.png" alt="">
-                </div>
-                <h4>Richard Geary</h4>
-                <p class="text-uppercase">Founder/Director<br>Deaf Reach Program</p>
-            </div>
+  <div class="sub-header resources-bg align-items-center">
+    <div class="container position-relative">
+      <div class="sub-header-content">
+        <h2>What is <span>Deafness?</span></h2>
+        <p>
+          This video is created by Deaf Reach to educate viewers about the
+          causes of deafness and to better understand Deaf culture. It is
+          available in English, Urdu and Pakistan Sign Language.
+        </p>
+        <div class="resources-img">
+          <button
+            type="button"
+            data-toggle="modal"
+            data-target="#versionModal"
+            class="play-btn"
+          >
+            <img src="/assets/images/play-icon.png" alt="" />
+          </button>
+          <img
+            class="r-img"
+            src="/assets/images/resources-header-img.png"
+            alt=""
+          />
         </div>
+        <h4>Richard Geary</h4>
+        <p class="text-uppercase">Founder/Director<br />Deaf Reach Program</p>
+      </div>
     </div>
+  </div>
 
-    <div class="modal fade" id="versionModal" tabindex="-1" role="dialog" aria-labelledby="versionModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content top-border">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="versionModalLabel"><i class="fas fa-video"></i> Select the Video
-                        Version to watch
-                        <span></span>
-                    </h5>
-                    <button type="button" class="close" id="version-modal-btn" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span> </button>
-                </div>
-                <div class="modal-body p-0">
-                    <div class="col-md-12 lesson-plan-list">
-                        <button (click)="selectedLanguage('urdu')" type="button" class="btn btn-primary w-100">The Urdu
-                            Version</button>
-                    </div>
-
-                    <div class="col-md-12 lesson-plan-list">
-                        <button (click)="selectedLanguage('englis')" type="button" class="btn btn-primary w-100">The
-                            English
-                            Version</button>
-                    </div>
-                </div>
-            </div>
+  <div
+    class="modal fade"
+    id="versionModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="versionModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content top-border">
+        <div class="modal-header">
+          <h5 class="modal-title" id="versionModalLabel">
+            <i class="fas fa-video"></i> Select the Video Version to watch
+            <span></span>
+          </h5>
+          <button
+            type="button"
+            class="close"
+            id="version-modal-btn"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-    </div>
+        <div class="modal-body p-0">
+          <div class="col-md-12 lesson-plan-list">
+            <button
+              (click)="selectedLanguage('urdu')"
+              type="button"
+              class="btn btn-primary w-100"
+            >
+              The Urdu Version
+            </button>
+          </div>
 
-    <!--
+          <div class="col-md-12 lesson-plan-list">
+            <button
+              (click)="selectedLanguage('englis')"
+              type="button"
+              class="btn btn-primary w-100"
+            >
+              The English Version
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--
     Button created with display none to open the Video Modal without using JQuery
     As because bootstrap supports JQuery instead of TypeScript 
 -->
-    <button style="display: none;" data-toggle="modal" data-target="#videoModal" data-backdrop="static"
-        id="video-modal">Open Video
-        Modal</button>
-    <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="vedioModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content video-modal-content top-border">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="vedioModalLabel"><i class="fas fa-video"></i> {{isUrdu ? 'The Urdu
-                        Version' : 'The English Version'}}
-                        <span></span>
-                    </h5>
-                    <button type="button" class="close" id="video-modal-btn" (click)="isUrdu=false;isEnglish=false"
-                        data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span> </button>
-                </div>
-                <div class="modal-body p-0">
-                    <div class="col-md-12 youtube-video">
-                        <iframe *ngIf="isUrdu" src="https://www.youtube.com/embed/IwPsBnmarto" frameborder="0"
-                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen=""></iframe>
-                        <iframe *ngIf="isEnglish" src="https://www.youtube.com/embed/4q7Wk_kb7ls" frameborder="0"
-                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen=""></iframe>
-                    </div>
-                </div>
-            </div>
+  <button
+    style="display: none"
+    data-toggle="modal"
+    data-target="#videoModal"
+    data-backdrop="static"
+    id="video-modal"
+  >
+    Open Video Modal
+  </button>
+  <div
+    class="modal fade"
+    id="videoModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="vedioModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content video-modal-content top-border">
+        <div class="modal-header">
+          <h5 class="modal-title" id="vedioModalLabel">
+            <i class="fas fa-video"></i>
+            {{
+              isUrdu
+                ? "The Urdu
+                        Version"
+                : "The English Version"
+            }}
+            <span></span>
+          </h5>
+          <button
+            type="button"
+            class="close"
+            id="video-modal-btn"
+            (click)="isUrdu = false; isEnglish = false"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-    </div>
-
-
-    <div class="sub-page">
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-12 d-flex align-items-center">
-                    <div>
-                        <h2>PSL <span>APP</span></h2>
-                        <p>Download the PSL Phone App with a wealth of learning resources!</p>
-                        <a href="https://play.google.com/store/apps/details?id=com.grappetite.fesf.psl" target="_blank"
-                            class="mr-1"><img class="store-img" src="/assets/images/playstore.png" alt=""></a>
-                        <a href="https://itunes.apple.com/us/app/pakistan-sign-language-psl/id955003505?mt=8"
-                            target="_blank"><img class="store-img" src="/assets/images/appstore.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12"><img class="res-img" src="/assets/images/resources-psl.jpg" alt="">
-                </div>
-            </div>
-
+        <div class="modal-body p-0">
+          <div class="col-md-12 youtube-video">
+            <iframe
+              *ngIf="isUrdu"
+              src="https://www.youtube.com/embed/IwPsBnmarto"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen=""
+            ></iframe>
+            <iframe
+              *ngIf="isEnglish"
+              src="https://www.youtube.com/embed/4q7Wk_kb7ls"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen=""
+            ></iframe>
+          </div>
         </div>
-
+      </div>
     </div>
+  </div>
 
-    <div class="psl-resources">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-12 d-flex align-items-center">
-                    <div>
-                        <h2>PSL <span>LEARNING UNIT</span></h2>
-                        <p>The PSL Learning Unit is a mini computer mounted on 22” HDMI Monitor with built in speakers,
-                            keyboard & mouse. Contents include: 6,000 Word PSL Dictionary, PSL Animated Stories, Teacher
-                            Tutorials, Learning Tutorials, The IQRA Literacy Program, and more. Free shipping in
-                            Pakistan. For purchase details, please contact
-                            <a href="mailto:info@fesf.org.pk">info@fesf.org.pk</a>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12 md-mb-20"><img class="res-img" src="/assets/images/psl-resources-02.png"
-                        alt="">
-                </div>
-
-            </div>
+  <div class="sub-page">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-12 d-flex align-items-center">
+          <div>
+            <h2>PSL <span>APP</span></h2>
+            <p>
+              Download the PSL Phone App with a wealth of learning resources!
+            </p>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.grappetite.fesf.psl"
+              target="_blank"
+              class="mr-1"
+              ><img class="store-img" src="/assets/images/playstore.png" alt=""
+            /></a>
+            <a
+              href="https://itunes.apple.com/us/app/pakistan-sign-language-psl/id955003505?mt=8"
+              target="_blank"
+              ><img class="store-img" src="/assets/images/appstore.png" alt=""
+            /></a>
+          </div>
         </div>
-    </div>
-
-
-    <div class="sub-page">
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-12 d-flex align-items-center">
-                    <div>
-                        <h2>1,000 <span>Basic Signs</span></h2>
-                        <p><strong>In 7 languages:</strong> English, Urdu, Punjabi, Sindhi, Pashto, Balochi and Pakistan Sign Language<br>
-                            PSL Place your order at <a
-                                href="https://www.daraz.pk/products/pakistan-sign-language-book-i134443564-s1294815102.html?spm=a2a0e.searchlist.list.1.327c4358sd92Fu&search=1"
-                                target="_blank">Daraz.pk</a><br>
-                            Free shipping in Pakistan.<br>
-                            Price:<span class="color"> Rs. 1,175/-</span></p>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12"><img class="res-img" src="/assets/images/psl-resources-03.jpg" alt="">
-                </div>
-            </div>
+        <div class="col-lg-6 col-md-12">
+          <img class="res-img" src="/assets/images/resources-psl.jpg" alt="" />
         </div>
+      </div>
     </div>
+  </div>
+
+  <div class="psl-resources">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-12 d-flex align-items-center">
+          <div>
+            <h2>PSL <span>LEARNING UNIT</span></h2>
+            <p>
+              TThe PSL Learning Unit is a mini computer mounted on 22" HDMI
+              Monitor with built in speakers, keyboard & mouse. Contents
+              include: 6,000 Word PSL Dictionary, PSL Animated Stories, Teacher
+              Tutorials, Learning Tutorials, The IQRA Literacy Program, and
+              more. Free shipping in Pakistan. For purchase details, please
+              contact
+              <a href="mailto:info@fesf.org.pk">info@fesf.org.pk</a>
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12 md-mb-20">
+          <img
+            class="res-img"
+            src="/assets/images/psl-resources-02.png"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-page">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-12 d-flex align-items-center">
+          <div>
+            <h2>1,000 <span>Basic Signs</span></h2>
+            <p>
+              <strong>In 7 languages:</strong> English, Urdu, Punjabi, Sindhi,
+              Pashto, Balochi and Pakistan Sign Language<br />
+              PSL Place your order at
+              <a
+                href="https://www.daraz.pk/products/pakistan-sign-language-book-i134443564-s1294815102.html?spm=a2a0e.searchlist.list.1.327c4358sd92Fu&search=1"
+                target="_blank"
+                >Daraz.pk</a
+              ><br />
+              Free shipping in Pakistan.<br />
+              Price:<span class="color"> Rs. 1,175/-</span>
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+          <img
+            class="res-img"
+            src="/assets/images/psl-resources-03.jpg"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
 </span>
 
 <div *ngIf="isLoading" class="loader-wrap">
-    <div class="main-loader">
-        <img src="/assets/images/loader.gif" alt="">
-    </div>
+  <div class="main-loader">
+    <img src="/assets/images/loader.gif" alt="" />
+  </div>
 </div>
